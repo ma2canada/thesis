@@ -1,0 +1,437 @@
+\chapter{Ch0-Introduction}
+\iffalse
+\documentclass[a4paper,11pt]{article}
+%%\usepackage[utf8x]{inputenc}
+%%\usepackage{wrapfig}
+\usepackage{commath}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\graphicspath{{C:/Users/zilmangroup/Documents/mathematica/images/}} %%%%%%%%%%%%%%%
+\usepackage{amsmath, amsthm, amssymb, braket} %%%%%%%%%%%%%%%%
+\numberwithin{equation}{section} %%%%%%%%%%%%%%%
+\usepackage{cite}
+\bibliographystyle{unsrt}
+\topmargin -2.5cm        % read Lamport p.163
+\oddsidemargin -0.74cm   % read Lamport p.163
+\evensidemargin -0.74cm  % same as oddsidemargin but for left-hand pages
+\textwidth 17.59cm
+\textheight 26.94cm 
+\pagestyle{empty}       % Uncomment if don't want page numbers
+\parskip 0pt           % sets spacing between paragraphs
+%\renewcommand{\baselinestretch}{1.5} 	% Uncomment for 1.5 spacing between lines
+\parindent 20pt		  % sets leading space for paragraphs
+
+%opening
+%%\title{NAME}
+\title{Report for Ph.D. Committee}
+\author{MattheW Badali}
+
+\begin{document}
+
+%\maketitle
+
+\fi
+
+
+\section{Introduction}
+
+This thesis is concerned with demographic stochastics. That is, the randomness inherent in systems with a discrete state space. 
+In biology this arises naturally in ecological systems. 
+%The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
+"strategic lit review"
+"gap"
+"thesis" "in this paper I will..."
+"roadmap"
+"short significance"
+
+
+
+
+
+\section{Motivation}
+\subsection{Biodiversity}
+Gause's Law states...
+Thus, in systems with few resources and therefore few niches, we expect...
+But paradox of the plankton...
+
+More generally, problems of biodiversity...
+Could be as complicated as abundance distributions. 
+Could be as simple as coexistence or time until fixation
+
+Applications of theory:
+paleo
+conservation
+medical/gut
+phylogenetics
+invasion%maybe move above paleo?
+
+%\subsection{Extinction/Fixation/Coexistence}
+
+
+
+
+
+
+
+\section{Neutrality}
+\subsection{Moran and other simple stochastic models}
+Start with a simple model of fixation with 2 species, for which we can calculate the time. 
+The Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways. 
+Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time. 
+But really it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem. 
+
+To arrive at the Moran model we must make some assumptions. 
+Whether these are justified depends on the situation being regarded. 
+The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species and the state of the system. 
+This makes the Moran model a neutral theory, and any evolution of the system comes from chance rather than from selection. 
+
+Next we assume that the the population size is fixed, owing to the (assumed) strict competition in the system. 
+That is, every time there is a birth the system becomes too crowded and a death follows immediately. Alternately, upon death there is a free space in the system that is filled by a subsequent birth. 
+In the classic Moran model each pair of birth and death event occurs at a discrete time step (cf. the Wright-Fisher model, where each step involves $N$ of these events). 
+This assumption of discrete time can be relaxed without a qualitative change in results. 
+
+In the Moran model, each step there is a birth and a death. 
+A species is chosen for either according to its frequency, $f=n/N$, where $N$ is the total population and $n$ is the number of organisms of that species. Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species denoted with `$n$'. 
+There is a net rate of change, in both increasing and decreasing $n$, of
+\begin{equation}
+b(n) = f(1-f) = (1-f)f = d(n) = \frac{n}{N}\left(1-\frac{n}{N}\right) = \frac{1}{N^2}n(N-n)
+\end{equation}
+each time step $\Delta t$ (ie. the above are probabilities of stepping, you should multiply by $\Delta t$ to get a rate). 
+Of course, the chance that nothing happens is $1-\left(b(n)+d(n)\right) = f^2 + (1-f)^2$. 
+
+The system fluctuates until either the species dies (extinction) or all others die (fixation). 
+Both of these cases are absorbing states, so once the system reaches either it will never change. 
+Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk, and therefore the probability of extinction occurring before fixation is just
+\begin{equation}
+E(n) = 1-n/N. 
+\end{equation}
+
+The system fluctuates as long as the number of organisms of the species of interest is neither none (extinction) nor all (fixation). 
+We define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction. 
+It can be calculated by regarding how the mean from one starting position $n$ relates to the mean of its neighbours. 
+%(This is similar to the backward master equation.) 
+\begin{equation}
+\tau(n) = \Delta t + d(n)\tau(n-1) + \left(1-b(n)-d(n)\right)\tau(n) + b(n)\tau(n+1)
+\end{equation}
+Subbing in the values of the `birth' and `death' rates and rearranging this gives
+\begin{equation}
+\tau(n+1) - 2\tau(n) + \tau(n-1) = -\frac{\Delta t}{b(n)} = -\Delta t\frac{N^2}{n(N-n)},
+\end{equation}
+or
+\begin{equation}
+\tau(f+1/N) - 2\tau(f) + \tau(f-1/N) = -\Delta t\frac{1}{f(1-f)}. 
+\end{equation}
+If we approximate the LHS of the above with a double derivative (ie. $1\ll N$) we get
+\begin{equation}
+\frac{\partial^2\tau}{\partial n^2} = -\Delta t\,N\left(\frac{1}{n}+\frac{1}{N-n}\right)
+\end{equation}
+Double integrate and use the bounds $\tau(0) = 0 = \tau(N)$ to get
+\begin{equation}
+\tau(n) = -\Delta t\,N^2\left(\frac{n}{N}\ln\left(\frac{n}{N}\right)+\frac{N-n}{N}\ln\left(\frac{N-n}{N}\right)\right). 
+\end{equation}
+Note that we didn't need to use the large $N$ approximation: there is an exact solution:
+\begin{equation}
+\tau(n) = \Delta t\,N\left(\sum_{j=1}^n\frac{N-n}{N-j} + \sum_{j=n+1}^N\frac{n}{j}\right). 
+\end{equation}
+Note that we didn't need to use the large $K$ approximation: there is an exact solution:
+\begin{equation}
+\tau(n) = \Delta t\,K\left(\sum_{m=1}^n\frac{K-n}{K-m} + \sum_{m=n+1}^K\frac{n}{m}\right)
+\end{equation}
+\begin{figure}
+	\centering
+	%\includegraphics[width=0.7\textwidth]{morantimespicturename.png}
+\end{figure}
+
+Kimura is like Moran, and is well-respected
+
+Hubbell is like Moran, but is not respected
+Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation rate, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
+At steady state, Hubbell says:
+\begin{equation*}
+u = P(1,0)\phi(1) = \frac{1}{N}\frac{N-1}{N}\phi(1) \rightarrow \phi(1) \approx u\frac{N^2}{N-1}
+\end{equation*}
+Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation rate, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
+At steady state, Hubbell says:
+\begin{align*}
+P(j,j-1)\phi(j) &= P(j-1,j)\phi(j-1) \\
+\frac{j(N-j)}{N^2}\phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{N^2}\phi(j-1) \\
+\end{align*}
+\begin{equation*}
+\phi(j) = \frac{(j-1)(N-j+1)(1-u)}{j(N-j)}\phi(j-1)
+\end{equation*}
+\begin{equation*}
+\phi(j) \approx \frac{\Theta (1-u)^j}{j},
+\end{equation*}
+where $\Theta = \frac{u}{1-u}N$ is Hubbell's fundamental biodiversity model. 
+
+
+
+
+
+
+
+
+
+\section{Niches}
+\subsection{Concept of a niche, the debates therein}
+Of course, species \emph{aren't} the same as each other. Some like grass, some like acid, some like cold. 
+This is why we have Gause's principle/competitive exclusion principle. 
+Niche was popularized by Grinnell17
+Is it tautological? Well maybe, and maybe that's okay. 
+%
+Some confusion/ambiguity to how it is used. 
+Grinnell refers to those environmental considerations that a species can live with [maybe including predators, but not competitors?]
+Following Leibold95, call that the functional or requirement niche. 
+%
+Other usage was popularized by Elton27 and MacArthur\&Levins67, that of a functional or impact niche. 
+Describes how a species influences its environment, or how it fits in a food web; what it's role is in an ecosystem. 
+Turns out this relates to the stability of a coexistence point. 
+%
+Functional niche tells us whether coexistence is even physical. 
+...
+...
+...
+%***MAYBE REORDER: NICHE CONCEPT, McGEHEE AND ARMSTRONG, LOTKA-VOLTERRA, /THEN/ TOXINS
+
+%\subsection{Concept of competitive exclusion}
+\subsection{Deterministically supporting multiple species}
+
+The two strains of bacteria $x_i$ each have a per capita birth rate $\beta_i$, death rate $\mu_i$, and toxin generation rate $g_{ij}$. 
+Each toxin $t_i$ has a degradation rate $\lambda_i$, and increases the death rate of each bacterium linearly with efficacy $e_{ij}$. 
+Mathematically, 
+\begin{align*}
+\dot{x}_1 &= \beta_1 x_1 - \mu_1 x_1 - e_{11} t_1 x_1 - e_{12} t_2 x_1 \\
+\dot{x}_2 &= \beta_2 x_2 - \mu_2 x_2 - e_{21} t_1 x_2 - e_{22} t_2 x_2
+\end{align*}
+and
+\begin{align*}
+\dot{t}_1 &= g_{11}x_1+g_{12}x_2 - \lambda_1 t_1 \\
+\dot{t}_2 &= g_{21}x_1+g_{22}x_2 - \lambda_2 t_2.
+\end{align*}
+First, define $r_i = \beta_i-\mu_i$. 
+Then, to make our lives easier, redefine some parameters such that $e_{ik}/r_i \leftarrow e_{ik}$ and $g_{ik}/\lambda_i \leftarrow g_{ik}$. 
+Then we get the toxin fixed point $t^*_i=g_{ii}x_i+g_{ij}x_j$ where $i\neq j$. This gives the bacteria dynamical equations
+\begin{align*}
+\dot{x}_1/(r_1 x_1) &= 1 - (e_{11}g_{11}+e_{12}g_{21}) x_1 - (e_{11}g_{12}+e_{12}g_{22}) x_2 &= 1 - x_1/K_1 - a_{12}x_2/K_1 \\
+\dot{x}_2/(r_2 x_2) &= 1 - (e_{21}g_{11}+e_{22}g_{21}) x_1 - (e_{21}g_{12}+e_{22}g_{22}) x_2 &= 1 - a_{21}x_1/K_2 - x_2/K_2. 
+\end{align*}
+Here the last line of each equation includes a substitution of variables such that the generalized 2D Lotka-Volterra equations are recovered. 
+
+Now, the to get the Moran line in the Lotka-Volterra case, it is required that the off-axis nullclines overlap completely (rather than just at one fixed point): $a_{12}=K_1/K_2$ and $a_{21}=K_2/K_1$. 
+This could instead be formulated as one of the previous equations and $a_{12}=1/a_{21}$. 
+For the above, two toxin model, these correspond to
+\begin{align}
+e_{11}g_{11}+e_{12}g_{21}&=e_{21}g_{11}+e_{22}g_{21} \\
+e_{11}g_{12}+e_{12}g_{22}&=e_{21}g_{12}+e_{22}g_{22}
+\end{align}
+or
+\begin{align*}
+g_{11}(e_{11}-e_{21})&=g_{21}(e_{22}-e_{12}) \\
+g_{12}(e_{11}-e_{21})&=g_{22}(e_{22}-e_{12}). 
+\end{align*}
+As a reminder, the condition for the fixed point is $1 - x^*_1/K_1 - a_{12}x^*_2/K_1=1 - a_{21}x^*_1/K_2 - x^*_2/K_2=0$. 
+
+For two species to exist on only one limiting resource, they must by necessity live on a Moran manifold. 
+We shall consider the same two bacteria system, but with only one toxin, $t_1$. 
+\begin{align*}
+\dot{x}_1/(r_1 x_1) &= 1 - e_{11} t_1 \\
+\dot{x}_2/(r_2 x_2) &= 1 - e_{21} t_1
+\end{align*}
+and
+\begin{align*}
+\dot{t}_1 &= g_{11}x_1+g_{12}x_2 - \lambda_1 t_1. 
+\end{align*}
+The claim is that for two species to exist on a single resource, their per-capita growth rates must be linearly dependent. 
+That is, $1-e_{11}t^*_1=1-e_{21}t^*_1$, or $e_{11}=e_{21}$. 
+Note that we could solve the $\dot{t}_1$ equation to get $t^*$ and substitute it into the bacterial equations to get
+\begin{align*}
+\dot{x}_1/(r_1 x_1) &= 1 - e_{11}g_{11} x_1 - e_{11}g_{12} x_2 \\
+\dot{x}_2/(r_2 x_2) &= 1 - e_{21}g_{11} x_1 - e_{21}g_{12} x_2. 
+\end{align*}
+While $e_{11}=e_{21}$ is not the same as either of the 2 bacteria, 2 toxins conditions, its similarity suggests that it is related. 
+If we wanted to include a second toxin into our 2,1 system while maintaining the Moran condition, we would require $e_{12}=e_{22}$. 
+This condition coupled with $e_{11}=e_{21}$ satisfies the 2,2 conditions. 
+I don't know if this is a satisfactory resolution, but this seems to be the case. 
+
+\subsection{Lotka-Volterra}
+Long history, from 1D Verhulst and 2D predator-prey. 
+A stochastic 2D model will be the main model used in this thesis. 
+phase space figure
+parameter space figure
+LV-Moran correspondence
+
+\subsection{toxins}
+As a minimal example of the general considerations above we regard a simple two-species model whose growth is constrained by two secreted factors. The two strains of bacteria $x_i$ each have basal per capita birth rates $\beta_i$, death rates $\mu_i$, and each generate the secreted soluble factors $t_j$ at rates $g_{ji}$. Each factor $t_i$ is degraded at a  rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. Positive $e_{ij}$ may correspond to toxins or  metabolic waste \cite{VanMelderen2009,Rankin2012}\cite{a review, surely}, whereas negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{need some}. The model kinetics is encapsulated in the following equations:
+\begin{align}
+\dot{x}_1 &= \beta_1 x_1 - \mu_1 x_1 - e_{11} t_1 x_1 - e_{12} t_2 x_1 \notag \\
+\dot{x}_2 &= \beta_2 x_2 - \mu_2 x_2 - e_{21} t_1 x_2 - e_{22} t_2 x_2 \label{eq-x-tox}
+\end{align}
+and
+\begin{align}
+\dot{t}_1 &= g_{11} x_1 + g_{12}x_2 - \lambda_1 t_1  \nonumber \\
+\dot{t}_2 &= g_{21} x_1 + g_{22}x_2 - \lambda_2 t_2. \label{eq-tox}
+\end{align}
+Henceforth we assume that $\lambda_1=\lambda_2=1$[[but why?]] and refer to the secreted factors as toxins.
+
+It is useful to recast equations (\ref{eq-xi}), (\ref{eq-tox}) in a matrix form by defining a matrix $\hat{X} = \begin{pmatrix}
+x_1 & 0 \\
+0 & x_2
+\end{pmatrix}$, so that
+%[SHOULD WE RECAST EVERYTHING IN THE MATRIX FORM?]
+\begin{equation}
+\dot{\vec{x}} = \hat{R}\cdot\hat{X} \left( \vec{1} - \hat{E}\cdot \vec{t} \right)\;\;\;\text{and}\;\;\;
+\dot{\vec{t}} =  \left( \hat{G}\cdot \vec{x} - \vec{t} \right). \label{xdot-tdot-eqn}
+\end{equation}
+where $\hat{R} = \begin{pmatrix}
+r_1 & 0 \\
+0 & r_2
+\end{pmatrix} = \begin{pmatrix}
+\beta_1-\mu_1 & 0 \\
+0 & \beta_2-\mu_2
+\end{pmatrix}$, $\hat{G} = \begin{pmatrix}
+g_{11} & g_{12} \\
+g_{21} & g_{22}
+\end{pmatrix}$, and $\hat{E} = \begin{pmatrix}
+e_{11}/r_1 & e_{12}/r_1 \\
+e_{21}/r_2 & e_{22}/r_2
+\end{pmatrix}$. 
+
+In many experimentally relevant systems, such as communities of microorganisms and cells, the timescale of production degradation and diffusion of secreted molecules is on the order of minutes \cite{??}, whereas cell division and death occurs over hours \cite{??}. In this regime, the dynamics of the toxin turnover are much faster than those of the interacting species, and the former can be assumed to adiabatically reach a steady state for a given $\vec{x}$ \cite{adiabatic}[Wingreen-Asfai, others] so that $\vec{t}^* = \hat{G}\cdot \vec{x}$.
+In this approximation the dynamical equations above reduce to $ \dot{\vec{x}} = \hat{R}\cdot\hat{X} \left( \vec{1} - (\hat{E}\cdot\hat{G})\cdot\vec{x} \right)$. 
+Written explicitly, this becomes the familiar generalized two-species Lotka-Volterra system \cite{Chotibut2015,MacArthur1970,Dobrinevski2012,Constable2015,Bomze1983,Levin1970,Czuppon2017}:
+\begin{align}
+\dot{x}_1 &= r_1 x_1 \left( 1 - \frac{x_1 + a_{12} x_2}{K_1} \right) \notag \\
+\dot{x}_2 &= r_2 x_2 \left( 1 - \frac{a_{21} x_1 + x_2}{K_2} \right), \label{mean-field-eqns}
+\end{align}
+where $\frac{1}{K_i} = \frac{e_{ii} g_{ii}}{r_i \lambda_i} + \frac{e_{ij} g_{ji}}{r_i \lambda_j}$ and $\frac{a_{ij}}{K_i} = \frac{e_{ii} g_{ij}}{r_i \lambda_i} + \frac{e_{ij} g_{jj}}{r_i \lambda_j}$. %$r_i=\beta_i-\mu_i$, 
+The turnover rates $r_i$ set the timescale of the birth and death for each species and $K_i$ are known as the carrying capacities. The interaction parameters $a_{ij}$  provide a mathematical representation of the intuitive notion of the niche overlap between the species. When $a_{ij}=0$, species $j$ does not affect the species $i$, and they occupy separate ecological niches. At the other limit, $a_{ij}=1$ implies that the species $j$ compete just as strongly with species $i$ as species $i$ does within itself, and occupy the same niche. We refer to the $a_{ij}$ as the niche overlap parameters. 
+
+The solutions to equation (\ref{xdot-tdot-eqn}) are that either one (or both) of the species is zero or else $\vec{x}^* = (E G)^{-1}\vec{1}$. 
+Complete niche overlap is when $(E G)$ is singular/non-invertible/$(E G)^{-1}$ does not exist/$|E G|=0$; then either one of the species is excluded or the degeneracy condition occurs. 
+Any 2D matrix can be written as $\hat{M}=\begin{pmatrix}
+\alpha_m   & \alpha_m\beta_m \\
+\alpha_m\gamma_m & \alpha_m\beta_m\gamma_m\delta_m
+\end{pmatrix}$ and is singular when $\delta_m=1$. 
+This situation is most obvious when $|\hat{E}|=0$/$\hat{E}$ is singular: we can then write an effective composite toxin $t_1 + \beta_e t_2$, with equation (\ref{eq-x-tox}) becoming
+\begin{align*}
+\dot{x}_1 &= r_1 x_1\big(1 -          e_{11}\left( t_1 + \beta_e t_2 \right) \big) \\
+\dot{x}_2 &= r_2 x_2\big(1 - \gamma_e e_{11}\left( t_1 + \beta_e t_2 \right) \big).
+\end{align*}
+With $\gamma_e\neq 1$ this corresponds to the classic notion of two species and only one limiting factor. The two equations cannot be simultaneously satisfied and either $x_1=0$ or $x_2=0$. This is exclusion of a species, though as will be shown below there are other, non-singular cases which result in competitive exclusion. 
+In the degenerate case of $\gamma_e=1$ both the species and the toxins are functionally identical: the system allows multiple solutions, along the line defined by $1=e_{11}\left( t_1^* + \beta_e t_2^* \right)$ and $\vec{x}^*=\hat{G}^{-1}\vec{t}^*$. 
+In subsequent sections we shall refer to this line as the Moran line. 
+$|\hat{G}|=0$ is the other situation describing complete niche overlap. The Moran line appears if $e_{11}+\gamma_ge_{12}=e_{21}+\gamma_ge_{22}$, otherwise there is exclusion of a species. [[could remove this line]]
+
+
+
+
+
+
+
+
+\section{Stochastics}
+\subsection{introduction}
+As stated before, a stochastic version of the 2D LV makes up the bulk of the thesis. 
+stochastics = randomness, noise
+useful due to inherent randomness, imprecise measurement, and sampling issues
+used in many fields (linguistics, economics, biology) - Wright and Fisher were pioneers, and there were renaissances around Kimura and Hubbell
+
+\subsection{Extinction rates from demographic and environmental stochasticity}
+It is a matter of common knowledge in the field/from the literature that demographic fluctuations lead to extinction times scaling exponentially in the system size, whereas environmental noise gives polynomial scaling \cite{?}. 
+That is, if $K$ is the constant or mean system size, then demographic fluctuations lead to
+\begin{equation}
+\tau \propto e^{cK}
+\end{equation}
+and environmental noise leads to
+\begin{equation}
+\tau \propto K^d,
+\end{equation}
+for some constants $c,d$
+This system size is often referred to as the carrying capacity \cite{?}. 
+
+I only care about demographic fluctuations. Environmental fluctuations can be someone else's problem. 
+In general the info presented here is a null model; most real systems will not be represented by my results, but it gives a baseline against which to contrast. 
+
+The above equations come from FP. There are many ways to calculate MTE...
+
+\subsection{How things can be calculated exactly (how I do it)}
+master equation
+\begin{equation}
+\frac{\,d}{dt}P_n = \sum_{m\neq n} W_{m,n}P_m
+\end{equation}
+MTE definition
+recursive equation
+matrix technique
+
+\subsection{Approximation techniques}
+
+With the existence of a system size parameter $K$, it opens some approximations. 
+Others simply rely on $n>>1$ or $P_n>>P_{n-1}$
+The popular ones are FP (and Gaussian), van Kampen, WKB
+I also do some matrix funny business (and could do eigenvalue)...
+
+
+
+
+
+
+
+
+
+
+\section{Structure of remaining thesis}
+single logistic system and hidden parameters
+approximation techniques
+
+coupled logistic symmetric
+coupled logistic route to fixation
+coupled logistic asymmetric
+
+invasion into a coupled logistic
+immigration from a reservoir
+
+conclusions, next steps, applications, extensions, outlook
+
+
+
+
+
+
+
+\iffalse
+\section{proposed thesis structure}
+Lit review
+1D log
+2D log, symmetric
+2D log, asymmetric
+Moran with immigration (influx of an immigrant from a static reservoir)
+Closing remarks
+
+Lit Review:
+Demographic stochastics
+Extinction rates from demographic and environmental stochasticity
+Approximation techniques
+How things can be calculated exactly
+Concept of a niche, the debates therein
+Concept of competitive exclusion, debates therein
+Biodiversity
+Moran and other simple stochastic models
+Lotka-Volterra
+Deterministically supporting multiple species
+\fi
+
+
+
+
+\iffalse
+
+\bibliography{qualifier-take3}
+%\section{references}
+%to come
+
+
+
+
+
+
+\end{document}
+\fi

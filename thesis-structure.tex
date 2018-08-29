@@ -1,0 +1,264 @@
+\documentclass[8pt]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\graphicspath{{"C:/Users/lenov/Documents/presentations etc/"}} %!!
+%\usetheme{AnnArbor}
+\usetheme{CambridgeUS}
+%\usetheme[secheader]{Boadilla}
+%\usepackage{pgfpages}
+%\pgfpagelayout{2 on 1}[letterpaper,border shrink=5mm]
+\mode<presentation>
+\title[Thesis Outline]{Thesis Outline}
+\subtitle{Extinction, Fixation, and Invasion in an Ecological Niche}
+
+\author[M.A.Badali]{MattheW Badali}
+%\institute[UofT]{University of Toronto}
+\date[24/05/2018]{24 May, 2018}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\section[Outline]{does this title do anything?}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\begin{itemize}
+    \item Introduction
+    \item Single Logistic System
+    \item Coupled Logistic System (Symmetric and Asymmetric)
+    \item Invasion and Immigration (Once and Repeated Attempts)
+    \item Closing Remarks
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+OR...
+\begin{itemize}
+	\item Introduction
+	\item Literature Review
+	\item Single Logistic System and Hidden Parameters
+	\item Approximation Techniques
+	\item Coupled Logistic System (Symmetric)
+	\item Coupled Logistic System (Route to Fixation)
+	\item Coupled Logistic System (Asymmetric)
+	\item Invasion into Coupled Logistic
+	\item Immigration from a Reservoir
+	\item Conclusions
+	\item Next Steps, Applications, Extensions
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Introduction and Literature Review
+	\begin{itemize}
+		\item Demographic stochastics
+		\begin{itemize}
+			\item master equation
+		\end{itemize}
+		\item Extinction rates from demographic and environmental stochasticity
+		\begin{itemize}
+			\item MTE definition
+			\item $e^{bK}$, $K^{c}$ scaling for demographic, environmental stochasticity
+		\end{itemize}
+		\item Approximation techniques
+%		\begin{itemize}
+%			\item quasipotential figure
+%			\item WKB figure
+%		\end{itemize}
+		\item How things can be calculated exactly
+		\begin{itemize}
+			\item recursive equation
+			\item matrix technique?
+		\end{itemize}
+		\item Concept of a niche, the debates therein
+		\item Concept of competitive exclusion, debates therein
+		\item Biodiversity
+		\item Moran and other simple stochastic models
+		\begin{itemize}
+			\item Moran figure
+		\end{itemize}
+		\item Lotka-Volterra
+%		\begin{itemize}
+%			\item deterministic equation
+%			\item stochastic equation
+%			\item phase space figure
+%			\item parameter space figure
+%		\end{itemize}
+		\item Deterministically supporting multiple species
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Introduction and Literature Review
+\begin{itemize}
+	%Reality/Background/Physics/Motivation/etc...
+	\item Biodiversity, abundance, coexistence
+	\begin{itemize}
+		\item paleo
+		\item conservation
+		\item medical/gut
+		\item phylogenetics
+		\item invasion
+	\end{itemize}
+	\item Extinction/Fixation
+	%neutral
+	\item Moran and other simple stochastic models
+	\begin{itemize}
+		\item Moran figure
+%		\item Kimura
+%		\item neutral
+	\end{itemize}
+	%niche
+	\item Concept of a niche, the debates therein
+	\begin{itemize}
+		\item toxins
+		\item Lotka-Volterra
+		\begin{itemize}
+			\item phase space figure
+			\item parameter space figure
+		\end{itemize}
+	\end{itemize}
+	\item Concept of competitive exclusion
+	\begin{itemize}
+		\item Deterministically supporting multiple species
+	\end{itemize}
+	%stochastics
+	\item Stochastics
+	\begin{itemize}
+		\item Extinction rates from demographic and environmental stochasticity
+%		\item master equation
+	\end{itemize}
+	\item How things can be calculated exactly
+	\begin{itemize}
+		\item recursive equation
+		\item matrix technique?
+		\item MTE definition
+%		\item $e^{bK}$, $K^{c}$ scaling for demographic, environmental stochasticity
+	\end{itemize}
+	\item Approximation techniques
+	\begin{itemize}
+		\item quasipotential figure
+		\item WKB figure
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Single Logistic System, $\dot{x}=x(1-x/K)$
+	\begin{itemize}
+		\item the deterministic model hides some parameters, which are important
+		\begin{itemize}
+			\item $b_n$, $d_n$
+		\end{itemize}
+		\item these parameters are the linear noise and shift of nonlinearity
+		\item hidden parameters affect the mean time to extinction (MTE)
+		\begin{itemize}
+			\item heat map figure
+			\item MTE vs delta, q figures
+			\item quasi-stationary pdf figure(s)
+		\end{itemize}
+		\item biological interpretation of parameter impact
+		\item probing MTE with different techniques
+		\begin{itemize}
+			\item (FP numerical, FP Gaussian), (WKB), (small $n$ and other 1D techniques), (smallest eigenvalue, matrix inverse)
+			\item quasipotential figure
+			\item WKB Hamiltonian figure
+			\item pdf vs $n$ techniques figure(s)
+			\item MTE vs $K$ techniques figure(s)
+		\end{itemize}
+		\item different parameter limits
+		\item which techniques one might use
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Symmetric Coupled Logistic System
+	\begin{itemize}
+		\item coupled logistic has interesting deterministic limits
+		\begin{itemize}
+			\item deterministic equation
+			\item stochastic equation
+			\item phase space figure
+			\item parameter space figure
+		\end{itemize}
+		\item $a=1$ recovers the classic Moran model (but $a\neq 1$ MTE scales exponentially with $K$)
+		\begin{itemize}
+			\item MTE vs init cond Moran figure
+		\end{itemize}
+		\item how this transition occurs
+		\begin{itemize}
+			\item MTE vs K figure
+			\item ansatz equation
+			\item ansatz figure
+		\end{itemize}
+		\item only ever exponential with asymmetric parameters
+		\begin{itemize}
+			\item figures
+		\end{itemize}
+		\item route to fixation
+		\begin{itemize}
+			\item figure
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Asymmetric Coupled Logistic System
+	\begin{itemize}
+		\item defining invasion in the coupled logistic model
+		\item results and rationalization thereof
+		\begin{itemize}
+			\item prob and time vs $K$,$a$ figures
+		\end{itemize}
+		\item implications of the results
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Influx of an Immigrant
+	\begin{itemize}
+		\item one kind of immigrant coming from a static reservoir
+		\begin{itemize}
+			\item Moran with immigration equation
+		\end{itemize}
+		\item steady states(, compared with experiment?)
+		\begin{itemize}
+			\item figures
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+Closing Remarks
+	\begin{itemize}
+		\item Applications (coalescent theory, phylogenic construction, ...?)
+		\item Extensions (eg. would eventually recover Hubbell)
+		\item Retrospect of previous contents, especially from the intro
+		\item Miscellanea (plasmids instead of species)
+		\item Conclusions (techniques, how to think of niche, competitive exclusion)
+		\item Next Steps (predator-prey, SIR, etc.)
+	\end{itemize}
+\end{frame}
+%33 points total
+
+
+\end{document}

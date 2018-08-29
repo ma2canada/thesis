@@ -1,0 +1,739 @@
+\chapter{Ch2-SymmetricLogistic}
+\iffalse
+\documentclass[a4paper,10pt]{article}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{wrapfig}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\graphicspath{{./../../../../mathematica/images/}} %%%%%%%%%%%%%%%
+%\graphicspath{{C:/Users/zilmangroup/Documents/mathematica/images/}} %%%%%%%%%%%%%%%
+\usepackage{amsmath, amsthm, amssymb, braket, color} %%%%%%%%%%%%%%%%
+\usepackage[usenames,dvipsnames]{xcolor} %%%%%%%%%%%%%
+\numberwithin{equation}{section} %%%%%%%%%%%%%%%
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty}       % Uncomment if don't want page numbers
+\parskip 0pt           % sets spacing between paragraphs
+%\renewcommand{\baselinestretch}{1.5} 	% Uncomment for 1.5 spacing between lines
+\parindent 8pt		  % sets leading space for paragraphs
+
+%opening
+\title{The Transition Between Fixation And Effective Coexistence In A 2D Lotka-Volterra Model}
+\author{MattheW Badali, Anton Zilman}
+%\author{MattheW Badali}
+%\affiliation{Department of Physics, University of Toronto, 60 St George St, Toronto, Canada M5S 1A7}
+%\author{Anton Zilman}
+%\affiliation{Department of Physics, University of Toronto, 60 St George St, Toronto, Canada M5S 1A7}
+%\affiliation{Institute for Biomaterials and Biomedical Engineering, University of Toronto}
+
+\begin{document}
+\fi
+
+
+\section{Introduction}
+
+Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the  ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2016}, and the immune system \cite{Weinstein2009,Desponds2015}. %T cells (Stirk2010)
+%Biodiversity is an indicator of a robust and stable ecosystem \cite{Tilman1996,Naeem2001}, but
+%These are complicated systems, and complex theories can be used to model them precisely. 
+%Superficially these systems seem disparate, but with a level of abstraction one can arrive at unifying principles. 
+%The abstraction necessitates simple models, yet even simple models can lead to interesting results. %TODO cite? %TODO interesting/unintuitive
+One commonly held belief is that due to abiotic constraints, resource usage, and a host of other factors, ecosystems can be divided into ecological niches, and a single species should dominate each niche, a process called competitive exclusion \cite{Hardin1960}. 
+Deterministically, the species with highest fitness beats out all others within an ecological niche, and the number of niches constrains the number of species that can exist at steady state \cite{Armstrong1980}. %, with excess species rapidly going extinct
+When all but one species has died off in a niche the system is said to have fixated \cite{Mayfield2010,Kimura1968,Nadell2013}. 
+%In the extreme case of distinct niches, each species should behave independently, and the fixation time of the system will be on the order of the extinction time of an individual species in a stable environment. 
+How biodiversity is maintained between species in similar niches is still not fully understood \cite{May1999,Pennisi2005,Posfai2017}. 
+%Of course, two species in distinct niches will happily coexist for long times; in deterministic models the coexistence is often infinite. 
+Some models, like the 2D Lotka-Volterra model used in this paper, have a stable coexistence point for two species with overlapping niches \cite{Volterra1926,Bomze1983,Chesson1990,Antal2006}. %paradigmatic
+This fixed point is replaced by a semi-stable manifold when the two species have linearly dependent dynamics, constraining the sum of the species to a constant total population \cite{McGehee1977a,Case1979}. % exists for much of the parameter space but
+The semi-stable line occurs at complete niche overlap. 
+%The major exception to this constraint is when the species interact with the environment in effectively the same way. 
+%Then the deterministic dynamics predict a fixed value for the average population size. %marginally/semi-stable manifold
+%However, there are some parameter values in our chosen model for which the fixed point is replaced by a line of semi-stable fixed points; the system is drawn to the line, along which it stochastically diffuses. 
+
+To get the whole picture, one must include stochastic fluctuations, for instance arising from demographic noise. 
+Fluctuations about a deterministic fixed point lead to fixation times that are exponentially long in the system size \cite{Ovaskainen2010}, after which only one specie remains in the system. 
+%The system size is characterized by the deterministic fixed point. 
+%When all but one species has died off the system is said to have fixated \cite{Mayfield2010,Kimura1968,Nadell2013}. 
+For typical biological populations this system size, the average number of organisms, is large, so these exponential times in practice imply coexistence. 
+Contrast this with classic stochastic models like those of Wright, Fisher, and Moran (WFM) \cite{Wright1931,Fisher1930,Moran1962}, which predict a time to fixation that is polynomial in the system size, fast relative to stochastic models with a stable coexistence point \cite{Moran1962,Kimura1968}. 
+%The dynamics of this model are akin to the neutral theory of Kimura \cite{Kimura1968}. %COMM include?
+%,Hubbell2001, and neutral theories lead to fast dynamics. 
+%This fast fixation is akin to competitive exclusion in that it is exclusionary, despite not being competitive;
+This fast fixation is akin to competitive exclusion except it is not competitive; even species with symmetric birth and death rates, through stochastic fluctuations, experience local extinctions until one species remains in a niche \cite{Wright1931,Fisher1930,Moran1962,Kimura1968,Stirk2010,Capitan2017} (eventually this final species will also go extinct). %
+It has recently been shown that the stochastic dynamics along the semi-stable manifold of the 2D Lotka-Volterra model mimic those of the WFM model \cite{Lin2012,Constable2015}. 
+
+While the two extremes of fast fixation with complete niche overlap and slow fixation with a deterministic fixed point are both known \cite{Dobrinevski2012,Gabel2013,Chotibut2015,Fisher2014,Constable2015,Lin2012}, more work remains to be done in characterizing the transition between these two limits. 
+%, the transition between them has not been fully characterized. 
+%Some research has been done near the independent limit \cite{Gabel2013,Chotibut2015,Fisher2014}. 
+%Other authors have looked at the fixation times close to the WFM limit \cite{Dobrinevski2012,Chotibut2015,Fisher2014,Constable2015,Lin2012}. 
+%As their niches overlap we expect to see this time decrease, until eventually we recover the fast times of the WFM model. 
+%In this paper we characterize the transition between the rapid fixation of two species competing for one niche to the long timescales of species coexisting in their own niches. 
+%To our knowledge, ours is the first explicit investigation where this transition is the subject of the study. 
+The main goal of this paper is to carefully regarded the loss of exponential character in the mean time to fixation as the transition between these two extremes occurs. 
+For more context we present some deterministic results in section 2, and the known stochastic results in section 3. 
+Section 3 also includes a description of the arbitrarily precise technique we use. 
+The transition of fixation scaling is treated in section 4. 
+The route to fixation is also discussed, in section 5. 
+
+The generalized Lotka-Volterra model also lends itself to an examination of the dynamics of invasion of an ecological niche. 
+When an immigrant or mutation appears in a system with an already-established species, without an explicit fitness advantage it is unlikely to secure its survival therein. 
+The probability of a successful invasion depends on the niche overlap between the two species, as well as the system size, as characterized by the carrying capacity. 
+Section 6 treats this probability, as well as the mean times conditioned on a successful or failed invasion attempt. 
+Section 7 contains a discussion of these results as well as the main findings of the transition between fixation and competitive exclusion, as arbitrated by niche overlap. 
+%Along with fixation, we consider conditioned times of an individual immigrant or mutant invading a system of an established species. 
+%The mean times of a successful invasion, an unsuccessful attempt, and the probability of success are presented in section 6, before the final discussion of section 7. 
+Our findings have important implications for understanding long term population diversity in many systems, such as human microbiota in health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial microbiota used in fermented products \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Rice2004}. %and maybe even in rodent populations\cite{Haydon2001}.
+
+%need more Hubbell?
+%route to extinction
+%invasion
+
+
+\section{Deterministic Model}
+
+%COMM we take an operational, practical approach in defining - we know it when we see it
+The definition and even the topic of an ecological niche is a divisive one \cite{Leibold1995}. 
+Here we take a practical, operational approach in defining a niche: we know it when we see it. %, and we do not endeavor to provide a definitive stance here. 
+Certainly the niche relates to those environmental factors that affect the growth and death rates of the species, as in the Hutchinsonian definition of those factor values that cause a species to be viable \cite{Leibold1995,Hutchinson1957}. 
+These limiting factors can be both abiotic and biotic, and can be modified by the species populations, so the Hutchinsonian definition is an insufficient descriptor\cite{Leibold1995,Chesson2000}. 
+%Mayfield2010 argues that comp exclu and environmental filtering are two different things
+To facilitate intuition, consider a niche as the combination of the steady state $x_i^\star$ and $\vec{f}^\star$; if adding species $j$ modifies these steady state values then there is some niche overlap, and so long as $\dot{x}_j$ is linearly independent of $\dot{x}_i$ the niche overlap is only partial. 
+%$x_i$ remains greater than zero the niche overlap is not complete. 
+For the purposes of this paper it is not necessary to know exactly what a niche is, only to recognize that the niches of two species may overlap, and this niche overlap is a phenomenological parameter. 
+%It suffices to understand that niche overlaps are phenomenological parameters in \ref{mean-field-eqns}. % and do not stress over its precise meaning. 
+The idea of niche overlap has a complicated history; in this case niche overlap can be thought of as the competition parameter \cite{Pianka1973}. 
+%Niche overlap can be measured by growing one species in an established colony of the other \cite{something with Gore growing pairwise competition?}. 
+%If its own turnover rate $r_i$ and carrying capacity $K_i$ in the ecosystem are known, the niche overlap can be inferred. 
+%For the purposes of this paper it is enough to imagine that niches exist in some sense, and two species can have an overlap in their respective niches. 
+%The deterministic or stochastic equations contain neither the niches themselves, nor even the limiting factors, only the niche overlaps. 
+
+%Ultimately, only the reproduction and death of an organism are relevant for the survival of its species. 
+%The simplest birth rate is one that is constant per individual, or linear for the species. 
+%A similarly constant per capita death rate will lead to rapid extinction or a population explosion, and does not lend itself to competition between two species. 
+%Malthusian explosion
+%A linear birth and death model either goes extinct or explodes to an unlimited population \cite{Nisbet1982}. 
+%To curtail the growth it is assumed that the presence of other organisms decreases the growth, such that at a certain number of organisms the growth is balanced by this competition; this number is the carrying capacity \cite{Abrams1983,Lande1993}. 
+%One can write the generalized Lotka-Volterra model with a linear birth rate and a quadratic death rate, to account for competition of resources available within a niche. 
+The generalized Lotka-Volterra model is essentially a coupling of many logistic models, that show exponential growth at small populations but are inhibited by intra-species competition accounting for the limited resources available within a niche. 
+One can define the carrying capacity, a phenomenological parameter that characterizes how many organisms of a species an ecosystem can support. 
+Intra-species interaction need not be direct, but could be mediated by a common limiting factor \cite{McGehee1977a}, see below. 
+%However, they also arise in cases when the organisms do not interact directly; rather, their interaction is mediated by another factor \cite{McGehee1977a}. %TODO new paper by Wingreen???
+These factors can be resources that are competed for like food and space, or they can be detrimental factors introduced into the system, like toxins, waste, or mutual predators. 
+%The carrying capacity is a phenomenological parameter that characterizes how many organisms of a species an ecosystem can support. 
+%If the interaction cross terms $x_i x_j$ do not correspond to predation, from whence might they come? 
+%Rather, there are some other factors that mediate their interaction. 
+%Often these are resources the two species compete for, or waste products that increase the death rate of organisms in that environ. 
+%(the distinction between birth and death is important for the stochastics, though not the deterministics)
+%This leads to a very general series of models. 
+
+%\begin{figure}[h]
+%	\centering
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=1.0\textwidth]{{a-a-graph3}}%TODO Anton's comment
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=1.0\textwidth]{phasespace-graphic-31.png}
+%	\end{minipage}
+%	\caption{\emph{Left: Stability of the non-trivial (coexistence) fixed point.} The coloured region meets the conditions for the existence of a stable coexistence point for $K_1=K_2$. The coexistence point is non-physical or a saddle point elsewhere. 
+%		In the positive quadrant, coexistence of the two species typically is deterministically stable if $a_{12},a_{21}<1$. The interior of this region is termed weak competition, with the strong competitive regime being exterior. When $a_{12}=a_{21}=1$ there is a line of fixed points, called the WFM line \cite{Case1979}. Otherwise, along the edge of $a_{ij}=1$, $1>a_{ji}\leq0$ the coexistence point overlies one of the axial fixed points. \emph{Right: State space of the coupled logistic model.}  At $a=0$ the two species evolve independently. As $a$ is increased the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of fixed points: the WFM line. The dashed lines illustrate the deterministic flow of the system: black is general, teal is for $a=0.5$, and orange for $a=1.1$. The zoom inset illustrates the stochastic transitions between the discrete states of the system. The fixation occurs when the system reaches either of the axes, where it stays afterwards. } \label{phasespace}
+%\end{figure}
+For two species, the paradigmatic Lotka-Volterra system reads \cite{Chotibut2015,MacArthur1970,Dobrinevski2012,Constable2015,Bomze1983,Levin1970,Czuppon2017}: %COMM - WHAT references? all references
+%The paradigmatic deterministic system resulting from including species interactions is that of the two dimensional generalized Lotka-Volterra equations:
+%As a deterministic system this model is the two dimensional generalized Lotka-Volterra equations:
+\begin{equation}
+\begin{aligned}
+ \dot{x}_1 &= r_1 x_1 \left( 1 - \frac{x_1 + a_{12} x_2}{K_1} \right) \\
+ \dot{x}_2 &= r_2 x_2 \left( 1 - \frac{a_{12} x_1 + x_2}{K_2} \right).
+\end{aligned} \label{mean-field-eqns}
+\end{equation}
+Here the turnover rates $r_i$ set the timescale of the birth and death for each species, 
+$K_i$ are the carrying capacities, and the interaction parameters $a_{ij}$ represent the degree that one species' niche overlaps with that of another. 
+When $a_{ij}=0$, species $j$ does not affect species $i$, and they experience different ecological niches. 
+$a_{ij}=1$ implies that species $j$ competes just as strongly with species $i$ as species $i$ does with itself: they occupy the same niche. 
+%; that is, these are the competition rates - but not technically a rate. 
+With positive $a_{ij}$'s, each species acts to reduce the growth rate of the other. %; that is, they compete, potentially to the exclusion of one species. % (see figure \ref{phasespace}). %TODO Anton's comment that exclusion is confusing
+Only one $a_{ij}$ being positive corresponds to a parasitic or predatory relationship, with one species gaining from the loss of the other. 
+The case where both $a_{ij}$'s are negative corresponds to mutualism or symbiosis \cite{Chotibut2015}. 
+Figure \ref{phasespace} shows these regions of parameter space in more detail. 
+Going forward, we only regard the condition where organisms do not interact directly (that is, their per capita birth and death rates do not depend explicitly on $\vec{x}$), and there is no immigration into the system (that is, the dynamics come from per capita birth and death and grow linearly with $x_i$). 
+%These are the simplest equations that avoid a Benthamite population explosion. 
+%The equations \ref{mean-field-eqns} were originally developed to model the dynamics of a predator species and its prey species \cite{Volterra1926}, 
+%A generalized Lotka-Volterra system is equivalent to a set of replicator equations in one higher dimension in terms of its deterministic dynamics \cite{Hofbauer1981}. 
+%In a certain limit it also recovers the replicator dynamics of the same dimension [reference]. %, as will be discussed further below. 
+%In this paper we consider species of the same trophic level, that would not typically interact with each other directly [through predation or antagonism]. 
+%The generalized Lotka-Volterra equations can be derived as a limiting case when the factors are included implicitly. 
+%but this need not be the case. 
+
+%\subsection{toxin generation}
+As an illustrative example of species growth being constrained by an implicit factor,
+ consider the case where each of two species produces a toxin \cite{VanMelderen2009}. %, which affects each species differently.%, and that their respective toxins affect the two species differently. 
+Niche overlap is related to how much the toxin generated by a species affects that species relative to how it affects the other species. 
+%The degree to which each toxin affects the other species relative to the species making it indicates the niche overlap. %similarly relates to the amount the species' respective niches overlap. 
+In the case where each species is unaffected by the toxin of the other the niche overlap is zero. 
+%If each toxin is equally detrimental to either species the niche overlap is one. 
+%Were they to react with the toxins identically we would say the two species are in the same niche; if they only interacted with their own toxin we would say the two have no niche overlap. 
+The two strains of bacteria $x_i$ each have a per capita birth rate $\beta_i$, death rate $\mu_i$, and toxin generation rate $g_i$. % {$b_i$}
+Each toxin $t_i$ has a degradation rate $\lambda_i$, and increases the death rate of each bacterium linearly with efficacy $e_{ij}$. 
+Mathematically, 
+\begin{align*}
+ \dot{x}_1 &= \beta_1 x_1 - \mu_1 x_1 - e_{11} t_1 x_1 - e_{21} t_2 x_1 \\
+ \dot{x}_2 &= \beta_2 x_2 - \mu_2 x_2 - e_{12} t_1 x_2 - e_{22} t_2 x_2
+\end{align*}
+and
+\begin{align*}
+ \dot{t}_1 &= g_1 x_1 - \lambda_1 t_1 \\
+ \dot{t}_2 &= g_2 x_2 - \lambda_2 t_2.
+\end{align*}%really I should have each toxin be generated by both bacteria (g_{11}x_1+g_{12}x_2)
+% \dot{t}_i = g_i b_i - \lambda_i t_i.
+In many systems, the timescale of production and degradation of a secreted molecule is on the order of minutes \cite{??}, whereas cell division and death occurs over hours \cite{??}. 
+The dynamics of the toxin are much faster than those of the bacteria and will reach a steady state for a given $\vec{x}$ \cite{adiabatic}. %so one can approximate these latter equations by setting $\dot{t}_i$ to zero \cite{adiabatic}. %COMM/TODO
+In this adiabatic limit we get $t_i^\star = \frac{g_i}{\lambda_i}x_i$; this substitution
+%In the adiabatic limit, when the dynamics of the toxins are faster than those of the bacteria, we set the change of toxins to zero and get $t_i = \frac{g_i}{\lambda_i}x_i$. %b->x
+directly recovers the equations \ref{mean-field-eqns}, %as
+%With the substitution $r_i=\beta_i-\mu_i$ this leads directly to
+% \dot{b}_1 &= (\beta_1-\mu_1) b_1 \left( 1 - \frac{e_{11} t_1 b_1 + e_{21} t_2 b_1}{\beta_1-\mu_1} \right)
+%\begin{align*}
+% \dot{x}_1 &= r_1 x_1 \left( 1 - \frac{x_1 + a_{12} x_2}{K_1} \right) \\
+% \dot{x}_2 &= r_2 x_2 \left( 1 - \frac{a_{21} x_1 + x_2}{K_2} \right)
+%\end{align*}
+% \dot{b}_1 &= r_1 b_1 \left( 1 - \frac{b_1 + a_{12} b_2}{K_1} \right) \\
+% \dot{b}_2 &= r_2 b_2 \left( 1 - \frac{a_{21} b_1 + b_2}{K_2} \right)
+%\begin{align*}
+% \dot{b}_1 &= r_1 b_1 \left( 1 - \frac{b_1 + \frac{r_1 e_{21} g_2 \lambda_1}{e_{11} g_1 \lambda_2} b_2}{\frac{r_1 \lambda_1}{e_{11} g_1} } \right) \\
+% \dot{b}_2 &= r_2 b_2 \left( 1 - \frac{\frac{r_2 e_{12} g_1 \lambda_2}{e_{22} g_2 \lambda_1} b_1 + b_2}{\frac{r_2 \lambda_2}{e_{22} g_2} } \right). 
+%\end{align*}
+identifying $r_i=\beta_i-\mu_i$, $a_{ij} = r_i \frac{e_{ji} g_j \lambda_i}{e_{ii} g_i \lambda_j}$, and $K_i = \frac{r_i \lambda_i}{e_{ii} g_i}$. 
+%COMM - emphasize this to give an intuition of niche overlap - and generalize by saying this can be done with other negatives or with positives, like... (food, shelter, waste, preds, etc)
+%Notice that the carrying capacity of each species depends only on the parameters for that species and its associated toxin, the generation rate and efficacy of the toxin acting to decrease the number of individuals that could exist in a monoculture. 
+Notice that carrying capacity $K_i$ depends only on the parameters for species (and associated toxin) $i$, independent of the other species. 
+By contrast, the niche overlap relates to the ratio of efficacy and secretion rate of the other's toxin to one's own. 
+Complete and symmetric niche overlap corresponds to the case when $a_{12} = a_{21} = 1$. 
+Whether for detrimental or beneficial common factors, the niche overlap of species $i$ with species $j$ is the ratio of how that factor facilitates intra-species competition within species $i$ to how that same factor affects species $j$. 
+%If rabbits and hares are competing for food and that food supply would support an average of $K_i$ rabbits, $a_{ij}$ gives the relative number of rabbits that could survive if each were competing not with rabbits but with hares. %COMM and give a reference
+%For two species, two factors need not be similar biologically; in a situation with rabbits and hares competing for food and avoiding a mutual predator, we can simply assign one factor to the rabbits and the other to the hares. 
+For two species, two factors need not be similar in biological function, we can simply assign one factor to each species. 
+The number of factors needs not be the same as the number of species, but this has consequences to their long term dynamics as described below. 
+%We treat the case of a differing number of species and factors in the next paragraph. %COMM - more generalized
+
+For dynamical systems, in this case the generalized Lotka-Volterra equations \ref{mean-field-eqns}, we can make a more general argument about the constraints caused by factors common to many species \cite{Armstrong1976,McGehee1977a}. 
+%The above example comes from a broader argument for dynamical systems like the generalized Lotka-Volterra equations \ref{mean-field-eqns}. 
+Contemplating $N$ focal species of the same trophic level (that is, disregarding any predators or prey of the $N$ species), the generic $N$ dynamical equations are
+%Consider the dynamical equations of $N$ species,
+\begin{align*}
+\dot{x}_i &= \beta_i\big(\vec{f}\big)x_i - \mu_i\big(\vec{f}\big) x_i,
+\end{align*}
+where $\vec{f}$ is the state of all factors that might affect the growth and death rates of the focal species, such as food, space, toxins, waste, or predation. 
+%These factors can be biotic or abiotic, factors affecting growth or death or both. 
+%We treat the case wherein organisms of the $N$ species do not interact directly (that is, their birth and death rates do not depend on $\vec{x}$), and there is no immigration into the system (that is, the dynamics come from per capita birth and death and grow linearly with $x_i$). 
+%These assumptions are valid when the focal species all come from the same trophic level and all reproduce asexually. 
+A factor $j$, $j \in M$, either follows its own dynamical production-consumption equation
+\begin{align*}
+\dot{f}_j &= g_j(\vec{f},\vec{x}) - \lambda_j(\vec{f},\vec{x}) f_j
+\end{align*}
+with some generation function $g_j$ and a depletion function $\lambda_j$,
+or else it has a conservation equation
+\begin{align*}
+f_j &= c_j(\vec{f},\vec{x}).
+\end{align*}
+McGehee and Armstrong identify the former case with biotic factors like plant biomass for herbivores to eat, and the latter case to abiotic factors like area of sunlight for phototrophs. 
+When solving for the fixed points in the former case, the $M$ equations can in principle be inverted to write each factor $j$ as a function of the focal species and the other factors, similar to a conservation equation. 
+Similarly if an adiabatic approximation in invoked, a dynamical equation is replaced by an instantaneous conservation equation. 
+
+%In fact the whole $N+M$ system of equations can be inverted to find $N+M$ fixed points. 
+With nonzero focal species populations, inverting the $N$ equations for the focal species creates $N$ constraints for the $M$ factors. %, assuming no $x_i$ equals zero. 
+However, if $N>M$ then the system of $M$ equations is overconstrained and cannot be solved. 
+This problem is resolved by some of the focal species (specifically, $N-M$ of them) going zero population at steady state. 
+%If we call a niche a multidimensional space defined by the set of factors affecting some focal species \cite{Leibold1995,Chesson2000}, then the number of niches is set by the number of factors, and competitive exclusion should deterministically reduce the number of viable species to the number of niches; we can divide up the niches such that each species occupies an independent niche, and competitively excludes any other species from that niche. 
+The number of niches is set by the number of limiting factors, and competitive exclusion reduces the number of surviving species to the number of niches. %deterministically 
+%COMM indep = math indep? clairify
+There is one major exception: if the $N$ focal species equations are not linearly independent, they do not provide $N$ constraints. %; this corresponds to a number of species sharing a single niche, and produces a marginally stable manifold in phase space. %, and is the origin of the WFM line we see in figure \ref{phasespace}. %COMM - WFM line not yet introduced, keep this general with neutral manifold
+All species redundant with each other deterministically tend toward a 1D manifold \cite{McGehee1977a,Case1979}. 
+This manifold is of marginal stability, in that the system is drawn to it, but any perturbations within the line are not restored. 
+This exception corresponds to complete niche overlap, with all the species sharing a single niche. 
+In the example of toxin generation above, the two toxins allow for two species. Were there only one toxin created by the two species, the substitution of $t^\star = \frac{g_1 x_1 + g_2 x_2}{\lambda}$ would lead to two incompatible $\dot{x}_i$ equations (in particular, a coexistence steady state would require $t^\star=r_1/e_1=r_2/e_2$). %COMM - not IF, but as and example
+This exceptional case could occur, and upon substitution of $t^\star$ the two $\dot{x}_i$ equations would be the same up to a multiplicative constant, and both would be satisfied by any solution on the line $\lambda t^\star = g_1 x_1 + g_2 x_2$. 
+In a stochastic analogue of the same system we expect that random fluctuations will quickly drive to extinction the species until only one remains on this coexistence line. 
+%While it is not competitive per se, this is still an exclusionary process, so we group it in with competitive exclusion. %"group it in" sounds terrible
+For a more rigourous treatment regarding the number of focal species that can be deterministically supported by extraneous factors, please consult the work of McGehee and Armstrong \cite{Armstrong1976,McGehee1977a}. 
+
+
+\subsection{Deterministic Stability} %COMM
+\begin{figure}[ht!]
+	\centering
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\textwidth]{{a-a-graph5}}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\textwidth]{phasespace-graphic-7-output-alt.jpg} 
+	\end{minipage}
+	\caption{\emph{Left: Stability phase diagram of the non-trivial (coexistence) fixed point.} 
+		There is a stable coexistence point for $K_1=K_2$ in the blue shaded region. The coexistence point is non-physical or a saddle point elsewhere. In quadrants II or IV the only stable fixed point outside of the shaded region is $A$ or $B$, respectively. 
+		%In quadrant I's strong competition both $A$ and $B$ are stable. 
+		Under competition ($a_{12},a_{21}>0$), coexistence of the two species typically is deterministically stable if $a_{12},a_{21}<1$. The interior of this region is termed weak competition, with the strong competitive regime being exterior, in which case both $A$ and $B$ are stable. 
+		For $a_{12}=a_{21}=1$ the coexistence point is replaced by a line of marginal stability, called the WFM line \cite{Case1979}. 
+		%On the border of these two regimes the coexistence point overlies one of the axial fixed points. 
+		\emph{Right: State space of the coupled logistic model.}  At $a=0$ the two species evolve independently. As $a$ is increased the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of fixed points: the WFM line. The dashed lines illustrate the deterministic flow of the system: black is general, teal is for $a=0.5$, and orange for $a=1.1$. The zoom inset illustrates the stochastic transitions between the discrete states of the system. The fixation occurs when the system reaches either of the axes. 
+	} \label{phasespace}
+\end{figure}
+
+The deterministic equations \ref{mean-field-eqns} have four fixed points,% different combinations of each species being extinct or not: %established or extinct
+\begin{equation}
+ O = (0,0) \; A = (0,K_2) \quad B = (K_1,0) \: C = (\frac{K_1-a_{12} K_2}{1-a_{12}a_{21}},\frac{K_2-a_{21} K_1}{1-a_{12}a_{21}}). %or use hspace
+\end{equation}
+The origin $O$ is the fixed point corresponding to both species being extinct and is unstable with positive eigenvalues $r_1$ and $r_2$. %$(0,0)$
+%$A$ and $B$ are the fixed points with one or the other species fixated. 
+The single species fixed points $A$ and $B$ are stable on-axis (with eigenvalues $-r_1$ and $-r_2$, respectively), but are prone to invasion if point $C$ is stable. %COMM same as from O - this is curious that there is no constant prefactor - mention this in the thesis
+Fixed point $C$ portrays coexistence of the two species; 
+%where $C$ comes from solving the system of equations of the isoclines $x_1+a_{12} x_2=K_1$ and $a_{21} x_1+x_2=K_2$. 
+%The origin is an unstable fixed point with positive eigenvalues $r_1$ and $r_2$. %$(0,0)$
+%The single species fixed point $(0,K_2)$ (resp., $(K_1,0)$) has eigenvalues $-r_1$ and $r_2\left(1-a_{21}\frac{K_1}{K_2}\right)$ (resp., $-r_2$ and $r_1\left(1-a_{12}\frac{K_2}{K_1}\right)$); for most parameter regimes it is a saddle point, with the stable manifold on-axis. 
+%The single species fixed point $A$ has eigenvalues $-r_1$ and $r_2\left(1-a_{21}\frac{K_1}{K_2}\right)$; for most parameter regimes it is a saddle point, with the stable manifold on-axis. Point $B$ is similar, with a substitution of labels $i$ and $j$. 
+%The single species fixed points $A$ and $B$ are stable on-axis (with eigenvalues $-r_1$ and $-r_2$, respectively), but are prone to invasion if point $C$ is stable. %COMM same as from O - this is curious that there is no constant prefactor - mention this in the thesis
+% but are semi-unstable for small $\beta$ or $\alpha$, though they could in theory be fully stable. 
+%The stability of the coexistence fixed point $C$ is more complicated; % and will be treated in the next subsection. 
+%By assuming that $K_1 \simeq K_2$ we can find the region of $a_{12}$-$a_{21}$ parameter space in which coexistence is deterministically stable; this is shown in figure \ref{phasespace}. 
+%
+%LV to Moran
+%reduction of dimensionality to simplex
+%(prefiguring the stochastics section, note that movement along Moran line is "free" (eigenvalue goes to zero))
+%
+%\subsection{Species Interaction Regimes}
+%
+%Calling $C$ a coexistence point can be a misnomer, as it is not always positive. 
+%Even when it is a positive value for both species, it may not be stable, in which case the system goes to either point $A$ or $B$ on a timescale independent of the carrying capacity \cite{Strogatz1994}. 
+its stable regime is shown in the left panel of figure \ref{phasespace} \cite{Neuhauser1999,Cox2010}, and see also the Supplemental Information. 
+%The general biological situations modelled by the generalized two-dimensional Lotka-Volterra equations \ref{mean-field-eqns1} and \ref{mean-field-eqns2} are labelled in figure \ref{phasespace}. 
+The different regions of the parameter space have biological meanings \cite{Chotibut2015}. % of the generalized two-dimensional Lotka-Volterra equations \ref{mean-field-eqns} as delineated figure \ref{phasespace}
+Parasitism, or antagonism, occurs in the II and IV quadrants of $(a_{ij},a_{ji})$ space. 
+Weak parasitism allows for the existence of both species at the detriment of one to the benefit of the other. 
+Conversely, in strong parasitism the antagonizer competes with the host/prey more than the intra-specific competition of the prey, such that the antagonizer drives the prey to extinction deterministically; the whole phase space is the basin of attraction for the antagonizer's fixed point $A$ or $B$. %COMM - basins of attraction
+Similarly with strong competition at $a_{ij},a_{ji}>1$ the system is bistable, albeit with two basins of attraction, one for each single species fixed point. % and deterministically the system evolves until only one species remains. 
+These strong regimes give the intuitive results of competitive exclusion. 
+The mutualistic case of $a_{ij},a_{ji}<1$ is not dealt with in this paper, but weak mutualism follows a similar trend to the weak competition regime investigated below. %, which is what we investigate below. 
+%Our emphasis will be on the weak competition regime. 
+In strong mutualism the two species benefit each other so much that it causes a population explosion. 
+
+The right panel of Figure \ref{phasespace} shows the locations of the fixed points and the flow of the system, in the symmetric case of $K \equiv K_1 = K_2$, $r \equiv r_1 = r_2$, and $a\equiv a_{12}=a_{21}$, where neither of the species has an explicit fitness advantage. 
+This equality of the two species comes from an assumption of neutrality and serves as a good null model against which fitness results can be compared \cite{I'm not sure this is necessary}. 
+%To specify a neutral model we define $K \equiv K_1 = K_2$, $r \equiv r_1 = r_2$, and $a\equiv a_{1,2}=a_{2,1}$.
+The time is non-dimensionalized by $r$, leaving only the carrying capacity $K$ and the niche overlap $a$ as the control parameters of the system. %could remove this line %For $a=0$ the species are independent of each other. In the other limit of complete niche overlap, $a=1$, the model becomes a continuous time version of the WFM model, as shown below and in the Supporting Information. %the classic WFM model
+In this case, the model reaches fixation deterministically if $|a|>1$, and coexistence is stable if $|a|<1$. 
+%Stochastically fixation is still possible [reference (of FP?)]. 
+For the critical value of complete niche overlap, $a=1$, there is a line of semi-stable fixed points connecting points $A$ and $B$, along $x_2 = K - x_1$; see figure \ref{phasespace}. 
+This is the 1D manifold of marginal stability discussed above, and arises because the two species are linearly dependent when $a=1$. 
+Each point has a zero eigenvalue along the line and is stable off line, so the system is deterministically attracted to this line, but any perturbations along the line are not restored to their unperturbed position \cite{McGehee1977a,Case1979}. % effectively `free' in that they are
+%This is the line along which a WFM model would fluctuate stochastically, hence we call it the WFM line. 
+
+\section{Effects of Stochasticity}
+Stochasticity naturally is introduced into a system upon the consideration that for many species there is not a fixed time for birth or death events, rather the time is randomly distributed \cite{VanKampen1992,Elgart2004a,Parker2009,Assaf2006}. % with some mean rate. 
+%Alternatively, the population does not evolve continuously but jumps to integer values, since the number of organisms is discrete. 
+%This is called demographic stochasticity. 
+%There are many sources of noise, but this is the one we choose to consider. 
+%After the fast deterministic dynamics to get to or near the line, stochastically the system is free to diffuse along this line of constant total population; this diffusion in fraction of species while population is held constant is analogous to the 
+With the inclusion of this demographic stochasticity, any fluctuations along the WFM line are not restored;%, so the system tends to diffuse along this line of constant total population; 
+this diffusion is analogous to the random walk of the %classic models of Wright-Fisher and Moran \cite{Chotibut2015}. %TODO Anton's comment re. switching between det. and stoch. %TODO Anton's comment re. diffusion unconstrained to line
+ classic WFM model \cite{Dobrinevski2012}, and is expected when $a=1$ \cite{Lin2012,Constable2015,Chotibut2015}. %, hence it being called the WFM line. 
+%Being constrained to the simplex of constant total population for $a=1$ can also be regarded as a recovery of the replicator equation popular in game theory. 
+%reduction of dimensionality to simplex
+%The purpose of this paper is to investigate the behaviour of mean fixation times near the critical case of complete niche overlap between two competing species \cite{Chotibut2015,Dobrinevski2012}, and the transition along $a$ from fast WFM dynamics to the exponential times of independent logistic systems. 
+%
+%\subsection{Limiting Cases for Stochastic Extinction [to be expanded??]}
+%\subsection{Stochastic Limits}
+%Fluctuations allow the fixation of one species upon the extinction of the other. 
+%When the two species occupy the same niche ($a=1$) the model predictions mirror the results of the WFM model, which has a relatively fast fixation time that scales algebraically with $K$ \cite{Moran1962,Lin2012}:% ($a=1$) 
+The WFM model shows a relatively fast fixation time scaling algebraically with $K$ \cite{Moran1962,Lin2012}:% ($a=1$)
+\begin{equation} \label{morantime}
+\tau \simeq \ln(2) K^2 \Delta t.
+\end{equation}
+Note that our time is measured in units of $1/r$, and we find that on average each WFM event occurs with $\Delta t \approx 1/K$; see the Supporting Information for more details.
+%Note that with no exponential dependence on the carrying capacity, fixation happens relatively rapidly in the WFM model.
+%That is, with fixed population size $K$, the mean fixation time of the WFM model depends on the initial fraction of species 1, $f = n_{1}^{(0)}/(n_{1}^{(0)}+n_{2}^{(0)})$, as
+%\begin{equation} \label{morantime}
+%\tau \approx - \Delta t K^2 \big(f\ln(f) + (1-f)\ln(1-f)\big),
+%\end{equation}
+%where $\Delta t\simeq 1/K$ is the generation time, during which exactly one birth and one death occur in the population \cite{Moran1962}.
+%%!!include?! Note that this is the mean time to either fixation or extinction of species 1 and is therefore symmetric about $f=1/2$ in this neutral model.
+
+In the opposite limit of non-interacting species ($a=0$), each species evolves according to an independent stochastic logistic model.
+%In the other extreme, when $a=0$ the two species have completely non-overlapping niches.
+%They are independent, each obeying a stochastic logistic model.
+The mean fixation time for a single species model can be calculated exactly and, asymptotically for $K\gg 1$, varies as $\frac{1}{K} e^K$ \cite{Lande1993,Nisbet1982}; see the Supporting Information. %, starting from the deterministic fixed point,
+%Gabel, Meerson and Redner use a WKB approximation to add a correction to the mean fixation time in the case of $a$ approaching zero\cite{Gabel2013}.
+In this regime the fixation time distribution in the two species model is dominated by a single exponential tail \cite{Norden1982,Hanggi1990,Ovaskainen2010}, and the overall fixation time is (see the Supporting Information):
+%The distribution of times is dominated by a single exponential tail \cite{Norden1982,Hanggi1990}, hence we expect the mean time to be half that of a single species \cite{Lande1993}.
+%Because the probability distribution function of the extinction times is dominated by a single exponential tail \cite{Norden1982,Hanggi1990},
+%the mean time to fixation of the two independent species is simply half of that of a single species\cite{Lande1993}.
+%The probability distribution function of the extinction time of a single species can be approximated as an exponential function\cite{Norden1982,Hanggi1990}.
+%In this case the mean of the minimum of two values is simply half the mean of a single logistic system: therefore %$\tau \approx \frac{1}{2K} e^K$.
+\begin{equation} \label{indietime}
+ \tau \simeq \frac{1}{2K} e^K.
+\end{equation}
+The exponential dependence of the fixation time on $K$ implies that in this case the two species coexist much longer than in the complete niche overlap regime, for sufficiently large $K$.
+
+In the physics and mathematical biology community it is recognized that a deterministically stable fixed point leads to an exponential mean time to extinction \cite{Ovaskainen2010,Assaf2016}, as in equation \ref{indietime}. 
+The WFM results of equation \ref{morantime} are also well known \cite{Moran1962,Lin2012}, being the same as Kimura's results for molecular evolution \cite{Kimura1968}, which serves as a basis for much of modern neutral theories of evolution \cite{Kingman1982,Hubbell2001}. %TODO I hate this sentence
+It has already been noted in the literature that the limiting behaviour of the generalized Lotka-Volterra equations \ref{mean-field-eqns} recovers the WFM results, and the asymptotic outcomes near this limit have been investigated \cite{Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012}. 
+Exponential escape times persist for incomplete niche overlap near the independent limit \cite{Gabel2013,Fisher2014}.
+%Results near the independent limit have also been found \cite{Gabel2013,Fisher2014}. 
+%Various points over the whole range of niche overlap have been explored, though in these studies the mean fixation time was not the outcome of interest \cite{Antal2006,Fisher2014,Chotibut2015}. % from $a=0$ to $a=1$ 
+%To our knowledge, there remains a gap in the literature, with t
+Our goal is to map out the full transition, between exponentially long fixation times of species in distinction niches and linear fixation times of species sharing a niche. %, remains to be explored. %COMM retry last couple sentences
+%Since population sizes tend to be large, an exponential dependence effectively leads to coexistence. 
+%Our goal is to map out this transition, with particular emphasis on observing when the exponential nature of the mean fixation time disappears. %COMM bears repeating? - depends
+
+%%%again highlighting that we want to observe the nature of this transition
+%%In the previous section we recounted the mean time for a species to be removed from a system when starting from a stable amount; either the carrying capacity in a single logistic species or half of a two-species WFM population. 
+%%We now will characterize the transition between these two limits. 
+%%We pay special heed to the question of where that exponential dependence is lost. 
+%In the previous section we summarized the mean time to extinction of a species starting from a stable number of organisms. 
+%In a two-species WFM population starting with equal proportions, a species will fixate relatively rapidly, in a time proportional to the population size. 
+%Conversely, an independent logistic population will take a long time to go extinct, exponential in the system size. 
+%It is the exponential character of the mean time that distinguishes whether fixation will be fast or slow;
+%we are interested in observing the loss of the exponential dependence on carrying capacity for mean fixation time. 
+%From the literature it is clear that fast fixation occurs at full niche overlap of $a=1$ and slow fixation is at no niche overlap, $a=0$. 
+%We will now characterize the transition between these two limits. 
+
+In the case of this paper, we consider species $i$ have a respective birth and death rate $b_i$ of% $b_i = r_i x_i$ and a death rate of $d_i = r_i x_i\frac{x_i+a_{ij}x_j}{K_i}$. 
+%$n_1 \rightarrow n_1+1$ & $b_1(n_1,n_2) = r_1n_1$ \\
+%$n_1 \rightarrow n_1-1$ & $d_1(n_1,n_2) = r_1n_1\frac{n_1+a_{1,2}n_2}{K_1}$ \\
+\begin{equation}
+ \begin{aligned}
+ b_i &= r_i x_i \\
+ d_i &= r_i x_i\frac{x_i+a_{ij}x_j}{K_i}.
+ \end{aligned}
+\end{equation} \label{deathrate}
+%\begin{equation}
+%b_i = r_i x_i
+%\end{equation}\label{birthrate}
+%and a death rate $d_i$ of
+%\begin{equation}
+%d_i = r_i x_i\frac{x_i+a_{ij}x_j}{K_i}.
+%\end{equation} \label{deathrate}
+These rates are used in the stochastic analyses described below. 
+They recover the Lotka-Volterra equations \ref{mean-field-eqns} in the deterministic limit of negligible fluctuations \cite{Nisbet1982}. %cite textbooks I guess - need more than one? %COMM - show in supplemental information? yes
+Having the interaction term in the death rate is inspired by the toxin model, since the introduction of a toxin will kill organisms more often while being independent of the reproductive process. 
+This is an assumption, and depending on the factors mediating competition the nonlinearity could go in birth (as when competing for space) or death (when encouraging predators) or both (with food scarcity). 
+
+We choose to solve the master equation directly, to arbitrary accuracy, in order to recover both the exponential and polynomial aspects of the mean time to fixation. 
+%The technique is agnostic to the functional form of the extinction time and so will recover both the exponential and polynomial aspects of the mean time to fixation. 
+%Since we are interested in both exponential and polynomial aspects [of the mean time], we require a technique that is agnostic to the functional form of the mean time to fixation. %TODO talk about /what/ previous work??? see last couple paragraphs of intro
+%To this end we solve the master equation directly, to arbitrary accuracy. 
+%TODO explain demographic noise: %The stochasticity of birth and death events, known as demographic noise \cite{VanKampen1992,Elgart2004a,Parker2009,Assaf2006}, causes the population numbers to fluctuate about the fixed point or line of the deterministic counterpart. Large fluctuations are improbable, but eventually a large deviation will take the system to the absorbing state composed of the union of the axes, where one of the species becomes extinct and the other fixated in the population.
+%By its very nature, an extinction event occurs far from the stable fixed point, when the system reaches either of the axes of the state space shown in figure \ref{phasespace}.
+%Instead of using the Fokker-Planck equation to describe fluctuations near the fixed point\cite{VanKampen1992,Redner2001,Karlin1975}, we describe the fluctuations in the whole space with the backward master equation.
+We denote the probability of the system being at population ($x_1,x_2$) at time $t$ (given the initial conditions $x_1^{0}$ and $x_2^{0}$) as $P(x_1,x_2,t|x_1^{0},x_2^{0},0)\equiv P(s,t|s^0)$, where $s=\{x_1,x_2\}$ denotes the state of the system. 
+The system is described by the vector of probabilities $\vec{P}(t)\equiv\big(\dots,P(s,t|s^0),\dots \big)$ where each element is the probability of being in a certain state $s$ \cite{Munsky2006}.
+The forward master equation describing the time evolution of the probability distribution is \cite{VanKampen1992}
+\begin{align} \label{matrix-master-eqn}
+ \frac{d}{dt}\vec{P}(t) = \hat{M}\vec{P}(t),
+\end{align}
+where $\hat{M}$ is the (semi-infinite) transition matrix. %, which shows up in the backward formalism \cite{Iyer-Biswas2015}.
+In order to construct the vector of probabilities it is expedient to enumerate the states of the system with a single index \cite{Munsky2006}.
+To this end we introduce the mapping of the two species populations $(x_1,x_2)$ to state $s$ as
+%To map between the two populations and the single dimension in which we construct our probability vectors we define the function
+\begin{equation}
+s(x_1,x_2) = (x_1-1)C_K+x_2,
+\end{equation}
+where $s$ serves as the index for our vectors. % and $C_K$ is a cutoff to make the matrix finite. 
+To enable numerical manipulations, we introduce a reflecting boundary condition at a cutoff population size $C_K>K$ for both species, to make the transition matrix finite \cite{Cao2016,Munsky2006}. 
+In our case, where the probability of escaping to infinity is zero, choosing a sufficiently high cutoff allows us to calculate the fixation times to an arbitrary precision. 
+The matrix $\hat{M}$ is sparse, with non-zero elements along five bands: $\pm 1$ off the diagonal, $\pm C_K$ off the diagonal, and the diagonal itself. 
+The bands at $\pm 1$ off diagonal are $\hat{M}_{s,s+1}=d_2(s+1)$ and $\hat{M}_{s+1,s}=b_2(s)$. 
+Those at $\pm C_K$ off diagonal are $\hat{M}_{s,s+C_K}=d_1(s+C_K)$ and $\hat{M}_{s+C_K,s}=b_1(s)$. 
+%The bands at $\pm 1$ off diagonal are $\hat{M}_{s,s+1}=d_2(s+1)=(x_2+1)\frac{x_2+1+a\,x_1}{K}$ and $\hat{M}_{s+1,s}=b_2(s)=x_2$. 
+%Those at $\pm C_K$ off diagonal are $\hat{M}_{s,s+C_K}=d_1(s+C_K)=(x_1+1)\frac{x_1+1+a\,x_2}{K}$ and $\hat{M}_{s+C_K,s}=b_1(s)=x_1$. 
+%The conservation of probability is ensured through the reflecting boundary conditions at $C_K$, which manifests itself in the diagonal elements of $\hat{M}$. %COMM - don't need to invoke conservation - mention that absorbing there has little difference
+The diagonal elements are $\hat{M}_{s,s}=-b_1(s)-b_2(s)-d_1(s)-d_2(s)$, except for a reflecting boundary condition at $x_i=C_K$. 
+% except at every state $s$ such that $x_1=C_K$ (resp. $x_2=C_K$); these corresponding diagonal elements $\hat{M}_{s,s}$ are missing the $b_1$ (resp. $b_2$) term. %COMM - TOO confusing?
+%This prevents a leakage of probability outside of our cutoff, although the likelihood of reaching the cutoff is so low that having absorbing boundary conditions at the cutoff has no noticeable difference. 
+
+The master equation (\ref{matrix-master-eqn}) has a formal solution obtained by the exponentiation of the matrix: $\vec{P}(t) = e^{\hat{M} t}\vec{P}(0)$. 
+Direct matrix exponentiation, for instance with Euler's method, rapidly becomes impractical since the fixation time grows exponentially with the system size. 
+%However, direct matrix exponentiation rapidly becomes impractical as the system size increases, since the fixation time grows exponentially with the system size. %, so too would the number of iterations of, say, an Euler's method to exponentiation. 
+The same issue holds with using Gillespie tau-leaping simulations \cite{Gillespie1977,Cao2006}; which we have nevertheless used to verify our results up to moderate system size. 
+The Fokker-Planck equation and other approximations would be viable but they incorrectly calculate the polynomial prefactor to the exponential \cite{Ovaskainen2010}, and since we are interested in the disappearance of the exponential scaling it is critical that we accurately capture the polynomial behaviour. %maybe also \cite{Assaf2016}
+%!!include?! The solution essentially becomes a sum $\sum_{a}\vec{v}_a c_a e^{\lambda_a t}$ over eigenvalues $\{\lambda_a\}$ and eigenvectors $\{\vec{v}_a\}$, and could be approximated by the long tail of the smallest magnitude eigenvalue \cite{Hanggi1990}.
+Rather than rely on lengthy simulations or unnecessary approximations, we solve the backward master equation, which allows us to directly calculate the mean fixation times. % without explicitly solving the forward master equation. 
+Such an approach benefits from the sparsity of the matrix $\hat{M}$. 
+Starting from state $s^0$, the mean fixation time is \cite{Iyer-Biswas2015}
+\begin{equation} \label{explicit-tau}
+ \tau(s^0) = -\sum_s \left(\hat{M}^{-1}\right)_{s,s^0}. 
+\end{equation}
+%TODO/COMM I don't really have a simple derivation for this. The survival probability and the first passage time distribution, each being linear in the probability, both also obey the backward master equation (maybe up to a negative sign). Then noting tau=int t F and multiplying both sides by M_b we get M_b tau = -1
+%The numerical solution is aided by the sparsity of the transition matrix. 
+We use the sparse matrix LU decomposition algorithm to find components of the matrix inverse, implemented with the C++ library Eigen \cite{eigenweb}. 
+The advantage of this technique is that it scales better in time than exact techniques while still having arbitrary accuracy, as controlled by the cutoff $C_K$. %; however, it takes more memory. 
+%To find the mean fixation time for any given initial condition this requires only one column of the inverse.
+%By increasing the cutoff $C_K$ we can calculate these times to arbitrary accuracy. 
+We find that a choice of $C_K=5K$ is sufficient to calculate the mean fixation times to three significant digits. 
+
+
+%\section{Transition between Limiting Fixation Dynamics} %... Dynamics(?) Stochastic Results? Times? Regimes? Functional Forms?}
+\section{Fixation Dynamics Results}
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=0.45\textwidth]{coupled-log-data.eps}
+\includegraphics[width=0.5\textwidth]{coupled-logistic-data.png}
+\caption{\emph{Dependence of the fixation time on the carrying capacity and the niche overlap.}  Fixation time as a function of carrying capacity $K$ for different values of niche overlap $a$. The lowest line, $a=1$, recovers the WFM results with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$. } \label{lntauvK}
+\end{figure}
+
+Figure \ref{lntauvK} shows the calculated fixation times for select values of the niche overlap $a$. 
+%The results of our calculations are shown in figure \ref{lntauvK}. 
+%Between the two extremes, t
+The exponentially long fixation times characteristic of species with completely non-overlapping niches persist even for incomplete niche overlap. %, as shown in figure \ref{lntauvK}. %repetitive?
+This is generally expected for systems with a deterministically stable fixed point \cite{Doering2005,Ovaskainen2010}, % and is most obvious in the context of a Fokker-Planck approximation with an effective potential:
+%the depth of the potential well depends on the system size, and from Kramers' theory \cite{Bez1981,Hanggi1990} we know that the mean time grows exponentially with well depth. 
+%About a stable fixed point the potential is deep, and many independent failed attempts of escaping the well occur before a successful trajectory takes one of the species to zero population. This intuition suggests an exponentially distributed fixation time, which is what we observe. 
+%The existence of this exponential dependence has also been noted
+and has been shown using Fokker-Planck type solutions \cite{Chotibut2015,Dobrinevski2012,Lin2012}, as well as the WKB approximation \cite{Gabel2013}, for the coupled logistic model. 
+The Supplemental Information gives an example of both Fokker-Planck and WKB approximations solving a single logistic system, correctly calculating the exponential scaling but miscalculating the polynomial prefactor. 
+%However, these approximations do not allow to study the nature of the transition from co-existence to fixation  because they do not accurately account for the prefactor to the exponent and break down at the WFM line.%To capture the prefactor and more generally analyze the dependence on niche overlap, we use an ansatz
+To investigate the transition from these exponential times to the linear scaling of the WFM limit, we use the ansatz 
+%To characterize the nature of this transition from coexistence to fixation we use an ansatz for the mean fixation time:
+\begin{equation} \label{ansatz2}
+ \tau(a,K) = e^{h(a)}K^{g(a)}e^{f(a)K}.
+\end{equation}
+% \ln[\tau] = f(a)K + g(a)\ln[K] + h(a).
+For biologically relevant population sizes and timescales, coexistence of the species will be typically observed experimentally whenever the fixation time has a non-zero exponential component, $f(a)\neq 0$ \cite{http://www.iucnredlist.org/static/categories_criteria_3_1}. %TODO Anton's comment: needs a reference to justify, and is maybe out of place
+%IUCN defines a species as Endangered if there are fewer than 250 mature individuals, and for 250/2 (factor for sexual reproduction) this is already a large number. http://www.iucnredlist.org/static/categories_criteria_3_1
+In the  WFM limit $a=1$ there should be no exponential component, and we expect $f(1)=0$, $g(1)=1$, as follows from equation (\ref{morantime}). %, and $h(1)=\ln\big(\ln(2)\big)$,
+In the independent species limit with zero niche overlap, $a=0$, equation (\ref{indietime}) suggests $f(0)=1$, $g(0)=-1$. %and $h(0)=-\ln(2)$
+Figure \ref{functionalKa} shows the ansatz functions $f(a)$ and $g(a)$, obtained  from the fit to the fixation times as a function of $K$ shown in figure \ref{lntauvK}.
+
+\begin{figure}[ht]
+\centering %COMM - what's up with the green line
+\includegraphics[width=0.45\textwidth]{functionalKa8.png} %COMM bigger fonts etc
+\caption{\emph{Niche overlap controls the transition from coexistence to exclusion.}  Blue line: $f(a)$ from the ansatz of equation \ref{ansatz2} characterizes the exponential dependence of the fixation time on $K$; it  approaches zero monotonically as the niche overlap reaches its WFM line value $a=1$. Green line: $g(a)$ quantifies the scaling of the pre-exponential prefactor $K^{g(a)}$ with $K$. Yellow line: $h(a)$ is the fitted multiplicative constant. Dashed bars represent a 95\% confidence interval. The points at the extremes $a=0$ and $a=1$ are the expected asymptotic values from equations (\ref{morantime}) and (\ref{indietime}). } \label{functionalKa}
+\end{figure}%, which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the WFM limit
+
+The expected limits accurately predict the exponential character, $f(a)$, of the mean fixation time at the limits $a=0$ and $a=1$. 
+The limiting values are derived from approximations, however, as evidenced by their lesser agreement for the polynomial term, $g(a)$, and constant term, $h(a)$. 
+%Despite being approximations, the expected limits accurately predict the exponential character ($f(a)$) of the mean fixation time at the limits $a=0$ and $a=1$. 
+%The fits for the polynomial ($g(a)$) and constants ($h(a)$) are less accurate, though since the fitting is dominated by the exponential it is unclear whether this is a deficiency of the approximations or the fitting algorithm. 
+%We find that only when the two species occupy \emph{exactly} the same ecological niche at $a=1$ will one or the other rapidly fixate. 
+More importantly, we find that only when two species have complete niche overlap ($a=1$) will fixation be rapid, dominated by a polynomial dependence on $K$. %COMM - FP expansion %COMM - will one English %COMM rapidly fixate, explain again
+In all other cases the mean time until fixation is exponentially long in the system size, which is large in most biological systems \cite{Hanggi1990,Ovaskainen2010}. 
+Even for species that occupy \emph{almost} the same niche ($a\lesssim1$), there exists a stable fixed point, and so the two species effectively coexist. 
+Whereas the coexistence point transitions to the the WFM line exactly at $a=1$, the exponential dependence $f(a)$ transitions to zero smoothly. 
+%The transition of $f(a)$ to $0$ appears to be smooth and continuous, unlike the sudden disappearance of the lone coexistence fixed point at $a=1$. 
+%For $a\neq 1$ there exists a stable fixed point, and the system behaves in a typical Kramers fashion, as if it is diffusing in a potential well. 
+The fixed point also remains if the parameter symmetry is broken, giving the same exponential scaling (see Supporting Information). 
+%Breaking the symmetry of the system's parameters also leads to exponential scaling in the fixation time (see Supporting Information). 
+%COMM We have only discussed a=a, but also some hold true for a!=a, blah blah
+%Escape events are rare, and only after many attempts will the system reach a stopping point, thus leading to a mean time that is exponential in the distance from the boundaries \cite{Hanggi1990,Ovaskainen2010}. 
+%The reason for this behaviour is that in the case of a deterministically stable coexistence fixed point, system dynamics can be likened to diffusion in a potential well, with exponentially rare escape events, similar to the Kramers' theory \cite{Hanggi1990,Ovaskainen2010}. 
+%When the two species live in exactly the same ecological niche there is a centre manifold in the deterministic system, corresponding to the WFM line, along which diffusion is easy and escape times are faster \cite{Dobrinevski2012}. 
+%In the case of complete niche overlap, the system possesses a ``soft" marginally stable direction along the WFM line that enables fast escape \cite{Dobrinevski2012}. 
+Some consequences of the transition are addressed in the Discussion section below. 
+
+
+\section{Route to Fixation}
+%indeed, the route to extinction is broad, not obvious (hence you can get wrong scaling, as in WKB??)
+\begin{figure}[h]%TODO need contour map index
+	\centering
+%	\begin{minipage}{0.9\linewidth}
+	\begin{minipage}{0.49\linewidth}
+%		\begin{flushright}
+			%  \includegraphics[width=0.9\linewidth]{coupled-logistic-extinctionpath-a9.jpg}
+			\includegraphics[width=\textwidth]{a10K64.png}
+			%  \includegraphics[width=1.0\linewidth ,trim={0 7cm 0 7cm},clip]{coupled-logistic-extinctionpath-a9-small}%coupled-logistic-
+%		\end{flushright}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\begin{flushright}
+			\includegraphics[width=\textwidth]{a0K32200.jpg} %COMM - final leg of escape trajectory - okay, do it
+		\end{flushright}
+	\end{minipage}
+	\caption{\emph{Route to fixation is unclear except for small niche overlap.}  Contour plot shows the average residency times at different states of the model, with pink indicating the longer times and deep green for fast times; pinker areas represent more visited states. The coloured line is a sample trajectory the system undergoes before fixation, from the trajectory beginning at orange through to purple and then ending in red. The red point is the deterministic coexistence point. See text for more details. \emph{Left}: With $a=1$ and $K=64$ the model is at the WFM limit. \emph{Right}: With $a=0$ and $K=32$ the model is at the independent limit. Note that only one per million trajectory points are included; each trajectory typically spends most of its time sampling the space near the deterministic fixed point. } \label{extinctionroutes}%!!: see figure in supplement. Panel B has $a=0.1$ and $K=32$. [LETS MOVE PANEL B to supplementary] 
+\end{figure}
+
+To gain a deeper insight into the fixation dynamics, we calculate the residency times in each state during the fixation process, which can be obtained by inverting the transition matrix \cite{Grinstead2003} (see also Supporting Info):
+\begin{equation} \label{residence-time}
+ t_{res}(s) = \hat{M}^{-1}_{s,s^0}.
+\end{equation}
+The result is shown as a contour plot, from long residing pink to rarely occupied green, in Figure \ref{extinctionroutes} for two different niche overlaps, close to and far from the WFM limit. 
+The set of states lying along the steepest descent lines of the contour plot, shown as the black line, can be thought of as a ``typical" trajectory \cite{Gabel2013,Matkowsky1984,Kessler2007}. 
+However, even for the species with complete niche overlap it is clear that the system trajectory covers many states far from this line. %, and the trajectories can differ greatly between different fixation events. 
+This departure is even greater for weakly competing species, where the system covers large areas around the fixed point. % before the rare fluctuation that leads to fixation occurs. 
+%See the Supporting Information for more details.
+
+This is relevant because the WKB approximation involves an integral along a line sometimes referred to as the most probable route to extinction \cite{Assaf2016,Gottesman2012}. 
+% can be considered as an expansion about the probable route to extinction \cite{Assaf2016,Gottesman2012}; with the system spending the majority of its time away from any one route, our findings suggest that, except for the case of complete niche overlap, the WKB approximation may not capture all the relevant dynamics of the system. 
+Since the sample trajectories and residence times of Figure \ref{extinctionroutes} include large departures from any ``typical'' trajectory, the WKB approximation may lack the ability to capture all the relevant dynamics of the system. 
+This is consistent with our finding that
+%Indeed,
+%For 
+ a one dimensional logistic equation the WKB approximation obtains a polynomial prefactor that differs from the asymptotically exact result \cite{Lande1993}. %\cite in prep paper with Jeremy
+See the Supplementary Information for this calculation. 
+%In particular, WKB typically misses the algebraic prefactor before the exponential, though this can be corrected by including higher order terms. 
+%Our point is that the route to extinction is broad and not constrained near a particular manifold (except for complete niche overlap). 
+%For this reason we expect that expansions about this route, such as the WKB approximation, should fail \cite{Assaf2016?,Gottesman2012?,Chotibut2015?}. %TODO
+%We generate an estimate of such a route by stitching together subsequent longest lived states; these are the black lines in figure \ref{extinctionroutes}.
+%When there is high niche overlap the system spends most of its time near the route, but this is not the case when the two species are nearly independent.
+%The residency time of each state $t_{res}(\{n_i\}) = \hat{M}^{-1}_{B\,\{n_i\},\{n_i^{s}\}}$ \cite{Grinstead2003} is found by inverting the transition matrix. %!!!CHECK IF IT'S M^-1 OR M_B^-1 !!!
+%For accuracy the Gillespie algorithm\cite{Gillespie1977} can be employed, but it scales with the extinction time and so is slow.
+%%and tau leaping, other extensions?
+%The technique used in this paper solves the backward master equation with arbitrary precision calculations to study how the mean fixation time transitions between complete niche overlap and independent species,
+% recovering the exponential term and give a good estimate of the prefactor. %include??
+
+%We invert the transition matrix to get the average residency time of each state in the state space: $t_{res}(\vec{n}) = \hat{M}^{-1}_{\vec{n},\vec{n}_{(0)}}$ \cite{Grinstead2003}.
+%The coexistence deterministic fixed point (shown in red in figure \ref{extinctionroutes}) is the expansion point of the Fokker-Planck approximation \cite{VanKampen1992,Redner2001,Stirk2010,Doering2005}, and is far from the axes, where extinction occurs.
+%By stitching together the longest lived states we estimate a probable route to extinction (in black in the figure); the WKB approximation \cite{Gabel2013,Elgart2004,Assaf2006a,Assaf2010,Ovaskainen2010,Tauber2005} expands about the most probable route.
+%When the system is close to the WFM case the extinction path is similarly close to the WFM line about which the system fluctuates, hence the WKB approximation is justified.
+%This is not so when the populations are nearly independent; the system explores a large area of state space around the deterministically stable fixed point and no reasonable path to extinction can be distinguished.
+%The WKB approximation nevertheless recovers the exponential term, but misses the prefactor \cite{Gabel2013}.
+%For accuracy the Gillespie algorithm\cite{Gillespie1977} can be employed, but it scales with the extinction time and so is slow.
+%%and tau leaping, other extensions?
+%The technique used in this paper solves the backward master equation with arbitrary precision calculations to study how the mean fixation time transitions between complete niche overlap and independent species,
+% recovering the exponential term and give a good estimate of the prefactor.
+
+%Also find likely route to extinction - it is clear that WKB cannot capture it all - the route is clearer as a->1 (though not %sudden like in tau) %check this bit in parentheses
+
+%indeed, the route to extinction is broad, not obvious (hence you can get wrong scaling, as in WKB??)
+
+The exponential scaling of the WKB approximation is inspired by the results of Kramer's theory, which describes the mean exit time of a particle in a potential \cite{Berglund2011}. 
+However, the concept of a potential does not hold in our model, which is a non-gradient system for which a true potential cannot be written. 
+%Some work has been done to define a quasi-potential for systems like ours \cite{Zhou2012}, and it complicates the understanding of results like in figure \ref{extinctionroutes}. 
+One can define a pseudo-potential in a number of ways \cite{Zhou2012}, for instance based on the flux of the probability, a manner similar to the residence times of Figure \ref{extinctionroutes}. 
+%In interpreting our results it is nevertheless useful to think of the WFM line as a line along which the pseudo-potential does not change, hence diffusion is free in this direction. 
+It is useful to think of the WFM line as a line along which the pseudo-potential does not change, hence diffusion is free in this direction. With niche overlap decreased from this $a=1$ limit, there is a gradient along some ``typical'' trajectory from the coexistence point to an axis, the gradient along which the steepness increases as the species interact less strongly. 
+%Similarly, the greater the niche overlap the less steep the gradient along this direction. 
+%Note that equation \ref{residence-time}, given as a contour plot in figure \ref{extinctionroutes}, is not a potential \cite{Zhou2012}. %TODO moar citations
+%While the stochastic system can be approximated by a Fokker-Planck equation \cite{VanKampen1992} with force and (non-homogenous) diffusion terms, the forces in the two directions cannot be written as the gradient of a scalar potential. 
+%In interpreting our results it nevertheless may be useful to think of the WFM line as a line along which the potential does not change, hence diffusion is free in this direction, and similarly that the greater the niche overlap the less steep the gradient along this direction, but such an analysis is technically incorrect. 
+
+
+
+
+\section{Discussion}%Conclusion
+
+%Both the WFM model and the Lotka-Volterra system are very old models, and have been popular since their inception. 
+%Only recently was it shown that a Lotka-Volterra system will recover dynamics like those of the WFM model \cite{Antal2006,check this}. 
+%One of the few ``laws'' of biology, that of Gause \cite{Gause1932}, is that no two species with similar ecological niches can coexist in a stable equilibrium; inevitably, one of the two species will undergo a local extinction. 
+%no two species with similar ecological niches can coexist in a stable equilibrium, meaning that when two species compete for exactly the same requirements, one will be slightly more efficient than the other and will reproduce at a higher rate as a result. The fate of the less efficient species is local extinction.
+Competitive exclusion, the idea that the most fit species excludes all others from a shared ecological niche, is a useful theory for thinking about biodiversity and how it may be maintained. % niche partitioning
+%When there is a fitness discrepancy between the two it is nearly axiomatic that the less fit species dies out. 
+Even when the two species are equally viable, as in the strong competition regime of the Lotka-Volterra model, deterministically there is fixation within the niche. 
+Stochastic models, such as the WFM model, also show a fixation of two species that is fast relative to the exponential scaling with system size expected for systems with demographic noise \cite{Ovaskainen2010}. 
+%``Quick'' here means the mean fixation time is less than that of a typical stochastic system with a limiting deterministic fixed point, which are well known to show an exponential relationship between mean time and system size \cite{FP etc}. 
+But our intuition of competitive exclusion can fail us, as typified with ``the paradox of the plankton" \cite{Hutchinson1961,Chesson2000}: there are many species of plankton seeming to live in the same niche. 
+In many ecosystems the biodiversity is huge, even when there appear to be a limited number of niches. 
+%COMM renewed interest from theo and exp'tal angles?!?!
+%The WFM model has served as a paradigm of fixation within an ecological niche and underlies a number of theories of biodiversity such as the competitive exclusion \cite{Hardin1960} and the theory of niche differences \cite{Abrams1983,Mayfield2010}, but reality is more complicated than this \cite{Chesson2000,Hutchinson1961}. 
+%We find that, assuming the system size is large, extinction times are long, even for species living in very similar niches.
+%We find that only when the two species occupy \emph{exactly} the same ecological niche do we expect one or the other to rapidly fixate. 
+%We find that the rapid fixation this model implies relies crucially on the niche overlap. 
+
+
+%COMM - FP is continuum expansion
+%Instead of the Fokker-Planck assumption of fluctuations being smaller than $K$ \cite{VanKampen1992,Chotibut2015,Constable2015,Dobrinevski2012,Fisher2014}, or the WKB approximation of large $K$ \cite{Gabel2013}, %COMM
+%TODO Anton's comment: what was wrong with the previous techniques?
+%, and unstable coexistence, and respectively the exponential, polynomial, and logarithmic dependence on system size in these three cases, though they do not explicitly regard the transition between them. %and their stochastic averaging technique may be questionable, idk
+%The work of Chotibut and Nelson \cite{Chotibut2015} is closest to the results found here: they also reference different types of dynamics that are possible, and find the probability of a given species fixating depending on its initial population, as well as the mean time to fixation. 
+%and observe the they find a broad basin of equal likelihood extinction changed only close to an axis and similarly the accompanying unconditioned extinction times%, though they don't seem to touch the Moran limit, nor do they go above K=20
+% SEE ALSO 20X-az FOR MORE DETAILED ONE-LINERS FOR EACH
+
+Both the WFM model and the Lotka-Volterra system are classic models, and recent theoretical developments show a link between them \cite{Antal2006,Lin2012,Constable2015}. 
+%Only recently was it shown that a Lotka-Volterra system will recover dynamics like those of the WFM model \cite{Antal2006,check this}. 
+The mean fixation time of a two-dimensional Lotka-Volterra system, typically scaling exponentially in the system size, recovers the fast dynamics of the WFM model at complete niche overlap, $a=1$. 
+At incomplete niche overlap the scaling has the expected exponential dependence, as has been verified in the literature \cite{Fisher2014,Chotibut2015,Dobrinevski2012}. 
+\iffalse
+%Other authors have explored the fixation probability with asymmetric parameters \cite{Gabel2013}, or even the whole range of $a$ looking at abundance distributions rather than fixation times \cite{Fisher2014}. 
+Specifically, Gabel and Meerson \cite{Gabel2013} regard a model similar to the one considered in this paper, near the independent case of complete niche mismatch. 
+Chotibut and Nelson \cite{Chotibut2015} look both at this limit and near the full niche overlap of $a=1$, calculating the mean time to fixation near both limits, though they do not explore the transition between the extremes. 
+Dobrinevski and Frey \cite{Dobrinevski2012} have also recognized the distinction between the exponential times of a stable fixed point and the polynomial times of a neutrally stable system; they too do not investigate the transition between them. 
+One work that \emph{does} examine the transition is that of Fisher and Mehta \cite{Fisher2014}; %COMM too dramatic
+%COMM it's not the same - bigger picture question of maintenantcde of biodiversity
+however, they use a different model, and are interested in community-level metrics like abundance distributions rather than the fixation time that we use to determine whether or not two species will coexist. 
+%COMM - have not explicitly described Gabel,Meerson,Redner or Constable,McKane or Antal,etal or Lin,Kim,Doering
+\fi
+Most of these studies \cite{Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012} start with a Fokker-Planck approximation, which is known to differ from true solution of the master equation \cite{Doering2005,Ovaskainen2010}, often  recovering the exponential character but neglecting the prefactor. 
+Others use a WKB \cite{Gabel2013} or game theoretic \cite{Antal2006} approach. 
+Because we focus our investigation on the details of the transition, as exact a solution as possible must be calculated. 
+We use an arbitrarily accurate quantitative method of truncating and inverting the transition matrix. 
+The algorithmic complexity of this method scales with the population size itself rather than the fixation time, as is the case with the Gillespie algorithm \cite{Gillespie1977}. 
+
+We have calculated the mean fixation times between completely overlapping and completely independent niches in order to observe the transition between these two qualitatively different extremes. %or completely mismatched
+%To our knowledge this is the first investigation of the transition of mean fixation times between complete and independent niche overlaps. 
+We find that fixation is exponential in the system size unless the two niches are exactly identical. 
+The reason for this behaviour is that in the case of a deterministically stable coexistence fixed point, system dynamics can be likened to Kramers' theory in a pseudo-potential well \cite{Bez1981,Hanggi1990,Ovaskainen2010}, where the mean transition time grows exponentially with well depth. 
+%Only for $a=1$ is the single coexistence point replaced by a line of marginally stable fixed points, on which the dynamics are analogous to the WFM model. 
+Even for species that occupy almost the same niche, the mean time until fixation is exponentially slow. 
+In the case of complete niche overlap, the system possesses a ``soft" marginally stable direction along the WFM line that enables fast escape \cite{Dobrinevski2012}. 
+%deterministically none of these models go extinct, so I don't quite know what you're talking about, Anton
+
+The WFM model has served as a paradigm of fixation within an ecological niche and underlies a number of theories of biodiversity. 
+It is related to the neutral models of Kimura \cite{Kimura1968} and Hubbell \cite{Hubbell2001}, and has direct application in coalescent theory \cite{Kingman1982}. % and the theory of niche differences \cite{Abrams1983,Mayfield2010}. 
+Regarding the generalized stochastic Lotka-Volterra system as an extension of the WFM model to incomplete niche overlap means that these theories can be similarly generalized. 
+%This raises the question of whether the limit of complete niche overlap is appropriate for these theories. 
+These theories have an implicit assumption of complete niche overlap. %, which could be relaxed. 
+When Kimura regards synonymous single nucleotide polymorphisms the supposition is entirely justified; for small effect mutations, Hubbell's theory, and coalescent theory it is more questionable, as minute differences between strains, while still not favouring one strain over another, could nevertheless distinguish the strains, as is the case for mismatched niches. 
+Including the impact of partial niche overlap does not change the qualitative results, acting primarily to extend the timescale of the theory. 
+But these theories still leave some questions unanswered: for instance, is there a limit to how finely a niche can be partitioned \cite{Chesson2000}? 
+What our work suggests is that such a limit is imposed only by the population size: coexistence is assumed only when the mean fixation time is much greater than the other timescales of the system, and the fixation time is dominated by $\exp\{f(a)K\}$. 
+Of course for any given carrying capacity there exists a niche overlap such that the exponential term is less significant than the polynomial scaling, but for the large system sizes of most ecological scenarios this niche overlap will be close to $a=1$. 
+% one could find the niche overlap for which this assumption fails. 
+
+%The method we have used can calculate the fixation probabilities and times to arbitrary accuracy. 
+%%The method presented in this paper does not suffer from any approximations, but rather calculates to arbitrary accuracy the fixation probabilities and mean fixation times as described by the master equation. 
+%%The algorithm scales favourably with system size, though may be constrained by RAM. 
+%This allowed us to examine the exponential character of the mean fixation time as it transitions from non-overlapping niches to one niche shared by two species. 
+%We find that only when the species occupy \emph{exactly} the same ecological niche do we expect one or the other to rapidly fixate. 
+%Due to the large system sizes typical in nature, the exponential character resultant from any niche mismatch leads to effective coexistence between species. 
+%%Assuming large biological system sizes, we conclude that competing species in this neutral model coexist for a long time.
+%Much faster than this exponential scaling are invasion times, both of successful and ultimately unsuccessful attempts. 
+%The likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species. 
+%%Invasions, however, is always faster than exponential, and its likelihood of occurrence grows linearly with 1-a
+%%TODO reverse order of points 2 (f(a)) and 3 (invasions)?
+
+%The theory of niche differences has long been used as a way to explain the long term coexistence of species \cite{Abrams1983,Chesson2000}, with limited success \cite{Hutchinson1961,Cushing2005}.
+%Chesson claims that there should be a limit to how finely we can partition niches\cite{Chesson2000};
+%what the preceding work suggests is that no such limit exists.
+Because a typical ecological population is large, a mean fixation time exponential in the system size implies effective coexistence. 
+%The method we have used can calculate the fixation probabilities and times to arbitrary accuracy. 
+%%The method presented in this paper does not suffer from any approximations, but rather calculates to arbitrary accuracy the fixation probabilities and mean fixation times as described by the master equation. 
+Our results suggest that even minute differences in niche overlap, in how different species interact with their shared environment, allows them to coexist \cite{Hutchinson1961,May1999}. 
+%Our results provide a quantitative outcome that expresses the previously qualitative suggestion that even minute differences in how different species interact with the environment allow them to coexist \cite{Hutchinson1961,May1999}. 
+This has important implications for understanding long term population diversity in many  systems, such as human microbiota in health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial microbiota used in fermented products \cite{Wolfe2014}, and evolutionary phylogeny inference algorithms \cite{Rice2004}. %and maybe even in rodent populations\cite{Haydon2001}.
+For small populations the exponential term does not necessarily dominate but our results can still serve as a neutral model, for problems such as maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015} or strain survival in cancer progression \cite{Ashcroft2015}. %clonotype survival
+%There are also implications for coalescent theories, the simplest of which rely on WFM-like dynamics to generate phylogenetic trees; by underestimating the mean time to fixation, two species are presumed to be more closely related than they are, hence the observed genetic differences come from lower mutation rates than are inferred\cite{Rice2004,Rogers2014}.
+%skipped Hubbell
+%Direct observation of extinction is a hard problem; it is usually infeasible to measure small populations approaching but not yet extinct \cite{?}.
+%catalogue \emph{all} of the organisms in a system.
+%However, in some situations a reasonable estimate of the relative population sizes is found.
+%The results in this paper could be used to interpret observational data and estimate niche overlaps and therefore long term diversity,
+%Direct observation of fixation in complex natural populations is a hard problem.
+The coupled logistic model can also be tested and extended based on experiments in more controlled environments, such as the gut microbiome of a \textit{c. elegans} \cite{Vega2016}, or in microfluidic devices \cite{Hung2005}.
+%The important comparison, the main result of the paper, is between competing species that have complete niche overlap, compared to pairs where there is a slight niche overlap:
+%in the former case we expect the mean time to fixation to grow linearly with the system size, whereas in the latter case the fixation time should have some exponential component, allowing for much longer coexistence times.
+
+%[Something about invasions, maybe regarding Gore or Hubbell or health in gut microbiome.] 
+
+%experimental realizations of these results
+%c elegans gut of Gore lab, lung microbiota of Coburn, plasmids of Ingalls, Haydon's minks and voles, (maybe mitochondria?)
+
+%when discussing problems, mention that Moran finds a timescale typically faster than the evolutionary (really, mutation) %timescale, but with our much longer times we will be abutting; same for assuming a fixed/constant environment
+
+%%\section{conclusion}
+%With complete niche overlap, the model presented in this Letter matches the results of the WFM model in terms of reproducing a rapid neutral drift to fixation, with appropriate scaling in terms of the initial fraction and the system size.
+%But the coupled logistic model also goes beyond the WFM model to account for a variable population size and continuous time.
+%By solving the backward master equation to arbitrary accuracy we are able to investigate the behaviour of the fixation time as it depends on the carrying capacity of the system and the niche overlap of the two species therein.
+%The two limits of niche overlap give the expected results of the WFM and independent cases.
+%It is the transition between the two that is of particular interest.
+%We observe that even a slight mismatch between the niches of two species allows for coexistence of those species for long timescales.
+
+\iffalse
+
+%\bibliographystyle{apsrev4-1}%.bst}
+\bibliographystyle{unsrt}
+\bibliography{paper1-3final}
+
+\end{document}
+\fi
