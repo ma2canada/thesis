@@ -52,7 +52,7 @@ now GAP
 
 
 
-\section{Motivation}
+\section{Motivation and background and such}
 \subsection{Biodiversity}
 %Gause's Law states...
 In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.'' 
@@ -78,16 +78,16 @@ Much research has been done on two species competing with each other, as a reduc
 Whether two species will coexist, and for how long, is of essential importance to the larger problem of biodiversity. 
 
 Applications of theory:
-paleo
 conservation
-medical/gut
+paleo
 phylogenetics
+medical/gut
 invasion%maybe move above paleo?
 
+
+
+
 %\subsection{Extinction/Fixation/Coexistence}
-
-
-
 
 
 
@@ -152,41 +152,57 @@ Note that we didn't need to use the large $N$ approximation: there is an exact s
 \begin{equation}
 \tau(n) = \Delta t\,N\left(\sum_{j=1}^n\frac{N-n}{N-j} + \sum_{j=n+1}^N\frac{n}{j}\right). 
 \end{equation}
-Note that we didn't need to use the large $K$ approximation: there is an exact solution:
-\begin{equation}
-\tau(n) = \Delta t\,K\left(\sum_{m=1}^n\frac{K-n}{K-m} + \sum_{m=n+1}^K\frac{n}{m}\right)
-\end{equation}
+%Note that we didn't need to use the large $K$ approximation: there is an exact solution:
+%\begin{equation}
+%\tau(n) = \Delta t\,K\left(\sum_{m=1}^n\frac{K-n}{K-m} + \sum_{m=n+1}^K\frac{n}{m}\right)
+%\end{equation}
 \begin{figure}
 	\centering
 	%\includegraphics[width=0.7\textwidth]{morantimespicturename.png}
 \end{figure}
+The Moran model can be modified in many ways, for instance to include selection. 
 
-Kimura is like Moran, and is well-respected
+Under the approximation of continuous $n$ (ie. $1\ll N$) the Moran model effectively becomes that of Kimura \cite{Kimura1983}. 
+Kimura was inspired by alleles rather than species, but the rationale was similar. 
+In each generation each organism provides many copies of its genome, which are chosen indiscriminately (because each organism has two copies of its genome, a factor of two shows up in Kimura's results when compared those of Moran). 
+Following a few assumptions, Kimura calculates the new mean and variance of the system, hence generating a diffusion equation. 
+Applying the Fokker-Planck approximation to the Moran model obtains the same equation, hence the claim that Kimura's results are similar to those of Moran. 
+Kimura's model similarly can be modified to include many biological effects, like selection. 
+The works of Kimura are well-respected and highly motivated a change in biology to be more quantitative and predictive. 
+Most of Kimura's predictions are numerical by necessity, as no nice analytic forms exist for the solutions. 
+Furthermore, transient behaviour was especially difficult to capture in the models, so only steady states are regarded. 
+Nevertheless, Kimura's ground-breaking work is powerful and wide-ranging. 
+Chapter 4 of this thesis compares some of its outcomes to those from a Kimura paper published decades earlier. 
+His legacy is inescapable. 
 
-Hubbell is like Moran, but is not respected
+The seminal work of Hubbell \cite{Hubbell2001} is also similar to that of Moran, but Hubbell is a much more controversial figure than Kimura. 
+Hubbell, like Moran, was concerned with species, but did not limit himself to Moran's pedagogical choice of two. 
+Hubbell assumes that each organism from any species competes equally with all others, and therefore as with Moran its probability of reproducing or dying is proportional to its fraction of the population. 
+But Hubbell does not predict fixation probabilities and times. 
+Rather, he calculates the distribution of species abundances that should be present within his neutral model. 
+Following the arguments of Hubbell, one can get an estimate of the expected biodiversity of a community. 
 Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation rate, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
 At steady state, Hubbell says:
 \begin{equation*}
 u = P(1,0)\phi(1) = \frac{1}{N}\frac{N-1}{N}\phi(1) \rightarrow \phi(1) \approx u\frac{N^2}{N-1}
 \end{equation*}
-Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation rate, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
+Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation probability, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
 At steady state, Hubbell says:
 \begin{align*}
-P(j,j-1)\phi(j) &= P(j-1,j)\phi(j-1) \\
-\frac{j(N-j)}{N^2}\phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{N^2}\phi(j-1) \\
+                 P(j,j-1)\phi(j) &= P(j-1,j)\phi(j-1) \\
+\equiv \frac{j(N-j)}{N^2}\phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{N^2}\phi(j-1) \\
+                         \phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{j(N-j)}\phi(j-1).
 \end{align*}
-\begin{equation*}
-\phi(j) = \frac{(j-1)(N-j+1)(1-u)}{j(N-j)}\phi(j-1)
-\end{equation*}
+This can be iterated down to get, for $j\ll N$,
 \begin{equation*}
 \phi(j) \approx \frac{\Theta (1-u)^j}{j},
 \end{equation*}
 where $\Theta = \frac{u}{1-u}N$ is Hubbell's fundamental biodiversity model. 
-
-
-
-
-
+The distribution $\phi(j)$ matches well with experimental observations in a variety of biological contexts, from trees to birds to microbiomes. 
+Nevertheless, Hubbell's neutral theory is contentious. 
+The idea that each species competes with all others to the same degree and intraspecies competition strains credibility...
+...
+niches. 
 
 
 
@@ -350,7 +366,7 @@ $|\hat{G}|=0$ is the other situation describing complete niche overlap. The Mora
 
 \section{Stochastics}
 \subsection{introduction}
-As stated before, a stochastic version of the 2D LV makes up the bulk of the thesis. 
+As stated before, a stochastic version of the two-dimensional generalized Lotka-Volterra model makes up the bulk of this thesis. 
 stochastics = randomness, noise
 useful due to inherent randomness, imprecise measurement, and sampling issues
 used in many fields (linguistics, economics, biology) - Wright and Fisher were pioneers, and there were renaissances around Kimura and Hubbell
@@ -412,6 +428,22 @@ immigration from a reservoir
 conclusions, next steps, applications, extensions, outlook
 
 
+The remaining structure of the thesis is as follows. 
+First, I use the exact techniques introduced in section XXX to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. 
+With the simplicity of this test system I explore the applicability of various common approximation techniques. 
+The exact techniques and the approximations together make up chapter XXY, regarding a one dimensional system. 
+This chapter is also being prepared as a paper for publication. 
+The natural extension from a one dimensional logistic is to couple two such systems together; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter XXZ. 
+First a symmetric system is investigated, and the mean time to fixation is used as a tool to diagnose the longevity of the two interacting species. 
+The overlap of their ecological niches is the parameter that controls the transition between effective coexistence and rapid fixation. 
+Next the corresponding asymmetric model is explored. 
+Along with the MTE, my analysis uncovers a typical route to fixation, the discussion of which wraps up this chapter. 
+The final chapter introducing novel research, chapter XYX, extends the scope of this thesis to invasion of a new species into an already occupied niche. 
+I calculate the probability of a successful invasion as a function of system size and niche overlap. 
+Then the MTE conditioned on the success of the invasion is analyzed. 
+Once these timescales are developed, I regard the Moran model modified to account for repeated invasions of the same species. 
+%This is compared with some steady state numerical results from Kimura. 
+Chapter XYY covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
 
 
 
