@@ -57,6 +57,7 @@ now GAP
 %Gause's Law states...
 In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.'' 
 This is better known as the competitive exclusion principle. %, and its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}. 
+%Hutchinson (57) says it's useful because it's a tautology
 Thus, in systems with few resources and therefore few niches, one expects that only few species will persist at any given time. 
 But this is not what is observed in nature. 
 Hutchinson outlined the problem with his famous paradox of the plankton \cite{Hutchinson1961}; %but see also \cite{Corderro2016}
@@ -206,7 +207,7 @@ Of course there are differences between species; even the staunchest neutralist 
 But slight perturbations from Hubbell's theory do not significantly alter its results. 
 What's more, while everyone concedes that there are differences between species, some argue that these differences do not matter. 
 In some sense, they claim, the species are equivalent and behave neutrally, which is why Hubbell's theory seems to work so well in such disparate ecologies. 
-The examples presented in Hubbell's seminal book are compelling, and their may be some truth to these claims. 
+The examples presented in Hubbell's seminal book are compelling, and there may be some truth to these claims. 
 The other side of the debate insists that species differences are the cause of observed abundance distributions. 
 In particular, the environment can be divided into various ecological niches, and it is how these niches are uniquely used by their occupying species that determines the biodiversity of the ecosystem. 
 This is broadly known as niche theory. 
@@ -217,27 +218,50 @@ This is broadly known as niche theory.
 
 
 \section{Niches}
-\subsection{Concept of a niche, the debates therein}
-Of course, species \emph{aren't} the same as each other. Some like grass, some like acid, some like cold. 
-This is why we have Gause's principle/competitive exclusion principle. 
-Niche was popularized by Grinnell17
-Is it tautological? Well maybe, and maybe that's okay. 
-%
-Some confusion/ambiguity to how it is used. 
-Grinnell refers to those environmental considerations that a species can live with [maybe including predators, but not competitors?]
-Following Leibold95, call that the functional or requirement niche. 
-%
-Other usage was popularized by Elton27 and MacArthur\&Levins67, that of a functional or impact niche. 
-Describes how a species influences its environment, or how it fits in a food web; what it's role is in an ecosystem. 
-Turns out this relates to the stability of a coexistence point. 
-%
-Functional niche tells us whether coexistence is even physical. 
-...
-...
-...
+\subsection{Concept of a niche, and the debates therein}
+Of course species \emph{aren't} the same as each other. 
+Some would live happily as the only animals on an island, and others would die out in such a situation. 
+Some can aerobically digest citrate, and others cannot. 
+This is the domain of the competitive exclusion principle. In any given niche, one species will eventually dominate (and usually this is the species optimized to that niche, though this is not necessary for the definition of Gause' law). 
+This begs the question, what is an ecological niche? 
+
+On the theory of niches, Hutchinson \cite{Hutchinson1957} says, ``Just \emph{because} the theory is analytically true and in a certain sense tautological, we can trust it in the work of trying to find out what has happened'' to allow for coexistence of species. 
+In principle, species coexist because they inhabit different niches. 
+The concept of niches is an old one, over a century old, and was popularized by Grinnell \cite{Grinnell1917}. 
+There is therefore over a century of debate as to the meaning of a niche, as there is ambiguity in its use. 
+Following Leibold \cite{Leibold1995}, I refer to the definition of a niche according to the two major camps as the habitat or requirement niche and the functional or impact niche. 
+
+Grinnell \cite{Grinnell1917} refers to those environmental considerations that a species can live with as what defines the niche. 
+These include those organisms on different trophic levels than the species, like their predators and prey, but not those on the same trophic level that might compete with them. 
+Hutchinson \cite{Hutchinson1957} was in the same camp as Grinnell, and has provided one of the most enduring conceptualizations of a niche, that of an ``\emph{n}-dimensional hypervolume'' in the space of factors that could affect the growth or death of a species. 
+For each factor there is some range at which the species can reproduce faster than it dies out. 
+This is true both for abiotic factors such as temperature, and biotic factors like the concentration of predators. 
+Sometimes these ranges are bounded by zero, sometimes they are unbounded, and sometimes they depend on the values of the other factors involved. 
+But in the space of all these factors, Hutchinson calls the fundamental niche that the volume in which the species would have a greater birth rate than death rate. 
+He defines the realized niche as the point in this high dimensional space that the species effectively experiences, given that it is existing and potentially coexisting in an ecosystem. 
+This also lends a natural definition of niche overlap, as the (normalized) overlap of the fundamental niches of two species. 
+A simple model of two species suggests that the functional niche tells us whether the coexistence point of two species is physical \cite{checkit}. 
+%McGehee and Armstrong do not stake a claim in the debates on the definition of a niche, but likely they would side with Hutchinson
+
+The other usage of the term niche was popularized by Elton \cite{Elton1927} and MacArthur \& Levins \cite{MacArthur1967}, that of a functional or impact niche. 
+Whereas the requirement niche focuses on what factors a species needs to live, the impact niche looks at how the species affects these factors. 
+Their conception of a niche describes how a species influences its environment, or how that species fits in a food web; essentially, what its role is in an ecosystem. 
+This idea is especially attractive to those who study keystone species, but is intuitively understood by anyone who has surveyed a variety of ecosystems. 
+In every ecosystem with flowers there is something that pollinates them; in every ecosystem with cells that grow cellulose cell walls there is something that can digest that cellulose; in every system with prey there are predators. %I don't like how this sentence is executed
+Whether the pollinator is a bird or any number of insect species is irrelevant; this role exists in the ecosystem, and so a species evolves to occupy this niche. 
+A simple model of two species suggests that the impact niche tells us whether a coexistence point of two species is stable \cite{checkit}. 
+%Turns out this relates to the stability of a coexistence point. 
+
+Both of these categories of semantics for the word niche have their use. 
+There has been some work to resolve the descrepancies that arise when the two definitions conflict \cite{Leibold probably}. 
+This thesis tends to favour the requirement niche definition but ultimately remains agnostic to the debate. 
+So long as niches exist in some sense, and a niche overlap parameter can be defined, the results I arrive at are sound. 
+I felt it would be remiss were I not to include a brief summary of the debates associated with the definition of an ecological niche, hence the preceding section. 
+
 %***MAYBE REORDER: NICHE CONCEPT, McGEHEE AND ARMSTRONG, LOTKA-VOLTERRA, /THEN/ TOXINS
 
 %\subsection{Concept of competitive exclusion}
+%\subsection{Niche partitioning} %here or after LV?
 \subsection{Deterministically supporting multiple species}
 
 The two strains of bacteria $x_i$ each have a per capita birth rate $\beta_i$, death rate $\mu_i$, and toxin generation rate $g_{ij}$. 
