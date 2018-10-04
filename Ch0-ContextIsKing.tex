@@ -57,7 +57,6 @@ now GAP
 %Gause's Law states...
 In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.'' 
 This is better known as the competitive exclusion principle. %, and its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}. 
-%Hutchinson (57) says it's useful because it's a tautology
 Thus, in systems with few resources and therefore few niches, one expects that only few species will persist at any given time. 
 But this is not what is observed in nature. 
 Hutchinson outlined the problem with his famous paradox of the plankton \cite{Hutchinson1961}; %but see also \cite{Corderro2016}
@@ -238,7 +237,7 @@ For each factor there is some range at which the species can reproduce faster th
 This is true both for abiotic factors such as temperature, and biotic factors like the concentration of predators. 
 Sometimes these ranges are bounded by zero, sometimes they are unbounded, and sometimes they depend on the values of the other factors involved. 
 But in the space of all these factors, Hutchinson calls the fundamental niche that the volume in which the species would have a greater birth rate than death rate. 
-He defines the realized niche as the point in this high dimensional space that the species effectively experiences, given that it is existing and potentially coexisting in an ecosystem. 
+He defines the realized niche as the point or subspace in this high dimensional space that the species effectively experiences, given that it is existing and potentially coexisting in an ecosystem. 
 This also lends a natural definition of niche overlap, as the (normalized) overlap of the fundamental niches of two species. 
 A simple model of two species suggests that the functional niche tells us whether the coexistence point of two species is physical \cite{checkit}. 
 %McGehee and Armstrong do not stake a claim in the debates on the definition of a niche, but likely they would side with Hutchinson
@@ -253,15 +252,15 @@ A simple model of two species suggests that the impact niche tells us whether a 
 %Turns out this relates to the stability of a coexistence point. 
 
 Both of these categories of semantics for the word niche have their use. 
-There has been some work to resolve the descrepancies that arise when the two definitions conflict \cite{Leibold probably}. 
+There has been some work to resolve the discrepancies that arise when the two definitions conflict \cite{Leibold1995,Leibold2006}. 
 This thesis tends to favour the requirement niche definition but ultimately remains agnostic to the debate. 
 So long as niches exist in some sense, and a niche overlap parameter can be defined, the results I arrive at are sound. 
 I felt it would be remiss were I not to include a brief summary of the debates associated with the definition of an ecological niche, hence the preceding section. 
 
 %***MAYBE REORDER: NICHE CONCEPT, McGEHEE AND ARMSTRONG, LOTKA-VOLTERRA, /THEN/ TOXINS
 
-%\subsection{Concept of competitive exclusion}
-%\subsection{Niche partitioning} %here or after LV?
+%\subsection{Concept of competitive exclusion} %was covered in diversity?
+%\subsection{Niche partitioning/apportionment} %here or after LV? or in appendix
 \subsection{Deterministically supporting multiple species}
 
 The two strains of bacteria $x_i$ each have a per capita birth rate $\beta_i$, death rate $\mu_i$, and toxin generation rate $g_{ij}$. 
@@ -322,11 +321,22 @@ This condition coupled with $e_{11}=e_{21}$ satisfies the 2,2 conditions.
 I don't know if this is a satisfactory resolution, but this seems to be the case. 
 
 \subsection{Lotka-Volterra}
-Long history, from 1D Verhulst and 2D predator-prey. 
-A stochastic 2D model will be the main model used in this thesis. 
-phase space figure
-parameter space figure
-LV-Moran correspondence
+%Long history, from 1D Verhulst and 2D predator-prey. 
+The original Lotva-Volterra model was introduced over a century ago to describe the dynamics of a population of a predator and its prey. 
+It can be seen as an extension of the Verhulst, or logistic, equation, from one to two dimensions. 
+%SHOW at least a 1D log, if not the deterministic LV?
+These days the generalized Lotka-Volterra model is the accepted terminology for a dynamical system that depends linearly and quadratically on the populations modelled, with no explicit time dependence. 
+%A stochastic 2D model will be the main model used in this thesis. 
+A stochastic 2D model will be the main model used in this thesis, except for the next chapter, which exhaustively explores the stochastic Verhulst model. 
+%phase space figure - later
+The deterministic limit of the 2D model has fixed points corresponding to neither species surviving, one, the other, or both. 
+%parameter space figure - later
+The position and stability of these points depends on the main parameters of the model, namely the growth rates, the carrying capacities, and the competition between species, called herein the niche overlap. 
+Carrying capacity is a common phenomenological parameter that measures the number or density of organisms an ecosystem can support, in the absence of competitors. 
+By growth rate I mean the timescale of approach toward the carrying capacity, typically measured experimentally by fitting a line to a semi-logarithmic plot of the growth curve. 
+%LV-Moran correspondence - more later
+Some authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for certain parameter values that the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis. 
+
 
 \subsection{toxins}
 As a minimal example of the general considerations above we regard a simple two-species model whose growth is constrained by two secreted factors. The two strains of bacteria $x_i$ each have basal per capita birth rates $\beta_i$, death rates $\mu_i$, and each generate the secreted soluble factors $t_j$ at rates $g_{ji}$. Each factor $t_i$ is degraded at a  rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. Positive $e_{ij}$ may correspond to toxins or  metabolic waste \cite{VanMelderen2009,Rankin2012}\cite{a review, surely}, whereas negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{need some}. The model kinetics is encapsulated in the following equations:
@@ -400,12 +410,22 @@ $|\hat{G}|=0$ is the other situation describing complete niche overlap. The Mora
 \section{Stochastics}
 \subsection{introduction}
 As stated before, a stochastic version of the two-dimensional generalized Lotka-Volterra model makes up the bulk of this thesis. 
-stochastics = randomness, noise
-useful due to inherent randomness, imprecise measurement, and sampling issues
-used in many fields (linguistics, economics, biology) - Wright and Fisher were pioneers, and there were renaissances around Kimura and Hubbell
+%stochastics = randomness, noise
+What is meant by ``stochastic''? 
+Stochasticity is the technical term for randomness or noise in a system. 
+Whereas the solution to a logistic differential equation would simply increase continuously (and differentiably) toward its asymptote at the carrying capacity, a stochastic version would allow for deviations from this trajectory, sometimes decreasing rather than steadily increasing toward the steady state, and thereupon fluctuating about the carrying capacity. 
+In rare cases the fluctuations can even bring the system to a population of zero, in which case it does not recover. 
+This is known as extinction, and is the main object of study in this thesis. 
+Stochasticity has other uses too. 
+It is the natural way to capture the difficulties of performing experiments, accounting for the imprecision of measurement and issues arising from sampling. 
+More broadly, we need stochastics because of nature's inherent randomness and because of the course-graining and phenomenological modelling necessarily done in biology (and indeed, in every scientific endeavor whose purview is not nanoscopic). %we observe inherent randomness in nature
+There are applications in many disciplines, including linguistics, economics, biology, neuroscience, chemistry, and cryptography, to name a few. 
+The giants Wright and Fisher were pioneers in applying randomness and statistical reasoning, in the biological context and in general. 
+In biology there were renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell. 
+
 
 \subsection{Extinction rates from demographic and environmental stochasticity}
-It is a matter of common knowledge in the field/from the literature that demographic fluctuations lead to extinction times scaling exponentially in the system size, whereas environmental noise gives polynomial scaling \cite{?}. 
+It is a matter of common knowledge from the literature that demographic fluctuations lead to extinction times scaling exponentially in the system size, whereas environmental noise gives polynomial scaling \cite{Ovaskainen20X6}. 
 That is, if $K$ is the constant or mean system size, then demographic fluctuations lead to
 \begin{equation}
 \tau \propto e^{cK}
@@ -415,19 +435,24 @@ and environmental noise leads to
 \tau \propto K^d,
 \end{equation}
 for some constants $c,d$
-This system size is often referred to as the carrying capacity \cite{?}. 
+This system size is often taken to be the carrying capacity \cite{um...}. 
+%I only care about demographic fluctuations. Environmental fluctuations can be someone else's problem. 
+This thesis only concerns itself with demographic fluctuations. 
+Environmental fluctuations are a very real phenomenon that I nevertheless ignore. 
+Consider this research as a null model; if the environment is constant then the results of the below research holds. 
+Most real systems will not be represented by my results, but it gives a baseline against which to contrast. 
 
-I only care about demographic fluctuations. Environmental fluctuations can be someone else's problem. 
-In general the info presented here is a null model; most real systems will not be represented by my results, but it gives a baseline against which to contrast. 
-
-The above equations come from FP. There are many ways to calculate MTE...
+The above extinction time scaling equations come from the Fokker-Planck equation. 
+There are many ways to calculate the mean time to extinction. 
+For most of my research I calculate the extinction time exactly, following a textbook formulation, or at least to arbitrary accuracy. 
+There also exist many approximation techniques to deal with stochastic problems, as I will outline below. 
 
 \subsection{How things can be calculated exactly (how I do it)}
 master equation
 \begin{equation}
 \frac{\,d}{dt}P_n = \sum_{m\neq n} W_{m,n}P_m
 \end{equation}
-MTE definition
+MTE definition %and write MTE
 recursive equation
 matrix technique
 
