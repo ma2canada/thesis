@@ -448,13 +448,48 @@ For most of my research I calculate the extinction time exactly, following a tex
 There also exist many approximation techniques to deal with stochastic problems, as I will outline below. 
 
 \subsection{How things can be calculated exactly (how I do it)}
-master equation
+%master equation
+Generically, a stochastic process with demographic noise and continuous time can be described by its master equation:
 \begin{equation}
-\frac{\,d}{dt}P_n = \sum_{m\neq n} W_{m,n}P_m
+\frac{\,d}{dt}P_n = \sum_{m\neq n} W_{m,n}P_m - \sum_{m\neq n} W_{n,m}P_n. \label{master}
 \end{equation}
-MTE definition %and write MTE
-recursive equation
-matrix technique
+Here $P_n$ is the probability of being in state $n$ at time $t$, and $W_{m,n}$ is the transition rate from state $m$ to state $n$. 
+The simple intuition of this equation is that it is a continuity equation, and the change in probability of a state is equal to the flux in minus the flux out. 
+A state $n$ could refer to a single population having $n$ individuals, but it could also refer to a vector of the populations of many species. 
+By defining a vector of probabilities $\vec{P}$ such that the $n$th element is $P_n$ the master equation can be written more compactly as
+\begin{equation*}
+\frac{\,d}{dt}\vec{P} = \hat{W}\vec{P}. \label{master-vector}
+\end{equation*}
+Demographic stochasticity is only relevant for discrete variables. 
+In principle I could consider discrete time systems rather than the continuous ones treated in equation \ref{master}, but as most biological systems require models with continuous time I maintain my focus there. 
+The master equation above is also true for explicitly time-dependent transition rates, but these are not considered in this thesis. 
+%birth death
+Another simplification can be made to equation \ref{master}, given that most physical systems evolve by individual increments or decrements. 
+These are called birth death processes and have $W_{n,m}=0$ for $n-m \neq \pm 1$. 
+Defining $W_{n,n+1}=b_n$ and $W_{n,n-1}=d_n$ then a one species birth death process would have a master equation
+\begin{equation*}
+\frac{\,d}{dt}P_n = b_{n-1}P__{n-1} + d_{n+1}P_{n+1} - (b_n+d_n)P_n. \label{master-birthdeath}
+\end{equation*}
+For systems with multiple species the equation is similar, but with a sum over all births and deaths. 
+
+%generic solution of master
+The master equation has a formal solution $\vec{P}(t) = \exp\{\hat{W}t\}\vec{P}(0)$, where $\exp\{\hat{W}t\}=\hat{I}+\hat{W}t+\frac{1}{2!}\hat{W}^2 t^2+\dots$. 
+This can be interpreted by diagonalizing $\hat{W}$ such that $\hat{\Lambda} = \hat{V}^{-1}\hat{W}\hat{V}$. 
+Then $\vec{P}(t) = \hat{V}\exp\{\hat{\Lambda}t\}\hat{V}^{-1}\vec{P}(0)$, with the diagonal elements of $\exp\{\hat{\Lambda}t\}$ being $\exp\{\lambda_i t\}$, exponentiated eigenvalues of $\hat{W}$. 
+If there are absorbing states in the system, they will be spanned by those eigenvectors with eigenvalues equal to zero. 
+The non-zero eigenvalues characterize the flow of the system between the transient states and from the transients to the absorbing states. 
+
+%MTE definition %and write MTE
+Eventually, a biological system with demographic fluctuations and no immigration will eventually go extinct. 
+Mathematically this is equivalent to saying that if there is no mechanism to leave a population of zero then extinction, having zero population, is an absorbing state, and the only physically realistic steady state of the system. 
+There is a possibility of reaching some other absorbing state but it is unclear what this state might be, since there is always the possibility of death of an organism. 
+Or the population could explode, increasing indefinitely, but this too is unphysical. 
+...
+
+%recursive equation
+
+%matrix technique
+
 
 \subsection{Approximation techniques}
 
