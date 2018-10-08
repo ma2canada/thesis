@@ -20,14 +20,7 @@
 %\renewcommand{\baselinestretch}{1.5} 	% Uncomment for 1.5 spacing between lines
 \parindent 20pt		  % sets leading space for paragraphs
 
-%opening
-%%\title{NAME}
-\title{Report for Ph.D. Committee}
-\author{MattheW Badali}
-
 \begin{document}
-
-%\maketitle
 
 \fi
 
@@ -48,7 +41,7 @@ Moran's model of two species is the cleanest example of two competing species in
 However, this model assumes the two species are identical, that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
 Some dudes have addressed this by noticing that results simular to that of Moran are found in one limit of the famous generalize Lotka-Volterra equations with stochastic fluctuations. 
 They employ various approximate techniques and explore various results and metrics...
-now GAP
+now GAP...
 
 
 
@@ -77,13 +70,18 @@ One question this text asks is how long a single species is expected to survive,
 Much research has been done on two species competing with each other, as a reduction of the full problem of biodiversity \cite{many}. 
 Whether two species will coexist, and for how long, is of essential importance to the larger problem of biodiversity. 
 
-Applications of theory:
-conservation
-paleo
-phylogenetics
-medical/gut
-invasion%maybe move above paleo?
-
+%Applications of theory:
+%conservation
+%paleo
+%phylogenetics
+%medical/gut
+%invasion%maybe move above paleo?
+The theory has many applications. 
+Most obvious, and most pressing to society, is the realm of conservation biology. Biodiversity is often used as an indicator of the health of an ecosystem. A clearer understanding of the forces that maintain biodiversity could provide new and easier metrics for evaluating the health of an ecosystem, and hence the efficacy of various conservation efforts. 
+The mechanisms of species maintenance are related to those of speciation, and stability of an ecosystem can refer to both avoiding collapse and avoiding invasion. Invasion of a new mutant or immigrant strain or species into the system is a problem deeply intertwined with that of biodiversity maintenance. This problem too is of obvious interest in the study of ecosystems. 
+Invasion is also relevant in the healthcare world. We are only recently learning, for example, about the composition of the gut microbiome in humans and its relation to health. The balance of different species in ones gut seems to be important for avoiding illness. Imbalance of the microbiome composition, or invasion of a new species, can greatly impact a person's wellbeing, and a theory of whether an invasion will be successful and how long it might persist would go a long way toward diagnostics and prognostication. 
+The other end of the process, namely the extinction of a species, also has a number of applications. Other than the obvious modern ecological ones, extinction times are useful in paleontology. The fossil record shows a number of species in different epochs, and these data make more sense in the light of a consistent theory of species survival and eventual decline. 
+Similarly, extinction and fixation times are already used in the construction of phylogenetic trees. The more accurate a theory of extinction timescales developed, the more precise we can perform phylogenetic analyses. 
 
 
 
@@ -210,8 +208,8 @@ The examples presented in Hubbell's seminal book are compelling, and there may b
 The other side of the debate insists that species differences are the cause of observed abundance distributions. 
 In particular, the environment can be divided into various ecological niches, and it is how these niches are uniquely used by their occupying species that determines the biodiversity of the ecosystem. 
 This is broadly known as niche theory. 
-%It itself has a contentious past mired by confusions. 
-%I will do my best to provide a summary here, to contextualize my research. 
+Niche theory itself has a contentious past mired by confusions. 
+I will do my best to provide a summary here, to contextualize my research. 
 
 
 
@@ -480,13 +478,36 @@ If there are absorbing states in the system, they will be spanned by those eigen
 The non-zero eigenvalues characterize the flow of the system between the transient states and from the transients to the absorbing states. 
 
 %MTE definition %and write MTE
-Eventually, a biological system with demographic fluctuations and no immigration will eventually go extinct. 
-Mathematically this is equivalent to saying that if there is no mechanism to leave a population of zero then extinction, having zero population, is an absorbing state, and the only physically realistic steady state of the system. 
-There is a possibility of reaching some other absorbing state but it is unclear what this state might be, since there is always the possibility of death of an organism. 
+Eventually, a biological system with demographic fluctuations and no immigration will go extinct. 
+This is equivalent to saying that if there is no mechanism to leave a population of zero then extinction, having zero population, is an absorbing state, and the only physically realistic steady state of the system. 
+There is a possibility of reaching some other absorbing state from whence the system cannot escape but it is unclear what this state might be, since there is always the possibility of death of an organism. 
 Or the population could explode, increasing indefinitely, but this too is unphysical. 
-...
+Thus we concern ourselves with extinction, its likelihood (usually unity) and the time it takes for the system to reach the extinction absorbing state. 
+Since the evolution of the system is a stochastic process, the time to first reach the extinction state is a random variable. 
+The problem is fully characterized by the distribution of exit times from the transients to the steady state. 
+In practice, people often restrict their calculations to the mean time to extinction (MTE), also known as the mean first passage time. 
+A typical exit time distribution for an otherwise stable system is exponential, so one quantity suffices to parameterize it. 
+Mathematically, the MTE is written as
+\begin{equation*}
+ \tau = \int t\, dP_0 = \int t\frac{dP_0}{dt}dt = -\int (1-P_0)dt
+\end{equation*}
+for a system with a single absorbing state. 
+Later in the thesis I will expand the definition as it becomes relevant. 
+%Note also that, for the following, $\tau$ refers to some mean exit time of the system, which may or may not be extinction. 
+Strictly speaking, the MTE should depend on the initial condition. What is usually found is that the MTE is roughly constant over initial conditions, unless the starting condition is already close to the extinction state. 
 
 %recursive equation
+The MTE can be calculated a number of ways. 
+In one dimension (that is, with one species), it can be found analytically as
+...
+Note that this is equivalent to solving the matrix formulation with a couple details. 
+By removing the extinction state from the state space one can define a new vector of probabilities $\vec{P}$ and a new transition matrix $\hat{M}$. 
+Note that probability in this new system is no longer conserved, as it leaks out of the system and into the absorbing state. 
+The removal of the steady state makes $\hat{M}$ invertible, and the vector of MTE's starting from initial states given by the index is
+\begin{equation*}
+\vec{\tau} = -\hat{M}^{-2}\vec{P}(0). 
+\end{equation*}
+%and there's probably something clever with Kramers you can do with this. 
 
 %matrix technique
 
@@ -508,18 +529,18 @@ I also do some matrix funny business (and could do eigenvalue)...
 
 
 \section{Structure of remaining thesis}
-single logistic system and hidden parameters
-approximation techniques
-
-coupled logistic symmetric
-coupled logistic route to fixation
-coupled logistic asymmetric
-
-invasion into a coupled logistic
-immigration from a reservoir
-
-conclusions, next steps, applications, extensions, outlook
-
+%single logistic system and hidden parameters
+%approximation techniques
+%
+%coupled logistic symmetric
+%coupled logistic route to fixation
+%coupled logistic asymmetric
+%
+%invasion into a coupled logistic
+%immigration from a reservoir
+%
+%conclusions, next steps, applications, extensions, outlook
+%
 
 The remaining structure of the thesis is as follows. 
 First, I use the exact techniques introduced in section XXX to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. 
