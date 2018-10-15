@@ -12,11 +12,20 @@ In biology this arises naturally in ecological systems.
 %"short significance"
 Stochastics, as applied in the biological context, was first done by Kimura when calculating the dynamics of gene frequencies in a population. %something re ecological context... Wright Fisher, Moran, the other big names, etc
 Kimura, and most theoretical ecologists since, employed the Fokker-Planck equation, a partial differential equations method which further approximates the system by assuming continuous population sizes %cf. discrete state space
-Moran's model of two species is the cleanest example of two competing species in an ecosystem, with eventually one extincting and one fixating after some characteristic time dependent on the system size. 
-However, this model assumes the two species are identical, that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
-Some dudes have addressed this by noticing that results simular to that of Moran are found in one limit of the famous generalize Lotka-Volterra equations with stochastic fluctuations. 
-They employ various approximate techniques and explore various results and metrics...
-now GAP...
+In the context of population ecology, the similar Moran model of two species is the cleanest example of two competing species in an ecosystem, with eventually one going extinct and one fixating after some short characteristic time dependent on the system size. 
+However, this model assumes the two species are identical, and that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
+Some recent researchers have addressed this by noticing that results similar to that of Moran are found in one limit of the famous generalized Lotka-Volterra equations with stochastic fluctuations. 
+They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
+None, however, have looked at how the system transitions between its slow and fast limits. 
+Most have also restricted themselves to uncontrolled approximations
+This is where I situate my research. 
+In this thesis I will show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
+To accomplish this I shall first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional Lotka-Volterra toy model. 
+Thence I will investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
+I do this with an arbitrarily accurate technique for calculating mean fixation times. 
+Finally, by regarding the opposite process to fixation, I can comment on the stability of the 2D model with regards to invasion attempts. 
+The obvious consequence of my research is a better null hypothesis for the dynamics of small homogeneous communities like the human microbiomes. 
+More generally the results are of significance in estimations of timescale for paleontology and phylogeny. 
 
 
 
@@ -24,7 +33,7 @@ now GAP...
 \subsection{Biodiversity}
 In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.'' 
 This is better known as the competitive exclusion principle. %, and its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}. 
-Thus, in systems with few resources and therefore few niches, one expects that only few species will persist at any given time. 
+That is, in systems with few resources and therefore few niches, one expects that only few species will persist at any given time. 
 But this is not what is observed in nature. 
 Hutchinson outlined the problem with his famous paradox of the plankton \cite{Hutchinson1961}; %but see also \cite{Corderro2016}
 in the top layer of the open ocean there are only a few energy sources and very few minerals or vitamins, yet the number of different phytoplankton living in what seems like the same environment is astounding. 
@@ -188,6 +197,7 @@ As stated before, a stochastic version of the two-dimensional generalized Lotka-
 What is meant by ``stochastic''? 
 Stochasticity is the technical term for randomness or noise in a system. 
 Whereas the solution to a logistic differential equation would simply increase continuously (and differentiably) toward its asymptote at the carrying capacity, a stochastic version would allow for deviations from this trajectory, sometimes decreasing rather than steadily increasing toward the steady state, and thereupon fluctuating about the carrying capacity. 
+See figure \ref{singlelog} for a visual example. 
 In rare cases the fluctuations can even bring the system to a population of zero, in which case it does not recover. 
 This is known as extinction, and is the main object of study in this thesis. 
 Stochasticity has other uses too. 
@@ -197,6 +207,11 @@ There are applications in many disciplines, including linguistics, economics, bi
 The giants Wright and Fisher were pioneers in applying randomness and statistical reasoning, in the biological context and in general. 
 In biology there were renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell. 
 %include figure of 1dlog stoch vs det!!!!!!!
+\begin{figure}%[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{single-logistic.pdf}
+	\caption{\emph{A single logistic system with deterministic and stochastic solutions.} The smooth red line shows the deterministic solution to a one dimensional logistic differential equation with carrying capacity $K=1000$, which the system asymptotically approaches. The jagged blue and purple lines are each an instantiation of a `noisy', or stochastic, version of the logistic equation, as simulated using the Gillespie algorithm. Notice that the stochastic versions tend to follow their deterministic analogue but with some fluctuations, sometimes being greater than the deterministic result, sometimes being lesser. }
+\end{figure} \label{singlelog}
 
 \subsection{Extinction rates from demographic and environmental stochasticity}
 It is a matter of common knowledge from the literature that demographic fluctuations lead to extinction times scaling exponentially in the system size, whereas environmental noise gives polynomial scaling \cite{Ovaskainen20X6}. 
@@ -223,12 +238,28 @@ There also exist many approximation techniques to deal with stochastic problems,
 
 
 \subsection{Approximation techniques}
+%With the existence of a system size parameter $K$, it opens some approximations. 
+%Others simply rely on $n>>1$ or $P_n>>P_{n-1}$
+%The popular ones are FP (and Gaussian), van Kampen, WKB
+%I also do some matrix funny business (and could do eigenvalue)...
+The existence of a system size parameter $K$ raises the possibility of approximation to the master equation, the equation which underlies all processes with demographic stochasticity. 
+The aforementioned Fokker-Planck equation is an expansion of the master equation to continuous populations, going from a difference-differential equation to a partial differential equation. 
+The results tend to look Gaussian about the deterministic dynamics and behave well near the fixed point. 
+However, since extinction invariably happens near zero population, which is far from the fixed point for large system size, the Fokker-Planck approximation is expected to fail. 
+It nevertheless does better than expected, and has utility in some contexts. 
+It is also the easiest equation to use, both in terms of solution and further approximations, so it remains the most popular. 
+%The van Kampen expansion to the master equation gives a similar equation, which is identical in the limit of... small noise?
 
-With the existence of a system size parameter $K$, it opens some approximations. 
-Others simply rely on $n>>1$ or $P_n>>P_{n-1}$
-The popular ones are FP (and Gaussian), van Kampen, WKB
-I also do some matrix funny business (and could do eigenvalue)...
+Recently popular is the WKB expansion. 
+Rather than just expanding about the fixed point as is effectively the case for Fokker-Planck, WKB expands about the most probable trajectory. 
+The WKB approach makes an ansatz solution to the master equation, which results in an effective Hamilton-Jacobi equation for some action-like object of the system. 
+Upon solving the Hamiltonian mechanics the action need only be integrated along the route to fixation in order to estimate the mean time. 
 
+%others like Kramers, eigenvalue, mine
+The main technique employed in this thesis is related to the formal solution to the master equation. 
+In principle this involves inverting a semi-infinite matrix. 
+By introducing a cutoff to the matrix I can calculate the mean fixation time. 
+Varying the cutoff allows for arbitrary accuracy. 
 
 
 
