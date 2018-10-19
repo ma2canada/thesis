@@ -257,7 +257,7 @@ If the system starts with $n_0$ individuals of the focal species, then there sho
 (n_0-1)d(n_0) + (n_0+1)b(n_0) + n_0\big(1-b(n_0)-d(n_0)\big) = n_0 - d(n_0) + b(n_0) = n_0
 \end{equation*}
 individuals in the next time step as well.
-Iterating this calculation gives that the expected value at all times is just the initial population, $\langlen\rangle(t) = n_0$.
+Iterating this calculation gives that the expected value at all times is just the initial population, $\langle n\rangle(t) = n_0$.
 Given the delta function initial condition of starting with $n_o$ individuals, the variance should start at zero and grow.
 After one time step the second moment is
 \begin{equation*}
@@ -290,6 +290,7 @@ E(n) = 1-n/N = 1-f.
 \end{equation}
 DERIVE THIS!!!!!!
 The first passage time, however, does not match a random walk, as there is a probability of no change in a time step, and this probability varies with $f$.
+DERIVE THE FIRST PASSAGE TIMES AS WELL (conditional and un?!?!)
 
 %The system fluctuates as long as the number of organisms of the species of interest is neither none (extinction) nor all (fixation).
 We define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction.
@@ -369,10 +370,10 @@ The continuous time model, which well approximates the discrete time Moran, is a
 %but you don't want to do that.  
 %You could as before approximate this as a differential equation, but the problem is that the bounds won't make sense.  
 
-If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then this is close to the regular Moran model, and will not be treated further here. 
+If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then this is close to the regular Moran model, and will not be treated further here. %!!! is tihs necessary?
 The system then corresponds to the regular Moran model presented in the introduction. 
 %A similar idea is considered in our paper, in preparation. 
-Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). 
+Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). %reservoir
 Since there will be always be immigration, the system will never truly fixate, as there will always be immigrants of the `extinct' species to be reintroduced to the population.  
 Rather, the system will settle on a stationary distribution. 
 The process will have the master equation $\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)$,
@@ -420,7 +421,9 @@ and the sum of these is the normalization
 \sum q_i = \frac{(-1 + N^2) (-1 + N + \nu - g N \nu + g N^2 \nu) + (N (1 - g \nu) - (1 - \nu))}{g N^2 \nu (N (1 - g \nu) - (1 - \nu))}
  \frac{\Gamma[\frac{N(1-g\nu) + 1-\nu}{1-\nu}]\Gamma[\frac{1 - \nu - N\nu}{1-\nu}]}{\Gamma[\frac{N\nu(g-1)+1-\nu}{1-\nu}]\Gamma[\frac{-N+1-\nu}{1-\nu}]}
 \end{equation*}
-which together gives $\widetilde{P}_n$. But I should be careful, because I think I summed this to infinity, rather than to $N$. \\
+which together gives $\widetilde{P}_n$. 
+%\iffalse
+But I should be careful, because I think I summed this to infinity, rather than to $N$. \\
 $Pochhammer[a,n] = (a)_n = \Gamma(a+n)/\Gamma(a)$ \\
 $\Gamma(n) = (n-1)! = \int_0^\infty t^{n-1}e^{-t}dt$ \\
 Stirling: $\ln n! \approx n \ln n - n$ so $\ln \Gamma(n) = \ln n!/n \approx n\ln n - 2n$ \\
@@ -428,60 +431,82 @@ $Hypergeometric2F1[a,b;c;z] = \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)} \int_0^1 \f
 $_2F_1(a,b;c;1) = \frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}$ \\
 Since $q_1=1$ the stationary probability at 1 is $\widetilde{P}_1$; this gives the flux to 0, hence the exit times. 
 Similarly $n=N-1$ should be the other place whence it exits (but it's not clear whether $q_{N-1}=1$). 
-
-
-
-
-
-See figure \ref{stationary-fig}. 
+%\fi
+See figure \ref{stationary-fig} for a visualization of the steady-state probability distribution for different immigration/speciation rates. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1]{Moran-withimmigration-stationaryprobability}
 	\caption{PDF of stationary Moran process due to immigration. $g=0.1$, $N=50$, $\nu=0.01$. } \label{stationary-fig}
 \end{figure}
 
+We can easily calculate the mean and variance as a function of time before reaching steady state. 
+If the mean $\mu$ at some time step $k$ has $\mu_k=n_k$ individuals, then after one time step there should be $\mu_{k+1}= n_k - d(n_k) + b(n_k) = n_k + \nu(g-f_k)$ individuals. 
+That is, $\mu_{k+1}-\mu_k = \nu(g-\mu_k/N)$. 
+This is solved by 
+\begin{equation*}
+ \mu_k = \langle n\rangle(k) = g N \left( 1 - (1-n_0)(1-\nu/N)^k\right).
+\end{equation*}
+At long times the mean fraction $f$ matches that of the metapopulation, $g$. 
+To get the an approximation of the variance, we will consider the continuous time analogue. 
+First, the mean evolves as $\partial_t\mu = \langle b(n)-d(n)\rangle = \nu\left(g-\mu/N\right)$, which has the solution $\mu(t) = g N  + (\mu_0-g N)e^{-\nu t/N}$, and the timescale is set by $\nu/N$. 
+The dynamical equation for the second moment is
+\begin{align*}
+ \partial_t\langle n^2\rangle &= 2\langle n b(n) - n d(n)\rangle + \langle b(n) + d(n)\rangle \\
+                              &= 2\nu \left( g \mu - \langle n^2\rangle/N\right) + 2(1-\nu)\left(N\mu-\langle n^2\rangle\right)/N^2 + \nu(\mu + g N - 2 \mu g)/N
+\end{align*}
+which is an inhomogeneous linear differential equation. 
+The solution is long but not complicated. 
+Recalling that $\sigma^2(t) = \partial_t\langle n^2\rangle(t) - \mu^2(t)$ I write the variance as
+%\begin{equation*}
+% \text{Var} = \frac{N e^{-\frac{2 t ((N-1) \nu+1)}{N^2}} \left(\mu_0 ((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(e^{\frac{t ((N-2) \nu+2)}{N^2}}-1\right)+g N \left(((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(-e^{\frac{t ((N-2) \nu+2)}{N^2}}\right)+((N-2) \nu+2) (g (N-1) \nu+1) e^{\frac{2 t ((N-1) \nu+1)}{N^2}}+(N-1) \nu (\nu (g N-1)+1)\right)\right)}{((N-2) \nu+2) ((N-1) \nu+1)}-e^{-\frac{2 \nu t}{N}} \left(g N \left(e^{\frac{\nu t}{N}}-1\right)+\mu_0\right)^2. 
+%\end{equation*}
+\begin{equation*}
+ \sigma^2(t) = \sigma^2(\infty) + \big(1+g\nu-g(1-\nu)/N\big)N^2\frac{\mu_0-gN}{N\nu+2(1-\nu)}\exp\{-\frac{\nu}{N}t\} - (gN-\mu_0)^2\exp\{-2\frac{\nu}{N}t\} + C\exp\{-\frac{2}{N}\left(\nu+\frac{(1-\nu)}{N}\right)t\}
+\end{equation*}
+where $C$ is an integration constant, and is $C = \sigma^2(0) - \sigma^2(\infty) + (gN-\mu_0)^2 + (gN-\mu_0)(2-\nu)(1-2g)/\big(N\nu+2(1-\nu)\big)$ if the initial variance is $\sigma^2(0)$. 
+$\sigma^2(\infty) = g(1-g) N^2\frac{1}{1+\nu(N-1)}$ is the long time, steady state variance of the system. 
+%The steady state variance is $N^2\frac{g(1+g \nu(N-1))}{1+\nu(N-1)}$. 
+%Or is it $N^2\frac{g(1-g)}{1+\nu(N-1)}$?
+
 Figure \ref{stationary-fig} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
-To do so, we must look at a slightly modified problem, with modified transition rates such that $b(0)=d(n)=0$. 
+To do so, we must look at a slightly modified problem, with modified transition rates such that $b(0)=d(N)=0$. 
 This allows us to find the mean first passage time to species fixation or extinction, recognizing that this will only be a temporary state. 
 %Since we have modified the transition rates at just two points, these don't show up when you use the approximate differential equation.  
-
-Define $E_i$ as the probability that the species of interest goes extinct in this modified system with absorbing states at $n=0$ and $n=N$, ie. the system goes to the former before the latter, given that it starts at $n=i$. 
-Then
-\begin{equation}
-E_i = \frac{b(i)}{b(i)+d(i)}E_{i+1} + \frac{d(i)}{b(i)+d(i)}E_{i-1}. 
-\end{equation}
-By defining $S_i$ as
-\begin{equation}
-S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}
-\end{equation}
-we can iterate to get
-\begin{equation}
-E_{i} = E_1 + (E_1-1)\sum_{j=1}^{i-1}S_j. 
-\end{equation}
-Using the boundary conditions $E_0 = 1$, $E_N = 0$ we can solve the above equation to get
+The technique follows that laid out in the introduction. 
+As a brief reminder, define $E_i$ as the probability that the focal species goes extinct in this modified system with absorbing states at $n=0$ and $n=N$, ie. the system goes to the former before the latter, given that it starts at $n=i$. 
+Then $E_i = \frac{b(i)}{b(i)+d(i)}E_{i+1} + \frac{d(i)}{b(i)+d(i)}E_{i-1}$. 
+Further define $S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}$. 
+Then 
 \begin{equation} \label{extnprob}
 E_{i} = \frac{\sum_{j=i}^{N-1}S_j}{1+\sum_{j=1}^{N-1}S_j}. 
 \end{equation}
 See figure \ref{extnprobfig} for a graphical representation of the results. 
-As with the stationary distribution, the extinction probabilities can be written explicitly, but the solution does not have a nice form. 
+As with the stationary distribution, the extinction probabilities can be written explicitly, but the solution has an even less nice form. 
+%Nevertheless, let's try:
+%\begin{equation*}
+%content...
+%\end{equation*}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1]{Moran-withimmigration-extinctionprobability}
 	\caption{Probability of first going extinct, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extnprobfig}
 \end{figure}
 
-Similar to the extinction probabilities, we can write unconditioned mean first passage times
+Similar to the extinction probabilities, we can write unconditioned mean first passage times to get
+%\begin{equation}
+%\tau[i] = \frac{\Delta t}{b(i)+d(i)} + \frac{b(i)}{b(i)+d(i)}\tau[i+1] + \frac{d(i)}{b(i)+d(i)}\tau[i-1]. 
+%\end{equation}
+%As before this can be rearranged to give
 \begin{equation}
-\tau[i] = \frac{\Delta t}{b(i)+d(i)} + \frac{b(i)}{b(i)+d(i)}\tau[i+1] + \frac{d(i)}{b(i)+d(i)}\tau[i-1]. 
-\end{equation}
-As before this can be rearranged to give
-\begin{equation}
-\tau[i] = \tau[1] + \sum_{j=1}^{i-1}\left(\tau[1] - \Delta t\sum_{k=1}^{j}q_k\right)S_{j}
+\tau[i] = \sum_{k=1}^{N-1}q_k + \sum_{j=1}^{i-1}S_{j}\sum_{k=j+1}^{N-1}q_k
 \end{equation}
 where
 \begin{equation*}
-q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
+q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}. 
+% \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
 \end{equation*}
+so ultimately
+$\tau[n]=-\frac{N^2}{-u+N (g u-1)+1}+\sum _{j=2}^{n-1} \frac{\Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j \left(\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}-\frac{g N^2 u (-u+N (g u-1)+1) \, _3F_2\left(1,j-N+1,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{u}{u-1}-\frac{g N u}{u-1}-\frac{1}{u-1};j+2,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{2 u}{u-1}+\frac{N}{u-1}-\frac{g N u}{u-1}-\frac{2}{u-1};1\right) (1-N)_j \left(1-\frac{g N u}{u-1}\right)_j-(j+1) (-g u N+N+j (u-1)+u-1) \Gamma (j+1) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}{g (j+1) u (-u+N (g u-1)+1) (-u j+j-u+N (g u-1)+1) \Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}\right)}{(1-N)_j \left(1-\frac{g N u}{u-1}\right)_j}+\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}+\frac{(-g u N+N+u-1) \left(g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}\right)}{(g-1) g (N-1) u ((g N-1) u+1) (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}$
 Note that this should go to zero at both $n=0$ and $n=N$, since it is unconditioned. 
 Again, there is a close form, but it is a sum of hyperbolic functions and has not be fully explored yet. 
 It is approximated numerically and displayed graphically in figure \ref{extntimefig}. 
@@ -491,32 +516,34 @@ It is approximated numerically and displayed graphically in figure \ref{extntime
 	\caption{Mean time to either fixation or extinction, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extntimefig}
 \end{figure}
 
-Now the conditional times, to extinction and to fixation. 
+Keeping with the artificial stoppage when the focal population reaches $0$ or $N$ individuals, we calculate the conditional times, respectively to extinction and to fixation. 
 As before, the extinction probability is given by equation \ref{extnprob}. 
-This is equivalent to solving
-\begin{equation}
-M_b \cdot \vec{E_i} = -\vec{\delta}_{1,i}d(1)
-\end{equation}
-from Iyer-Biswas and Zilman 2015 \cite{Iyer-Biswas2015}. 
-Following, we can solve for the conditional extinction time from
-\begin{equation}
-M_b \cdot \vec{\phi_i} = -\vec{E_i}. 
-\end{equation}% = M_b \cdot \vec{E_i \theta_i}
-Here $\phi_i = E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
-These equations were derived for a continuous time process, rather than the discrete one of the Moran model, but the results are largely comparable. In fact, because we are calculating the mean time, I think it gives the same results. 
-Just like for unconditioned extinction times (in the discrete case) you have,
-\begin{equation*}
-\tau_e[n_0+1] - \tau_e[n_0] = \left(\tau_e[1] - \sum_{i=1}^{n_0}q_i\right)S_{n_0},
-\end{equation*}
-so too can you write
-\begin{equation}
-\phi[n+1] - \phi[n] = \left(\phi[1] - \sum_{i=1}^{n}q_iE_i\right)S_{n},
-\end{equation}
-where $\phi_i = E_i\theta_i$, and with the reminder that
-\begin{equation*}
-q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
-\end{equation*}
-Then it follows that
+%This is equivalent to solving
+%\begin{equation*}
+%M_b \cdot \vec{E_i} = -\vec{\delta}_{1,i}d(1),
+%\end{equation*}
+%following Iyer-Biswas and Zilman \cite{Iyer-Biswas2015}. 
+%We can solve for the conditional extinction time from
+%\begin{equation}
+%M_b \cdot \vec{\phi_i} = -\vec{E_i}. 
+%\end{equation}
+%Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
+%These equations were derived for a continuous time process, rather than the discrete one of the Moran model, but the results are largely comparable. 
+%%In fact, because we are calculating the mean time, I think it gives the same results. 
+%Just like for unconditioned extinction times (in the discrete case) you have,
+%\begin{equation*}
+%\tau_e[n_0+1] - \tau_e[n_0] = \left(\tau_e[1] - \sum_{i=1}^{n_0}q_i\right)S_{n_0},
+%\end{equation*}
+%so too can you write
+%\begin{equation}
+%\phi[n+1] - \phi[n] = \left(\phi[1] - \sum_{i=1}^{n}q_iE_i\right)S_{n},
+%\end{equation}
+%where $\phi_i = E_i\theta_i$, and with the reminder that
+%\begin{equation*}
+%q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
+%\end{equation*}
+Similar to the continuous time solutions presented in the introduction,%!!!!!!!!!!\ref{?}
+the conditional extinction time can be written as
 \begin{equation}
 \phi[n] = \phi[1] + \sum_{j=1}^{n-1}\left(\phi[1] - \sum_{i=1}^{j}q_iE_i\right)S_{j}.  
 \end{equation}
@@ -524,8 +551,9 @@ We have the other boundary condition that, since $\theta_N = 0$, $\phi_N = 0$, w
 \begin{equation}
 \phi_1 = \frac{\sum_{j=1}^{N-1}\sum_{i=1}^{j}q_iE_i}{1+\sum_{j=1}^{N-1}S_j}. 
 \end{equation}
+Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
 These previous two equation allow us to solve for $\phi$, and therefore $\theta$. 
-After all this, you get something like the graph in figure \ref{condextntimefig}. 
+After all this, one arrives at the graph in figure \ref{condextntimefig}. 
 The conditional times mostly follow the unconditioned time, except near the rare events that do not much contribute to the average. 
 \begin{figure}[ht]
 	\centering
