@@ -281,6 +281,7 @@ Iterating the above and using the geometric series $\sum_{i=0}^{k-1} r^i = (1-r^
 V_k = V_1 \big(1-(1-2/N^2)^k\big)/(2/N^2) = n_0(N-n_0) \big(1-(1-2/N^2)^k\big).
 \end{equation*}
 Notice that as $N\rightarrow\infty$ the variance, a measure of the fluctuations, goes to zero, and the system becomes deterministic. [maybe cf. hardy-weinberg variances]
+For finite $N$ the variance goes to $N^2 \, f_0(1-f_0)$ at long times. 
 
 The system fluctuates until either the species dies (extinction) or all others die (fixation).
 Both of these cases are absorbing states, so once the system reaches either it will never change.
@@ -404,10 +405,16 @@ recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-
 %$Hypergeometric2F1[a,b;c;z] = \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)} \int_0^1 \frac{t^{b-1}(1-t)^{c-b-1}}{(1-t z)^{a}}dt = \sum_{n=0}^\infty \frac{(a)_n (b)_n}{(c)_n}\frac{z^n}{n!} = (1-z)^{c-a-b} _2F_1(c-a,c-b;c;z)$
 The unnormalized steady-state probability can be written compactly as%Specifically,
 %\begin{equation*}
-% q_n = \frac{Pochhammer[1 - N, -1 + n] Pochhammer[1 - (g N \nu)/(-1 + \nu), -1 + n]}{(n (-n + N) (1 - \nu) + (1 - g) n N \nu) \Gamma(n) Pochhammer[(-1 + N + \nu - g N \nu)/(-1 + \nu), -1 + n]}
+% q_n = \frac{N^2 Pochhammer[1 - N, -1 + n] Pochhammer[1 - (g N \nu)/(-1 + \nu), -1 + n]}{(n (-n + N) (1 - \nu) + (1 - g) n N \nu) \Gamma(n) Pochhammer[(-1 + N + \nu - g N \nu)/(-1 + \nu), -1 + n]}
 %\end{equation*}
-\begin{equation*}
-q_n = \frac{ \Gamma(N+n-2) \Gamma\left(n+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+\nu-1-g N\nu}{1-\nu}\right) }{ (n(N-n)(1-\nu)+(1-g)n N\nu) \Gamma(n) \Gamma(N-1) \Gamma\left(1+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+(n-2)(1-\nu)-g N\nu}{1-\nu}\right)}
+%\begin{equation*}%this is definitely awkward and possibly wrong
+%q_n = \frac{ N^2 \Gamma(N+n-2) \Gamma\left(n+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+\nu-1-g N\nu}{1-\nu}\right) }{ (n(N-n)(1-\nu)+(1-g)n N\nu) \Gamma(n) \Gamma(N-1) \Gamma\left(1+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+(n-2)(1-\nu)-g N\nu}{1-\nu}\right)}
+%\end{equation*}
+\begin{equation*}%right from b/d
+q_n = \frac{ N^2\Gamma(N) \Gamma\left(n+\frac{g N\nu}{1-\nu}\right) \Gamma\left(N-n+1+\frac{(1-g) N\nu}{1-\nu}\right) }{ \big(n(N-n)(1-\nu)+(1-g)n N\nu\big) \Gamma(n) \Gamma(N-n+1) \Gamma\left(1+\frac{g N\nu}{1-\nu}\right) \Gamma\left(N+\frac{(1-g) N\nu}{1-\nu}\right)}
+\end{equation*}
+\begin{equation*}%right from b/d
+q_n = \frac{ N^2(N-1)! \left(n-1+\frac{g N\nu}{1-\nu}\right)! \left(N-n+\frac{(1-g) N\nu}{1-\nu}\right)! }{ \bigg(n(N-n)(1-\nu)+(1-g)n N\nu\bigg) (n-1)! (N-n)! \left(\frac{g N\nu}{1-\nu}\right)! \left(N-1+\frac{(1-g) N\nu}{1-\nu}\right)!}
 \end{equation*}
 %which, under the assumption of small speciation $\nu$, gives
 %\begin{equation*}
@@ -417,15 +424,22 @@ and the sum of these is the normalization
 %\begin{equation*}
 % \sum q_i = \frac{(-1 + N^2) (-1 + N + \nu - g N \nu + g N^2 \nu) + (N (1 - g \nu) - (1 - \nu)) 2F1[-N, \frac{g N \nu}{1 - \nu}; \frac{-1 + N + \nu - g N \nu}{-1 + \nu}; 1]}{g N^2 \nu (N (1 - g \nu) - (1 - \nu))}
 %\end{equation*}
+%\begin{equation*}
+%\sum q_i = \frac{(-1 + N^2) (-1 + N + \nu - g N \nu + g N^2 \nu) + (N (1 - g \nu) - (1 - \nu))}{g N^2 \nu (N (1 - g \nu) - (1 - \nu))}
+%\frac{\Gamma[\frac{N(1-g\nu) + 1-\nu}{1-\nu}]\Gamma[\frac{1 - \nu - N\nu}{1-\nu}]}{\Gamma[\frac{N\nu(g-1)+1-\nu}{1-\nu}]\Gamma[\frac{-N+1-\nu}{1-\nu}]}
+%\end{equation*}
+%hypergeometric is defined as 2F1(a,b,c,z)=sum_n=0^\infty \frac{\Gamma(a+n)\Gamma(b+n)\Gamma(c)}{\Gamma(a)\Gamma(b)\Gamma(c+n)}\frac{z^n}{n!}
+ $sum q_i = _2F_1(-N,g N \nu/(1-\nu); 1-N(1-g\nu)/(1-\nu); 1)/g\nu$ which follows from the hypergeometric definition and $q_i$  %seems close to legit with definition of q_i, 2F1, but it requires writing (d-n)!/(d-1)! = (-1)^{n-1}(-d)!/(n-d-1)! ish
 \begin{equation*}
-\sum q_i = \frac{(-1 + N^2) (-1 + N + \nu - g N \nu + g N^2 \nu) + (N (1 - g \nu) - (1 - \nu))}{g N^2 \nu (N (1 - g \nu) - (1 - \nu))}
- \frac{\Gamma[\frac{N(1-g\nu) + 1-\nu}{1-\nu}]\Gamma[\frac{1 - \nu - N\nu}{1-\nu}]}{\Gamma[\frac{N\nu(g-1)+1-\nu}{1-\nu}]\Gamma[\frac{-N+1-\nu}{1-\nu}]}
+\sum q_i = \frac{1}{g\nu} \frac{\Gamma[1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[N+1-\frac{N}{1-\nu}]}{\Gamma[N+1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[1-\frac{N}{1-\nu}]}
+         = \frac{1}{g\nu} \frac{(-\frac{N(1-g\nu)}{1-\nu})!(-\frac{N\nu}{1-\nu})!}{(-\frac{N(1-g)\nu}{1-\nu})!(-\frac{N}{1-\nu})!}
 \end{equation*}
 which together gives $\widetilde{P}_n$. 
 %\iffalse
-But I should be careful, because I think I summed this to infinity, rather than to $N$. \\
+But I should be careful, because I think I summed this to infinity, rather than to $N$ - checked; it makes no difference apparently (and anyway assume $q_{n>N}=0$). \\
 $Pochhammer[a,n] = (a)_n = \Gamma(a+n)/\Gamma(a)$ \\
 $\Gamma(n) = (n-1)! = \int_0^\infty t^{n-1}e^{-t}dt$ \\
+$\ln(-x)=\ln(x)+i\pi$ [yes] for $x>0$ and $\Gamma(-x)=(-(x+1))!=(x+1)!+i\pi=?\Gamma(x+2)?$ [no] - I'm not sold that this line is true!!! \\
 Stirling: $\ln n! \approx n \ln n - n$ so $\ln \Gamma(n) = \ln n!/n \approx n\ln n - 2n$ \\
 $Hypergeometric2F1[a,b;c;z] = \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)} \int_0^1 \frac{t^{b-1}(1-t)^{c-b-1}}{(1-t z)^{a}}dt = \sum_{n=0}^\infty \frac{(a)_n (b)_n}{(c)_n}\frac{z^n}{n!} = (1-z)^{c-a-b} _{2}F_1(c-a,c-b;c;z)$ \\
 $_2F_1(a,b;c;1) = \frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}$ \\
