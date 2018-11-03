@@ -282,6 +282,7 @@ V_k = V_1 \big(1-(1-2/N^2)^k\big)/(2/N^2) = n_0(N-n_0) \big(1-(1-2/N^2)^k\big).
 \end{equation*}
 Notice that as $N\rightarrow\infty$ the variance, a measure of the fluctuations, goes to zero, and the system becomes deterministic. [maybe cf. hardy-weinberg variances]
 For finite $N$ the variance goes to $N^2 \, f_0(1-f_0)$ at long times. 
+This corresponds to $f_0$ of the probability mass being at $n=N$, and $(1-f_0)$ being at $n=0$, since at long times the system has fixated at one end or the other. 
 
 The system fluctuates until either the species dies (extinction) or all others die (fixation).
 Both of these cases are absorbing states, so once the system reaches either it will never change.
@@ -390,8 +391,8 @@ where
 \begin{align*}
  q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \\
  q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
- q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  } i\rangle1 \\
-     &= \prod_{j=1}^{i-1} \frac{1}{d(i)}\sum_{j=1}^{i-1}\frac{b(j)}{d(j)}
+ q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  } i>1 \\
+     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
 \end{align*}
 recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-\nu) + \nu N(1-g)i}$.
 %\begin{equation*}
@@ -413,9 +414,9 @@ The unnormalized steady-state probability can be written compactly as%Specifical
 \begin{equation*}%right from b/d
 q_n = \frac{ N^2\Gamma(N) \Gamma\left(n+\frac{g N\nu}{1-\nu}\right) \Gamma\left(N-n+1+\frac{(1-g) N\nu}{1-\nu}\right) }{ \big(n(N-n)(1-\nu)+(1-g)n N\nu\big) \Gamma(n) \Gamma(N-n+1) \Gamma\left(1+\frac{g N\nu}{1-\nu}\right) \Gamma\left(N+\frac{(1-g) N\nu}{1-\nu}\right)}
 \end{equation*}
-\begin{equation*}%right from b/d
-q_n = \frac{ N^2(N-1)! \left(n-1+\frac{g N\nu}{1-\nu}\right)! \left(N-n+\frac{(1-g) N\nu}{1-\nu}\right)! }{ \bigg(n(N-n)(1-\nu)+(1-g)n N\nu\bigg) (n-1)! (N-n)! \left(\frac{g N\nu}{1-\nu}\right)! \left(N-1+\frac{(1-g) N\nu}{1-\nu}\right)!}
-\end{equation*}
+%\begin{equation*}%right from b/d
+%q_n = \frac{ N^2(N-1)! \left(n-1+\frac{g N\nu}{1-\nu}\right)! \left(N-n+\frac{(1-g) N\nu}{1-\nu}\right)! }{ \bigg(n(N-n)(1-\nu)+(1-g)n N\nu\bigg) (n-1)! (N-n)! \left(\frac{g N\nu}{1-\nu}\right)! \left(N-1+\frac{(1-g) N\nu}{1-\nu}\right)!}
+%\end{equation*}
 %which, under the assumption of small speciation $\nu$, gives
 %\begin{equation*}
 %q_n \approx \frac{ \Gamma(N+n-2) \Gamma(n+g N\nu) \Gamma(N+\nu-1-g N\nu) }{ (n(N-n+(1-g) N\nu) \Gamma(n) \Gamma(N-1) \Gamma(1+g N\nu) \Gamma(N+n-2-g N\nu)};
@@ -429,13 +430,13 @@ and the sum of these is the normalization
 %\frac{\Gamma[\frac{N(1-g\nu) + 1-\nu}{1-\nu}]\Gamma[\frac{1 - \nu - N\nu}{1-\nu}]}{\Gamma[\frac{N\nu(g-1)+1-\nu}{1-\nu}]\Gamma[\frac{-N+1-\nu}{1-\nu}]}
 %\end{equation*}
 %hypergeometric is defined as 2F1(a,b,c,z)=sum_n=0^\infty \frac{\Gamma(a+n)\Gamma(b+n)\Gamma(c)}{\Gamma(a)\Gamma(b)\Gamma(c+n)}\frac{z^n}{n!}
- $sum q_i = _2F_1(-N,g N \nu/(1-\nu); 1-N(1-g\nu)/(1-\nu); 1)/g\nu$ which follows from the hypergeometric definition and $q_i$  %seems close to legit with definition of q_i, 2F1, but it requires writing (d-n)!/(d-1)! = (-1)^{n-1}(-d)!/(n-d-1)! ish
+% $\sum q_i = _2F_1(-N,g N \nu/(1-\nu); 1-N(1-g\nu)/(1-\nu); 1)/g\nu$ which follows from the hypergeometric definition and $q_i$  %seems close to legit with definition of q_i, 2F1, but it requires writing (d-n)!/(d-1)! = (-1)^{n-1}(-d)!/(n-d-1)! ish
 \begin{equation*}
 \sum q_i = \frac{1}{g\nu} \frac{\Gamma[1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[N+1-\frac{N}{1-\nu}]}{\Gamma[N+1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[1-\frac{N}{1-\nu}]}
-         = \frac{1}{g\nu} \frac{(-\frac{N(1-g\nu)}{1-\nu})!(-\frac{N\nu}{1-\nu})!}{(-\frac{N(1-g)\nu}{1-\nu})!(-\frac{N}{1-\nu})!}
+%         = \frac{1}{g\nu} \frac{(-\frac{N(1-g\nu)}{1-\nu})!(-\frac{N\nu}{1-\nu})!}{(-\frac{N(1-g)\nu}{1-\nu})!(-\frac{N}{1-\nu})!}
 \end{equation*}
-which together gives $\widetilde{P}_n$. 
-%\iffalse
+which follows formally from the definition of the hypergeometric function $_2F_1$. Together these give $\widetilde{P}_n$. 
+\iffalse
 But I should be careful, because I think I summed this to infinity, rather than to $N$ - checked; it makes no difference apparently (and anyway assume $q_{n>N}=0$). \\
 $Pochhammer[a,n] = (a)_n = \Gamma(a+n)/\Gamma(a)$ \\
 $\Gamma(n) = (n-1)! = \int_0^\infty t^{n-1}e^{-t}dt$ \\
@@ -445,12 +446,18 @@ $Hypergeometric2F1[a,b;c;z] = \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)} \int_0^1 \f
 $_2F_1(a,b;c;1) = \frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}$ \\
 Since $q_1=1$ the stationary probability at 1 is $\widetilde{P}_1$; this gives the flux to 0, hence the exit times. 
 Similarly $n=N-1$ should be the other place whence it exits (but it's not clear whether $q_{N-1}=1$). 
-%\fi
-See figure \ref{stationary-fig} for a visualization of the steady-state probability distribution for different immigration/speciation rates. 
+\fi
+See figure \ref{stationary-fig2} for a visualization of the steady-state probability distribution for different immigration/speciation rates. 
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=1]{Moran-withimmigration-stationaryprobability}
+%	\caption{PDF of stationary Moran process due to immigration. $g=0.1$, $N=50$, $\nu=0.01$. } \label{stationary-fig}
+%\end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=1]{Moran-withimmigration-stationaryprobability}
-	\caption{PDF of stationary Moran process due to immigration. $g=0.1$, $N=50$, $\nu=0.01$. } \label{stationary-fig}
+	\includegraphics[width=\textwidth]{Moran-withimmigration-stationaryprobability2}
+	\caption{PDF of stationary Moran process due to immigration. $g=0.4$, $N=100$, $N\nu$ is given by the colour; red is 10, orange is 5, green is 3, blue is 2, purple is 1, and grey is 0.2. Notice that the curvature of the distribution inverts around $\nu=2/N$. } \label{stationary-fig2}
+	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
 
 We can easily calculate the mean and variance as a function of time before reaching steady state. 
@@ -475,14 +482,80 @@ Recalling that $\sigma^2(t) = \partial_t\langle n^2\rangle(t) - \mu^2(t)$ I writ
 % \text{Var} = \frac{N e^{-\frac{2 t ((N-1) \nu+1)}{N^2}} \left(\mu_0 ((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(e^{\frac{t ((N-2) \nu+2)}{N^2}}-1\right)+g N \left(((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(-e^{\frac{t ((N-2) \nu+2)}{N^2}}\right)+((N-2) \nu+2) (g (N-1) \nu+1) e^{\frac{2 t ((N-1) \nu+1)}{N^2}}+(N-1) \nu (\nu (g N-1)+1)\right)\right)}{((N-2) \nu+2) ((N-1) \nu+1)}-e^{-\frac{2 \nu t}{N}} \left(g N \left(e^{\frac{\nu t}{N}}-1\right)+\mu_0\right)^2. 
 %\end{equation*}
 \begin{equation*}
- \sigma^2(t) = \sigma^2(\infty) + \big(1+g\nu-g(1-\nu)/N\big)N^2\frac{\mu_0-gN}{N\nu+2(1-\nu)}\exp\{-\frac{\nu}{N}t\} - (gN-\mu_0)^2\exp\{-2\frac{\nu}{N}t\} + C\exp\{-\frac{2}{N}\left(\nu+\frac{(1-\nu)}{N}\right)t\}
+ \sigma^2(t) = \sigma^2(\infty) + A\exp\{-\frac{\nu}{N}t\} - B\exp\{-2\frac{\nu}{N}t\} + C\exp\{-\frac{2}{N}\left(\nu+\frac{(1-\nu)}{N}\right)t\}
 \end{equation*}
-where $C$ is an integration constant, and is $C = \sigma^2(0) - \sigma^2(\infty) + (gN-\mu_0)^2 + (gN-\mu_0)(2-\nu)(1-2g)/\big(N\nu+2(1-\nu)\big)$ if the initial variance is $\sigma^2(0)$. 
+where $A=\big(1+g\nu-g(1-\nu)/N\big)N^2\frac{\mu_0-gN}{N\nu+2(1-\nu)}$, $B=(gN-\mu_0)^2$, and $C$ is an integration constant; $C = \sigma^2(0) - \sigma^2(\infty) + (gN-\mu_0)^2 + (gN-\mu_0)(2-\nu)(1-2g)/\big(N\nu+2(1-\nu)\big)$ if the initial variance is $\sigma^2(0)$. 
 $\sigma^2(\infty) = g(1-g) N^2\frac{1}{1+\nu(N-1)}$ is the long time, steady state variance of the system. 
 %The steady state variance is $N^2\frac{g(1+g \nu(N-1))}{1+\nu(N-1)}$. 
 %Or is it $N^2\frac{g(1-g)}{1+\nu(N-1)}$?
 
-Figure \ref{stationary-fig} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
+Notice that for $g=0,1$ the long term variance $\sigma^2(\infty)$ goes to zero. 
+This contrasts with the results of the Moran model without immigration, where a fraction of instances fixate with the focal species and in the remaining fraction that species goes extinct, in proportion to its initial abundance. 
+Having a supply of immigrants destabilizes one of these absorbing states, such that the ultimate fate is either none of the focal species for $g=0$ or only the focal species for $g=1$. 
+The memory of the initial abundance does not affect these results at long times. 
+However, if the immigration rate is truly small, such that $N\nu\ll 1$, we recover similar results to the no immigration case. 
+Instead of $f_0(1-f_0)N^2$ we get $\sigma^2(\infty) \approx g(1-g) N^2$, with the metapopulation focal species abundance $g$ acting as the initial abundance. 
+This is because the fixation time of the Moran model, which goes like $N$, is much faster than the immigration time $1/\nu$. 
+Upon entry of a new immigrant the Moran model fixates as usual, in proportion to either $1/N$ or $(N-1)/N$, depending on the species of the immigrant, which in turn is governed by the metapopulation abundance $g$. 
+Each iteration goes one way or the other, typically to the closest extreme, which a fraction $g$ of the time is the focal species, hence $\sigma^2(\infty) \approx g(1-g) N^2$. 
+The fixation need not happen more rapidly than the time between successive immigration events, however. 
+When $N\nu\gg 1$ the system is still evolving when a new immigrant is introduces, which acts to keep the probability distribution near $g$ and away from fixation. 
+In this limit the long term variance tends to $\sigma^2(\infty) \approx g(1-g) N/\nu$. 
+The argument for having no variance with $g=0,1$ still stands. %, but now the variance is much smaller for intermediate $g$... or larger?
+But now that the immigration rate is no longer negligibly small, it shows up in the variance. 
+For a fixed system size $N$, increasing the immigration rate decreases the variance, as the system is drawn more toward the metapopulation abundance and away from the edges. 
+
+The variance limits, and indeed figure \ref{stationary-fig2}, suggest that there are two regimes of the Moran model with immigration. 
+At low immigration rate the system undergoes a series of fixations punctuated by the occasional immigrant. It spends most of its time resting in the fixated state, rarely seeing a new immigrant which quickly either dies out or takes over in a new fixation. 
+When immigration is common the system is tied to the metapopulation, and deviations away from the metapopulation abundance are suppressed. 
+Probability gathers near the mean value $gN$. 
+These regimes will be investigated further in the following paragraphs. 
+
+A quantity similar to the mean is the extremum of the distribution, which for large immigration corresponds to the mode of the system. 
+The extremum occurs when $\partial_n \widetilde{P}_n = 0$ but for ease note that $\partial_n \widetilde{P}_n = \partial_n q_n/\sum_i q_i = \partial_n q_n = q_n \partial_n \ln(q_n)$ therefore I can instead calculate the value which gives $\partial_n \ln(q_n)=0$. 
+First,
+\begin{align*}
+ \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\nu g N/(1-\nu)\right)!\big] + \ln\big[\left(N-n+\nu(1-g)N/(1-\nu)\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\nu g N/(1-\nu)\right)!\big] - \ln\big[\left(N-1+\nu(1-g)N/(1-\nu)\right)!\big] \\
+          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] + \left(n-1+\nu g N/(1-\nu)\right)\ln\big[\left(n-1+\nu g N/(1-\nu)\right)\big] + \left(N-n+\nu(1-g)N/(1-\nu)\right)\ln\big[\left(N-n+\nu(1-g)N/(1-\nu)\right)\big] - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\nu g N/(1-\nu)\right)\ln\big[\left(\nu g N/(1-\nu)\right)\big] - \left(N-1+\nu(1-g)N/(1-\nu)\right)\ln\big[\left(N-1+\nu(1-g)N/(1-\nu)\right)\big]
+\end{align*}
+where I have employed the Stirling approximation $\ln[x!] = x\ln[x] - x + O(1/x)$. 
+Setting $\partial_n \ln[q_n]=0$ gives
+\begin{align*}
+ \ln\left[ \frac{(N-n)(n-1+\nu g N/(1-\nu))}{(n-1)(N-n+\nu(1-g)N/(1-\nu))}\right]  &= \frac{-2n+N(1-\nu-g\nu)/(1-\nu)}{n\left(-n+N(1-\nu-g\nu)/(1-\nu)\right)} \\
+=\ln\left[ \frac{(1-f)(f-\gamma+\epsilon g)}{(f-\gamma)(1-f+\epsilon(1-g))}\right] &= \gamma\frac{1-2f-\epsilon g}{f\left(1-f-\epsilon g\right)}
+\end{align*}
+where $\gamma = 1/N$ and $\epsilon = \nu/(1-\nu)$, and recalling that $f=n/N$. 
+I expect that $\gamma$ and $\epsilon$ are small parameters, and as such I expand in them. 
+The right-hand side obviously is to $O(\gamma)$ lowest, followed by $O(\epsilon\gamma)$. 
+The left-hand side has an infinite series in $\epsilon$ starting at $O(\epsilon^1)$, before picking up $O(\epsilon\gamma)$ terms. 
+Keeping only the $O(\epsilon^1)$ and $O(\gamma^1)$ terms gives
+\begin{equation}
+	f^* = \frac{1-g\epsilon/\gamma}{2-\epsilon/\gamma}. % \text{  or  } n^* = \frac{N-gN\epsilon/\gamma}{2-\epsilon/\gamma}
+\end{equation}
+Once again it is clear that there are two regimes. 
+When immigration is small, $\epsilon/\gamma = N\nu \ll 1$, and the maximum or mode of the distribution matches with the mean. 
+The bulk of the probability is centred near $g N$. 
+But in the opposite limit, when the probability is concentrated at zero and one, the minimal value is half way between these two. 
+No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. 
+
+The question remains, how does the distribution switch between these two qualitatively different regimes. 
+To observe this I calculate the curvature of the extremum point. 
+It goes from positive to negative as the immigration rate is increased, and there must be a critical value at which it changes sign. 
+This is found when $\partial_n^2 q_n=0$. 
+I note that $\partial_n^2 q_n=\partial_n \big(q_n \partial_n \ln[q_n] \big) = q_n \big( (\partial_n \ln[q_n])^2 + \partial_n^2 \ln[q_n] \big)$. 
+$q_n>0$ and $\partial_n \ln[q_n]=0$ at the extremum so an equivalent problem is to find the parameter values that make $\partial_n^2 \ln[q_n]=0$ at the extremum. 
+\begin{align*}
+ \partial_n^2 \ln[q_n] &= \frac{\gamma}{f-1} + \frac{\gamma}{f-\gamma+\epsilon g} + \frac{\gamma}{\gamma-f} + \frac{\gamma}{1-f+\epsilon(1-g)} + \frac{2\gamma^2}{f\big(1-f+\epsilon(1-g)\big)} + \frac{\gamma^2\big(2f-1-\epsilon(1-g)\big)}{f\big(1-f+\epsilon(1-g)\big)^2} + \frac{\gamma^2\big(1-2f+\epsilon(1-g)\big)}{f^2\big(1-f+\epsilon(1-g)\big)}
+\end{align*}
+%Substituting $f^*$, expanding to lowest order, and setting equal to zero gives
+Substituting $f^*$ and expanding to lowest order makes the sign proportional to
+\begin{equation*}
+% -\epsilon^2\left(4\gamma/\epsilon - 4g+1 - \sqrt{16g^2+1}\right)\left(4\gamma/\epsilon - 4g+1 + \sqrt{16g^2+1}\right) = 0
+ 4 - 2\epsilon/\gamma - \big(1-4g(1-g)\big)\big(\epsilon/\gamma\big)^2
+\end{equation*}
+Also finding the mode and inversion values...!!!
+
+Figure \ref{stationary-fig2} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
 To do so, we must look at a slightly modified problem, with modified transition rates such that $b(0)=d(N)=0$. 
 This allows us to find the mean first passage time to species fixation or extinction, recognizing that this will only be a temporary state. 
 %Since we have modified the transition rates at just two points, these don't show up when you use the approximate differential equation.  
@@ -505,6 +578,7 @@ As with the stationary distribution, the extinction probabilities can be written
 	\includegraphics[scale=1]{Moran-withimmigration-extinctionprobability}
 	\caption{Probability of first going extinct, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extnprobfig}
 \end{figure}
+Comment here? Or later...!!!
 
 Similar to the extinction probabilities, we can write unconditioned mean first passage times to get
 %\begin{equation}
@@ -512,23 +586,24 @@ Similar to the extinction probabilities, we can write unconditioned mean first p
 %\end{equation}
 %As before this can be rearranged to give
 \begin{equation}
-\tau[i] = \sum_{k=1}^{N-1}q_k + \sum_{j=1}^{i-1}S_{j}\sum_{k=j+1}^{N-1}q_k
+\tau[i] = \sum_{k=1}^{N-1}q_k + \sum_{j=1}^{i-1}S_{j}\sum_{k=j+1}^{N-1}q_k. 
 \end{equation}
-where
-\begin{equation*}
-q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}. 
+%where
+%\begin{equation*}
+%q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}. 
 % \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
-\end{equation*}
-so ultimately
-$\tau[n]=-\frac{N^2}{-u+N (g u-1)+1}+\sum _{j=2}^{n-1} \frac{\Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j \left(\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}-\frac{g N^2 u (-u+N (g u-1)+1) \, _3F_2\left(1,j-N+1,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{u}{u-1}-\frac{g N u}{u-1}-\frac{1}{u-1};j+2,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{2 u}{u-1}+\frac{N}{u-1}-\frac{g N u}{u-1}-\frac{2}{u-1};1\right) (1-N)_j \left(1-\frac{g N u}{u-1}\right)_j-(j+1) (-g u N+N+j (u-1)+u-1) \Gamma (j+1) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}{g (j+1) u (-u+N (g u-1)+1) (-u j+j-u+N (g u-1)+1) \Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}\right)}{(1-N)_j \left(1-\frac{g N u}{u-1}\right)_j}+\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}+\frac{(-g u N+N+u-1) \left(g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}\right)}{(g-1) g (N-1) u ((g N-1) u+1) (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}$
+%\end{equation*}
+%so ultimately
+%$\tau[n]=-\frac{N^2}{-u+N (g u-1)+1}+\sum _{j=2}^{n-1} \frac{\Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j \left(\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}-\frac{g N^2 u (-u+N (g u-1)+1) \, _3F_2\left(1,j-N+1,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{u}{u-1}-\frac{g N u}{u-1}-\frac{1}{u-1};j+2,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{2 u}{u-1}+\frac{N}{u-1}-\frac{g N u}{u-1}-\frac{2}{u-1};1\right) (1-N)_j \left(1-\frac{g N u}{u-1}\right)_j-(j+1) (-g u N+N+j (u-1)+u-1) \Gamma (j+1) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}{g (j+1) u (-u+N (g u-1)+1) (-u j+j-u+N (g u-1)+1) \Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}\right)}{(1-N)_j \left(1-\frac{g N u}{u-1}\right)_j}+\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}+\frac{(-g u N+N+u-1) \left(g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}\right)}{(g-1) g (N-1) u ((g N-1) u+1) (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}$
 Note that this should go to zero at both $n=0$ and $n=N$, since it is unconditioned. 
-Again, there is a close form, but it is a sum of hyperbolic functions and has not be fully explored yet. 
+Again, there is a closed form, but it is a sum of hyperbolic functions and does not possess intuitable limits. 
 It is approximated numerically and displayed graphically in figure \ref{extntimefig}. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1]{Moran-withimmigration-extinctiontimes}
 	\caption{Mean time to either fixation or extinction, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extntimefig}
 \end{figure}
+Comments???!!!
 
 Keeping with the artificial stoppage when the focal population reaches $0$ or $N$ individuals, we calculate the conditional times, respectively to extinction and to fixation. 
 As before, the extinction probability is given by equation \ref{extnprob}. 
