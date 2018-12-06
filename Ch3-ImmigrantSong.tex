@@ -213,14 +213,19 @@ The mean time of an unsuccessful invasion is even faster than logarithmic, and f
 Curiously, these failed invasion attempts are unimodal, at intermediate carrying capacity and niche overlap values. %COMM heat map?
 Our results provide a timescale to which the rate of immigration or mutation can be compared. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
-However, if individual invaders arise faster than the time it takes to suppress the previous attempt, the new strains interact with one another in ways beyond the scope of this paper, leading to greater biodiversity. 
-In the other extreme, if the time between invaders is even longer than the fixation times calculated in Section 4 then serial monocultures are expected. 
+In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected. 
+However, if individual invaders arise faster than the time it takes to suppress the previous attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity. 
+
 %We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species. 
 
+!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!!
+
+We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration. 
+This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. 
 
 
 
-\section{Introduction}
+\section{Moran Reintroduction}
 The Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
 Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time. 
 But really it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem.
