@@ -213,21 +213,17 @@ The mean time of an unsuccessful invasion is even faster than logarithmic, and f
 Curiously, these failed invasion attempts are unimodal, at intermediate carrying capacity and niche overlap values. %COMM heat map?
 Our results provide a timescale to which the rate of immigration or mutation can be compared. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
-In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected. 
-However, if individual invaders arise faster than the time it takes to suppress the previous attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity. 
-
-%We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species. 
-
+In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected.
+However, if individual invaders arise faster than the time it takes to suppress the previous attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity.
+%We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species.
 !!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!!
-
-We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration. 
-This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. 
-
+We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration.
+This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line.
 
 
 \section{Moran Reintroduction}
 The Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
-Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time. 
+Its most prominent use is in coalescent theory \cite{Blythe2007}, describing how the relative proportion of genes in a gene pool might change over time. 
 But really it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem.
 
 To arrive at the Moran model we must make some assumptions.
@@ -329,6 +325,7 @@ Note that we didn't need to use the large $N$ approximation: there is an exact s
 
 
 \section{Moran With Immigration}
+%c.f. McKane2003
 Previous sections have stated that different dynamics are expected depending on a comparison of timescales. 
 If new species enter the system faster than they go extinct, the biodiversity should increase to some steady state. 
 Conversely, if extinction is much more rapid than speciation, a monoculture is expected in the system. 
@@ -460,7 +457,7 @@ See figure \ref{stationary-fig2} for a visualization of the steady-state probabi
 %\end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=\textwidth]{Moran-withimmigration-stationaryprobability2}
+	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability2}
 	\caption{PDF of stationary Moran process due to immigration. $g=0.4$, $N=100$, $N\nu$ is given by the colour; red is 10, orange is 5, green is 3, blue is 2, purple is 1, and grey is 0.2. Notice that the curvature of the distribution inverts around $\nu=2/N$. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
@@ -510,7 +507,7 @@ The argument for having no variance with $g=0,1$ still stands. %, but now the va
 But now that the immigration rate is no longer negligibly small, it shows up in the variance. 
 For a fixed system size $N$, increasing the immigration rate decreases the variance, as the system is drawn more toward the metapopulation abundance and away from the edges. 
 
-The variance limits, and indeed figure \ref{stationary-fig2}, suggest that there are two regimes of the Moran model with immigration. 
+The variance limits, and indeed figure \ref{stationary-fig2}, suggest that there are at least two regimes of the Moran model with immigration. 
 At low immigration rate the system undergoes a series of fixations punctuated by the occasional immigrant. It spends most of its time resting in the fixated state, rarely seeing a new immigrant which quickly either dies out or takes over in a new fixation. 
 When immigration is common the system is tied to the metapopulation, and deviations away from the metapopulation abundance are suppressed. 
 Probability gathers near the mean value $gN$. 
@@ -520,14 +517,16 @@ A quantity similar to the mean is the extremum of the distribution, which for la
 The extremum occurs when $\partial_n \widetilde{P}_n = 0$ but for ease note that $\partial_n \widetilde{P}_n = \partial_n q_n/\sum_i q_i = \partial_n q_n = q_n \partial_n \ln(q_n)$ therefore I can instead calculate the value which gives $\partial_n \ln(q_n)=0$. 
 First,
 \begin{align*}
- \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\nu g N/(1-\nu)\right)!\big] + \ln\big[\left(N-n+\nu(1-g)N/(1-\nu)\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\nu g N/(1-\nu)\right)!\big] - \ln\big[\left(N-1+\nu(1-g)N/(1-\nu)\right)!\big] \\
-          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] + \left(n-1+\nu g N/(1-\nu)\right)\ln\big[\left(n-1+\nu g N/(1-\nu)\right)\big] + \left(N-n+\nu(1-g)N/(1-\nu)\right)\ln\big[\left(N-n+\nu(1-g)N/(1-\nu)\right)\big] - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\nu g N/(1-\nu)\right)\ln\big[\left(\nu g N/(1-\nu)\right)\big] - \left(N-1+\nu(1-g)N/(1-\nu)\right)\ln\big[\left(N-1+\nu(1-g)N/(1-\nu)\right)\big]
+ \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)!\big] + \ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\frac{\nu g N}{1-\nu}\right)!\big] - \ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)!\big] \\
+          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] + \left(n-1+\frac{\nu g N}{1-\nu}\right)\ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)\big] + \left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\big] - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\frac{\nu g N}{1-\nu}\right)\ln\big[\left(\frac{\nu g N}{1-\nu}\right)\big] - \left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\big]
 \end{align*}
 where I have employed the Stirling approximation $\ln[x!] = x\ln[x] - x + O(1/x)$. 
 Setting $\partial_n \ln[q_n]=0$ gives
 \begin{align*}
  \ln\left[ \frac{(N-n)(n-1+\nu g N/(1-\nu))}{(n-1)(N-n+\nu(1-g)N/(1-\nu))}\right]  &= \frac{-2n+N(1-\nu-g\nu)/(1-\nu)}{n\left(-n+N(1-\nu-g\nu)/(1-\nu)\right)} \\
 =\ln\left[ \frac{(1-f)(f-\gamma+\epsilon g)}{(f-\gamma)(1-f+\epsilon(1-g))}\right] &= \gamma\frac{1-2f-\epsilon g}{f\left(1-f-\epsilon g\right)}
+% \ln\left[ \frac{(N-n)\left(n-1+\frac{\nu g N}{1-\nu}\right)}{(n-1)\left(N-n+\frac{\nu(1-g)N}{1-\nu}\right)}\right]  &= \frac{-2n+\frac{N(1-\nu-g\nu)}{1-\nu}}{n\left(-n+\frac{N(1-\nu-g\nu)}{1-\nu}\right)} \\
+%=\ln\left[ \frac{(1-f)(f-\gamma+\epsilon g)}{(f-\gamma)(1-f+\epsilon(1-g))}\right] &= \gamma\frac{1-2f-\epsilon g}{f\left(1-f-\epsilon g\right)}
 \end{align*}
 where $\gamma = 1/N$ and $\epsilon = \nu/(1-\nu)$, and recalling that $f=n/N$. 
 I expect that $\gamma$ and $\epsilon$ are small parameters, and as such I expand in them. 
@@ -537,13 +536,15 @@ Keeping only the $O(\epsilon^1)$ and $O(\gamma^1)$ terms gives
 \begin{equation}
 	f^* = \frac{1-g\epsilon/\gamma}{2-\epsilon/\gamma}. % \text{  or  } n^* = \frac{N-gN\epsilon/\gamma}{2-\epsilon/\gamma}
 \end{equation}
-Once again it is clear that there are two regimes. 
-When immigration is small, $\epsilon/\gamma = N\nu \ll 1$, and the maximum or mode of the distribution matches with the mean. 
+Once again it is clear that there are multiple regimes. 
+When immigration is small, $\epsilon/\gamma \approx N\nu \ll 1$, and the maximum or mode of the distribution matches with the mean. 
 The bulk of the probability is centred near $g N$. 
 But in the opposite limit, when the probability is concentrated at zero and one, the minimal value is half way between these two. 
 No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. 
 
 The question remains, how does the distribution switch between these two qualitatively different regimes. 
+\iffalse
+%TURNS OUT THIS DOES NOT QUITE WORK, AS THE EXTREMUM LEAVES THE DOMAIN
 To observe this I calculate the curvature of the extremum point. 
 It goes from positive to negative as the immigration rate is increased, and there must be a critical value at which it changes sign. 
 This is found when $\partial_n^2 q_n=0$. 
@@ -558,6 +559,18 @@ Substituting $f^*$ and expanding to lowest order makes the sign proportional to
 % -\epsilon^2\left(4\gamma/\epsilon - 4g+1 - \sqrt{16g^2+1}\right)\left(4\gamma/\epsilon - 4g+1 + \sqrt{16g^2+1}\right) = 0
  4 - 2\epsilon/\gamma - \big(1-4g(1-g)\big)\big(\epsilon/\gamma\big)^2
 \end{equation*}
+\fi
+First, note that there is in fact an intermediate regime, as evinced in figure \ref{stationary-fig2}. 
+For moderate values of immigration there is the possibility that the curvature near one edge of the domain is positive while it is negative near the other. 
+To this end, I calculate how the ratio of $\widetilde{P}_0/\widetilde{P}_1$ compares to unity for $g$ and the symmetric case $g\rightarrow 1-g$. 
+At the lower critical parameter combination
+\begin{align*}
+ \frac{\widetilde{P}_0}{\widetilde{P}_1} - 1 = \frac{q_0}{q_1} - 1 = \frac{N - \nu N^2 g - \nu N g - 1 + \nu}{\nu N^2 g} \approx \frac{N - \nu N^2 g}{\nu N^2 g} < 0
+\end{align*}
+which implies the probability distribution is always concave up when $N\nu < 1/g$. %implicitly I assume $g \gg 1/N$
+By symmetry the other bound is $1/(1-g)$, above which the distribution is concave down. 
+It turns out these same bounds can be found by requiring $0<f^*\approx\frac{1-g N\nu}{2-N\nu}<1$, since when the mode is in outside the domain this distribution cannot have a consistent curvature. 
+%some conclusion to be drawn???
 Also finding the mode and inversion values...!!!
 
 Figure \ref{stationary-fig2} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
@@ -636,7 +649,7 @@ As before, the extinction probability is given by equation \ref{extnprob}.
 %\begin{equation*}
 %q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
 %\end{equation*}
-Similar to the continuous time solutions presented in the introduction,%!!!!!!!!!!\ref{?}
+Similar to the continuous time solutions presented in the introduction, %!!!!!!!!!!\ref{?}
 the conditional extinction time can be written as
 \begin{equation}
 \phi[n] = \phi[1] + \sum_{j=1}^{n-1}\left(\phi[1] - \sum_{i=1}^{j}q_iE_i\right)S_{j}.  
