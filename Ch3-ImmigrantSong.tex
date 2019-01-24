@@ -1,246 +1,245 @@
 \chapter{Ch3-AsymmetricLogistic}
 
-\section{Invasion Analysis}
+%Should I include the other symmetry breaks here? Or in the previous chapter? In previous chapter
 
-In the previous sections the two species obeyed symmetric dynamics, with random fluctuations leading to the eventual extinction of one or the other with equal likelihood. 
-The mean time calculated was for this fixation, of either species. 
-But if the symmetry is broken, for instance by starting away from the deterministic fixed point, one should not expect an equal likelihood of fixation and extinction for each species. 
-%A more detailed analysis should also include the time to fixation \emph{given that a certain species fixates}, called the conditional fixation time. 
-%We and others \cite{Chotibut2015} find that starting \emph{near} the deterministic coexistence point is like starting \emph{at} this fixed point, as the system quickly gets drawn to the coexistence point. 
-%Starting close to the fixed point adds a deterministic relaxation time that is negligible compared to the mean times calculated in previous sections \cite{Chotibut2015}. 
-%However, starting far from the fixed point, and in particular s
-Starting close to an axis leads to different timescales than those found above. %\emph{ie.} with one of the populations small,
-%This is inspired by two different scenarios. 
-For instance, in a scenario where a species is already settled in a niche, a small immigrant population enters or a small mutant strain arises, one that has some niche overlap with the established species. 
-One might ask whether this invader will successfully establish itself, and if so, how long would a successful invasion take on average. 
-Also of interest is the mean time of a failed invasion attempt. 
-Both times set the scale against which one measures the immigration or mutation rate, to conclude whether a system should be a monoculture or show diversity. 
-%Alternatively, a clonal wildtype population experiences a mutation event, and the mutant allele either establishes itself in the system or goes extinct. 
-%Hence we investigate the scenario where an immigrant joins an established native species, or alternately a mutant arises in an otherwise clonal wildtype population \cite{some}. 
-%Using the same equations as before, we remind the reader that neither species has an explicit fitness advantage. 
-%We continue to give neither species an explicit fitness advantage. 
-In any case we treat the situation where neither the established population nor the invader has an explicit fitness advantage. 
-Each species has the same birth and death rates, equations \ref{deathrate} above with symmetric parameters. 
-%: the functional forms of their birth and death rates are the same, and only the initial population sizes differ. 
-%For a system starting close to one axis in state space, much of the time it will quickly go to that axis and the system will have fixated. 
-%But even the slight possibility of going to the coexistence point and hence taking an exponentially long time will dominate the mean time to fixation. 
-%The fixation time, even of a system starting close to one axis, will be dominated by any trajectories that
-%However, it is no longer useful to consider the mean time to fixation. 
-%Any mean fixation times will be dominated by the exponential behaviour observed for all niche overlaps except $a=1$, since half of those trajectories that reach the coexistence point will still contribute to the conditional fixation time of that species. 
-%Instead we will consider the mean time to fixation, conditioned on the invader going extinct, and the mean time to a successful invasion. 
-However, the system starts with $K-1$ individuals of the established species and $1$ invader. 
-%This asymmetry leads to differing behaviour between the species, and so we must condition our calculations on which outcome occurs. 
-%Rather than calculate the time to fixation regardless of species, w
-The invader strain is successful if it grows to be half of the total population before dying out. 
-This success happens with probability $E_s$ and in mean time $\tau_s$. 
-We also calculate the mean time conditioned on a failed invasion attempt, $\tau_f$, for which the invading population never establishes itself. 
-%We shall calculate the mean time conditioned on the new species either invading the established population or going extinct. 
-%A successful invasion is defined here as one lone mutant growing to be half of the total population. 
-%To proceed, we define $E_s$ and $\tau_s$ respectively as the probability and mean time conditioned on a successful invasion.  $\tau_f$ is the mean time to extinction if that should happen before the invader is successful. %e invader should first go extinct. 
-%We define $E_s(1)$ as the probability of one mutant successfully reaching this proportion. 
-%$\tau_s(1)$ is the mean time to invasion, given that the mutant is successfully invading. 
-%$\tau_f(1)$ is the mean time to extinction of the mutant, conditioned on the invasion failing and the native species fixating. /[I have no references; these are my definitions that I have made up]
+%The previous chapter should end with a rough estimate of monocultures vs mixed states, using only an immigration rate and explicitly assuming that - NO, because if you assume that the system goes to the fixed point first then you never have monocultures.
+%The previous chapter should end with a brief discussion of abundances and coalescents. Such a discussion will naturally motivate this chapter - perhaps the discussion should be at the start of this chapter. 
 
-%%%%%%%!!! need to talk about the math, and how it is different from what was done above - is that which is below sufficient???
+\section{Introduction}
+%"strategic lit review"
+Kimura is famous for introducing the Fokker-Planck equation to a genetic context, and more generally for promoting mathematical modeling in biology. 
+One of the topics he treated in this way, in this case with Crow, is that of a population undergoing random drift and linear pressure \cite{Crow1956,Kimura1964}. 
+``Under the term linear pressure,'' he writes, ``we include the pressures of gene mutations and of migration.'' 
+While his inspiration is primarily gene frequencies as they evolve in time, he also notes that the modeling involved looks similar to the case of a population experiencing immigration. 
+In this sense it is similar to the island model of Wilson and MacArthur  and its extensions \cite{MacArthur2001,Hubbell2001,Kessler2015}. % and extensions (?!) of Moran Wright Fisher
+In both cases the theories regard the dynamics of a population after the arrival of a potential invader, where this invader could be a mutant or immigrant. 
+%"gap"
+However, mathematically the approach has typically been with the Fokker-Planck equation, which I argued earlier is not the fundamental way of representing systems with demographic noise. %NTS:::do this.
+And in terms of the biology, the cases regarded have been either when the invader is under positive or negative selection \cite{Kimura1955} or else when they are truly neutral \cite{Kimura1956,Hubbell2001}. %NTS:::previously explain truly neutral vs unbiased. %get a better reference than Hubbell - see niche vs neutral presentation
+What has \emph{not} been done is to look at an invasion attempt into an established niche when the invader has partial niche overlap with the established species. 
+%"thesis" "in this chapter I will..."
+This is what I aim to do in this chapter, using a matrix cutoff to solve the backward master equation. 
+Furthermore, the literature typically argues that invasion attempts are rare and so they may be treated independently, but this need not always be the case, depending on the immigration rate. %NTS:::in more detail point out that mutation is less applicable than immigration, since its likely to have repeat species immigrating but not so for mutations, unless there is a common mutation for some reason or if we clump all equivalent mutants into one category of invader.
+%-also mostly only looked at an individual invader; what are the effects of multiple invaders
+Below I investigate how the success probability and mean times scale with niche overlap, carrying capacity, and immigration rate, and in so doing I uncover critical combinations of these parameters as they affect the scaling of the mean times and the shape of the steady state distribution. 
+%"roadmap"
+There are a few steps needed to get to these conclusions. 
+I will continue using the generalized Lotka-Volterra model from the previous chapter. %NTS:::call it generalized LV or coupled log? In either case, have a section(s) explaining the significance of both
+In the model I must define what is meant by invasion before I find the probability of a successful invasion attempt. 
+Similarly, I find the mean times conditioned on the success or failure of an attempt. The scaling with carrying capacity will be analyzed. 
+To treat repeated invaders, I go to the Moran limit; specifically, I analyze the Moran model with an immigration term. 
+The steady state probability distribution is found analytically and analyzed, and the mean conditional time to fixation is graphed. 
+%"short significance"
+These results have a couple of uses. 
+One theory of the maintenance of biodiversity (e.g. \cite{Hubbell2001}) is that no species truly establishes itself, and biodiversity is maintained by transient species in the system. 
+Calculation of the steady state number of species requires the time of transient survivors. 
+It is worth noting that inevitably all the species in the theoretical work below are transient, on one timescale or another. 
+My results hold both for a species in an ecosystem (hence its relevance to conservation biology, where biodiversity is a marker of ecosystem robustness) and a gene in a population (hence its use in calculating heterozygosity, which confers resilience to environmental changes). 
+There are also more practical applications, like the susceptibility of a microbiome ecosystem (like your gut or lungs) to invasion (say from salmonella or whatever causes TB). %look this up, it's in the Gutman paper
 
-%\subsection{Expected Limits}%!!!
-%expected limits (small $a$ large $a$ for prob and time; ordering at large and small Q)
-As before, we expect $a=1$, the complete niche overlap limit, to behave like the WFM model, and $a=0$, the independent limit, to correspond to two single logistic systems. 
-%In the WFM model the success probability is proportional to the fraction of individuals of a type; thus for one initial mutant going to either zero or $K/2$ population we expect
-For $a=1$ the Kramers-Moyal of the WFM result is \cite{Moran1962}
+\iffalse
+Transient co-existence during the fixation/extinction process of immigrants/mutants has also been proposed as a mechanism for observed biodiversity in a number of contexts \cite{Kimura1964,Dias1996,Hubbell2001,Chesson2000,Leibold2006,Kessler2015,Vega2017}. 
+The extent of this biodiversity is constrained by the interplay between the residence times of these invaders and the rate at which they appear in a settled population. 
+In the previous sections we calculated the fixation times in the two species system starting from the deterministically stable fixed point. 
+In this section we investigate the complementary problem of robustness of a stable population of one species with respect to an invasion of another species, arising either through mutation or immigration, and investigate the effect of niche overlap and system size on the probability and mean times of successful and failed invasions. 
+\fi
+
+
+\section{Defining Invasion in the Two-Dimensional Lotka-Volterra Model}
+
+As before, I employ the symmetric generalized LV model with niche overlap $a$ and carrying capacity $K$. 
+I study the case where the system starts with $K-1$ individuals of the established species and $1$ invader. 
+This initial condition corresponds to a birth of a mutant. 
+To accurately reflect a new immigrant an initial condition of $K$ established organisms and the $1$ invader would be more appropriate; however, the following results would be largely unchanged, so I elect only one initial condition. 
+In any case, the established species before the arrival of the invader would naturally fluctuate about the carrying capacity, so an initial population of $K-1$ individuals is reasonable. 
+The species' dynamics are described by the birth and death rates defined by Equations (\ref{deathrate}) from the previous chapter. 
+
+Obviously, an invasion is unsuccessful if the invading species dies out before establishing itself in the system. 
+But what it means to be established is as-yet undefined. 
+Deterministically the system would grow to asymptotically approach the co-existence fixed point. 
+(Deterministically, all invasion attempts are successful.) 
+In a stochastic system, the populations could very easily fluctuate \emph{near} the fixed point without touching that exact point. This would overestimate the time to establishment, or even misrepresent a successful invasion as unsuccessful if the system gets near the fixed point without hitting it but then fixates. 
+(Indeed, there is a non-zero probability that the established species dies out before the system reaches the co-existence fixed point, which clearly should count as a successful invasion but would ultimately count as unsuccessful once the invader species also goes extinct.) 
+For this reason a successful invasion should not be defined as the system hitting the co-existence point. 
+Nor should invasion mean getting within a region of this fixed point, by the same arguments. 
+Inspired by the observation that in the symmetric case, the co-existence fixed point has the same population of the two species, I consider the invasion successful if the invader grows to be half of the total population without dying out first. 
+So long as the invader population matches that of the established species, regardless what random fluctuations may have made that population to be, the invasion is a success. 
+I denote the probability of a invader success as $\mathcal{P}$. 
+
+Along with the probability of a successful invasion attempt, I am interested in the timescales involved. 
+As such, I will consider conditional mean times, conditioned on either success or failure of the invasion attempt. 
+The mean time to a successful invasion is written as $\tau_s$, and the mean time of a failed invasion attempt as $\tau_f$. 
+More generally, invasion probability and the successful and failed times starting from an arbitrary state $s^0$ are denoted as $\mathcal{P}^{s^0}$, $\tau_s^{s^0}$ and $\tau_f^{s^0}$, respectively. 
+
+Similar to Equation (\ref{explicit-tau}) in a previous chapter, the invasion probability can be obtained from \cite{Nisbet1982,Iyer-Biswas2015}
 \begin{equation}
-E_{s} = 2/K,
+\mathcal{P}^{s^0} = -\sum_s \hat{M}^{-1}_{s,s^0}\alpha_{s} %eq'n 36 in Iyer-Biswas and Zilman
 \end{equation}
-%The conditional time obeys the difference relation $(\tau_s E_{s})(n+1) - 2(\tau_{s}E_{s})(n) + (\tau_{s}E_{s})(n-1) = -\frac{2 K \Delta t}{K-n}$, where $(\tau_{s}E_{s})(n)$ refers to a product of the probability and mean conditioned time assuming $n$ invaders. 
-%At large $K$ one can approximate the left-hand side as a second derivative (this is the Fokker-Planck approach) and solve to get
+and the times from
 \begin{equation}
-\tau_{s} = \Delta t K^2(K-1)\ln\left(\frac{K}{K-1}\right), 
+\Phi^{s^0} = -\sum_s \hat{M}^{-1}_{s,s^0}\mathcal{P}^{s}, %eq'n 38 in Iyer-Biswas and Zilman
 \end{equation}
-%By a similar process one gets
-\begin{equation}
-\tau_{f} = \Delta t (K-2)\left( \ln\left(K\right) - (K-1)\ln\left(\frac{K}{K-1}\right)\right). 
-\end{equation}
-For $a=0$ the invading mutant follows the dynamics of a single logistic system with carrying capacity $K$. %!!!under the assumption that the other species is at population $K$, which is only somewhat justified
-%for a one dimensional system there is a standard procedure to calculate $E_s$, $\tau_{s}$, and $\tau_{f}$ (see Supporting Information) \cite{Nisbet1982}. 
-Calculating $E_s$, $\tau_{s}$, and $\tau_{f}$ for a one dimensional system is a textbook procedure \cite{Nisbet1982} but does not have a compact solution and is shown in the Supporting Information. %and will not be reproduced here (but see the Supporting Information for the calculation). 
-%We assume the dominant species is at population $K$, its quasi-steady state value. 
-%Then the mutant's invasion probability will obey normal one-dimensional stochastics (see Supporting Information): %the equation
-%\begin{equation}%TODO this? or 1-this?
-% E_s= \frac{\sum_{i=1}^{K}\prod_{j=1}^i \frac{d(j)}{b(j)}}{1+\sum_{i=1}^{K}\prod_{j=1}^i \frac{d(j)}{b(j)}},
-%\end{equation}
-%\begin{equation}%TODO this cannot be correct - the indices alone overlap
-% \tau_{s} = \frac{1}{E_{s}}\frac{\sum_{j=1}^{K-1}\sum_{i=1}^j E_s(i) \frac{1}{d(i)}\prod_{j=1}^{i-1} \frac{b(j)}{d(j)}}{1+\sum_{j=1}^{K-1} \prod_{h=1}^j \frac{d(h)}{b(h)}},
-%\end{equation}
-%\begin{equation}
-% \tau_{f} = \frac{1}{1-E_{s}}\frac{\sum_{j=1}^{K-1}\sum_{i=1}^j \left( 1-E_s(i)\right) \frac{1}{d(i)}\prod_{j=1}^{i-1} \frac{b(j)}{d(j)}}{1+\sum_{j=1}^{K-1} \prod_{h=1}^j \frac{d(h)}{b(h)}}.
-%\end{equation}
-%Since this is analogous to the deterministic approach of a fixed point at the carrying capacity, we expect the time to grow logarithmically with the system size. 
-%These sums can be evaluated numerically. % and are used in figures \ref{Esucc} - \ref{Tsucc}. 
-%We expect the time to grow logarithmically with the system size, similar to the deterministic logistic system approaching the fixed point. 
-A one-dimensional deterministic logistic system approaching its fixed point from $n=1$ displays an invasion time that grows logarithmically with the system size (see Supplementary Information), and should also be a good match for $\tau_{s}$. 
+where $\alpha_s$ is the transition rate from a state $s$ directly to extinction or invasion of the invader and $\Phi^{s^0}=\tau^{s^0}\mathcal{P}^{s^0}$ is a product of the invasion or extinction time and probability. 
+Similar equations describe $\tau_f$ \cite{Nisbet1982,Iyer-Biswas2015}.
+%$E_s = \mathcal{P}_{(1,K-1)}$
 
+
+\section{Observations and Intuition Behind Them}
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-probvK.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-probvK.pdf}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-probva.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-probva.pdf}
 	\end{minipage}
 	%  \includegraphics[width=0.9\linewidth]{invasion-prob-succ}
 	\caption{\emph{Probability of a successful invasion.}
-		\emph{Left:} Solid lines are the numerical results, from $a=0$ above to $a=1$ below. The black dotted line is the expected single logistic limit, and the blue dashed line is WFM result. 
-		\emph{Right:} The solid blue line shows the results for small carrying capacity ($K=4$), and matches well with the black dotted line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ (see text for details). Successive lines are at larger system size, and approach the dashed blue line of $1-(d_{mut}/b_{mut})$. 
+		\emph{Left:} Solid lines show the numerical results, from $a=0$ at the top to $a=1$ at the bottom. The black dotted line is the expected analytical solution in the independent limit. The blue dashed line is the prediction of the Moran model in the complete niche overlap case.
+		\emph{Right:} The solid blue line shows the results for small carrying capacity ($K=4$), and matches well with the black dotted line $\frac{b_{mut}}{b_{mut}+d_{mut}}$. Successive lines are at larger system size, and approach the dash-dot purple line of $1-d_{mut}/b_{mut}\approx 1-a$.
 	} \label{Esucc}
 \end{figure}
 
-%COMM describe the general features - greater a is lesser probablity; for ts increasing K is increasing t, but not for fail
-The calculated invasion probabilities and times are unintuitive, but regarding the asymptotic limits of small and large carrying capacity $K$ allows for an understanding of the results. %COMM figures... are unintuiotiove,  buyt in the limits this is what's happening...
-%, as shown in figures \ref{Esucc}, \ref{Tsucc}, and \ref{Tfail},
-At small $K$ commonly only a few birth or death events occur before invasion or extinction, and the slowest step determines the timescale. 
-%is determined by the slowest rate, the death rate $d_{mut}=\frac{1+a(K-1)}{K}$. 
-With $n_{mut}=1$ and $n_{established}=K-1$ this limiting step is the mutant death: with $K=3$ the rates are $d_{mut}=(1+2a)/3\langle1$, $b_{mut}=1$, $d_{est.}=(4+2a)/3=1+d_{mut}\rangle1$, $b_{est.}=2$. 
-Hence we expect $\tau \approx \frac{1}{d_{mut}}=\frac{K}{1+a(K-1)}$, 
-%$d_m=(1+2a)/3\langle1 vs d_wt=(4+2a)/3=1+d_m vs b_m=1 vs b_wt=2$
-%results will be more sensitive to the set-up of the problem, and starting the native species at $K$ or $K-1$ could in principle make a difference. 
-%Trivially, for $K=2$ if a mutant is generated then there will be $1$ mutant and $K-1=1$ wildtype organism, and the equal proportion condition is already met. 
-%But for $K\geq3$ invasion is not assured, though either way the situation will resolve itself in only a few steps. 
-%A failed invasion occurs immediately if the single mutant dies out, which happens at a rate $d_{mutant}=\frac{1+a(K-1)}{K}$ (contrast this with its birth rate of unity, or the death rate of the other species, $\frac{K-1+a}{K}(K-1)$). 
-%It is clear that the likelihood of the mutant dying out increases with niche overlap, thus we expect lesser niche overlap to result in a greater probability of successful invasion. 
-%The death rate goes from order $1/K$ to order $1$ as the niche overlap parameter increases. 
-%Thus w
-with smaller niche overlap resulting in greater mean times, both of invasion and extinction. %probability of successful invasion. 
-The invasion probability at this low $K$ is the probability that the mutant reproduces before it dies, namely $\frac{b_{mut}}{b_{mut}+d_{mut}} = \frac{K}{K(1+a)+1-a}$. 
-%Similarly, because the rates are greater with greater $a$ we expect the conditioned times to anticorrelate with niche overlap. 
-%
-In the other extreme, at large $K$, invasion will be likely and fast, as the stochastic drift draws the system to the deterministic fixed point for incomplete niche overlap. 
-%Invasions will be likely and fast. 
-%This is because at a low number of mutants the per capita birth rate is approximately $1$ and per capita death rate $a$ as $K\rightarrow\infty$. 
-The invader birth and death rates can be approximated as constant for small invader number and large carrying capacity: a system with constant rates has an extinction probability of $d_{mut}/b_{mut}$ \cite{Allen2005,Allen2003}, which in this case implies $E_{s} \approx 1-a$. 
-%Only in the WFM limit of $a=1$ will the invasion probability go asymptotically to zero at large carrying capacity. 
-The invasion probability go asymptotically to zero at large carrying capacity only in the WFM limit of $a=1$. 
+Figure \ref{Esucc} shows the calculated invasion probabilities as a function of the carrying capacity $K$ and of the niche overlap $a$ between the invader and the established species. 
+In the complete niche overlap limit, $a=1$, the dependence of the invasion probability on the carrying capacity $K$ closely follows the results of the classical Moran model, $\mathcal{P}^{s^0}=2/K$ \cite{Moran1962}, shown in the blue dotted line in the left panel, and tends to zero as $K$ increases. 
+In the other limit, $a=0$, the problem is well approximated by the one-species stochastic logistic model starting with one individual and evolving to either $0$ or $K$ individuals; the exact result in this limit is shown in black dotted line, referred to as the independent limit \cite{Nisbet1982}. 
+In the independent limit, $a=0$, the invasion probability asymptotically approaches $1$ for large $K$, reflecting the fact that the system is deterministically drawn towards the deterministic stable fixed point with equal numbers of both species. 
+As $K$ gets large, fluctuations are minimal and the system becomes more deterministic. 
+Interestingly, the invasion probability is a non-monotonic function of $K$ and exhibits a minimum at an intermediate/low carrying capacity, which might be relevant for some biological systems, such as in early cancer development \cite{Ashcroft2015} or plasmid exchange in bacteria \cite{Gooding-townsend2015}.
 
-%\subsection{Observations}
-%stuff as expected
-Figures \ref{Esucc}, \ref{Tsucc}, and \ref{Tfail} confirm our predictions for small and large $K$, respectively showing the invasion probability, mean time conditioned on invasion, and mean time conditioned on extinction of the invader. 
-%The results generally match the predictions of the previous paragraphs. 
-Note that at small carrying capacity the WFM limit has the shortest conditional times, but at large carrying capacity this complete niche overlap has the longest. 
-%The suggested ordering of expected times with niche overlap at small and large carrying capacity is observed. 
-%The WFM limit in red and the independent limit in black both match well with the data. 
-%It is noteworthy that a
-%A greater niche overlap leads to faster fixation at small system size but slower times at large $K$. 
-In general, increasing $a$ has conflicting effects; it brings the fixed point closer to the initial condition of one invader, suggesting a shorter timescale, but it also makes the two species more similar, effectively reducing the fast approach to the attractive deterministic fixed point. 
-This non-monotonic dependence on $a$ causes the unimodality of the conditional times in figures \ref{Tsucc} and \ref{Tfail}. 
-% characterized by more back-and-forth dynamics and a longer timescale. 
-%TODO The low $K$ pattern of $E_{s} \approx 1-d_{mut}/(b_{mut}+d_{mut})$ is plotted in figure \ref{Esucc} and shows some agreement, though it is not entirely correct. %TODO this does not follow; Anton's comment
-%Figure \ref{Esucc} shows that at low $K$ the probabilities, while not quite converging, have a much lesser range than their high $K$ limits. 
-%
-An odd but reproducible feature, seen in figure \ref{Esucc}, is that for some values of niche overlap there appears to be a minimum of probability at some intermediate carrying capacity. 
-This is a low-number effect, and will not be relevant in most ecological systems, though in some situations it may apply, like with nascent cancer strains \cite{Ashcroft2015} or plasmid replacement \cite{Gooding-townsend2015}. 
-%Interestingly, at large system size when the parameters are away from the extremes of niche overlap, the invasion probability approaches an asymptotic intermediate value. %This is $E_s=1-a$
-%TODO COMM also comment on the badness of that one fit (I think a=0 for both times???)
-%
-%weird maxima from ordering
-%While a reversal of the ordering does not necessitate a maximum mean time, neither is it inconsistent. 
-%COMM start more generally; figure seven shows time for failed invasion, has a peak, whatverver
-Figure \ref{Tfail} also shows a maximum of mean time conditioned on a failed invasion attempt at intermediate carrying capacity. 
-%While this is not inconsistent with the predicted ordering reversal, neither is it necessary. 
-%We did not predict this peak, but i
-It is consistent with the our expectation of fast times for both small and large $K$ for incomplete niche overlap. 
-The maximum appears for all values of $a$ except $a=1$. 
-%We do not provide a mechanism to explain this result. 
-%We do, however, point out that this observation should be easily testable in a setup with controlled population size and regular genotypic sampling (or phenotypic, if the mutant is distinguishable experimentally). 
+For the intermediate values of the niche overlap, $0<a<1$, the invasion probability is a monotonically decreasing function of $a$, as shown in the right panel of Figure \ref{Esucc}. 
+For large $K$, the outcome of the invasion is typically determined after only a few steps: since the system is drawn deterministically to the mixed fixed point, the invasion is almost certain once the invader has reproduced several times. 
+At early times, the invader birth and death rates (\ref{deathrate}) are roughly constant, and the invasion failure can be approximated by the extinction probability of a birth-death process with constant death $d_{mut}$ and birth $b_{mut}$ rates. 
+The invasion probability is then $\mathcal{P}=1- d_{mut}/b_{mut}\approx 1-a$. 
+This heuristic estimate is in excellent agreement with the numerical predictions, shown in the right panel of Figure \ref{Esucc} as a purple dashed and the blue lines respectively.
+Similarly, for small $K$ either invasion or extinction typically occurs after only a small number of steps. 
+The invasion probability in this limit is dominated by the probability that the lone mutant reproduces before it dies, namely $\frac{b_{mut}}{b_{mut}+d_{mut}} = \frac{K}{K(1+a)+1-a}$, as shown in black dotted line in the right panel of Figure \ref{Esucc}.
 
 \begin{figure}[ht!]
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-invtimevK.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-invtimevK.pdf}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-invtimeva.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-invtimeva.pdf}
 	\end{minipage}
 	%  \includegraphics[width=0.9\linewidth]{invasion-time-succ}
-	\caption{\emph{Time of a successful invasion.} 
-		\emph{Left:} Solid lines are the numerical results, from $a=0$ at the bottom to $a=1$ at top. The WFM result is given by the blue dashed line, and is linear, albeit with a slope that matches poorly with our results. 
-		\emph{Right:} The solid blue line shows the results for small carrying capacity ($K=4$), and successive lines are at larger system size, up to $K=256$. The dash dot black line is $1/d_{mut}$. 
+	\caption{\emph{Mean time of a successful invasion.}
+		\emph{Left:} Solid lines are the numerical results, from $a=0$ at the bottom to $a=1$ at top. The blue dashed line shows for comparison the predictions of the Moran model in the complete niche overlap limit, $a=1$; see text. The black line correspond to the solution of an independent stochastic logistic species, $a=0$.
+		\emph{Right:} The solid red line shows the results for small carrying capacity ($K=4$), and successive lines are at larger system size, up to $K=256$. The dashed blue line is $1/(b_{mut}+d_{mut})$ and matches with small $K$.
 	} \label{Tsucc}
-\end{figure}%TODO The black dotted line is the expected single logistic limit.
+\end{figure}
+
+Figure \ref{Tsucc} shows the dependence of the mean time to successful invasion, $\tau_s$, on $K$ and $a$. 
+Increasing $K$ can have potentially contradictory effects on the invasion time, as it increases the number of births before a successful invasion on the one hand, while increasing the steepness of the potential landscape and therefore the bias towards invasion on the other. 
+Nevertheless, the invasion time is a monotonically increasing function of $K$ for all values of $a$. In the complete niche overlap limit $a=1$ the invasion time scales linearly with the carrying capacity $K$, as expected from the predictions of the Moran model, $\tau_{s} = \Delta t K^2(K-1)\ln\left(\frac{K}{K-1}\right)$ with $\Delta t\simeq 1/K$, as explained above. %NTS:::more info?
+The quantitative discrepancy arises from the breakdown of the $\Delta t\simeq 1/K$ approximation off of the Moran line. %NTS:::say more?
+For all values $0\leq a<1$ the invasion time scales sub-linearly with the carrying capacity, indicating that successful invasions occur relatively quickly, even when close to complete niche overlap, where the invading mutant strongly competes against the stable species.
+In the $a=0$ limit of non-interacting species, the invading mutant follows the dynamics of a single logistic system with the carrying capacity $K$, resulting in the invasion time that grows approximately logarithmically with the system size, as shown in the left panels of Figure \ref{Tsucc} as a black line. 
+This result is well-known in the literature, and is stated without reference for instance by Lande \cite{Lande1993}. 
+It is easy to see: by writing $\tau_s = \int dt = \int_{x_o}^{x_f} dx \frac{1}{\dot{x}}$ for initial state $x_0=1$ and final state $x_f=(1-\epsilon)K$ with small $\epsilon$ and large $K$ we get
+\begin{align*}
+\tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} \\
+	   &= \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) \\
+	   &= \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} \\
+	   &= \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \\
+	   &\approx \frac{1}{r}\ln\left[\frac{(1-\epsilon)K}{\epsilon} \right] \\
+	   &\approx \frac{1}{r}\left(\ln\left[K\right]-\ln\left[\epsilon\right]\right)
+\end{align*}
+and so expect the invasion time to grow logarithmically with carrying capacity. 
 
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-exttimevK.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-exttimevK.pdf}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{fiftyfifty-exttimeva.png}
+		\includegraphics[width=1.0\linewidth]{fiftyfifty-exttimeva.pdf}
 	\end{minipage}
 	%  \includegraphics[width=0.9\linewidth]{invasion-time-fail}
-	\caption{\emph{Time of a failed invasion.}
-		\emph{Left:} Solid lines are the numerical results, from $a=0$ mostly being fastest to $a=1$ being slowest, for large $K$. The blue dashed line is WFM result. 
-		\emph{Right:} The solid blue line shows the results for small carrying capacity ($K=4$), and successive lines are at larger system size, up to $K=256$. The dash dot black line is $1/d_{mut}$. 
+	\caption{\emph{Mean time of a failed invasion.}
+		\emph{Left:} Solid lines are the numerical results, from $a=0$ mostly being fastest to $a=1$ being slowest, for large $K$. The blue dashed line is the analytical approximation of the Moran model result, and black is a 1D stochastic logistic system, which overestimates the time at small $K$ but then converges to the same limiting value.
+		\emph{Right:} The solid red line shows the results for small carrying capacity ($K=4$), and successive lines are at larger system size, up to $K=256$. The dashed blue line is $1/(b_{mut}+d_{mut})$ and matches with small $K$.
 	} \label{Tfail}
 \end{figure}
 
-These conditional times are hard to intuit. 
-%What this suggests is that, even if failure is likely, it happens quickly, within one or two events. 
-Increasing $K$ moves the deterministic fixed point farther away, so we expect longer times, but it also draws the system more strongly, which would imply faster times. 
-%nothing exponential
-Regardless, all the timescales of invasion are fast:
-neither the mean time of a successful invasion nor of a failed attempt grows exponentially with the system size. 
-This contrasts with the results of the previous sections, where the mean fixation time is exponential in the system size except when $a$ is exactly one. 
-$\tau_{s}$ at complete niche overlap has the fastest scaling, growing linearly with the carrying capacity. 
-Whereas competing species will coexist for long times unless niche overlap is complete, the dynamics of the attempted invasion of a dominant species will be fast \cite{invasion is fast}. 
-%Anton's comment: need references or explanation for this, rather than just observing
-As will be discussed below, these timescales need to be compared against the mutation or immigration timescale to offer some insight on mutation-selection balance. 
+Unlike the mean times conditioned on success, the failed invasion time, shown in Figure \ref{Tfail}, is non-monotonic in $K$. 
+The analytical approximations of the Moran model and the of two independent 1D stochastic logistic systems recover the qualitative dependence of the failed invasion time on $K$ at high and low niche overlap, respectively. 
+All failed invasion times are fast, with the greatest scaling being that of the Moran limit. 
+For $a<1$ these failed invasion attempts appear to approach a constant timescale at large $K$.
+
+The dependence of the time of an attempted invasion (both for successful and failed ones) on the niche overlap $a$ is different for small and large $K$, as shown in the right panels of Figures \ref{Tsucc} and \ref{Tfail}. 
+For small $K$ both $\tau_s$ and $\tau_f$ are monotonically decreasing functions of $a$, with the Moran limit having the shortest conditional times. 
+In this regime, the extinction or fixation already occurs after just a few steps, and its timescale is determined by the slowest steps, namely the mutant birth and death. 
+Thus $\tau \approx \frac{1}{b_{mut}+d_{mut}}=\frac{K}{K+1+a(K-1)}$, as shown in the figures as the dashed blue line. 
+By contrast, at large $K$, the invasion time is a non-monotonic function of the niche overlap, increasing at small $a$ and decreasing at large $a$. 
+This behavior stems from the conflicting effect of the increase in niche overlap: on the one hand, increasing $a$ brings the fixed point closer to the initial condition of one invader, suggesting a shorter timescale; on the other hand, it also makes the two species more similar, increasing the competition that hinders the invasion.
 
 
-
-\section{Discussion}
-Unlike the fixation times of coexisting species in all but complete niche overlap, invasions into the system do not show exponential scaling in any limit. 
-%The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. 
-%If the rate in is greater than the mean failure time, the system will diversify. In the other extreme, if the influx rate is lesser even than the mean fixation times of Section 4 then a monoculture is expected. 
-%For this reason we have calculated the mean failure time, the mean time of invasion, and the probability of such a success. 
-The likelihood of failure grows linearly with niche overlap, for sufficiently large $K$. 
-For complete niche overlap the invasion probability goes asymptotically to zero, but it is low even for partially mismatched niches. 
+\section{Discussion of One Invasion Attempt Results}
+Unlike the fixation times of the previous chapter, invasions into the system do not show exponential scaling in any limit. 
+Indeed, all scaling with $K$ is sublinear except in the complete niche overlap limit for successful invasion times. 
 The timescale of a successful invasion varies between linear and logarithmic in the system size. 
 The mean time of an unsuccessful invasion is even faster than logarithmic, and for large $K$ it becomes independent of $K$. 
-Curiously, these failed invasion attempts are unimodal, at intermediate carrying capacity and niche overlap values. %COMM heat map?
+Curiously, these failed invasion attempts are unimodal, at intermediate carrying capacity and niche overlap values. %NTS:::heat map?
+As for the probabilities, the likelihood of a failed invasion attempt grows linearly with niche overlap, for sufficiently large $K$. 
+For complete niche overlap the invasion probability goes asymptotically to zero, but it is low even for partially mismatched niches. 
+
+High niche overlap makes invasion difficult due to strong competition between the species. 
+In this regime, the times of the failed invasions become important because they set the timescales for transient species diversity. 
+If the influx of invaders is slower than the mean time of their failed invasion attempts, most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader. 
+On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient co-existence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Hubbell2001,Chesson2000}. 
+Full discussion of diversity in this regime is beyond of the scope of the present work. % but see \cite{Dias1996,Hubbell2001,Chesson2000}. 
+The weaker dependence of the invasion times on the population size and the niche overlap, as compared to the escape times of a stably co-existing system to fixation, imply that the transient co-existence is expected to be much less sensitive to the niche overlap and the population size than the steady state co-existence. 
+Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in section III) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters.
+
+For species with low niche overlap, the probability of invasion is likely, and for large $K$ decreases monotonically as $1-a$ with the increase in niche overlap, independent of the population size $K$. 
+The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$ and is typically increasing with the niche overlap $a$.
+
+%For this reason we have calculated the mean failure time, the mean time of invasion, and the probability of such a success. 
+The fixation times of two co-existing species, discussed in the previous chapter, determine the timescales over which the stability of the mixed populations can be destroyed by stochastic fluctuations. 
+Similarly, the times of successful and failed invasions set the timescales of the expected transient co-existence in the case of an influx of invaders, arising from mutation, speciation, or immigration. 
 Our results provide a timescale to which the rate of immigration or mutation can be compared. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
 In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected.
-However, if individual invaders arise faster than the time it takes to suppress the previous attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity.
+If the rate in is greater than the mean failure time, the system will diversify. 
+The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. %NTS:::extend this discussion, harken to the intro
+With different strains of invaders arising faster than the time it takes to suppress the previous invasion attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity. 
 %We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species.
-!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!!
+!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!! - it is just the ratio of lifetime of a species over (time between invasions divided by probability of a successful invasion); $(E^s\tau^s+E^f\tau^f)/\tau_{inv}$ - I’m not convinced that this is right either!!!
+% - For large species: steady state is rate at which they successfully enter = rate at which they leave: E_s/\tau_{mut} = N_{big}(1/\tau_{ext} / 2?) where \tau_{ext} is the unconditioned extinction time - but then do I divide by the number of species since they're each equally likely to go extinct? Do I use \tau_{ext} with an effective carrying capacity based on the number of species?? I'm still not sure
+% - For small species: steady state is rate at which they enter (as small) = rate at which they leave: E_f/\tau_{mut} = N_{small}/\tau_f
 We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration.
-This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line.
+This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. %NTS:::say a bit more that rather than being Moran-like, I'll do actual Moran because it's easier, has results to compare against, and offers analytic solution
 
 
 \section{Moran Reintroduction}
-The Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
-Its most prominent use is in coalescent theory \cite{Blythe2007}, describing how the relative proportion of genes in a gene pool might change over time. 
+As a reminder, the Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
+Its most prominent uses are in coalescent theory \cite{Blythe2007} and neutral theory \cite{Hubbell2001}, describing how the relative proportion of genes in a gene pool might change over time. 
 But really it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem.
 
 To arrive at the Moran model we must make some assumptions.
 Whether these are justified depends on the situation being regarded.
-The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species and the state of the system.
-This makes the Moran model a neutral theory, and any evolution of the system comes from chance rather than from selection.
+The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species. % and the state of the system.
+They all occupy the same niche. 
+This makes the Moran model a neutral theory, and any evolution of the system comes from chance rather than from selection. 
 
 Next we assume that the the population size is fixed, owing to the (assumed) strict competition in the system.
 That is, every time there is a birth the system becomes too crowded and a death follows immediately. Alternately, upon death there is a free space in the system that is filled by a subsequent birth.
-In the classic Moran model each pair of birth and death event occurs at a discrete time step (cf. the Wright-Fisher model, where each step involves $N$ of these events).
-This assumption of discrete time can be relaxed without a qualitative change in results.
+In the classic Moran model each pair of birth and death events occurs at a discrete time step (cf. the Wright-Fisher model, where each step involves $N$ of these events). %NTS:::change $N$ to $K$, and maybe explain this unconventional choice.
+This assumption of discrete time can be relaxed without a qualitative change in results. 
 
 
 \section{Moran Model in More Detail}
 In the classic Moran model, each iteration or time step involves a birth and a death event.
 Each organism is equally likely to be chosen (for either birth or death), hence a species is chosen according to its frequency, $f=n/N$, where $N$ is the total population and $n$ is the number of organisms of that species.
-Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species denoted with `$n$'.
+Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species denoted with $n$. %NTS:::emphasize this, pointing out that this theory therefore accounts for any number of species. 
 The focal species increases in the population if one of its members gives birth while a member of a different species dies; that is, $b(n) = f(1-f)$.
 Increase and decrease of the focal species are equally likely, with
 %There is a net rate of change, in both increasing and decreasing $n$, of
@@ -291,9 +290,9 @@ Since a species is equally likely to increase or decrease each time step, the mo
 \begin{equation}
 E(n) = 1-n/N = 1-f.
 \end{equation}
-DERIVE THIS!!!!!!
+%NTS:::DERIVE THIS???
 The first passage time, however, does not match a random walk, as there is a probability of no change in a time step, and this probability varies with $f$.
-DERIVE THE FIRST PASSAGE TIMES AS WELL (conditional and un?!?!)
+%NTS:::DERIVE THE FIRST PASSAGE TIMES AS WELL? (conditional and un?!?!)
 
 %The system fluctuates as long as the number of organisms of the species of interest is neither none (extinction) nor all (fixation).
 We define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction.
@@ -325,7 +324,8 @@ Note that we didn't need to use the large $N$ approximation: there is an exact s
 
 
 \section{Moran With Immigration}
-%c.f. McKane2003
+%NTS:::c.f. McKane2003
+%NTS:::should I include a brief Hubbell here or in Appendix?
 Previous sections have stated that different dynamics are expected depending on a comparison of timescales. 
 If new species enter the system faster than they go extinct, the biodiversity should increase to some steady state. 
 Conversely, if extinction is much more rapid than speciation, a monoculture is expected in the system. 
@@ -517,8 +517,11 @@ A quantity similar to the mean is the extremum of the distribution, which for la
 The extremum occurs when $\partial_n \widetilde{P}_n = 0$ but for ease note that $\partial_n \widetilde{P}_n = \partial_n q_n/\sum_i q_i = \partial_n q_n = q_n \partial_n \ln(q_n)$ therefore I can instead calculate the value which gives $\partial_n \ln(q_n)=0$. 
 First,
 \begin{align*}
- \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)!\big] + \ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\frac{\nu g N}{1-\nu}\right)!\big] - \ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)!\big] \\
-          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] + \left(n-1+\frac{\nu g N}{1-\nu}\right)\ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)\big] + \left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\big] - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\frac{\nu g N}{1-\nu}\right)\ln\big[\left(\frac{\nu g N}{1-\nu}\right)\big] - \left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\big]
+ \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)!\big] \\
+ 		  &\, + \ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\frac{\nu g N}{1-\nu}\right)!\big] - \ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)!\big] \\
+          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] \\
+          &\, + \left(n-1+\frac{\nu g N}{1-\nu}\right)\ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)\big] + \left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\big] \\
+          &\, - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\frac{\nu g N}{1-\nu}\right)\ln\big[\left(\frac{\nu g N}{1-\nu}\right)\big] - \left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\big]
 \end{align*}
 where I have employed the Stirling approximation $\ln[x!] = x\ln[x] - x + O(1/x)$. 
 Setting $\partial_n \ln[q_n]=0$ gives
@@ -562,7 +565,7 @@ Substituting $f^*$ and expanding to lowest order makes the sign proportional to
 \fi
 First, note that there is in fact an intermediate regime, as evinced in figure \ref{stationary-fig2}. 
 For moderate values of immigration there is the possibility that the curvature near one edge of the domain is positive while it is negative near the other. 
-To this end, I calculate how the ratio of $\widetilde{P}_0/\widetilde{P}_1$ compares to unity for $g$ and the symmetric case $g\rightarrow 1-g$. 
+To this end, I calculate how the ratio of $\widetilde{P}_0/\widetilde{P}_1$ compares to unity for $g$ and the symmetric case $g\leftrightarrow (1-g)$. 
 At the lower critical parameter combination
 \begin{align*}
  \frac{\widetilde{P}_0}{\widetilde{P}_1} - 1 = \frac{q_0}{q_1} - 1 = \frac{N - \nu N^2 g - \nu N g - 1 + \nu}{\nu N^2 g} \approx \frac{N - \nu N^2 g}{\nu N^2 g} < 0
@@ -570,14 +573,13 @@ At the lower critical parameter combination
 which implies the probability distribution is always concave up when $N\nu < 1/g$. %implicitly I assume $g \gg 1/N$
 By symmetry the other bound is $1/(1-g)$, above which the distribution is concave down. 
 It turns out these same bounds can be found by requiring $0<f^*\approx\frac{1-g N\nu}{2-N\nu}<1$, since when the mode is in outside the domain this distribution cannot have a consistent curvature. 
-%some conclusion to be drawn???
-Also finding the mode and inversion values...!!!
+%NTS:::draw some conclusions about this later down
 
 Figure \ref{stationary-fig2} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
 To do so, we must look at a slightly modified problem, with modified transition rates such that $b(0)=d(N)=0$. 
 This allows us to find the mean first passage time to species fixation or extinction, recognizing that this will only be a temporary state. 
 %Since we have modified the transition rates at just two points, these don't show up when you use the approximate differential equation.  
-The technique follows that laid out in the introduction. 
+The technique follows that laid out in the introduction/appendix. 
 As a brief reminder, define $E_i$ as the probability that the focal species goes extinct in this modified system with absorbing states at $n=0$ and $n=N$, ie. the system goes to the former before the latter, given that it starts at $n=i$. 
 Then $E_i = \frac{b(i)}{b(i)+d(i)}E_{i+1} + \frac{d(i)}{b(i)+d(i)}E_{i-1}$. 
 Further define $S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}$. 
@@ -590,13 +592,41 @@ As with the stationary distribution, the extinction probabilities can be written
 %Nevertheless, let's try:
 %\begin{equation*}
 %content...
+%ugh it's so gross; it's a sum of factorials, therefore a hypergeometric
+%but I can't (shouldn't) take the log, since it varies between zero and one
+%sum[S] = -(((1 - NN - u + g NN u) HypergeometricPFQ[{1, 2, -(2/(-1 + u)) + NN/(-1 + u) + (2 u)/(-1 + u) - (g NN u)/(-1 + u)}, {2 - NN, -(2/(-1 + u)) + (2 u)/(-1 + u) - (g NN u)/(-1 + u)}, 1])/((-1 + NN) (1 - u + g NN u))) - (Gamma[1 + NN] Hypergeometric2F1[1 + NN, -(1/(-1 + u)) + u/(-1 + u) + (NN u)/(-1 + u) - (g NN u)/(-1 + u), -(1/(-1 + u)) - NN/(-1 + u) + u/(-1 + u) + (NN u)/(-1 + u) - (g NN u)/(-1 + u), 1] Pochhammer[(-1 + NN + u - g NN u)/(-1 + u), NN])/(Pochhammer[1 - NN, NN] Pochhammer[1 - (g NN u)/(-1 + u), NN])
+%sum[S] = (NN-1+u-g NN u) _3F_2[{1, 2, (2-NN-2u+g NN u)/(1-u)}, {2-NN, (2-2 u+g NN u)/(1-u)}, 1]\frac{1}{(NN-1) (1 - u + g NN u)} - Gamma[NN+1] _2F_1[NN+1, (1-u-NN u+g NN u)/(1-u), (1+NN-u-NN u+g NN u)/(1-u), 1] Pochhammer[(1-u-NN+g NN u)/(1-u),NN]\frac{1}{Pochhammer[1-NN,NN] Pochhammer[1+(g NN u)/(1-u),NN]}
 %\end{equation*}
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=1]{Moran-withimmigration-extinctionprobability}
+%	\caption{Probability of first going extinct, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extnprobfig}
+%\end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=1]{Moran-withimmigration-extinctionprobability}
-	\caption{Probability of first going extinct, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extnprobfig}
+	\setbox1=\hbox{\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}}
+	\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}\llap{\makebox[\wd1][c]{\includegraphics[height=4cm]{Moran-withimmigration-extinctionprob-zoomed}}}
+	\caption{Probability of first going extinct, given starting population/fraction. $g=0.4$, $N=100$, $\nu$ and colours as in figure \ref{stationary-fig2} (red is large $N\nu$, grey is small $N\nu$). Black is the regular Moran result without immigration. } \label{extnprobfig-ihope}
 \end{figure}
-Comment here? Or later...!!!
+\iffalse
+\begin{figure}[ht]
+	\centering
+	%	\includegraphics[width=\textwidth]{Moran-withimmigration-extinctionprob}\llap{\makebox[0.5\wd1][l]{\includegraphics{Moran-withimmigration-extinctionprob-zoomed}}}%[width=0.5\textwidth]
+	\includegraphics[width=0.8\columnwidth]{Moran-withimmigration-extinctionprob}
+	\caption{Probability of first going extinct, given starting population/fraction. $g=0.4$, $N=100$, $\nu$ and colours as in figure \ref{stationary-fig2}. Black is the regular Moran result without immigration. } \label{extnprobfig}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Moran-withimmigration-extinctionprob-zoomed}
+	\caption{Probability of first going extinct, given starting population/fraction. $g=0.4$, $N=100$, $\nu$ and colours as in figure \ref{stationary-fig2}. Black is the regular Moran result without immigration. }
+\end{figure}
+\fi
+
+Unsurprisingly, having immigrants coming in that are less often from the focal species ($g<0.5$) largely acts to increase the probability of the focal species going extinct first. %but does it ever cross the Moran result??? - yes; see inset
+The exception is for some $n/N$ values less than $g$; it seems that for low immigration or population size there is a reduction in the extinction probability, as emphasized in the inset of figure \ref{extnprobfig-ihope}. 
+Unlike before, the different trends for the extremes of $N\nu$ compared to $1/g$ and $1/(1-g)$ are less pronounced. 
+Certainly for large immigration rate and population size, for $g<0.5$ the extinction is almost certain, as is fixation for $g>0.5$. 
+But all parameter combinations (with $g\neq 0,1$) result in a leveling of the probability as compared to the Moran model (in black). %NTS:::need to discuss these results in discussion
 
 Similar to the extinction probabilities, we can write unconditioned mean first passage times to get
 %\begin{equation}
@@ -616,12 +646,14 @@ Similar to the extinction probabilities, we can write unconditioned mean first p
 Note that this should go to zero at both $n=0$ and $n=N$, since it is unconditioned. 
 Again, there is a closed form, but it is a sum of hyperbolic functions and does not possess intuitable limits. 
 It is approximated numerically and displayed graphically in figure \ref{extntimefig}. 
+Introducing immigrants that are sometimes from the focal species and sometimes not acts to stabilize the system, drawing it towards $g$ and hence away from the extremes, at which fixation occurs. 
+Thus a higher immigration rate is expected to increase the mean time until fixation when compared to the regular Moran model. 
+What's more, since this is the unconditioned time, the increase of time is larger toward the extreme at the opposite of $g$. For example, close to $n=0$ the fact that many more non-focal organisms are introduced (as in the figure) does little to change the fixation time since the largest contributor would be the extinction of the focal species. Conversely, near $n=N$ the more likely fixation is that of the focal species, but immigration with $g<0.5$ acts to counteract that tendency, providing a supply of the rare non-focal species. Thus the unconditioned time to fixation skews away from the average focal immigrant fraction $g$. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1]{Moran-withimmigration-extinctiontimes}
 	\caption{Mean time to either fixation or extinction, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extntimefig}
-\end{figure}
-Comments???!!!
+\end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
 
 Keeping with the artificial stoppage when the focal population reaches $0$ or $N$ individuals, we calculate the conditional times, respectively to extinction and to fixation. 
 As before, the extinction probability is given by equation \ref{extnprob}. 
@@ -650,15 +682,17 @@ As before, the extinction probability is given by equation \ref{extnprob}.
 %q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
 %\end{equation*}
 Similar to the continuous time solutions presented in the introduction, %!!!!!!!!!!\ref{?}
-the conditional extinction time can be written as
+the conditional extinction time can be written as \cite{Iyer-Biswas2015}
 \begin{equation}
 \phi[n] = \phi[1] + \sum_{j=1}^{n-1}\left(\phi[1] - \sum_{i=1}^{j}q_iE_i\right)S_{j}.  
 \end{equation}
+%where $\theta[n]=E_n \tau[n]$ is the product of the extinction probability and conditional time at that state. 
+Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
+Since $E_0=0$ this gives $\phi_0=0$. 
 We have the other boundary condition that, since $\theta_N = 0$, $\phi_N = 0$, which allows us to rearrange the previous equation to get
 \begin{equation}
 \phi_1 = \frac{\sum_{j=1}^{N-1}\sum_{i=1}^{j}q_iE_i}{1+\sum_{j=1}^{N-1}S_j}. 
 \end{equation}
-Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
 These previous two equation allow us to solve for $\phi$, and therefore $\theta$. 
 After all this, one arrives at the graph in figure \ref{condextntimefig}. 
 The conditional times mostly follow the unconditioned time, except near the rare events that do not much contribute to the average. 
@@ -666,19 +700,48 @@ The conditional times mostly follow the unconditioned time, except near the rare
 	\centering
 	\includegraphics[scale=1]{Moran-withimmigration-condtimesmall}
 	\caption{Mean time to fixation or extinction, conditioned on that event happening, given starting population/fraction. $g=0.7$, $N=100$, $\nu$ varies from 0.3 (highest) to 0.0001 (lowest). Grey is regular Moran results without immigration. } \label{condextntimefig}
-\end{figure}
+\end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
 
-\section{Some Results}
-With all that we've discovered, we can say something about the switching behaviour of this Moran population with immigrants. 
-Likely, there are some limiting forms of the analytic expressions that will offer more insight - these are currently being investigated. 
-Let's say the population starts in state $n=0$.  
+\section{Some Results}%this section is NOT well thought out
+%NTS:::nor sufficiently developed
+
+%NTS:::talk about the 1/g and 1/(1-g) critical values of N\nu
+%NTS:::talk about leveling of extinction probability - or don't because it's all transient anyways; having fixated first doesn't not mean it's any likelier to be present after some long time than if it goes extinct, or than compared to being almost fixated (unlike in deterministic systems or stochastic systems without immigration)
+%NTS:::comment on unconditioned and conditioned extinction/fixation times
+
+With all that I have outlined above, we can say something about the switching behaviour of this Moran population with immigrants. 
+%Likely, there are some limiting forms of the analytic expressions that will offer more insight - these are currently being investigated. 
+Suppose the population starts in state $n=0$, before any mutations have arisen.  
 Then at a rate $\nu g$ there will be an attempted invasion.  
 The invasion will be successful only every $1/E_1$ attempts.  
 Thus a successful invasion occurs every $1/\nu g E_1$ time units.  
-%Of course, all this assumes that after the first invader is added, no others arrive until the first one succeeds or fails.  
+%Of course, all this assumes that after the first invader is added, no others arrive until the first one succeeds or fails.  - not true! E_1 accounts for further immigrants before fixation
 We can compare the time between successful invasions, and the time between attempted invasions, with the time each attempt takes (successful or not). 
-COMPARE SOME ACTUAL NUMBERS
-ALSO REFER BACK TO THE GRAPHS
-%For $g=0.1$, $N=50$, $\nu=0.01$ this gives an attempt (invasion or suppression) time of $\tau[1] = 243.138$, a time between attempts of $1/\nu(1-g) = 111.111$, and a time between successful attempts of $1/\nu(1-g)(1-E_1) = 7919.01$. 
+For example, for $g=0.1$, $N=50$, $\nu=0.01$ this gives an (unconditioned) attempt time of $\tau[1] = 243.138$, a time between attempts of $1/\nu(1-g) = 111.111$, and a time between successful attempts of $1/\nu(1-g)(1-E_1) = 7919.01$. 
+
+%THIS CONCLUSION SHOULD COMBINE THE PAPER RESULTS WITH THE MORAN RESULTS - ONE DISCUSSION FOR BOTH
+%ALSO REFER BACK TO THE GRAPHS
+
+Hearkening back to the first half of the chapter, we see that the Moran results, ie. complete niche overlap, offer the longest time scales of any niche overlap. 
+As such one might conclude that they provide an upper bound for the (bio)diversity expected in an (eco)system. 
+However, the invasion probability is lowest for complete niche overlap (see figure \ref{Esucc}). 
+With incomplete niche overlap more attempts will successfully invade the system, at which point they will persist for longer. 
+At the other limit of independent species, the LV theory simplifies to classical niche theory, and a further theory of the apportionment of resources is needed to predict biodiversity. 
 
 
+\section{Outlook}%this also is very not thought out
+%NTS:::nor sufficently developed
+%It seems we cannot come to any conclusions of what kind of niche overlap is typical in nature based on measured biodiversities, at least not using the absolute number of different species in an ecosystem. 
+The complete niche overlap that Hubbell uses in his (in)famous neutral theory of biodiversity and biogeography suggests, based on the Moran with immigration results above, that invasion attempts will rarely be successful. 
+A successfully invading species will take a long time to do so, as compared to the results of incomplete niche overlap from earlier in the chapter, but this time scale is still much lesser than the timescale that a successful invader will persist, as based on the previous chapter. 
+Thus Hubbell's model implies few species of large abundance and a more even distribution of abundances from large to small. 
+Regarding the small population, transient species that fail to establish themselves, they persist longer in the Moran limit, dying out very quickly in systems with incomplete niche overlap. 
+Again, the theory behind Hubbell's model suggests a wealth of small population species should be present in an ecosystem, compared to one dominated by niches, even largely overlapping niches. 
+
+So, while the absolute number that is the biodiversity of an ecosystem cannot distinguish between niche and neutral theories, the abundance distribution should be able to do so. 
+Unfortunately calculating the abundance distribution as a function of immigration rate, ecosystem carrying capacity, and niche overlap is outside of the scope of this thesis. 
+I can however make a qualitative argument. 
+Hubbell's species abundance distribution is well known, and is similar to that of Fisher's log series distribution when diversity is high \cite{Fisher1943,Alonso2004}. 
+Based on my results above, an observed species distribution that is greater than Hubbell's at high diversity but lesser at low diversity is a signature of an ecosystem influenced by niches, with the species interactions being less than completely neutral (while still not necessarily being selective). %NTS:::reminder this distinction should be in the beginning
+
+%NTS:::okay, and then some sort of conclusion and/or synopsis?
