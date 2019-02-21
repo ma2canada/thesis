@@ -8,6 +8,7 @@ The extinction times from the last few chapters are long, and not just those tha
 Even the relatively fast results of the Moran model, which scale linearly with $K$, will be longer than is experimentally viable for typical biological populations and timescales. 
 The fastest reproducing model organism is the \emph{e. coli} bacterium, which reproduces every twenty minutes in ideal conditions. 
 A carrying capacity as low as $10^3$ would show fixation in the Moran limit in a week, but the complete extinction of the population (as described in the first chapter) would take longer than life has existed on the Earth. %NTS:::"first" chapter.
+%NTS:::comment on Lenski
 %NTS:::somewhere talk about how this isn't a problem, that this is a sort of null model, and works theoretically - if anything is off from this, it allows us to ask pointed "in what way" questions. 
 
 
@@ -21,7 +22,40 @@ A carrying capacity as low as $10^3$ would show fixation in the Moran limit in a
 
 
 \section{Miscellanea}
- (plasmids instead of species)
+% (plasmids instead of species)
+Chapters 2 and 3 briefly touch on the idea of small population sizes. 
+For instance, the second chapter's figure \ref{heatmap} suggests that the exponential term is less relevant than the algebraic term when it comes to the fixation time of two competing species as compared to a similarly sized Moran-like system. 
+Indeed, exponential dependence is only dominant when system sizes are large. 
+This large population size is relevant in many (if not most) biological contexts, from \emph{e. coli} and their typical $10^6 - 10^8$ bacteria/mL density \cite{Lenski} to hare in Canada's arctic which are more spread out but number in the ten thousands \cite{or whatever}. 
+But not all biology is overflowing with individuals. 
+One example is that of plasmids in a cell \cite{Ingalls}. 
+
+Plasmids are small loops of DNA that typically code for a few/handful genes, often one of which confers some antibiotic resistance. \cite{that bio textbook - Wilson?}
+Their reproduction can be thought of as asexual, since only one plasmid copy is required as a template to make a new copy. 
+Plasmid copy numbers, the average number of copies of a plasmid per cell, tend to be low, ranging from $10^1$ to $10^3$. 
+The copy number can be thought of as the carrying capacity of that plasmid in the cell, and is maintained primarily by a negative regulatory circuit, whereby a protein expressed by the plasmid acts to inhibit the replication of new plasmids. 
+There is also a stochastic effect when the cell divides and the plasmids are distributed between the two daughters, but given the differing time scales of plasmid (DNA) replication and cell division it is not a necessity that cellular division be the sole mechanism of local extinction; demographic fluctuations like those described in this thesis may also be relevant. 
+Seeing as the bacterial chromosome is typically thousands or a million times longer than that of a plasmid, and as a bacterium can only divide when it has copied its chromosome, I expect the relative time scales to be similarly disparate. 
+A low copy number plasmid might have a carrying capacity of $K=20$, which would suggest a mean extinction time of 20 million replications, which is a long time for a bacterium, despite the differing time scales of DNA replication and cell division, though for a quickly replicating, low copy number plasmid in a slowly dividing bacterium this could be of relevance. 
+%https://biology.stackexchange.com/questions/31625/when-do-plasmids-replicate-relative-to-its-host-cell-cycle
+What's more, different types of plasmids can have the same or similar maintenance mechanisms, such that they compete, as mediated by their shared inhibitor proteins. 
+Then the relevant comparison would not be chapter 1's extinction of a single species but the competition of chapters 2 and 3. 
+Each plasmid type would have its carrying capacity given by its copy number if it were alone in the bacteria. 
+The niche in this case is defined by the replication inhibitor, and niche overlap relates how much the inhibitor of each plasmid type stymies the replication of the other; if there is a shared inhibitor, the plasmids are in the Moran limit, and we expect fixation to be rapid, much faster than the cell division time scale. 
+
+Similar to plasmids, the number of mitochondria in a cell is small and tends to be controlled within a cell. 
+In [brewer's] yeast there are typically $34\pm 2$ mitochondria per cell \cite{bionumbers}. 
+Of interest to researchers is how the integrity of mitochondrial DNA is maintained \cite{Nunn}. 
+Sometimes a mitochondrion will have large deletions in its DNA. 
+There are conflicting selection forces in this system: the mutant mitochondria [presumably] reproduce faster than the wildtype but hinder the viability of the cell, hence its reproduction. 
+But when one mutant arises in a population, what is the chance it will fixate, and will fixation occur before the cell reproduces? 
+The analyses of chapter 3 are relevant to such a problem. 
+
+Of course, some of the assumptions underlying my theories might fail, and this is especially true for systems will small population sizes. 
+The results outlined in this thesis should be applied with caution. 
+%NTS:::c.f. part in experimental section above where I explain that this is a null model to compare to other theories or from which tobase other theories
+
+%NTS:::ANYTHING ELSE???
 
 
 \section{Conclusions and retrospective}
