@@ -255,19 +255,41 @@ The first approximation I will regard is the Fokker-Planck (FP) equation, which 
 Starting from the master equation \ref{master-eqn} and expanding the $\pm 1$ terms as $P_{n\pm 1} \approx P_n \pm \partial_n P_n + \partial^2_n P_n$ we arrive at the popular Fokker-Planck equation:
 %. This is known as the Van Kampen expansion \cite{}. - actually the Kramers-Moyal expansion \cite{Gardiner2004 or whomever}
 \begin{equation}
-\partial_t P_n(t) = - \partial_n\big( (b_n - d_n) P_n(t) \big) + \frac{1}{2 K} \partial_n^2 \Big( (b_n + d_n) P_n(t) \Big). \label{FP}
+\partial_t P_n(t) = - \partial_n\big( (b_n - d_n) P_n(t) \big) + \frac{1}{2} \partial_n^2 \Big( (b_n + d_n) P_n(t) \Big). \label{FP}
 \end{equation}
+Used the KM expansion \cite{Gardiner2004}. Pawula theorem says 2 or infinite \cite{Risken}. %NTS
+I have been cavalier; more precisely, we need a large parameter, which I denote $K$, to do the expansion. Typically in bio the large parameter is volume. Then $x=n/K$ is something like density, and is the parameter about which we expand, requiring that $|1/K| \ll 1$. 
+Furthermore, the expansion requires that the rates $W_n$ can be written in a form $W_n/K = w(x)$. %NTS
+The more pedagogical Fokker-Planck equation is then
+\begin{equation}
+\partial_t P(x,t) = - \partial_x\big( (b(x) - d(x)) P(x,t) \big) + \frac{1}{2 K} \partial_x^2 \Big( (b(x) + d(x)) P(x,t) \Big),
+\end{equation}
+which is equivalent to equation \ref{FP} above for $b(x) = b_n/K$ and similarly for $d$. 
 Instead of a difference differential equation for the probability, equation \ref{FP} is a partial differential equation for the probability density. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
 The first term on the right hand side is called the drift term and corresponds to the dynamical equation at the deterministic limit, when fluctuations are neglected. 
 The second term is the diffusion term and describes the magnitude of the effect of stochasticity on the system. 
 A quasi-steady state can be calculated when the time derivative $\partial_t P_n(t)$ is small. 
-%NTS:::expand the below
-To simplify the situation further the birth and death rates can be linearized about the fixed point, which implies a Gaussian solution to the FP equation. 
+That is,
+\begin{equation}
+\ln P_n^{ss} \propto \frac{2(b_n - d_n) - \partial_n(b_n + d_n)}{(b_n + d_n)}. 
+\end{equation}
+By analogy with Boltzmann statistics, the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Zhou-ish}. 
 Equation \ref{FP} can also be solved directly to give a MTE \cite{Gardiner2004}. 
+For ease of reference, I leave the equation here:
+\begin{equation}
+\tau(n) = \int \frac %NTS
+\end{equation}
+
+%NTS:::expand the below?
+To simplify the situation further the birth and death rates can be linearized about a stable fixed point, which implies a Gaussian solution to the FP equation. 
+More specifically, the drift term is replaced with $(n-n^*)\partial_n(b_n - d_n)|_{n=n*}$ (since $(b_n - d_n)|_{n=n*}=0$) and the diffusion with $(b_n + d_n)|_{n=n*}$. 
+We only expect this further approximation to hold near the fixed point. 
+If we extend the domain to all space the solution is Gaussian, peaked near the fixed point. 
+%NTS:::could show it, could not
 
 %E - Jeremy
-Another method frequently studied is the WKB approximation \cite{}.
-The WKB method involves approximating the solution to a differential equation with a large parameter (such as $K$) by assuming an exponential solution (an ansatz) of the form
+Another method frequently utilized is the WKB approximation \cite{}.
+Generally, the WKB method involves approximating the solution to a differential equation with a large parameter (such as $K$) by assuming an exponential solution (an ansatz) of the form
 \begin{equation}
 \P_n \backsim e^{K\sum_i \frac{1}{K^i}S_i(n)}.
 \label{ansatz}
@@ -276,14 +298,20 @@ Starting again from the masters equation \ref{master-eqn}, one can immediately a
 To leading order, only $S_0(n)$ is needed. 
 This method is commonly referred to as the real-space WKB approximation, wherein we obtain a solution for the quasi-stationary probability distribution.
 Another method, known as the momentum-space WKB, is to write an evolution equation of the generating function of $P_n$, the conjugate of the master equation, and then apply the exponential ansatz \cite{Generating function stuff}.
+The momentum-space WKB has been shown to differ from real-space WKB \cite{Ovaskainen?}, and has gone out of favour. 
+Real-space WKB remains popular. 
+The quantity $S_0(n)$ can be interpreted as the action in a Hamilton-Jacobi equation. 
+Its solution is $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$. %NTS:::check this
+From the pdf, the MTE is calculated via $\tau = \frac{1}{d_1 P_1}$ \cite{Assaf?}. 
+%NTS:::somewhere, probably in intro, decide and articulate difference between $\tau(x)$ and $\tau$
 
 %C - MattheW
 Rather than approximating the probability distribution function near the fixed point, a different approximation can be done to estimate the probability distribution function near the absorbing state $n=0$. %this still could be formulated simply as a steady state approximation - see Gardiner p.237
-If the bulk of the probability mass is centered on $K$ then the probability of being close to the absorbing state is small (note that this is similar to the quasi-stationary approximation, since the flux out of the system is proportional to the probability of being at a state close to $0$). 
-Furthermore, we assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order \cite{smalln}. 
-Rewriting the master equation \ref{master-eqn} as $\partial_t P_n = \left(b_{n-1} P_{n-1} - b_n P_n \right) + \left(d_{n+1}P_{n+1} - d_n P_n\right)$ we approximate the left hand side as zero and the right hand side as $\left(-b_n P_n \right) + \left( d_{n+1} P_{n+1}\right)$. 
+If the bulk of the probability mass is centered on $K$ then the probability of being close to the absorbing state is small (note that this condition is similar to the quasi-stationary approximation, since the flux out of the system is proportional to the probability of being at a state close to $0$). 
+Furthermore, it is assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order \cite{smalln}. 
+Rewriting the master equation \ref{master-eqn} as $\partial_t P_n = \left(b_{n-1} P_{n-1} - b_n P_n \right) + \left(d_{n+1}P_{n+1} - d_n P_n\right)$ one approximates the left hand side as zero and the right hand side as $\left(-b_n P_n \right) + \left( d_{n+1} P_{n+1}\right)$. 
 Rearranging this gives $P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}$. %make sure it looks nice, like Gardiner
-$P_{1}$ can be found by ensuring the probability is normalized; despite the sum extending beyond the region for which $P_{n+1}\gg P_n$ is valid, the probability distribution generated from this small $n$ approximation is qualitatively reasonable. 
+$P_{1}$ can be found by ensuring the probability is normalized; despite the sum extending beyond the region for which $P_{n+1}\gg P_n$ is valid, the probability distribution generated from this small $n$ approximation is qualitatively reasonable and is used, in conjunction with approximations that work near the fixed point, to verify numerical solutions \cite{Ovaskainen?}. 
 
 \begin{figure}[ht!]
 	\centering
@@ -291,18 +319,22 @@ $P_{1}$ can be found by ensuring the probability is normalized; despite the sum 
 	\caption{\emph{Techniques for calculating a probability distribution function} A comparison of the different probability distribution approximations show how the described dynamics at equilibrium may differ for various techniques.} \label{pdf_techn}
 \end{figure}
 
-
 %[PDFs can be approximated, as explained earlier] - Jeremy
-As we have described, certain of these approximation methods permit the calculation of a quasi-stationary distribution. 
+As seen above, certain of these approximation methods permit the calculation of a quasi-stationary distribution. 
 %Hence, a method that can consistently obtain the correct distribution is a powerful tool.
-Figure \ref{pdf_techn} gives us an instance of the quasi-stationary distribution as a function of the parameters $q$, $\delta$ and $K$ for each technique. 
-%Note that for the shown range of the parameters the WKB approximation and the quasi-stationary algorithm are not distinguishable by eye, though there are indeed slight differences. 
+Figure \ref{pdf_techn} gives an instance of the quasi-stationary distribution as a function of $n$ (or $x$) for a choice of the parameters $q$, $\delta$ and $K$ for each technique. 
+Note that with this scale of the figure the WKB approximation and the quasi-stationary algorithm are not distinguishable by eye, though there are indeed slight differences. 
 In general, the ability of the techniques to successfully approximate the quasi-stationary distribution depends heavily on the region of parameter space. 
-The WKB method appears to be reasonable everywhere, and the FP approximation is only valid for large $K$ except for low $\delta$ and $q$. %for high K, WKB is always good, FP is good except for low low; for low K, WKB still good, FP bad except for low high; others are bad everywhere
-%and small n?
+What I observe is that for large $K$ the celebrated FP approximation is valid in all cases except for low $\delta$ and $q$. 
+For small $K$ it is a poor approximation except low $\delta$ and high $q$. %NTS:::why might these be true?
+The WKB method fares better, appearing to be reasonable everywhere in $q$, $\delta$, $K$ parameter space. 
+%for high K, WKB is always good, FP is good except for low low; for low K, WKB still good, FP bad except for low high; others are bad everywhere
+%NTS:::and small n?
+All other approximations match near the fixed point but fail elsewhere. 
+
 It is also possible to obtain the mean time to extinction from these distributions.
 As described earlier, the quasi-stationary probability distribution leaks from $P_n$, a non-extinct population, to $P_0$.
-As we are dealing with a single step process, the only transition from which we can reach the absorbing state is through a death at $P_1$: all population extinctions must go through this sole state.
+As since this is a single step process (with the population only changing by one individual per event), the only transition from which it can reach the absorbing state is through a death at $P_1$: all population extinctions must go through this sole state. 
 The flux of the probability to the absorbing state is thus given by the expression $d(1)P_1$, hence the approximation \cite{textbooks,WKB paper(Assaf2016?)}
 \begin{equation}
 \tau_e \approx \frac{1}{d(1)P_1}.
@@ -310,24 +342,28 @@ The flux of the probability to the absorbing state is thus given by the expressi
 \end{equation}
 This same equation can be applied to different methods and algorithms that have produced quasi-stationary distributions. % for which we have an expression for $P_1$.
 
-%A - Jeremy%not just here but elsewhere too, I ask: do we want subtitles/subsections? Ie. inline italic sentence fragments: “Reducing the 1D sum”
+\ifffalse %NTS:::make this into a sentence or two, maybe
+%A - Jeremy
 By omitting negligeable terms from the full solution to the MTE, equation \ref{analytic_mte}, we can heavily reduce the computational runtime in our calculation.
 This becomes important at large population sizes, as the the number of terms in the analytical solution scale with the maximal size of the population.
 $\tau_1$, the time it takes for the population to go extinct from a size of one individual, is also the first term in our sum and the dominant term in the solution.
 Setting $\tau_e \sim \tau_1$ turns out to be a fine approximation.
 However it is only a useful approximation for reducing computation runtime: we learn no more about the dependencies of the MTE on $q$ and $\delta$ than we do for the exact solution. 
 %!!!We’re writing tau_e. Also b_n and d_n. Also using \delta instead of \delta/2. Also model vs models - use models in general and model for a parameter choice. Also American modeling or UK modelling. Do we ever say pdf or is it always probability distribution (function)?
+\fi
 
 %Results of the tau_e approximations presented above - Jeremy
-Having calculated the MTE using each approximation, we can now compare the results to the exact solution and verify their accuracy in the parameter space of $\delta$ and $q$.
+Having calculated the MTE using each approximation, I can now compare the results to the exact solution and verify their accuracy in the parameter space of $q$, $\delta$, and $K$.
 These results are summarized in Figure \ref{mte_techn}.
 As with the probability distribution function, the difference between the solution of the approximations and equation \ref{analytic_mte} is dependent on $q$, $\delta$ and $K$. 
-Most of the solutions tend to converge at very low $K$, the divergence of each approximation occurring with increasing $K$. 
-From this difference we can evaluate in which regime certain approximations work best.
-We find that while no approximation works well for large $\delta$, many of them recover the correct scaling in $K$, albeit off by a factor. %yeah?
-For all other parameter regimes, $\tau_1$ and the WKB approximation are both reasonable approximations for the exact results. %!!!CHECK if this is true for small n as well
+Most of the solutions tend to converge at very low $K$, though this is unsurprising as the techniques should all approach zero as $K$ decreases and the initial condition of $K$ approaches the final absorbing state at $0$. 
+With increasing $K$ the divergence of each approximation becomes more evident. 
+%From this difference we can evaluate in which regime certain approximations work best.
+I find that while no approximation works well for large $\delta$, many of them recover the correct scaling in $K$, albeit off by a factor. %yeah?
+For all other parameter regimes, small $n$ and the WKB approximation are both reasonable approximations for the exact results. %!!!CHECK if this is true for small n as well
 %, and Fokker-Planck QSD? And small n? And full FP%
 %I think we need to be a bit more specific with our assessment of the approximations
+%NTS:::say a bit more, here or in discussion
 
 \begin{figure}[ht!]
 	\centering
@@ -340,7 +376,7 @@ For all other parameter regimes, $\tau_1$ and the WKB approximation are both rea
 
 
 
-
+%NTS:::haven't done this yet
 
 \section{Discussion}
 %QUESTION: what is a “model”, in our language? A set of parameters?
