@@ -1,11 +1,18 @@
 \chapter{Ch3-AsymmetricLogistic}
 
+
 %Should I include the other symmetry breaks here? Or in the previous chapter? In previous chapter
 
 %The previous chapter should end with a rough estimate of monocultures vs mixed states, using only an immigration rate and explicitly assuming that - NO, because if you assume that the system goes to the fixed point first then you never have monocultures.
 %The previous chapter should end with a brief discussion of abundances and coalescents. Such a discussion will naturally motivate this chapter - perhaps the discussion should be at the start of this chapter. 
 
-\section{Introduction}
+\section{pre-intro}%NTS
+Half of this research has been submitted, in conjunction with the previous chapter, to be published in Journal of the Royal Society: Interfaces. 
+
+Note also that I talk about foreign invading immigrants in this chapter. This is not meant to be related to human immigrants into a country (which I view favourably). 
+
+
+\section{Introduction}%NTS:::skipping draft 1 intro revisions for now (as with Ch2)
 %"strategic lit review"
 Kimura is famous for introducing the Fokker-Planck equation to a genetic context, and more generally for promoting mathematical modeling in biology. 
 One of the topics he treated in this way, in this case with Crow, is that of a population undergoing random drift and linear pressure \cite{Crow1956,Kimura1964}. 
@@ -50,20 +57,26 @@ In this section we investigate the complementary problem of robustness of a stab
 As before, I employ the symmetric generalized LV model with niche overlap $a$ and carrying capacity $K$. 
 I study the case where the system starts with $K-1$ individuals of the established species and $1$ invader. 
 This initial condition corresponds to a birth of a mutant. 
-To accurately reflect a new immigrant an initial condition of $K$ established organisms and the $1$ invader would be more appropriate; however, the following results would be largely unchanged, so I elect only one initial condition. 
-In any case, the established species before the arrival of the invader would naturally fluctuate about the carrying capacity, so an initial population of $K-1$ individuals is reasonable. 
-The species' dynamics are described by the birth and death rates defined by Equations (\ref{deathrate}) from the previous chapter. 
+%To accurately reflect a new immigrant an initial condition of $K$ established organisms and the $1$ invader would be more appropriate; however, the following results would be largely unchanged, so I elect only one initial condition. 
+An initial condition of $K$ established organisms and the $1$ invader gives similar results. 
+%In any case, the established species before the arrival of the invader would naturally fluctuate about the carrying capacity, so an initial population of $K-1$ individuals is reasonable. 
+The species' dynamics are described by the birth and death rates defined by Equations (\ref{deathrate}) from the previous chapter, which I reproduce here:
+\begin{align*}
+	b_i/x_i &= r_i \\
+	d_i/x_i &= r_i\frac{x_i+a_{ij}x_j}{K_i}. 
+\end{align*}
 
-Obviously, an invasion is unsuccessful if the invading species dies out before establishing itself in the system. 
-But what it means to be established is as-yet undefined. 
-Deterministically the system would grow to asymptotically approach the co-existence fixed point. 
-(Deterministically, all invasion attempts are successful.) 
-In a stochastic system, the populations could very easily fluctuate \emph{near} the fixed point without touching that exact point. This would overestimate the time to establishment, or even misrepresent a successful invasion as unsuccessful if the system gets near the fixed point without hitting it but then fixates. 
-(Indeed, there is a non-zero probability that the established species dies out before the system reaches the co-existence fixed point, which clearly should count as a successful invasion but would ultimately count as unsuccessful once the invader species also goes extinct.) 
-For this reason a successful invasion should not be defined as the system hitting the co-existence point. 
-Nor should invasion mean getting within a region of this fixed point, by the same arguments. 
-Inspired by the observation that in the symmetric case, the co-existence fixed point has the same population of the two species, I consider the invasion successful if the invader grows to be half of the total population without dying out first. 
-So long as the invader population matches that of the established species, regardless what random fluctuations may have made that population to be, the invasion is a success. 
+An invasion is unsuccessful if the invading species dies out before establishing itself in the system. 
+There are many ways to define what it means for a species to be established, and I will outline one such definition below. 
+Deterministically the system would grow to asymptotically approach the co-existence fixed point; deterministically, all invasion attempts are successful, and stochasticity is required for nontrivial invasion probabilities. 
+In a stochastic system, the populations could very easily fluctuate \emph{near} the fixed point without touching that exact point. This would overestimate the time to establishment, or even misrepresent a successful invasion as unsuccessful if the system gets near the fixed point without reaching it but then fixates. 
+%(Indeed, there is a non-zero probability that the established species dies out before the system reaches the co-existence fixed point, which clearly should count as a successful invasion but would ultimately count as unsuccessful once the invader species also goes extinct.) 
+Indeed, there is even a chance the established species dies out before the system reaches the co-existence fixed point, which would be counted as an unsuccessful invasion. 
+For these reasons a successful invasion should not be defined as the system arriving at the co-existence point. 
+%Nor should invasion mean getting within a region of this fixed point, by the same arguments. 
+The same arguments hold for a defined region near the fixed point (for instance, within three birth or death events, or within a circle of radius $\varepsilon$): the region might by chance be avoided for a time even after the invader is more populous than the original species, which could even go extinct before the invader. 
+Inspired by the observation that in the symmetric case, the co-existence fixed point has the same population of each species, I consider the invasion successful if the invader grows to be half of the total population without dying out first. 
+So long as the invader population matches that of the established species, regardless what random fluctuations may have made that population to be, the invasion is a success. %Anton says, "No need in rhetorics." What does that mean? Unclear. Does he not like my sentence structure? He wasn't explicit, and I do, so it stays. 
 I denote the probability of a invader success as $\mathcal{P}$. 
 
 Along with the probability of a successful invasion attempt, I am interested in the timescales involved. 
@@ -84,7 +97,7 @@ Similar equations describe $\tau_f$ \cite{Nisbet1982,Iyer-Biswas2015}.
 %$E_s = \mathcal{P}_{(1,K-1)}$
 
 
-\section{Observations and Intuition Behind Them}
+\section{Results and some intuition behind them}
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.49\linewidth}
@@ -137,18 +150,16 @@ The invasion probability in this limit is dominated by the probability that the 
 Figure \ref{Tsucc} shows the dependence of the mean time to successful invasion, $\tau_s$, on $K$ and $a$. 
 Increasing $K$ can have potentially contradictory effects on the invasion time, as it increases the number of births before a successful invasion on the one hand, while increasing the steepness of the potential landscape and therefore the bias towards invasion on the other. 
 Nevertheless, the invasion time is a monotonically increasing function of $K$ for all values of $a$. In the complete niche overlap limit $a=1$ the invasion time scales linearly with the carrying capacity $K$, as expected from the predictions of the Moran model, $\tau_{s} = \Delta t K^2(K-1)\ln\left(\frac{K}{K-1}\right)$ with $\Delta t\simeq 1/K$, as explained above. %NTS:::more info?
-The quantitative discrepancy arises from the breakdown of the $\Delta t\simeq 1/K$ approximation off of the Moran line. %NTS:::say more?
+%NTS:::$\Delta t \neq K$ but $3/K$, and only at equal pops, which is strictly not true here
+%in response to Anton's question, the asymptotic scaling of this is $\tau \sim K$ for large $K$ and $\Delta t \sim K$
+The quantitative discrepancy arises from the breakdown of the $\Delta t\simeq 1/K$ approximation off of the Moran line. %NTS:::say more? - yes!
 For all values $0\leq a<1$ the invasion time scales sub-linearly with the carrying capacity, indicating that successful invasions occur relatively quickly, even when close to complete niche overlap, where the invading mutant strongly competes against the stable species.
 In the $a=0$ limit of non-interacting species, the invading mutant follows the dynamics of a single logistic system with the carrying capacity $K$, resulting in the invasion time that grows approximately logarithmically with the system size, as shown in the left panels of Figure \ref{Tsucc} as a black line. 
 This result is well-known in the literature, and is stated without reference for instance by Lande \cite{Lande1993}. 
 It is easy to see: by writing $\tau_s = \int dt = \int_{x_o}^{x_f} dx \frac{1}{\dot{x}}$ for initial state $x_0=1$ and final state $x_f=(1-\epsilon)K$ with small $\epsilon$ and large $K$ we get
 \begin{align*}
-\tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} \\
-	   &= \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) \\
-	   &= \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} \\
-	   &= \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \\
-	   &\approx \frac{1}{r}\ln\left[\frac{(1-\epsilon)K}{\epsilon} \right] \\
-	   &\approx \frac{1}{r}\left(\ln\left[K\right]-\ln\left[\epsilon\right]\right)
+\tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} = \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) = \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} = \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \\
+	   &\approx \frac{1}{r}\ln\left[\frac{(1-\epsilon)K}{\epsilon} \right] \approx \frac{1}{r}\left(\ln\left[K\right]-\ln\left[\epsilon\right]\right)
 \end{align*}
 and so expect the invasion time to grow logarithmically with carrying capacity. 
 
@@ -182,7 +193,7 @@ By contrast, at large $K$, the invasion time is a non-monotonic function of the 
 This behavior stems from the conflicting effect of the increase in niche overlap: on the one hand, increasing $a$ brings the fixed point closer to the initial condition of one invader, suggesting a shorter timescale; on the other hand, it also makes the two species more similar, increasing the competition that hinders the invasion.
 
 
-\section{Discussion of One Invasion Attempt Results}
+\section{Discussion of one attempted invasion} \label{DiscussionOfOneAttemptedInvasion}
 Unlike the fixation times of the previous chapter, invasions into the system do not show exponential scaling in any limit. 
 Indeed, all scaling with $K$ is sublinear except in the complete niche overlap limit for successful invasion times. 
 The timescale of a successful invasion varies between linear and logarithmic in the system size. 
@@ -197,7 +208,7 @@ If the influx of invaders is slower than the mean time of their failed invasion 
 On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient co-existence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Hubbell2001,Chesson2000}. 
 Full discussion of diversity in this regime is beyond of the scope of the present work. % but see \cite{Dias1996,Hubbell2001,Chesson2000}. 
 The weaker dependence of the invasion times on the population size and the niche overlap, as compared to the escape times of a stably co-existing system to fixation, imply that the transient co-existence is expected to be much less sensitive to the niche overlap and the population size than the steady state co-existence. 
-Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in section III) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters.
+Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in section III) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters.%NTS:::section
 
 For species with low niche overlap, the probability of invasion is likely, and for large $K$ decreases monotonically as $1-a$ with the increase in niche overlap, independent of the population size $K$. 
 The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$ and is typically increasing with the niche overlap $a$.
@@ -212,18 +223,32 @@ If the rate in is greater than the mean failure time, the system will diversify.
 The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. %NTS:::extend this discussion, harken to the intro
 With different strains of invaders arising faster than the time it takes to suppress the previous invasion attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity. 
 %We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species.
-!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!! - it is just the ratio of lifetime of a species over (time between invasions divided by probability of a successful invasion); $(E^s\tau^s+E^f\tau^f)/\tau_{inv}$ - I’m not convinced that this is right either!!!
+%NTS:::%!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!! - it is just the ratio of lifetime of a species over (time between invasions divided by probability of a successful invasion); $(E^s\tau^s+E^f\tau^f)/\tau_{inv}$ - I’m not convinced that this is right either!!!
 % - For large species: steady state is rate at which they successfully enter = rate at which they leave: E_s/\tau_{mut} = N_{big}(1/\tau_{ext} / 2?) where \tau_{ext} is the unconditioned extinction time - but then do I divide by the number of species since they're each equally likely to go extinct? Do I use \tau_{ext} with an effective carrying capacity based on the number of species?? I'm still not sure
 % - For small species: steady state is rate at which they enter (as small) = rate at which they leave: E_f/\tau_{mut} = N_{small}/\tau_f
 We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration.
 This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. %NTS:::say a bit more that rather than being Moran-like, I'll do actual Moran because it's easier, has results to compare against, and offers analytic solution
 
 
-\section{Moran Reintroduction}
-As a reminder, the Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
-Its most prominent uses are in coalescent theory \cite{Blythe2007} and neutral theory \cite{Hubbell2001}, describing how the relative proportion of genes in a gene pool might change over time. 
-But really it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem.
+%\section{Moran Reintroduction}
+\section{Moran model in more detail}
+%General purpose of this section...
+The previous results in this chapter have related to a single organism attempting to invade a system wherein another species is already established. 
+The number of invader progeny fluctuates and ultimately it either dies out or occupies half of the total population. 
+%However, if the system is not entirely isolated, but instead is akin to MacArthur and Levins's island model
+But recall the island model of MacArthur and Levins, in which a mainland system, which is large, is considered to be static, while a much smaller island system's dynamics are regarded, occasionally including immigration from the mainland. 
+If the immigration rate is large then the invaders will receive reinforcements from the mainland in their attempt to establish themselves on the island system of interest. 
+The easiest way to model this is a Moran model with immigration. 
+In this section I will review the Moran model and some quantities that can be calculated from it. 
+In the following section I calculate these quantities for a Moran model with immigration, and link said model to the results of a single invader analyzed above. 
 
+As a reminder, the Moran model \cite{Moran1962} is a classic urn model used in population dynamics in a variety of ways.
+Its most prominent uses are in coalescent theory \cite{Blythe2007,Etheridge2010} and neutral theory \cite{Kimura1956,Bell2000,Hubbell2001}, describing how the relative proportion of genes in a gene pool might change over time. 
+In fact it can describe any system where individuals of different species/strains undergo strong but unselective competition in some closed or finite ecosystem \cite{Claussen2005}: applications include cancer progression \cite{Ashcroft2015}, evolutionary game theory \cite{Tayloer2004,Antal2006,Hilbe2011}, competition between species \cite{Houchmandzadeh2010,Blythe2011,Constable2015}, population dynamics with evolution \cite{Traulsen2006}, and linguistics \cite{Blythe2007}. 
+%Moran in... cancer progression \cite{Ashcroft2015}, evolutionary game theory \cite{Tayloer2004,Antal2006,Hilbe2011}, competition between species \cite{Houchmandzadeh2010,Blythe2011,Constable2015}, pop dynamics with evolution \cite{Traulsen2006}, linguistics \cite{Blythe2007}
+
+\iffalse
+%NTS:::still need to redo this section (in particular, it's just a rehash from the Neutrality section of the Introduction chapter)
 To arrive at the Moran model we must make some assumptions.
 Whether these are justified depends on the situation being regarded.
 The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species. % and the state of the system.
@@ -237,56 +262,50 @@ This assumption of discrete time can be relaxed without a qualitative change in 
 
 
 \section{Moran Model in More Detail}
+\fi
 In the classic Moran model, each iteration or time step involves a birth and a death event.
 Each organism is equally likely to be chosen (for either birth or death), hence a species is chosen according to its frequency, $f=n/N$, where $N$ is the total population and $n$ is the number of organisms of that species.
-Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species denoted with $n$. %NTS:::emphasize this, pointing out that this theory therefore accounts for any number of species. 
-The focal species increases in the population if one of its members gives birth while a member of a different species dies; that is, $b(n) = f(1-f)$.
-Increase and decrease of the focal species are equally likely, with
+We focus on one species of population $n$, which will be referred to as the focal species. 
+Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species. % denoted with $n$. 
+%NTS:::emphasize this, pointing out that this theory therefore accounts for any number of species - maybe in the previous transitionary paragraphs. 
+The focal species increases in the population if one of its members gives birth (with probability $f$) while a member of a different species dies (with probability $1-f$); that is, in time step $\Delta t$ the probability of focal species increase is $b(n) = f(1-f)$. 
+Similarly, decrease in the focal species comes from a birth from outside the focal group and a death from within, such that the probability of decrease is $d(n) = (1-f)f$. 
+By commutativity of multiplication, increase and decrease of the focal species are equally likely, with
 %There is a net rate of change, in both increasing and decreasing $n$, of
 \begin{equation}
-b(n) = f(1-f) = (1-f)f = d(n) = \frac{n}{N}\left(1-\frac{n}{N}\right) = \frac{1}{N^2}n(N-n)
+%b(n) = f(1-f) = (1-f)f = d(n) = \frac{n}{N}\left(1-\frac{n}{N}\right) = \frac{1}{N^2}n(N-n)
+b(n) = d(n) = n(N-n)/N^2.
 \end{equation}
-each time step $\Delta t$.
-Each step, the chance that nothing happens is $1-\left(b(n)+d(n)\right) = f^2 + (1-f)^2$.
-These are not rates themselves, rather they are the probability of an increase or decrease in the time step.
-A straightforward approximation would be to take $\Delta t$ infinitesimal, then $b(n)\Delta t$ and $d(n)\Delta t$ serve as rates of birth and death of the species in a continuous time analogue to the Moran model.
+%each time step $\Delta t$.
+Each time step, the chance that nothing happens is $1-\left(b(n)+d(n)\right) = f^2 + (1-f)^2$. 
 
-For the record, here is the mean and variance as a function of time.
-If the system starts with $n_0$ individuals of the focal species, then there should be
+Note that, unlike in previous chapters where I used $b$ and $d$ as rates, here these are not rates, rather they are the probability of an increase or decrease of the focal species in one time step. 
+I use the same notation not to be confusing but to hint at an approximation I employ in the following sections. %NTS:::point out where/when this is done
+Taking $\Delta t$ to be infinitesimal, $b(n)\Delta t$ and $d(n)\Delta t$ serve as probabilities of birth and death of the focal species during this small time interval. 
+This creates a continuous time analogue to the Moran model, with $b$ and $d$ serving as rates. 
+The timescale is now in units of $\Delta t$, which is only relevant if one were to compare with other models, which I do not. 
+With this approximation I can employ the formulae explored in chapter 1 for quantities like quasi-stationary probability distribution and mean time to extinction. 
+
+%NTS:::hopefully this answers Anton's question of what is the purpose of why I include this
+For reference, I include the mean and variance as a function of time \cite{???, Moran1962}, so that I may later compare with the immigration case.
+If the system starts with $n_0$ individuals of the focal species, then on average there should be $n_0$ individuals in the next time step as well.
+Therefore the mean population as a function of time is $\langle n\rangle(t) = n_0$. 
+Since the extremes of $n=0$ and $n=N$ are absorbing, The ultimate fate of the system is in one of these two states, despite the mean being constant. 
+The variance starts at zero for this delta function initial condition. 
+After $k$ time steps the variance is
 \begin{equation*}
-(n_0-1)d(n_0) + (n_0+1)b(n_0) + n_0\big(1-b(n_0)-d(n_0)\big) = n_0 - d(n_0) + b(n_0) = n_0
+V_k = n_0(N-n_0) \big(1-(1-2/N^2)^k\big).
 \end{equation*}
-individuals in the next time step as well.
-Iterating this calculation gives that the expected value at all times is just the initial population, $\langle n\rangle(t) = n_0$.
-Given the delta function initial condition of starting with $n_o$ individuals, the variance should start at zero and grow.
-After one time step the second moment is
-\begin{equation*}
-(n_0-1)^2d(n_0) + (n_0+1)^2b(n_0) + n_0^2\big(1-b(n_0)-d(n_0)\big) = n_0^2 - 2n_0d(n_0) + 2n_0b(n_0) + d(n_0) + b(n_0)
-\end{equation*}
-and the variance $V_1 = 2b(n_0) = 2d(n_0) = 2f_0(1-f_0)$.
-%Because the expectation of $n$ does not change each time step, 
-For the variance at time step $k$ we need the variance at $k-1$ and the law of total variance, $E[Var(n_k|n_{k-1})]+Var(E[n_k|n_{k-1}])=Var(n_k)\equiv V_k$.
-Recalling $E[n_k|n_{k-1}]=n_{k-1}=n_0$ and $Var(n_k|n_{k-1})=2f_{k-1}(1-f_{k-1})$
-\begin{align*}
-V_k &= E\left[ 2 f_{k-1}(1-f_{k-1}) \right] + Var(n_{k-1}) \\
-    &= 2\langle f_{k-1}\rangle - 2\langle n_{k-1}^2\rangle/N^2 + V_{k-1} \\
-    &= 2\langle f_{k-1}\rangle - 2(V_{k-1}+\langle n_{k-1}\rangle^2)/N^2 + V_{k-1} \\
-    &= 2\langle f_{k-1}\rangle (1 - \langle f_{k-1}\rangle ) + (1-2/N^2)V_{k-1} \\
-    &= V_1 + (1-2/N^2)V_{k-1}.
-%     &= V_1 + (1-2/N^2)(V_1 + (1-2/N^2)V_{k-2}) = V_1(1 + (1-2/N^2) + (1-2/N^2)^2) + (1-2/N^2)^3V_{k-3} \\
-%     &= V_1(\sum_{i=0}^{k-1} (1-2/N^2)^i)
-\end{align*}
-Iterating the above and using the geometric series $\sum_{i=0}^{k-1} r^i = (1-r^k)/(1-r)$ gives
-\begin{equation*}
-V_k = V_1 \big(1-(1-2/N^2)^k\big)/(2/N^2) = n_0(N-n_0) \big(1-(1-2/N^2)^k\big).
-\end{equation*}
-Notice that as $N\rightarrow\infty$ the variance, a measure of the fluctuations, goes to zero, and the system becomes deterministic. [maybe cf. hardy-weinberg variances]
 For finite $N$ the variance goes to $N^2 \, f_0(1-f_0)$ at long times. 
-This corresponds to $f_0$ of the probability mass being at $n=N$, and $(1-f_0)$ being at $n=0$, since at long times the system has fixated at one end or the other. 
+%NTS:::[maybe cf. hardy-weinberg variances]
+This is easy to intuit: there is probability $f_0$ that the system ended in $n=N$, and probability $(1-f_0)$ of ending at $n=0$, since at long times the system has fixated at one end or the other. 
+Notice that as $N\rightarrow\infty$ the variance, a measure of the fluctuations, goes to zero, and the system becomes deterministic, as any change of $\pm 1/N$ in the frequency of the focal species becomes meaningless. 
 
-The system fluctuates until either the species dies (extinction) or all others die (fixation).
+The mean and variance characterize the distribution of outcomes that could occur when running an ensemble of identical trials of the same system. 
+This is the the ensemble average denoted by $\langle \cdot \rangle$. 
+Any individual trajectory, any individual realization, will take its own course, independent of any others, and after fluctuations will ultimately end up with either the focal species dying (extinction) or all others dying (fixation). 
 Both of these cases are absorbing states, so once the system reaches either it will never change.
-Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk, and therefore the probability of extinction occurring before fixation is just
+Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk \cite{Gardiner2004}, and therefore the probability of extinction occurring before fixation is just
 \begin{equation}
 E(n) = 1-n/N = 1-f.
 \end{equation}
@@ -294,78 +313,101 @@ E(n) = 1-n/N = 1-f.
 The first passage time, however, does not match a random walk, as there is a probability of no change in a time step, and this probability varies with $f$.
 %NTS:::DERIVE THE FIRST PASSAGE TIMES AS WELL? (conditional and un?!?!)
 
+The unconditioned first passage time can be found using the techniques outlined in chapter 1. 
 %The system fluctuates as long as the number of organisms of the species of interest is neither none (extinction) nor all (fixation).
-We define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction.
+As a reminder, I define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction. 
 It can be calculated by regarding how the mean from one starting position $n$ relates to the mean of its neighbours.
 %(This is similar to the backward master equation.)
 \begin{equation}
 \tau(n) = \Delta t + d(n)\tau(n-1) + \left(1-b(n)-d(n)\right)\tau(n) + b(n)\tau(n+1)
 \end{equation}
-Subbing in the values of the `birth' and `death' rates and rearranging this gives
-\begin{equation}
-\tau(n+1) - 2\tau(n) + \tau(n-1) = -\frac{\Delta t}{b(n)} = -\Delta t\frac{N^2}{n(N-n)},
-\end{equation}
-or
-\begin{equation}
-\tau(f+1/N) - 2\tau(f) + \tau(f-1/N) = -\Delta t\frac{1}{f(1-f)}.
-\end{equation}
-If we approximate the LHS of the above with a double derivative (ie. $1\ll N$) we get
-\begin{equation}
-\frac{\partial^2\tau}{\partial n^2} = -\Delta t\,N\left(\frac{1}{n}+\frac{1}{N-n}\right)
-\end{equation}
-Double integrate and use the bounds $\tau(0) = 0 = \tau(N)$ to get
+Substituting in the values of the increase and decrease rates and rearranging this gives
+\begin{equation*}
+\tau(n+1) - 2\tau(n) + \tau(n-1) = -\frac{\Delta t}{b(n)} = -\Delta t\frac{N^2}{n(N-n)}. %,
+\end{equation*}
+%or
+%\begin{equation}
+%\tau(f+1/N) - 2\tau(f) + \tau(f-1/N) = -\Delta t\frac{1}{f(1-f)}.
+%\end{equation}
+Similar to the Fokker-Planck approximation, I approximate the LHS of the above with a double derivative (ie. $1\ll N$) to get $\frac{\partial^2\tau}{\partial n^2} = -\Delta t\,N\left(\frac{1}{n}+\frac{1}{N-n}\right)$. 
+%\begin{equation}
+%\frac{\partial^2\tau}{\partial n^2} = -\Delta t\,N\left(\frac{1}{n}+\frac{1}{N-n}\right)
+%\end{equation}
+Double integrate and use the bounds $\tau(0) = 0 = \tau(N)$ gives
 \begin{equation}
 \tau(n) = -\Delta t\,N^2\left(\frac{n}{N}\ln\left(\frac{n}{N}\right)+\frac{N-n}{N}\ln\left(\frac{N-n}{N}\right)\right).
 \end{equation}
-Note that we didn't need to use the large $N$ approximation: there is an exact solution:
+Note that it was not necessary to use the large $N$ approximation, there is an exact solution \cite{???}:
 \begin{equation}
 \tau(n) = \Delta t\,N\left(\sum_{j=1}^n\frac{N-n}{N-j} + \sum_{j=n+1}^N\frac{n}{j}\right).
 \end{equation}
 
 
-\section{Moran With Immigration}
-%NTS:::c.f. McKane2003
-%NTS:::should I include a brief Hubbell here or in Appendix?
-Previous sections have stated that different dynamics are expected depending on a comparison of timescales. 
-If new species enter the system faster than they go extinct, the biodiversity should increase to some steady state. 
-Conversely, if extinction is much more rapid than speciation, a monoculture is expected in the system. 
-Whether the monocultural system contains the same species over multiple invasion attempts or whether it experiences sweeps, changing from a monoculture of one species to the next, depends on the probability of a successful invasion. 
-To arrive at some analytic solutions, we will treat a simplified model. 
+\section{Moran model with immigration}
+In section (\ref{DiscussionOfOneAttemptedInvasion}) I argued that qualitatively different steady states are expected depending on a comparison of the timescales of immigration/mutation/speciation and invasion attempts. 
+If new species enter the system faster than they go extinct, the number of extant coexisting species, and hence the biodiversity, should increase to some steady state. 
+Conversely, if extinction is much more rapid than speciation, a monoculture of one single species is expected in the system. 
+Whether the monocultural system consists of the same species over multiple invasion attempts or whether it experiences sweeps, changing from a monoculture of one species to the next, depends on the probability of a successful invasion. 
+%Numerics are easy, and have been done, though mostly for Hubbell stuff - indeed, most of this is for Hubbell stuff
+Results can easily be simulated, but to get better insight into the role of the parameters on the results I look for analytic solutions, and as such I treat a simplified model, that of the Moran model with immigration. 
 
-The basis of the following model is that of Moran, with its finite population size and discrete time steps, although we will relax the latter constraint. 
-For comparison, Crow and Kimura \cite{Crow1956,Kimura1983} treat the problem with both continuous time and continuous populations (ie. population densities), arriving at some numerical results but not much else...
-Our inspiration is an /interesting/ work from the Gore lab \cite{Vega2017}, measuring the gut microbiome of bacteria-consuming \emph{C. elegans} grown in a 50-50 environment of two strains of fluorescently-labeled but otherwise identical \emph{E. coli}. 
+%NTS:::what has been done, what are the knowledge gaps, what does my work advance/contribute?
+%NTS:::should I include a brief Hubbell here or in Appendix? - Appendix, but DO IT
+The Moran model with immigration is akin to the Hubbell model \cite{Hubbell2001}. %, though Hubbell is interested in species abundance distributions rather than the population distribution or lifetime of a single species. 
+His work reinvigorated the debate between niche and neutral mechanisms of biodiversity maintenance. 
+Early numerical solution of the Hubbell model was done by Bell \cite{Bell2001}. %, and work similar to that of Hubbell was done by McKane and Sol\'{e} \cite{McKane2003} among others \cite{???}. 
+Ultimately, it is simply a Moran model with immigration, where the immigrant species is never from one of the extant species (from Hubbell's perspective, the newcomers arise via speciation rather than immigration or simple mutation). 
+Hubbell aggregated his theory to describe species abundance curves, rather than my interests of the population distribution or lifetime of a single species. 
+%For comparison, Crow and Kimura \cite{Crow1956,Kimura1983} treat the problem with both continuous time and continuous populations (ie. population densities), arriving at some numerical results but not much else...
+With regard to the stationary probability distribution of a single species there was some pioneering work done by Crow and Kimura \cite{Crow1956,Kimura1983}, who had to assume both continuous time (as do I) and continuous population densities (which I do not), arriving at some numerical results. 
+The techniques available in the field have evolved, and I highlight the work of McKane and Sol\'{e} \cite{McKane2003}, which follows techniques similar to Hubbell but calculates the single species distribution. % among others \cite{???}. 
+%I highlight McKane et al. since they calculated the stationary probability distribution of a single species, which I aim to analyze here below. 
+The difference between my work and that of McKane \emph{et al.} is that I analyze the distribution in the context of differing timescales, so I calculate the conditions for monocultures versus biodiversity. 
+I also look at the lifetime of a single species. 
+Hubbell did this a little in his book \cite{Hubbell2001} and later \cite{Hubbell2003}, and it has since been regarded in more detail by others \cite{Pigolotti2005,Kessler2015}. 
+There remains a gap in that no one, so far as I know, has considered the conditional extinction time where the conditions are the focal species going extinct or else fixating in the system. 
+My motivation is an impressive bit work from Gore and others \cite{Vega2017}, measuring the gut microbiome of bacteria-consuming \emph{C. elegans} grown in a 50-50 environment of two strains of fluorescently-labeled but otherwise identical \emph{E. coli}. 
 After an initial colonization period, each nematode has a stable number of bacteria in their gut, presumably from a balance of immigration, birth, and death/emigration. 
-The researchers find a distribution of populations depending on the comparison of two experimental timescales. 
+The researchers find the population distribution depending on the comparison of two experimental timescales, those of establishment and fixation time conditioned on a successful invasion. 
+In this section I calculate the stationary probability distribution of a single species, analyzing the critical parameter choices that change its qualitative form. 
+Later, I find the probability of (temporary) extinction versus fixation and the first passage times conditioned on these two possibilities. 
 
-For the model in this section, consider a focal species of $n$ organisms, with the remaining $N-n$ organisms being of a different strain (or strains). 
-Again we define a fractional abundance $f=n/N$. 
+%The basis of the following model is that of Moran, with its finite population size and discrete time steps, although we will relax the latter constraint. 
+The Moran model in this section is as before: there is a focal species of $n$ organisms, with the remaining $N-n$ organisms being of a different strain (or strains). 
+Again I define a fractional abundance $f=n/N$ of the species on which I focus. 
 %Consider a regular Moran population, but now there can be immigration into the system. 
 %Biologically this can correspond to eg. new bacteria being drawn into a microbiome or new mutants arising within a population. 
-Traditionally the Moran population is thought to be some isolated population, and immigrants come from some metapopulation of larger size and diversity. 
-We shall see if the Moran population acts as a reservoir, and generally what its dynamics are. 
-The metapopulation has the same species we were originally talking about, with $m$, $M$ and $g$ analogous to $n$, $N$ and $f$. 
-That is, assume the immigrant into the Moran population is a member of the focal speciest with probability $g$, and not that species with probability $1-g$. 
-In theory $g$ should be a random number drawn from the probability distribution associated with some evolving metapopulation, but for now we will take it to be fixed. That is, we assume that the metapopulation changes much slower than the Moran population of interest. 
-In the analogy of the Gore experiment, the system of interest is the nematode gut, and the metapopulation is the environment in which the nematode lives (and eats). 
+%Traditionally t
+The Moran population is treated as a rapidly evolving population, with immigrants coming from a more static metapopulation of larger size and diversity. 
+%We shall see if the Moran population acts as a reservoir, and generally what its dynamics are. 
+As with the Moran population, the metapopulation contains the focal species and other species, with $m$, $M$ and $g$ analogous to $n$, $N$ and $f$. 
+That is, an immigrant into the Moran population is a member of the focal species with probability $g$, and of another species with probability $1-g$. 
+The metapopulation contains $m = g\,M$ members of the focal species out of $M$ total organisms. 
+In principle $g$ should be a random number drawn from the probability distribution associated with an evolving metapopulation, but for $M\ll N$ one can treat it as fixed. 
+In practice, I am assuming that the metapopulation changes much slower than the Moran population. % of interest. 
+In the context of the Gore experiment, the system of interest is the nematode gut, and the metapopulation is the environment in which the nematode lives (and eats). 
 The consumption of one bacterium will influence the gut microbiome while having a negligible effect on the external environment. 
+In a more general setting, the system of interest is a small island receiving immigrants from a larger mainland; the arrival of one immigrant on the island can be impactful even when the loss of that same emigrant is negligible to the mainland. 
 
-Suppose immigration acts like birth in the Moran model. 
-That is, $\nu$ of the time an immigrant comes in instead of a birth event occurring. 
-Death occurs as normal. 
-Then we have the following possibilities:
+Each step of the Moran model involves one birth and one death. 
+I leave the death unchanged, killing the focal species with probability $f$. 
+Immigration is incorporated by having a fraction $\nu$ of the birth events be replaced by immigration events. 
+The regular Moran model has the focal species increasing in population with probability $f(1-f)$; this is now modified to occur only a fraction $(1-\nu)$ of the time, and there is also a contribution $\nu g(1-f)$ that increases the focal population when an immigrant enters (fraction $\nu$) of the focal species (fraction $g$) when a death of a non-focal species occurs (fraction $1-f$). 
+As before, I take the time interval $\Delta t$ of each step to be infinitesimal, such that $b$ and $d$ are rates, which are:
+%Then we have the following possibilities:
 \begin{center}
 	\begin{tabular}{l|c|l}
-		transition		& function	& value \\
+		transition				& function	& value \\
 		\hline
 		$n$ $\rightarrow$ $n+1$	& $b(n)$	& $f(1-f)(1-\nu) + \nu g(1-f)$ \\
 		$n$ $\rightarrow$ $n-1$	& $d(n)$	& $f(1-f)(1-\nu) + \nu (1-g)f$ \\
 		$n$ $\rightarrow$ $n$	& $1-b(n)-d(n)$	& $\left(f^2+(1-f)^2\right)(1-\nu) + \nu\left(gf+(1-g)(1-f)\right)$
 	\end{tabular}
 \end{center}
-Note that the birth and death rates are no longer the same as each other (as they are, in the classical Moran model); there is a bias in the system, toward $g$. 
-Just as with the classical Moran model, strictly speaking $b$ and $d$ are probabilities rather than rates. 
-The continuous time model, which well approximates the discrete time Moran, is attained by calling $b$ and $d$ rates and taking $\Delta t$ to zero. 
+Note that the rates of increase and decrease of the focal species are no longer the same as each other (as they are in the classical Moran model); there is a bias in the system, toward $g$. % (which I respectively refer to as birth and death rates henceforth)
+Notice that setting the immigration rate $\nu$ to zero recovers the classic Moran model. %NTS:::may need to explain also that $\nu$ is a probability but can be thought of as a rate in the same dimensionless units of $1/\Delta t$. 
+%Just as with the classical Moran model, strictly speaking $b$ and $d$ are probabilities rather than rates. 
+%The continuous time model, which well approximates the discrete time Moran, is attained by calling $b$ and $d$ rates and taking $\Delta t$ to zero. 
 
 %Just as before from the backwards master equation you can write
 %\begin{equation}
@@ -374,18 +416,18 @@ The continuous time model, which well approximates the discrete time Moran, is a
 %but you don't want to do that.  
 %You could as before approximate this as a differential equation, but the problem is that the bounds won't make sense.  
 
-If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then this is close to the regular Moran model, and will not be treated further here. %!!! is tihs necessary?
-The system then corresponds to the regular Moran model presented in the introduction. 
-%A similar idea is considered in our paper, in preparation. 
-Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). %reservoir
-Since there will be always be immigration, the system will never truly fixate, as there will always be immigrants of the `extinct' species to be reintroduced to the population.  
+If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then the model corresponds to the Moran model with selection \cite{???}, which I will not explicitly treat, though it is included in the general treatment below. %!!! is tihs necessary?
+Also included here results similar to those of the Moran limit of section (\ref{DiscussionOfOneAttemptedInvasion}) above, with a single immigrant entering the community and then either successfully invading or going (locally) extinct. 
+%Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). %reservoir
+Since there is immigration from the static metacommunity, the system will never truly fixate, as there will always be immigrants of the `extinct' species to be reintroduced to the population.  
 Rather, the system will settle on a stationary distribution. 
-The process will have the master equation $\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)$,
+The process has the master equation $\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)$,
 %\begin{equation} \label{master-eqn3}
 %\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)
 %\end{equation}
-which gives a difference relation when the time derivative is set to zero. 
-Since the system is constrained between $0$ and $N$ we normalize the finite number of probabilities and sum them to unity to get
+%which gives a difference relation when the time derivative is set to zero. 
+the difference equation of which can be solved in steady state to give
+%Since the system is constrained between $0$ and $N$ we normalize the finite number of probabilities and sum them to unity to get
 \begin{equation}
 \widetilde{P}_n = \frac{q_n}{\sum_{i=0}^\infty q_i}
 \end{equation}
@@ -393,7 +435,7 @@ where
 \begin{align*}
  q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \\
  q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
- q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  } i>1 \\
+ q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for i>1} \\
      &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
 \end{align*}
 recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-\nu) + \nu N(1-g)i}$.
@@ -406,7 +448,7 @@ recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-
 %$Pochhammer[a,n] = (a)_n = \Gamma(a+n)/\Gamma(a)$
 %$\Gamma(n) = (n-1)! = \int_0^\infty t^{n-1}e^{-t}dt$
 %$Hypergeometric2F1[a,b;c;z] = \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)} \int_0^1 \frac{t^{b-1}(1-t)^{c-b-1}}{(1-t z)^{a}}dt = \sum_{n=0}^\infty \frac{(a)_n (b)_n}{(c)_n}\frac{z^n}{n!} = (1-z)^{c-a-b} _2F_1(c-a,c-b;c;z)$
-The unnormalized steady-state probability can be written compactly as%Specifically,
+The unnormalized steady-state probability $q_n$ can be written compactly as%Specifically,
 %\begin{equation*}
 % q_n = \frac{N^2 Pochhammer[1 - N, -1 + n] Pochhammer[1 - (g N \nu)/(-1 + \nu), -1 + n]}{(n (-n + N) (1 - \nu) + (1 - g) n N \nu) \Gamma(n) Pochhammer[(-1 + N + \nu - g N \nu)/(-1 + \nu), -1 + n]}
 %\end{equation*}
@@ -437,7 +479,8 @@ and the sum of these is the normalization
 \sum q_i = \frac{1}{g\nu} \frac{\Gamma[1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[N+1-\frac{N}{1-\nu}]}{\Gamma[N+1-\frac{N(1-g\nu)}{1-\nu}]\Gamma[1-\frac{N}{1-\nu}]}
 %         = \frac{1}{g\nu} \frac{(-\frac{N(1-g\nu)}{1-\nu})!(-\frac{N\nu}{1-\nu})!}{(-\frac{N(1-g)\nu}{1-\nu})!(-\frac{N}{1-\nu})!}
 \end{equation*}
-which follows formally from the definition of the hypergeometric function $_2F_1$. Together these give $\widetilde{P}_n$. 
+which follows formally from the definition of the hypergeometric function $_2F_1$. 
+%Together these give $\widetilde{P}_n$. 
 \iffalse
 But I should be careful, because I think I summed this to infinity, rather than to $N$ - checked; it makes no difference apparently (and anyway assume $q_{n>N}=0$). \\
 $Pochhammer[a,n] = (a)_n = \Gamma(a+n)/\Gamma(a)$ \\
@@ -449,37 +492,39 @@ $_2F_1(a,b;c;1) = \frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}$ \\
 Since $q_1=1$ the stationary probability at 1 is $\widetilde{P}_1$; this gives the flux to 0, hence the exit times. 
 Similarly $n=N-1$ should be the other place whence it exits (but it's not clear whether $q_{N-1}=1$). 
 \fi
-See figure \ref{stationary-fig2} for a visualization of the steady-state probability distribution for different immigration/speciation rates. 
+See figure \ref{stationary-fig2} for a visualization of the steady-state probability distribution for different immigration rates. %/speciation
 %\begin{figure}[ht]
 %	\centering
 %	\includegraphics[scale=1]{Moran-withimmigration-stationaryprobability}
 %	\caption{PDF of stationary Moran process due to immigration. $g=0.1$, $N=50$, $\nu=0.01$. } \label{stationary-fig}
 %\end{figure}
 \begin{figure}[ht]
+%NTS:::address Anton's figure comments
 	\centering
 	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability2}
-	\caption{PDF of stationary Moran process due to immigration. $g=0.4$, $N=100$, $N\nu$ is given by the colour; red is 10, orange is 5, green is 3, blue is 2, purple is 1, and grey is 0.2. Notice that the curvature of the distribution inverts around $\nu=2/N$. } \label{stationary-fig2}
+	\caption{PDF of stationary Moran process with immigration. $g=0.4$, $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
 
-We can easily calculate the mean and variance as a function of time before reaching steady state. 
+While the population probability distribution is difficult to calculate before steady state, the mean and variance of the distribution are more tractable at all times. 
+%We can easily calculate the mean and variance of the population distribution as a function of time before reaching steady state. 
 If the mean $\mu$ at some time step $k$ has $\mu_k=n_k$ individuals, then after one time step there should be $\mu_{k+1}= n_k - d(n_k) + b(n_k) = n_k + \nu(g-f_k)$ individuals. 
 That is, $\mu_{k+1}-\mu_k = \nu(g-\mu_k/N)$. 
 This is solved by 
-\begin{equation*}
+\begin{equation}
  \mu_k = \langle n\rangle(k) = g N \left( 1 - (1-n_0)(1-\nu/N)^k\right).
-\end{equation*}
-At long times the mean fraction $f$ matches that of the metapopulation, $g$. 
-To get the an approximation of the variance, we will consider the continuous time analogue. 
-First, the mean evolves as $\partial_t\mu = \langle b(n)-d(n)\rangle = \nu\left(g-\mu/N\right)$, which has the solution $\mu(t) = g N  + (\mu_0-g N)e^{-\nu t/N}$, and the timescale is set by $\nu/N$. 
+\end{equation}
+At long times the mean fraction $f$ approaches $g$, the fraction of the focal species in the metapopulation. 
+To get the an approximation of the variance, I consider the continuous time analogue to the model by taking $\Delta t$ to be infinitesimal, as described previously. 
+First, the above difference equation of the mean is written as a differential equation $\partial_t\mu(t) = \langle b(n)-d(n)\rangle = \nu\left(g-\mu(t)/N\right)$, which has solution $\mu(t) = g N  + (\mu_0-g N)e^{-\nu t/N}$, and the timescale is set by $\nu/N$. 
 The dynamical equation for the second moment is
 \begin{align*}
  \partial_t\langle n^2\rangle &= 2\langle n b(n) - n d(n)\rangle + \langle b(n) + d(n)\rangle \\
                               &= 2\nu \left( g \mu - \langle n^2\rangle/N\right) + 2(1-\nu)\left(N\mu-\langle n^2\rangle\right)/N^2 + \nu(\mu + g N - 2 \mu g)/N
 \end{align*}
 which is an inhomogeneous linear differential equation. 
-The solution is long but not complicated. 
-Recalling that $\sigma^2(t) = \partial_t\langle n^2\rangle(t) - \mu^2(t)$ I write the variance as
+%The solution is easy to arrive at, but I omit it here as it is not intuitable. 
+Recalling that $\sigma^2(t) = \partial_t\langle n^2\rangle(t) - \mu^2(t)$ I solve the above equation and write the variance as
 %\begin{equation*}
 % \text{Var} = \frac{N e^{-\frac{2 t ((N-1) \nu+1)}{N^2}} \left(\mu_0 ((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(e^{\frac{t ((N-2) \nu+2)}{N^2}}-1\right)+g N \left(((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(-e^{\frac{t ((N-2) \nu+2)}{N^2}}\right)+((N-2) \nu+2) (g (N-1) \nu+1) e^{\frac{2 t ((N-1) \nu+1)}{N^2}}+(N-1) \nu (\nu (g N-1)+1)\right)\right)}{((N-2) \nu+2) ((N-1) \nu+1)}-e^{-\frac{2 \nu t}{N}} \left(g N \left(e^{\frac{\nu t}{N}}-1\right)+\mu_0\right)^2. 
 %\end{equation*}

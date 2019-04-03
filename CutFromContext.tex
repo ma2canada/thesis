@@ -61,9 +61,9 @@ u = P(1,0)\phi(1) = \frac{1}{N}\frac{N-1}{N}\phi(1) \rightarrow \phi(1) \approx 
 Define $P(1,0)$ as probability to go from one organism to zero in a species, $u$ as the speciation probability, $N$ the total number of organisms, and $\phi(j)$ the number of species with population $j$. 
 At steady state, Hubbell says:
 \begin{align*}
-                 P(j,j-1)\phi(j) &= P(j-1,j)\phi(j-1) \\
+P(j,j-1)\phi(j) &= P(j-1,j)\phi(j-1) \\
 \equiv \frac{j(N-j)}{N^2}\phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{N^2}\phi(j-1) \\
-                         \phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{j(N-j)}\phi(j-1).
+\phi(j) &= \frac{(j-1)(N-j+1)(1-u)}{j(N-j)}\phi(j-1).
 \end{align*}
 This can be iterated down to get, for $j\ll N$,
 \begin{equation*}
@@ -243,7 +243,7 @@ In practice, people often restrict their calculations to the mean time to extinc
 A typical exit time distribution for an otherwise stable system is exponential, so one quantity suffices to parameterize it. 
 Mathematically, the MTE is written as
 \begin{equation*}
- \tau = \int t\, dP_0 = \int t\frac{dP_0}{dt}dt = -\int (1-P_0)dt
+\tau = \int t\, dP_0 = \int t\frac{dP_0}{dt}dt = -\int (1-P_0)dt
 \end{equation*}
 for a system with a single absorbing state. 
 Later in the thesis I will expand the definition as it becomes relevant. 
@@ -265,6 +265,85 @@ The removal of the steady state makes $\hat{M}$ invertible, and the vector of MT
 
 %matrix technique
 ...
+
+
+
+\section{Cut From Immigration}
+\subsection{standard Moran results in detail}
+For the record, here is the mean and variance as a function of time.
+If the system starts with $n_0$ individuals of the focal species, then there should be
+\begin{equation*}
+	(n_0-1)d(n_0) + (n_0+1)b(n_0) + n_0\big(1-b(n_0)-d(n_0)\big) = n_0 - d(n_0) + b(n_0) = n_0
+\end{equation*}
+individuals in the next time step as well.
+Iterating this calculation gives that the expected value at all times is just the initial population, $\langle n\rangle(t) = n_0$.
+Given the delta function initial condition of starting with $n_0$ individuals, the variance should start at zero and grow.
+After one time step the second moment is
+\begin{equation*}
+	(n_0-1)^2d(n_0) + (n_0+1)^2b(n_0) + n_0^2\big(1-b(n_0)-d(n_0)\big) = n_0^2 - 2n_0d(n_0) + 2n_0b(n_0) + d(n_0) + b(n_0)
+\end{equation*}
+and the variance $V_1 = 2b(n_0) = 2d(n_0) = 2f_0(1-f_0)$.
+%Because the expectation of $n$ does not change each time step, 
+For the variance at time step $k$ we need the variance at $k-1$ and the law of total variance, $E[Var(n_k|n_{k-1})]+Var(E[n_k|n_{k-1}])=Var(n_k)\equiv V_k$.
+Recalling $E[n_k|n_{k-1}]=n_{k-1}=n_0$ and $Var(n_k|n_{k-1})=2f_{k-1}(1-f_{k-1})$
+\begin{align*}
+	V_k &= E\left[ 2 f_{k-1}(1-f_{k-1}) \right] + Var(n_{k-1}) \\
+	&= 2\langle f_{k-1}\rangle - 2\langle n_{k-1}^2\rangle/N^2 + V_{k-1} \\
+	&= 2\langle f_{k-1}\rangle - 2(V_{k-1}+\langle n_{k-1}\rangle^2)/N^2 + V_{k-1} \\
+	&= 2\langle f_{k-1}\rangle (1 - \langle f_{k-1}\rangle ) + (1-2/N^2)V_{k-1} \\
+	&= V_1 + (1-2/N^2)V_{k-1}.
+	%     &= V_1 + (1-2/N^2)(V_1 + (1-2/N^2)V_{k-2}) = V_1(1 + (1-2/N^2) + (1-2/N^2)^2) + (1-2/N^2)^3V_{k-3} \\
+	%     &= V_1(\sum_{i=0}^{k-1} (1-2/N^2)^i)
+\end{align*}
+Iterating the above and using the geometric series $\sum_{i=0}^{k-1} r^i = (1-r^k)/(1-r)$ gives
+\begin{equation*}
+	V_k = V_1 \big(1-(1-2/N^2)^k\big)/(2/N^2) = n_0(N-n_0) \big(1-(1-2/N^2)^k\big).
+\end{equation*}
+Notice that as $N\rightarrow\infty$ the variance, a measure of the fluctuations, goes to zero, and the system becomes deterministic. [maybe cf. hardy-weinberg variances]
+For finite $N$ the variance goes to $N^2 \, f_0(1-f_0)$ at long times. 
+This corresponds to $f_0$ of the probability mass being at $n=N$, and $(1-f_0)$ being at $n=0$, since at long times the system has fixated at one end or the other. 
+
+The system fluctuates until either the species dies (extinction) or all others die (fixation).
+Both of these cases are absorbing states, so once the system reaches either it will never change.
+Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk, and therefore the probability of extinction occurring before fixation is just
+\begin{equation}
+E(n) = 1-n/N = 1-f.
+\end{equation}
+%NTS:::DERIVE THIS???
+The first passage time, however, does not match a random walk, as there is a probability of no change in a time step, and this probability varies with $f$.
+%NTS:::DERIVE THE FIRST PASSAGE TIMES AS WELL? (conditional and un?!?!)
+
+%The system fluctuates as long as the number of organisms of the species of interest is neither none (extinction) nor all (fixation).
+We define the unconditioned first passage time $\tau(n)$ as the time the system takes, starting from $n$ organisms of the focal species, to reach either fixation \emph{or} extinction.
+It can be calculated by regarding how the mean from one starting position $n$ relates to the mean of its neighbours.
+%(This is similar to the backward master equation.)
+\begin{equation}
+\tau(n) = \Delta t + d(n)\tau(n-1) + \left(1-b(n)-d(n)\right)\tau(n) + b(n)\tau(n+1)
+\end{equation}
+Subbing in the values of the `birth' and `death' rates and rearranging this gives
+\begin{equation}
+\tau(n+1) - 2\tau(n) + \tau(n-1) = -\frac{\Delta t}{b(n)} = -\Delta t\frac{N^2}{n(N-n)},
+\end{equation}
+or
+\begin{equation}
+\tau(f+1/N) - 2\tau(f) + \tau(f-1/N) = -\Delta t\frac{1}{f(1-f)}.
+\end{equation}
+If we approximate the LHS of the above with a double derivative (ie. $1\ll N$) we get
+\begin{equation}
+\frac{\partial^2\tau}{\partial n^2} = -\Delta t\,N\left(\frac{1}{n}+\frac{1}{N-n}\right)
+\end{equation}
+Double integrate and use the bounds $\tau(0) = 0 = \tau(N)$ to get
+\begin{equation}
+\tau(n) = -\Delta t\,N^2\left(\frac{n}{N}\ln\left(\frac{n}{N}\right)+\frac{N-n}{N}\ln\left(\frac{N-n}{N}\right)\right).
+\end{equation}
+Note that we didn't need to use the large $N$ approximation: there is an exact solution:
+\begin{equation}
+\tau(n) = \Delta t\,N\left(\sum_{j=1}^n\frac{N-n}{N-j} + \sum_{j=n+1}^N\frac{n}{j}\right).
+\end{equation}
+
+
+
+
 
 
 
