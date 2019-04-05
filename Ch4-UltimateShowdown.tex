@@ -67,6 +67,7 @@ Retrospect of previous contents, especially from the intro
 %NTS:::in INTRO, "minimal working model" rather than null model
 %NTS:::in CH1, point out that inverting the matrix gives perfect match with true results
 %NTS:::in CH1, Langevin is the same as Fokker-Planck (though it is often done even worse)
+%NTS:::comment somewhere (intro chapter) about what defines fitness???
 I will now indulge in some speculation. 
 In this section I present some straightforward extensions of my research. 
 Also included are some more extensive next steps. 
@@ -116,6 +117,7 @@ What is more, most models with selection, including those of Kimura \cite{Kimura
 Inverting the transition matrix, as I do in chapter 2, is arbitrarily precise and so does not suffer from any requirement of such an assumption. It can treat the range of selection, from weak to strong. 
 Not only does this give access to regimes not normally considered, it provides a way to verify the small selection results that rely on approximation. 
 %one more sentence?!?
+In the literature there is a debate about selective sweeps \cite{Jensen2014} that requires more careful treatment, with fewer assumptions; the method employed in chapter 2 of this thesis would be ideal to explore the differences between hard and soft selective sweeps. 
 Selection can also be incorporated into the invasion dynamics of chapter 3. 
 
 %chapter 2-3 stuff - environmental noise
@@ -125,12 +127,28 @@ Whereas demographic stochasticity comes from the discrete nature of population s
 environmental noise is continuous, especially for the phenomenological parameters I use, which cannot be fixed to any one cause, let alone a discrete one. 
 Such an advancement in my research would involve the abandonment of the transition matrix, and likely would require the use of Fokker-Planck, which I am dubious about, based on my findings in chapter 1. 
 
-%NTS:::suggestions in this paragraph
 %chapter 3 stuff - check what happens to Hubbell/abundance with incomplete niche overlap
-%applying the results to things %As with all my research, there is the obvious extension of applying my results to specific real biological systems, finding a way to estimate the phenomenological parameters based on measurable evidence, and then making preditions. 
-%sweeps
-%3D+ (predator-prey, SIR, etc., chaos?); niches, $K$ drawn from distribution
-%other possibilities?
+%In chapter 3 I focused on a single species immigrating into a small system. 
+In chapter 3 I considered the probability and timescales of a single individual attempting to invade a system with an established species, and observed the effect of niche overlap. 
+I then looked at the steady state population distribution and conditional exit times of the focal species in the case of complete niche overlap, via the Moran model. 
+This Moran model was equivalent to the system employed by Hubbell \cite{Hubbell2001}, albeit with different questions being asked. 
+However, I could have also asked the questions of Hubbell in the case of incomplete niche overlap. 
+Namely, if species do not occupy the same niche, what should we expect the species abundance curves to look like? 
+With lessened pressure of competing for exactly the same niche I showed that an invader can more easily invade a system, and in lesser time, regardless of its ultimate success or failure. %NTS:::lesser times?
+This suggests that a Hubbell model with only partial niche overlap would certainly have more species than the classic Hubbell model with $a=1$. 
+It is unclear how the abundance curves would change. 
+The Hubbell model has its total population size $K$, but if species occupy different niches they could in principle have different carrying capacities. 
+Therefore the abundance curve would be influenced by the distribution $K$ is drawn from. 
+In effect this change of niche overlap being partial and carrying capacities drawn from a distribution would move the model of Hubbell closer to those models of niche apportionment \cite{??niche apportionment??}. 
+Insofar as no species would have an explicit fitness advantage this new model would be neutral, but with its differing $K$s it would also be a niche model, hence a hybrid of the two. 
+There is a body of work for hybrid models \cite{??hybrid niche neutral??} against which one could compare my proposed incomplete niche overlap Hubbell model. 
+
+%chapter 3 stuff - coalescent with incomplete niche overlap
+Just as the Hubbell model is used to make sense of current extant species, coalescent theory uses a Moran or Kimura model to understand paleontological data and other data of the past \cite{??coalescent??}.  
+It seeks to find the time to coalescence, which means the time (in the past) when a common ancestor existed for two variants of a species (in the present). 
+The classic model assumes the variants behave the same - in my language, they occupy the same niche, and have niche overlap of one. 
+The theory has been modified to include explicit fitness advantage \cite{???} but the unbiased case of incomplete niche overlap has not been tried. %as far as I know/to the best of my knowledge. 
+Seeing as decreasing the niche overlap from unity acts to increase the timescales of the system, as I have shown in this thesis, using my results to extend coalescent theory when appropriate would similarly suggest that variants diverged longer ago than the classic theory predicts. 
 
 The techniques applied in this thesis, specifically the use of a truncated transition matrix being inverted to solve for the first passage times exactly, can easily be applied to other low species number systems. 
 The calculation for each point in parameter space is not lengthy; the main constraint is RAM, rather than time, and so a larger memory computer could deal with problems with larger carrying capacities or more species. %NTS::: can expand these past two sentences into a whole paragraph
@@ -150,9 +168,14 @@ The simplest extension in this regard would be to have three species all with ov
 I could observe how a species whose niche is situated between those of two others (such that they each overlap with the first species but not with each other) would go extinct more readily as the overlap of the encroaching species is increased. 
 
 A famous fun model of three interacting species has ones that %RPS - not just fun, also with pairwise competition of bacteria a la Gore
-%NTS::: SIR, RPS
 
-%NTS:::could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
+%NTS::: SIR, 3 species fewer resources highlighted by McGehee, chaos
+
+%NTS:::suggestions in this paragraph
+%applying the results to things %As with all my research, there is the obvious extension of applying my results to specific real biological systems, finding a way to estimate the phenomenological parameters based on measurable evidence, and then making preditions. 
+%3D+ (predator-prey, SIR, etc., chaos?) - see above; niches, $K$ drawn from distribution
+%could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
+%other possibilities?
 
 
 
