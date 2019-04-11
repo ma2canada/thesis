@@ -91,7 +91,7 @@ Similar to Equation (\ref{explicit-tau}) in a previous chapter, the invasion pro
 and the times from
 \begin{equation}
 \Phi^{s^0} = -\sum_s \hat{M}^{-1}_{s,s^0}\mathcal{P}^{s}, %eq'n 38 in Iyer-Biswas and Zilman
-\end{equation}
+\end{equation} \label{conditionalPhi}
 where $\alpha_s$ is the transition rate from a state $s$ directly to extinction or invasion of the invader and $\Phi^{s^0}=\tau^{s^0}\mathcal{P}^{s^0}$ is a product of the invasion or extinction time and probability. 
 Similar equations describe $\tau_f$ \cite{Nisbet1982,Iyer-Biswas2015}.
 %$E_s = \mathcal{P}_{(1,K-1)}$
@@ -220,14 +220,17 @@ Our results provide a timescale to which the rate of immigration or mutation can
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
 In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected.
 If the rate in is greater than the mean failure time, the system will diversify. 
-The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. %NTS:::extend this discussion, harken to the intro
+The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. %NTS:::extend this discussion, hearken to the intro
 With different strains of invaders arising faster than the time it takes to suppress the previous invasion attempt, the new strains interact with one another in ways beyond the scope of this thesis, leading to greater biodiversity. 
 %We have also found that at large $K$ the likelihood of an invasion failing grows linearly with niche overlap, such that a mutant or immigrant is more likely to invade a system if its niche is more dissimilar with that of the established species.
-%NTS:::%!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!! - it is just the ratio of lifetime of a species over (time between invasions divided by probability of a successful invasion); $(E^s\tau^s+E^f\tau^f)/\tau_{inv}$ - I’m not convinced that this is right either!!!
+%!!!%should be able to at least estimate steady state biodiversity as a function of mutation/immigration/speciation rate and niche overlap and carrying capacity using the parametrized plots !!! - it is just the ratio of lifetime of a species over (time between invasions divided by probability of a successful invasion); $(E^s\tau^s+E^f\tau^f)/\tau_{inv}$ - I’m not convinced that this is right either!!!
 % - For large species: steady state is rate at which they successfully enter = rate at which they leave: E_s/\tau_{mut} = N_{big}(1/\tau_{ext} / 2?) where \tau_{ext} is the unconditioned extinction time - but then do I divide by the number of species since they're each equally likely to go extinct? Do I use \tau_{ext} with an effective carrying capacity based on the number of species?? I'm still not sure
 % - For small species: steady state is rate at which they enter (as small) = rate at which they leave: E_f/\tau_{mut} = N_{small}/\tau_f
 We can get an idea of what it would be like, having a new immigrant come in before the previous invasion attempt is over, by considering a Moran model with immigration.
-This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. %NTS:::say a bit more that rather than being Moran-like, I'll do actual Moran because it's easier, has results to compare against, and offers analytic solution
+This would correspond to the complete niche overlap limit, such that the population size is roughly constrained to the Moran line. 
+%say a bit more that rather than being Moran-like, I'll do actual Moran because it's easier, has results to compare against, and offers analytic solution
+In the following sections I solve steady state and dynamical properties of the Moran model with immigration. 
+Compared to the Moran limit of the Lotka-Volterra system it is easier to treat, has well established literature results against which to compare, and offers analytic solutions. 
 
 
 %\section{Moran Reintroduction}
@@ -344,6 +347,7 @@ Note that it was not necessary to use the large $N$ approximation, there is an e
 
 
 \section{Moran model with immigration}
+%NTS:::be careful whether "system" means both the metapop and the local pop or whether it refers only to the Moran part, the local pop
 In section (\ref{DiscussionOfOneAttemptedInvasion}) I argued that qualitatively different steady states are expected depending on a comparison of the timescales of immigration/mutation/speciation and invasion attempts. 
 If new species enter the system faster than they go extinct, the number of extant coexisting species, and hence the biodiversity, should increase to some steady state. 
 Conversely, if extinction is much more rapid than speciation, a monoculture of one single species is expected in the system. 
@@ -379,6 +383,7 @@ Again I define a fractional abundance $f=n/N$ of the species on which I focus.
 %Biologically this can correspond to eg. new bacteria being drawn into a microbiome or new mutants arising within a population. 
 %Traditionally t
 The Moran population is treated as a rapidly evolving population, with immigrants coming from a more static metapopulation of larger size and diversity. 
+%NTS:::immigrants could also be mutants, especially regarding SNPs
 %We shall see if the Moran population acts as a reservoir, and generally what its dynamics are. 
 As with the Moran population, the metapopulation contains the focal species and other species, with $m$, $M$ and $g$ analogous to $n$, $N$ and $f$. 
 That is, an immigrant into the Moran population is a member of the focal species with probability $g$, and of another species with probability $1-g$. 
@@ -416,11 +421,12 @@ Notice that setting the immigration rate $\nu$ to zero recovers the classic Mora
 %but you don't want to do that.  
 %You could as before approximate this as a differential equation, but the problem is that the bounds won't make sense.  
 
+\subsection{steady state}
 If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then the model corresponds to the Moran model with selection \cite{???}, which I will not explicitly treat, though it is included in the general treatment below. %!!! is tihs necessary?
 Also included here results similar to those of the Moran limit of section (\ref{DiscussionOfOneAttemptedInvasion}) above, with a single immigrant entering the community and then either successfully invading or going (locally) extinct. 
 %Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). %reservoir
 Since there is immigration from the static metacommunity, the system will never truly fixate, as there will always be immigrants of the `extinct' species to be reintroduced to the population.  
-Rather, the system will settle on a stationary distribution. 
+Rather, the system will settle on a stationary distribution of $P_n$, the probability of having $n$ organisms of the focal species. 
 The process has the master equation $\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)$,
 %\begin{equation} \label{master-eqn3}
 %\frac{d\,P_n(t)}{dt} = P_{n-1}(t)b(n-1) + P_{n+1}(t)d(n+1) - \big(b(n)+d(n)\big)P_n(t)
@@ -498,13 +504,20 @@ See figure \ref{stationary-fig2} for a visualization of the steady-state probabi
 %	\includegraphics[scale=1]{Moran-withimmigration-stationaryprobability}
 %	\caption{PDF of stationary Moran process due to immigration. $g=0.1$, $N=50$, $\nu=0.01$. } \label{stationary-fig}
 %\end{figure}
+\setlength{\unitlength}{1.0cm}
 \begin{figure}[ht]
 %NTS:::address Anton's figure comments
 	\centering
-	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability2}
-	\caption{PDF of stationary Moran process with immigration. $g=0.4$, $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
+	%NTS:::\put(10,0){$F_N$}
+%	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability}
+	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-fig1}
+	\caption{PDF of stationary Moran process with immigration. Metapopulation focal fraction $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
+%\begin{picture}(100,100)
+%\put(0,0){\includegraphics[width=0.8\textwidth]{Moran-withimmigration-fig1}}
+%\put(10,10){$x$ axis}
+%\end{picture}
 
 While the population probability distribution is difficult to calculate before steady state, the mean and variance of the distribution are more tractable at all times. 
 %We can easily calculate the mean and variance of the population distribution as a function of time before reaching steady state. 
@@ -537,60 +550,79 @@ $\sigma^2(\infty) = g(1-g) N^2\frac{1}{1+\nu(N-1)}$ is the long time, steady sta
 %Or is it $N^2\frac{g(1-g)}{1+\nu(N-1)}$?
 
 Notice that for $g=0,1$ the long term variance $\sigma^2(\infty)$ goes to zero. 
-This contrasts with the results of the Moran model without immigration, where a fraction of instances fixate with the focal species and in the remaining fraction that species goes extinct, in proportion to its initial abundance. 
-Having a supply of immigrants destabilizes one of these absorbing states, such that the ultimate fate is either none of the focal species for $g=0$ or only the focal species for $g=1$. 
-The memory of the initial abundance does not affect these results at long times. 
-However, if the immigration rate is truly small, such that $N\nu\ll 1$, we recover similar results to the no immigration case. 
-Instead of $f_0(1-f_0)N^2$ we get $\sigma^2(\infty) \approx g(1-g) N^2$, with the metapopulation focal species abundance $g$ acting as the initial abundance. 
-This is because the fixation time of the Moran model, which goes like $N$, is much faster than the immigration time $1/\nu$. 
-Upon entry of a new immigrant the Moran model fixates as usual, in proportion to either $1/N$ or $(N-1)/N$, depending on the species of the immigrant, which in turn is governed by the metapopulation abundance $g$. 
-Each iteration goes one way or the other, typically to the closest extreme, which a fraction $g$ of the time is the focal species, hence $\sigma^2(\infty) \approx g(1-g) N^2$. 
-The fixation need not happen more rapidly than the time between successive immigration events, however. 
-When $N\nu\gg 1$ the system is still evolving when a new immigrant is introduces, which acts to keep the probability distribution near $g$ and away from fixation. 
+This contrasts with the results of the Moran model without immigration, which has a nonzero variance due to there being a nonzero chance of ending up with the focal species fixated or extinct, with fixation ultimate probability equal to initial fractional abundance. 
+%, where a fraction of instances fixate with the focal species and in the remaining fraction that species goes extinct, in proportion to its initial abundance. 
+Having a supply of immigrants destabilizes one of these absorbing states; for instance for $g=0$ the ultimate fate is none of the focal species. % for $g=0$ or only the focal species for $g=1$. 
+This is true even if the initial population fraction was almost entirely of the focal species. If immigration is rare the system may temporarily fixate with the focal species, but with the repeated invasion attempts eventually a non-focal species will fixate, after which the system cannot recover the focal species. 
+Ultimately there is only one fate, hence no variance. 
+%The memory of the initial abundance does not affect these results at long times. 
+
+For $g\neq 0,1$, I would like to consider the case when the time $1/\nu$ between immigration events is truly smaller than the classic Moran model, which has a time scaline proportional to $N$. 
+In this case we recover similar results to the no immigration case of the Moran model. 
+Instead of $f_0(1-f_0)N^2$ from the Moran model we get $\sigma^2(\infty) \approx g(1-g) N^2$, with the metapopulation focal species abundance $g$ acting analogously to the initial abundance $f_0$. 
+%This is because the fixation time of the Moran model, which goes like $N$, is much faster than the immigration time $1/\nu$. 
+This is easy to intuit. Because the immigration events are rare, each time an immigrant arrives it does so into a system that has already fixated into a monoculture, either of the focal species or without the focal species. 
+A fraction $g$ of the time the immigrant is of the focal species; this is akin to having multiple independent iterations of a classic Moran model, hence the appearance of $g$ as the initial abundance analogue. %this is not quite correct, as it's not acting as an initial condition but rather it's g*prob of fix or something
+%Each iteration goes one way or the other, typically to the closest extreme, which a fraction $g$ of the time is the focal species, hence $\sigma^2(\infty) \approx g(1-g) N^2$. 
+%Starting from a fixated system, upon an entry of a new immigrant the Moran model fixates quickly, in proportion to either $1/N$ or $(N-1)/N$, depending on the species of the immigrant, which in turn is governed by the metapopulation abundance $g$. 
+%
+%
+%
+%The fixation need not happen more rapidly than the time between successive immigration events, however. 
+In the other extreme, immigration happens much more rapidly than the fixation time of the classic Moran model. 
+When $N\nu\gg 1$ the system is still evolving when a new immigrant is introduced, which acts to keep the probability distribution near $g$ and away from fixation. 
 In this limit the long term variance tends to $\sigma^2(\infty) \approx g(1-g) N/\nu$. 
-The argument for having no variance with $g=0,1$ still stands. %, but now the variance is much smaller for intermediate $g$... or larger?
-But now that the immigration rate is no longer negligibly small, it shows up in the variance. 
-For a fixed system size $N$, increasing the immigration rate decreases the variance, as the system is drawn more toward the metapopulation abundance and away from the edges. 
+%The argument for having no variance with $g=0,1$ still stands. %, but now the variance is much smaller for intermediate $g$... or larger?
+%But with the immigration rate no longer being negligibly small, it shows up in the variance. 
+For a fixed system size $N$, increasing the immigration rate decreases the variance, as the system is drawn more toward the metapopulation abundance and away from the extremes of focal species fixation or extinction. 
+%NTS:::WHY is $N^2$ replaced by $N/\nu$? WHAT is the main point I'm trying to make?
 
-The variance limits, and indeed figure \ref{stationary-fig2}, suggest that there are at least two regimes of the Moran model with immigration. 
-At low immigration rate the system undergoes a series of fixations punctuated by the occasional immigrant. It spends most of its time resting in the fixated state, rarely seeing a new immigrant which quickly either dies out or takes over in a new fixation. 
-When immigration is common the system is tied to the metapopulation, and deviations away from the metapopulation abundance are suppressed. 
-Probability gathers near the mean value $gN$. 
+The variance limits, and indeed figure \ref{stationary-fig2}, suggest that there are at least two parameter space regimes of the Moran model with immigration. 
+At low immigration rate the system undergoes a series of monocultures punctuated by the occasional immigrant. It spends most of its time resting in the fixated state, rarely seeing a new immigrant which quickly either dies out or takes over in a new fixation. 
+When immigration is frequent the system follows the metapopulation, and deviations away from the metapopulation abundance are suppressed. 
+Probability of having $n$ focal organisms gathers near the mean value $g N$. 
 These regimes will be investigated further in the following paragraphs. 
+%NTS:::figure out why there's a gap here
 
-A quantity similar to the mean is the extremum of the distribution, which for large immigration corresponds to the mode of the system. 
-The extremum occurs when $\partial_n \widetilde{P}_n = 0$ but for ease note that $\partial_n \widetilde{P}_n = \partial_n q_n/\sum_i q_i = \partial_n q_n = q_n \partial_n \ln(q_n)$ therefore I can instead calculate the value which gives $\partial_n \ln(q_n)=0$. 
+Like the mean, another way to characterize the distribution is the extremum, which for large immigration rate corresponds to the mode of the system. 
+%A quantity similar to the mean is the extremum of the distribution, which for large immigration corresponds to the mode of the system. 
+The extremum occurs at the $n$ for which $\partial_n \widetilde{P}_n = 0$. For ease of analysis it is notable that $\partial_n \widetilde{P}_n = \partial_n \left( q_n/\sum_i q_i \right) = \partial_n q_n = q_n \partial_n \ln(q_n)$ and therefore I can instead calculate the value which gives $\partial_n \ln(q_n)=0$. 
 First,
-\begin{align*}
+\begin{align}
  \ln(q_n) &= 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + \ln[(N-n)!] + \ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)!\big] \\
- 		  &\, + \ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\frac{\nu g N}{1-\nu}\right)!\big] - \ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)!\big] \\
-          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] \\
-          &\, + \left(n-1+\frac{\nu g N}{1-\nu}\right)\ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)\big] + \left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\big] \\
-          &\, - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\frac{\nu g N}{1-\nu}\right)\ln\big[\left(\frac{\nu g N}{1-\nu}\right)\big] - \left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\big]
-\end{align*}
-where I have employed the Stirling approximation $\ln[x!] = x\ln[x] - x + O(1/x)$. 
-Setting $\partial_n \ln[q_n]=0$ gives
-\begin{align*}
- \ln\left[ \frac{(N-n)(n-1+\nu g N/(1-\nu))}{(n-1)(N-n+\nu(1-g)N/(1-\nu))}\right]  &= \frac{-2n+N(1-\nu-g\nu)/(1-\nu)}{n\left(-n+N(1-\nu-g\nu)/(1-\nu)\right)} \\
+ 		  &\, + \ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)!\big] - \ln[(N-n)!] - \ln[(n-1)!] - \ln\big[\left(\frac{\nu g N}{1-\nu}\right)!\big] - \ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)!\big] . \notag%\\
+%          &\approx 2\ln[N] - \ln\big[n(N-n)(1-\nu)+(1-g)n N\nu\big] + (N-n)\ln[(N-n)] \\
+%          &\, + \left(n-1+\frac{\nu g N}{1-\nu}\right)\ln\big[\left(n-1+\frac{\nu g N}{1-\nu}\right)\big] + \left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-n+\frac{\nu (1-g) N}{1-\nu}\right)\big] \\
+%          &\, - (N-n)\ln[(N-n)] - (n-1)\ln[(n-1)] - \left(\frac{\nu g N}{1-\nu}\right)\ln\big[\left(\frac{\nu g N}{1-\nu}\right)\big] \\
+%          &\, - \left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\ln\big[\left(N-1+\frac{\nu (1-g) N}{1-\nu}\right)\big]
+\end{align}
+%where 
+I have employ the Stirling approximation $\ln[x!] = x\ln[x] - x + O(1/x)$. 
+Setting $\partial_n \ln[q_n]=0$ and collecting all the non-logarithmic terms to the right-hand side gives
+\begin{align}
+ \ln\left[ \frac{(N-n)(n-1+\nu g N/(1-\nu))}{(n-1)(N-n+\nu(1-g)N/(1-\nu))}\right]  &= \frac{-2n+N(1-\nu-g\nu)/(1-\nu)}{n\left(-n+N(1-\nu-g\nu)/(1-\nu)\right)} \notag \\
 =\ln\left[ \frac{(1-f)(f-\gamma+\epsilon g)}{(f-\gamma)(1-f+\epsilon(1-g))}\right] &= \gamma\frac{1-2f-\epsilon g}{f\left(1-f-\epsilon g\right)}
 % \ln\left[ \frac{(N-n)\left(n-1+\frac{\nu g N}{1-\nu}\right)}{(n-1)\left(N-n+\frac{\nu(1-g)N}{1-\nu}\right)}\right]  &= \frac{-2n+\frac{N(1-\nu-g\nu)}{1-\nu}}{n\left(-n+\frac{N(1-\nu-g\nu)}{1-\nu}\right)} \\
 %=\ln\left[ \frac{(1-f)(f-\gamma+\epsilon g)}{(f-\gamma)(1-f+\epsilon(1-g))}\right] &= \gamma\frac{1-2f-\epsilon g}{f\left(1-f-\epsilon g\right)}
-\end{align*}
+\end{align}
 where $\gamma = 1/N$ and $\epsilon = \nu/(1-\nu)$, and recalling that $f=n/N$. 
-I expect that $\gamma$ and $\epsilon$ are small parameters, and as such I expand in them. 
-The right-hand side obviously is to $O(\gamma)$ lowest, followed by $O(\epsilon\gamma)$. 
+The parameters $\gamma$ and $\epsilon$ are typically small, so I perform an expansion in them. 
+%The right-hand side obviously is to $O(\gamma)$ lowest, followed by $O(\epsilon\gamma)$. 
+For this expansion the lowest order in these parameters is $O(\gamma)$, followed by $O(\epsilon\gamma)$. 
 The left-hand side has an infinite series in $\epsilon$ starting at $O(\epsilon^1)$, before picking up $O(\epsilon\gamma)$ terms. 
-Keeping only the $O(\epsilon^1)$ and $O(\gamma^1)$ terms gives
+Keeping only the $O(\epsilon^1)$ terms from the left and $O(\gamma^1)$ terms from the right gives
 \begin{equation}
 	f^* = \frac{1-g\epsilon/\gamma}{2-\epsilon/\gamma}. % \text{  or  } n^* = \frac{N-gN\epsilon/\gamma}{2-\epsilon/\gamma}
 \end{equation}
-Once again it is clear that there are multiple regimes. 
-When immigration is small, $\epsilon/\gamma \approx N\nu \ll 1$, and the maximum or mode of the distribution matches with the mean. 
+%Once again it is clear that there are multiple regimes. 
+This analysis agrees with the observation that there are multiple regimes in parameter space. 
+When immigration is large, $\epsilon/\gamma \approx N\nu \gg 1$, and the maximum or mode of the distribution matches with the mean. 
 The bulk of the probability is centred near $g N$. 
 But in the opposite limit, when the probability is concentrated at zero and one, the minimal value is half way between these two. 
-No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. 
+%NTS:::Anton is rightly confused by this following sentence/line. 
+%No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. 
 
-The question remains, how does the distribution switch between these two qualitatively different regimes. 
+The question remains, how does the distribution switch between these two qualitatively different regimes as $\nu$ changes. 
 \iffalse
 %TURNS OUT THIS DOES NOT QUITE WORK, AS THE EXTREMUM LEAVES THE DOMAIN
 To observe this I calculate the curvature of the extremum point. 
@@ -608,23 +640,61 @@ Substituting $f^*$ and expanding to lowest order makes the sign proportional to
  4 - 2\epsilon/\gamma - \big(1-4g(1-g)\big)\big(\epsilon/\gamma\big)^2
 \end{equation*}
 \fi
-First, note that there is in fact an intermediate regime, as evinced in figure \ref{stationary-fig2}. 
-For moderate values of immigration there is the possibility that the curvature near one edge of the domain is positive while it is negative near the other. 
-To this end, I calculate how the ratio of $\widetilde{P}_0/\widetilde{P}_1$ compares to unity for $g$ and the symmetric case $g\leftrightarrow (1-g)$. 
-At the lower critical parameter combination
-\begin{align*}
+First, note that there is in fact an intermediate regime, as shown by the blue line $N\nu=2$ in figure \ref{stationary-fig2}. 
+The probability need not only be concentrated near both extremes or near $gN$:
+for moderate values of immigration there is the possibility that the curvature near one edge of the domain is positive while it is negative near the other. 
+To this end, I calculate whether the ratio of $\widetilde{P}_0/\widetilde{P}_1$ is greater than one for $g$ (assuming $g<0.5$) and for the symmetric case $g\leftrightarrow 1-g$ (rather than also considering $\widetilde{P}_N/\widetilde{P}_{N-1}$ as a function of $g$). 
+There are three regimes, with two critical parameter combinations dividing them. 
+%At the lower critical parameter combination
+At the lower division,
+\begin{align}
  \frac{\widetilde{P}_0}{\widetilde{P}_1} - 1 = \frac{q_0}{q_1} - 1 = \frac{N - \nu N^2 g - \nu N g - 1 + \nu}{\nu N^2 g} \approx \frac{N - \nu N^2 g}{\nu N^2 g} < 0
-\end{align*}
-which implies the probability distribution is always concave up when $N\nu < 1/g$. %implicitly I assume $g \gg 1/N$
-By symmetry the other bound is $1/(1-g)$, above which the distribution is concave down. 
-It turns out these same bounds can be found by requiring $0<f^*\approx\frac{1-g N\nu}{2-N\nu}<1$, since when the mode is in outside the domain this distribution cannot have a consistent curvature. 
-%NTS:::draw some conclusions about this later down
+\end{align}
+which implies the probability distribution is concave down when $N\nu > 1/g$. %implicitly I assume $g \gg 1/N$
+%NTS:::Anton doesn't seem to know/like the terms concave up and concave down
+By symmetry the other bound is at $1/(1-g)$, below which the distribution is concave down. 
+It turns out these same bounds can be found by requiring $0<f^*\approx\frac{1-g N\nu}{2-N\nu}<1$, since only when the extremum $f^*$ is inside the domain can the distribution have a consistent curvature; when the extremum is outside the domain then the distribution is monotonic and therefore in the intermediate regime. 
+The regimes are shown in figure \ref{biodiversity-regimes}. 
 
-Figure \ref{stationary-fig2} gives the probability distribution of the species of interest averaged over long times, but does not allow us to infer anything about the time scales or dynamics of the system. 
-To do so, we must look at a slightly modified problem, with modified transition rates such that $b(0)=d(N)=0$. 
-This allows us to find the mean first passage time to species fixation or extinction, recognizing that this will only be a temporary state. 
+%NTS:::make a figure of different regimes of parameter space
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ch3regimes}
+	\caption{The qualitatively different regimes of the system based on the system size $N$, the immigration rate $\nu$, and the focal species metapopulation abundance $g$. When immigration is frequent (green region) the focal species is maintained in the population by new immigrants. When immigration is rare (yellow region) the steady state of the system is either an absence or monoculture of the focal species. There is an intermediate regime (blue region) for which the focal species is present but not fixated. } \label{biodiversity-regimes}
+\end{figure}
+
+%NTS:::draw some conclusions about this later down - AT LEAST HAVE A SUMMARY OF THE DISCUSSION HERE - hm, seems I did not do this
+%
+%okay, so let's try (but I still need to at least echo it, and probably expand it, below)
+To recapitulate, one should expect the Moran model with immigration to have populations close to one or other of fixation and extinction of the focal species most of the time when the immigration rate is low, specifically $N\nu < \min\big(1/g,1/(1-g)\big)$. 
+In the case of frequent immigration, with $N\nu > \max\big(1/g,1/(1-g)\big)$, the system spends most of its time near the average value $gN$, with a fraction of the focal species equal to the faction in the metacommunity from which the system receives its immigrants. 
+Qualitatively, these regimes correspond to the system spending most of its time as a monoculture or as having multiple species present, respectively. 
+And there is a third, intermediate regime for $N\nu$ between $1/g$ and $1/(1-g)$ for which the system is often fixated to one extreme but not the other (of $f=0,1$), with occasional fluctuations bringing the system away from this extreme. 
+%say somthing about g=1/2 and there only being two regimes, or remind biologically what these qualitativley different regimes mean
+If the metapopulation is equally likely as not to provide an immigrant of the focal species then there are only the two qualitative regimes of low and high immigration rate. %if g=1-g ie g=1/2
+
+%go back to many species..
+%I had previously written that $N\nu \ll 1$ was the condition of infrequent immigration, and this remains true. But when $g \ll 1$ it is no longer clear which of $N\nu$ or $g$ is larger, thus which qualitative regime the system is in. This is of no import, as the difference between the regimes is negligible in the small $g$ limit: either the probability - NO WAIT THAT'S NOT TRUE!
+I had previously written that $N\nu \gg 1$ was the condition of frequent immigration. 
+One also needs to make the comparison between $N\nu$ and $1/g$ to predict, for the focal species, whether it is expected to be locally extinct most of the time (for $N\nu<1/g$) or maintained at the fractional abundance $g$ (for $N\nu>1/g$). 
+%If $g$ is very small you might say you're in the high immigration rate limit yet still not have the focal species maintained in the system by immigration. 
+%Note that if the low abundance is less than one individual, \emph{i.e.} if $gN<1$ while $N\nu>1/g$, the system will still not contain the focal species much of the time, since the number of organisms is constrained to integer values. %this cannot be, as it requires $\nu>1$
+The parameter regime of the focal species has no direct impact on the rest of the species. %except the impact of the system parameters themselves. 
+The metapopulation is expected to contain many species, thus when any one of them is the focal species it is likely that the associated $g$ is small. 
+For each species $i$ that $N\nu>1/g_i$ we expect it to exist in the system, and so the number of species with $g_i$'s greater than $1/(N\nu)$ gives a estimate of the expected number of species extant in the system when immigration is frequent. 
+To this extent, the distribution of $g_i$'s in the metapopulation affects the biodiversity of the local system. 
+
+\subsection{dynamics}
+Figure \ref{stationary-fig2} gives the probability distribution of the species of interest at steady state, but does not allow us to infer anything about the timescales or dynamics of the system. 
+%In this section I ask the question: what happens to the focal species at intermediate abundance?
+We can guess that if immigration is common the system will fluctuate about its mean, and if immigrants are rare the system will be in a fixated state punctuated by occasional invasion attempts. 
+Given that the focal species in at an intermediate abundance, I want to find the probability of locally fixating before going extinct, and the timescales of these conditions, recognizing that both local fixation and extinction are temporary states, since there is always another immigrant on the way. 
+To make the mathematics more tractable, we must regard at a slightly modified problem, with transition rates changed such that $b(0)=d(N)=0$. 
+This allows us to find the mean time the system first reaches focal species fixation or extinction. %, recognizing that this will only be a temporary state. 
 %Since we have modified the transition rates at just two points, these don't show up when you use the approximate differential equation.  
-The technique follows that laid out in the introduction/appendix. 
+The difference between these results and the results earlier in this chapter is that there is still immigration into the system as it is evolving, which alters the dynamics depending on the rate $\nu$ and the immigrant focal fraction $g$. 
+
+The technique I employ follows that laid out in the introduction/appendix/chapter 1. %NTS
 As a brief reminder, define $E_i$ as the probability that the focal species goes extinct in this modified system with absorbing states at $n=0$ and $n=N$, ie. the system goes to the former before the latter, given that it starts at $n=i$. 
 Then $E_i = \frac{b(i)}{b(i)+d(i)}E_{i+1} + \frac{d(i)}{b(i)+d(i)}E_{i-1}$. 
 Further define $S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}$. 
@@ -632,8 +702,8 @@ Then
 \begin{equation} \label{extnprob}
 E_{i} = \frac{\sum_{j=i}^{N-1}S_j}{1+\sum_{j=1}^{N-1}S_j}. 
 \end{equation}
-See figure \ref{extnprobfig} for a graphical representation of the results. 
-As with the stationary distribution, the extinction probabilities can be written explicitly, but the solution has an even less nice form. 
+See figure \ref{extnprobfig-ihope} for a graphical representation of the results. 
+As with the stationary distribution, the extinction probabilities can be written explicitly in terms of $N$, $\nu$, and $g$, but graphical interpretation is easier than understanding such a complicated expression. %the solution has an even less nice form. 
 %Nevertheless, let's try:
 %\begin{equation*}
 %content...
@@ -649,16 +719,19 @@ As with the stationary distribution, the extinction probabilities can be written
 %\end{figure}
 \begin{figure}[ht]
 	\centering
-	\setbox1=\hbox{\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}}
-	\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}\llap{\makebox[\wd1][c]{\includegraphics[height=4cm]{Moran-withimmigration-extinctionprob-zoomed}}}
-	\caption{Probability of first going extinct, given starting population/fraction. $g=0.4$, $N=100$, $\nu$ and colours as in figure \ref{stationary-fig2} (red is large $N\nu$, grey is small $N\nu$). Black is the regular Moran result without immigration. } \label{extnprobfig-ihope}
-\end{figure}
+%	\setbox1=\hbox{\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}}
+	\setbox1=\hbox{\includegraphics[height=8cm]{Moran-withimmigration-fig2}}
+%	\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}\llap{\makebox[\wd1][c]{\includegraphics[height=4cm]{Moran-withimmigration-extinctionprob-zoomed}}}
+	\includegraphics[height=8cm]{Moran-withimmigration-fig2}\llap{\makebox[\wd1][l]{\includegraphics[height=4cm]{Moran-withimmigration-fig2-insert}}}
+	\caption{Probability of first going extinct rather than fixating, given starting population of the focal species. Metapopulation focal fraction $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$ (same as in figure \ref{stationary-fig2}). The black line is the regular Moran result without immigration. The inset shows that immigration acts to lower the probability of extinction as compared to the Moran model for some $f$ less than $g$, even though $g<0.5$ and more often than not the immigrant is not from the focal species. } \label{extnprobfig-ihope}
+\end{figure}%NTS:::see Anton's notes on fixing the figure
+%NTS:::"Put this figure into a proper order" - WHAT DOES THAT MEAN?!?
 \iffalse
 \begin{figure}[ht]
 	\centering
 	%	\includegraphics[width=\textwidth]{Moran-withimmigration-extinctionprob}\llap{\makebox[0.5\wd1][l]{\includegraphics{Moran-withimmigration-extinctionprob-zoomed}}}%[width=0.5\textwidth]
 	\includegraphics[width=0.8\columnwidth]{Moran-withimmigration-extinctionprob}
-	\caption{Probability of first going extinct, given starting population/fraction. $g=0.4$, $N=100$, $\nu$ and colours as in figure \ref{stationary-fig2}. Black is the regular Moran result without immigration. } \label{extnprobfig}
+	\caption{Probability of first going extinct rather than fixating, given starting population of the focal species. The parameters are $g=0.4$ and $N=100$, with $\nu$ and colours the same as in figure \ref{stationary-fig2}. The black line is the regular Moran result without immigration. } \label{extnprobfig}
 \end{figure}
 \begin{figure}[ht]
 	\centering
@@ -667,13 +740,15 @@ As with the stationary distribution, the extinction probabilities can be written
 \end{figure}
 \fi
 
-Unsurprisingly, having immigrants coming in that are less often from the focal species ($g<0.5$) largely acts to increase the probability of the focal species going extinct first. %but does it ever cross the Moran result??? - yes; see inset
-The exception is for some $n/N$ values less than $g$; it seems that for low immigration or population size there is a reduction in the extinction probability, as emphasized in the inset of figure \ref{extnprobfig-ihope}. 
-Unlike before, the different trends for the extremes of $N\nu$ compared to $1/g$ and $1/(1-g)$ are less pronounced. 
-Certainly for large immigration rate and population size, for $g<0.5$ the extinction is almost certain, as is fixation for $g>0.5$. 
+Unsurprisingly, when immigrants of the focal species are uncommon ($g<0.5$) the extinction probability is generally increased compared to the Moran model without immigration. 
+%Unsurprisingly, having immigrants coming in that are less often from the focal species ($g<0.5$) largely acts to increase the probability of the focal species going extinct first. %but does it ever cross the Moran result??? - yes; see inset
+The exception is for some $n/N$ values less than $g$, when the focal fraction in the metapopulation is notably greater than in the local system; in this case the immigration acts to stabilize the population, lessening the probability of extinction before fixation. See the inset of figure \ref{extnprobfig-ihope}. 
+%The exception is for some $n/N$ values less than $g$; it seems that for low immigration or population size there is a reduction in the extinction probability, as emphasized in the inset of figure \ref{extnprobfig-ihope}. 
+Unlike with the steady state results, the different trends for the extremes of $N\nu$ compared to $1/g$ and $1/(1-g)$ are less pronounced. 
+Certainly for large immigration rate and population size, for $g<0.5$ the temporary extinction is almost certain, as is fixation for $g>0.5$. 
 But all parameter combinations (with $g\neq 0,1$) result in a leveling of the probability as compared to the Moran model (in black). %NTS:::need to discuss these results in discussion
 
-Similar to the extinction probabilities, we can write unconditioned mean first passage times to get
+Similar to the extinction probabilities, we can write the unconditioned mean first passage time to either fixation or extinction:
 %\begin{equation}
 %\tau[i] = \frac{\Delta t}{b(i)+d(i)} + \frac{b(i)}{b(i)+d(i)}\tau[i+1] + \frac{d(i)}{b(i)+d(i)}\tau[i-1]. 
 %\end{equation}
@@ -687,21 +762,33 @@ Similar to the extinction probabilities, we can write unconditioned mean first p
 % \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
 %\end{equation*}
 %so ultimately
-%$\tau[n]=-\frac{N^2}{-u+N (g u-1)+1}+\sum _{j=2}^{n-1} \frac{\Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j \left(\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}-\frac{g N^2 u (-u+N (g u-1)+1) \, _3F_2\left(1,j-N+1,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{u}{u-1}-\frac{g N u}{u-1}-\frac{1}{u-1};j+2,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{2 u}{u-1}+\frac{N}{u-1}-\frac{g N u}{u-1}-\frac{2}{u-1};1\right) (1-N)_j \left(1-\frac{g N u}{u-1}\right)_j-(j+1) (-g u N+N+j (u-1)+u-1) \Gamma (j+1) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}{g (j+1) u (-u+N (g u-1)+1) (-u j+j-u+N (g u-1)+1) \Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}\right)}{(1-N)_j \left(1-\frac{g N u}{u-1}\right)_j}+\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}+\frac{(-g u N+N+u-1) \left(g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}\right)}{(g-1) g (N-1) u ((g N-1) u+1) (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}$
-Note that this should go to zero at both $n=0$ and $n=N$, since it is unconditioned. 
-Again, there is a closed form, but it is a sum of hyperbolic functions and does not possess intuitable limits. 
+%$\tau[n]=-\frac{N^2}{-u+N (g u-1)+1}+\sum _{j=2}^{n-1} \frac{\Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j \left(\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}-\frac{g N^2 u (-u+N (g u-1)+1) \, _3F_2\left(1,j-N+1,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{u}{u-1}-\frac{g N u}{u-1}-\frac{1}{u-1};j+2,\frac{u j}{u-1}-\frac{j}{u-1}+\frac{2 u}{u-1}+\frac{N}{u-1}-\frac{g N u}{u-1}-\frac{2}{u-1};1\right) (1-N)_j \left(1-\frac{g N u}{u-1}\right)_j-(j+1) (-g u N+N+j (u-1)+u-1) \Gamma (j+1) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}{g (j+1) u (-u+N (g u-1)+1) (-u j+j-u+N (g u-1)+1) \Gamma (j+1) \left(\frac{-g u N+N+u-1}{u-1}\right)_j}\right)}{(1-N)_j \left(1-\frac{g N u}{u-1}\right)_j}+\frac{g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}{(g-1) g u (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}+\frac{(-g u N+N+u-1) \left(g (-u+N (g u-1)+1) (1-N)_{N-1} \left(1-\frac{g N u}{u-1}\right)_{N-1}+(g-1) \Gamma (N) \left(g u N^2-g u N+N+u+(-u+N (g u-1)+1) \, _2F_1\left(-N,-\frac{g N u}{u-1};\frac{-g u N+N+u-1}{u-1};1\right)-1\right) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}\right)}{(g-1) g (N-1) u ((g N-1) u+1) (-u+N (g u-1)+1) \Gamma (N) \left(\frac{-g u N+N+u-1}{u-1}\right)_{N-1}}$ %NTS:::put this in the appendix
+At $n=0$ the focal species has temporarily gone extinct and at $n=N$ it has fixated; for both of these cases we get $\tau[n]=0$ since the system has already attained one of these extremes. %could remove this line
+%Note that this should go to zero at both $n=0$ and $n=N$, since it is unconditioned. 
+Again there is a closed form, which I include in the appendix, but it is a sum of hyperbolic functions and so I rely on the graphical representation for interpretation. 
 It is approximated numerically and displayed graphically in figure \ref{extntimefig}. 
-Introducing immigrants that are sometimes from the focal species and sometimes not acts to stabilize the system, drawing it towards $g$ and hence away from the extremes, at which fixation occurs. 
+Immigration acts to stabilize the system, drawing it towards $g$ and hence away from the extremes, at which momentary fixation or extinction occurs. 
+%Introducing immigrants that are sometimes from the focal species and sometimes not acts to stabilize the system, drawing it towards $g$ and hence away from the extremes, at which fixation occurs. 
 Thus a higher immigration rate is expected to increase the mean time until fixation when compared to the regular Moran model. 
-What's more, since this is the unconditioned time, the increase of time is larger toward the extreme at the opposite of $g$. For example, close to $n=0$ the fact that many more non-focal organisms are introduced (as in the figure) does little to change the fixation time since the largest contributor would be the extinction of the focal species. Conversely, near $n=N$ the more likely fixation is that of the focal species, but immigration with $g<0.5$ acts to counteract that tendency, providing a supply of the rare non-focal species. Thus the unconditioned time to fixation skews away from the average focal immigrant fraction $g$. 
+What is more, immigration skews this unconditioned first passage time away from $g$. 
+Consider the parameters chosen for figure \ref{extntimefig} with $g=0.1$. At small $n$ the focal species is more likely to go extinct before it fixates, thus the largest contribution to the unconditioned time is from the mean time conditioned on extinction. Immigration may help delay the inevitable, but the effect is not great, as most immigrants do not increase the focal species population. 
+At large $n$, however, fixation is the main contributor to the unconditioned time. Most of the immigrants act in opposition to fixation of the focal species, greatly increasing the time to either fixation or extinction. 
+%What's more, since this is the unconditioned time, the increase of time is larger toward the extreme at the opposite of $g$. For example, close to $n=0$ the fact that many more non-focal organisms are introduced (as in the figure) does little to change the fixation time since the largest contributor would be the extinction of the focal species. Conversely, near $n=N$ the more likely fixation is that of the focal species, but immigration with $g<0.5$ acts to counteract that tendency, providing a supply of the rare non-focal species. Thus the unconditioned time to fixation skews away from the average focal immigrant fraction $g$. 
+I once again remind the reader that since immigration is unending into the system, both fixation and extinction of the focal species are temporary. 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=1]{Moran-withimmigration-extinctiontimes}
-	\caption{Mean time to either fixation or extinction, given starting population/fraction. $g=0.1$, $N=50$, $\nu=0.01$. Grey is regular Moran results without immigration. } \label{extntimefig}
+%	\includegraphics[scale=1]{Moran-withimmigration-extinctiontimes}
+	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-fig3}
+%	\caption{Mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.1$, system size is $N=50$, and immigration rate is $\nu=0.01$. The grey line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gN$. } \label{extntimefig}
+	\caption{Mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.4$, system size is $N=100$, and immigration rate $\nu$ is coloured as before. The black line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gN$. } \label{extntimefig}
 \end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
+%NTS:::could also find the time a species exists in a system (allowing for fixation to be temporary but extinction to be permanent) but this is either not very meaningful (if the immigration is common - because if immigrants are coming in 1+ times during your transient existence then they'll also quickly come in shortly after you go extinct) or else it is just Moran without immigration conditioned on going extinct
 
-Keeping with the artificial stoppage when the focal population reaches $0$ or $N$ individuals, we calculate the conditional times, respectively to extinction and to fixation. 
-As before, the extinction probability is given by equation \ref{extnprob}. 
+%Obviously, the conditional times matter
+In interpreting the unconditioned mean time I made reference to the times conditioned on local focal fixation or extinction. 
+With the clock stopping when the focal population first reaches $0$ or $N$ individuals, I calculate the conditional times, respectively to extinction and to fixation. 
+%Keeping with the artificial stoppage when the focal population reaches $0$ or $N$ individuals, we calculate the conditional times, respectively to extinction and to fixation. 
+The extinction probability is given by equation \ref{extnprob}. 
 %This is equivalent to solving
 %\begin{equation*}
 %M_b \cdot \vec{E_i} = -\vec{\delta}_{1,i}d(1),
@@ -726,67 +813,94 @@ As before, the extinction probability is given by equation \ref{extnprob}.
 %\begin{equation*}
 %q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} \text{  and  } S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}. 
 %\end{equation*}
-Similar to the continuous time solutions presented in the introduction, %!!!!!!!!!!\ref{?}
-the conditional extinction time can be written as \cite{Iyer-Biswas2015}
+Equation \ref{conditionalPhi} gives the general equation for solving the conditional time, but it can be written more clearly, following the notation of the fixation probability and unconditioned time, as
+%Similar to the continuous time solutions presented in the introduction, the conditional extinction time can be written as \cite{Iyer-Biswas2015}
 \begin{equation}
-\phi[n] = \phi[1] + \sum_{j=1}^{n-1}\left(\phi[1] - \sum_{i=1}^{j}q_iE_i\right)S_{j}.  
-\end{equation}
+\phi_n = \phi_1 + \sum_{j=1}^{n-1}\left(\phi_1 - \sum_{i=1}^{j}q_iE_i\right)S_{j}.  
+\end{equation} \label{conditionedphi}
 %where $\theta[n]=E_n \tau[n]$ is the product of the extinction probability and conditional time at that state. 
-Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time. 
-Since $E_0=0$ this gives $\phi_0=0$. 
-We have the other boundary condition that, since $\theta_N = 0$, $\phi_N = 0$, which allows us to rearrange the previous equation to get
+Here $\phi_i \equiv E_i \theta_i$ (not a dot product, just multiplication of elements), where $\theta_i$ is the conditional extinction time \cite{Iyer-Biswas2015}. 
+The probability of first fixating before being locally extinct when starting with zero members of the focal species is zero ($E_0=0$), so too is $\phi_0=0$. 
+The other boundary condition is that the mean first passage time conditioned on fixation is zero if the system starts fixated ($\theta_N = 0$), thus $\phi_N = 0$. 
+These boundary conditions allow me to rearrange the previous equation to get
 \begin{equation}
 \phi_1 = \frac{\sum_{j=1}^{N-1}\sum_{i=1}^{j}q_iE_i}{1+\sum_{j=1}^{N-1}S_j}. 
-\end{equation}
-These previous two equation allow us to solve for $\phi$, and therefore $\theta$. 
-After all this, one arrives at the graph in figure \ref{condextntimefig}. 
+\end{equation} \label{conditionedOne}
+Equation \ref{conditionedOne} substituted into equation \ref{conditionedphi} allows us to solve for $\phi_n$, and therefore the conditional time $\theta_n$. 
+One arrives at the graph in figure \ref{condextntimefig}. 
 The conditional times mostly follow the unconditioned time, except near the rare events that do not much contribute to the average. 
+%NTS:::say a bit more about these times
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=1]{Moran-withimmigration-condtimesmall}
+%	\includegraphics[scale=1]{Moran-withimmigration-condtimesmall}
+	\includegraphics[width=0.8\linewidth]{Moran-withimmigration-fig4}
 	\caption{Mean time to fixation or extinction, conditioned on that event happening, given starting population/fraction. $g=0.7$, $N=100$, $\nu$ varies from 0.3 (highest) to 0.0001 (lowest). Grey is regular Moran results without immigration. } \label{condextntimefig}
 \end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
 
-\section{Some Results}%this section is NOT well thought out
-%NTS:::nor sufficiently developed
 
-%NTS:::talk about the 1/g and 1/(1-g) critical values of N\nu
+\section{Discussion}
 %NTS:::talk about leveling of extinction probability - or don't because it's all transient anyways; having fixated first doesn't not mean it's any likelier to be present after some long time than if it goes extinct, or than compared to being almost fixated (unlike in deterministic systems or stochastic systems without immigration)
 %NTS:::comment on unconditioned and conditioned extinction/fixation times
 
-With all that I have outlined above, we can say something about the switching behaviour of this Moran population with immigrants. 
-%Likely, there are some limiting forms of the analytic expressions that will offer more insight - these are currently being investigated. 
-Suppose the population starts in state $n=0$, before any mutations have arisen.  
-Then at a rate $\nu g$ there will be an attempted invasion.  
-The invasion will be successful only every $1/E_1$ attempts.  
-Thus a successful invasion occurs every $1/\nu g E_1$ time units.  
+As a reminder, in the research above, even though not all species are equal to each other, their interactions have been symmetric. That is, no species has been given an explicit fitness advantage. The complete neutrality of Hubbell comes when the species not only interact with each other symmetrically but also interact with other species as strongly as they interact with themselves. 
+
+Based on the results above, I can make some comments about the switching behaviour of the Moran population with immigration. 
+Suppose the focal species population starts in state $n=0$, before any mutations have arisen or immigrants have entered.  
+At a rate $\nu g$ there will be an attempted invasion by the focal species. 
+%The invasion will lead to fixation before it dies out only every $1/E_1$ attempts.  
+%Thus a successful invasion occurs every $1/\nu g E_1$ time units. 
 %Of course, all this assumes that after the first invader is added, no others arrive until the first one succeeds or fails.  - not true! E_1 accounts for further immigrants before fixation
-We can compare the time between successful invasions, and the time between attempted invasions, with the time each attempt takes (successful or not). 
-For example, for $g=0.1$, $N=50$, $\nu=0.01$ this gives an (unconditioned) attempt time of $\tau[1] = 243.138$, a time between attempts of $1/\nu(1-g) = 111.111$, and a time between successful attempts of $1/\nu(1-g)(1-E_1) = 7919.01$. 
+Once the invader arrives the dynamics and its ultimate fate depend on how much its niche overlaps with the species currently present in the system. 
+It will be most excluded by those with high population and those with large niche overlap. 
+In the research above I have considered the case of only one extant species upon the arrival of an invader. 
+For species with low niche overlap, the probability of invasion is likely, and for large $K$ decreases monotonically as $1-a$ with the increase in niche overlap, independent of the population size $K$. %first figure
+The invader is least likely to be successful in the Moran limit when niche overlap is complete. 
+For invaders that are mutants of the extant wildtype species, this $a=1$ is the niche overlap they are most likely to experience, and so more similar a mutant to the wildtype, the less likely it is to reach half the population size, which is how I have defined a successful invasion. 
 
-%THIS CONCLUSION SHOULD COMBINE THE PAPER RESULTS WITH THE MORAN RESULTS - ONE DISCUSSION FOR BOTH
-%ALSO REFER BACK TO THE GRAPHS
+Whether or not a mutant invasion is successful, the timescale is longest when niche overlap is high. %second and third figures
+The times of successful and failed invasions into a stable population set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration. 
+The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$. 
+By contrast, high niche overlap makes invasion difficult due to strong competition between the species. 
+In this regime, the times of the failed invasions become particularly salient because they set the timescales for transient species diversity. 
+We must compare the rate of invasion attempts $\nu g$ to the time of an invasion attempt. 
+If the influx of invaders is slower than the mean time of their failed invasion attempts, most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader \cite{Dias1996,Hubbell2001,Chesson2000}. 
+On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, they will buoy the population in the system, maintaining its presence. %buoy/stabilize
+I deal with both of these cases, high or low immigration rate, using the Moran model with immigration when the niche overlap is $a=1$. 
+For incomplete niche overlap, once a species successfully invades it will persist for long times, based on the results of chapter 2. 
 
-Hearkening back to the first half of the chapter, we see that the Moran results, ie. complete niche overlap, offer the longest time scales of any niche overlap. 
-As such one might conclude that they provide an upper bound for the (bio)diversity expected in an (eco)system. 
-However, the invasion probability is lowest for complete niche overlap (see figure \ref{Esucc}). 
-With incomplete niche overlap more attempts will successfully invade the system, at which point they will persist for longer. 
-At the other limit of independent species, the LV theory simplifies to classical niche theory, and a further theory of the apportionment of resources is needed to predict biodiversity. 
+%We can compare the time between successful invasions, and the time between attempted invasions, with mean first passage time to fixation or extinction once the invader is in the system, interpreted as the time each attempt takes (successful or not). 
+%For example, for $g=0.1$, $N=50$, $\nu=0.01$ this gives the invading immigrant an (unconditioned) attempt time of $\tau[1] = 243.138$, a time between attempts of $1/\nu(1-g) = 111.111$, and a time between successful attempts of $1/\nu(1-g)(1-E_1) = 7919.01$. 
+%In this example the first passage time is longer than the interval between attempts, and so we expect there to always be at least a transient presence of the species in the system. 
+%Only very infrequently will the species actually fixate in the system. 
 
+Within the Moran model with immigration I have explicitly considered the cases of high and low immigration rate. 
+When immigration is sufficiently high, such that $N\nu > \max\big(1/g,1/(1-g)\big)$, the focal species is maintained at steady state most often at a fractional abundance equal to that in the metapopulation from which the immigrants arrive. 
+For low immigration rate, specifically $N\nu < \min\big(1/g,1/(1-g)\big)$, the focal species spends the bulk of its time either locally extinct or else fixated in the system. 
+One way to characterize biodiversity is by the number of different species that reside in a system \cite{May1999,Hubbell2001,others?,Chesson2000?}. 
+An estimate of the expected number of species in a system, at least when immigration is frequent, is given by the number of $g_i$'s greater than $1/(N\nu)$, where $g_i$ is the fractional abundance of species $i$ in the static large metapopulation that provides immigrants to the system. 
 
-\section{Outlook}%this also is very not thought out
-%NTS:::nor sufficently developed
-%It seems we cannot come to any conclusions of what kind of niche overlap is typical in nature based on measured biodiversities, at least not using the absolute number of different species in an ecosystem. 
-The complete niche overlap that Hubbell uses in his (in)famous neutral theory of biodiversity and biogeography suggests, based on the Moran with immigration results above, that invasion attempts will rarely be successful. 
-A successfully invading species will take a long time to do so, as compared to the results of incomplete niche overlap from earlier in the chapter, but this time scale is still much lesser than the timescale that a successful invader will persist, as based on the previous chapter. 
-Thus Hubbell's model implies few species of large abundance and a more even distribution of abundances from large to small. 
-Regarding the small population, transient species that fail to establish themselves, they persist longer in the Moran limit, dying out very quickly in systems with incomplete niche overlap. 
-Again, the theory behind Hubbell's model suggests a wealth of small population species should be present in an ecosystem, compared to one dominated by niches, even largely overlapping niches. 
+%Hearkening back to the first half of the chapter, we see that the Moran results, ie. complete niche overlap, offer the longest timescales of both successful and failed invasion attempts compared to lesser niche overlaps. 
+%The fact that the Moran model with immigration has the longest persistence times of transient species that will ultimately go extinct before even reaching half the total population implies that complete niche overlap should have the greatest number of species existent in the system at any given time. 
+%As such one might conclude that Moran with immigration provides an upper bound for the (bio)diversity expected in an (eco)system. 
+%However, the invasion probability is lowest for complete niche overlap (see figure \ref{Esucc}). 
+%With incomplete niche overlap more attempts will successfully invade the system, at which point they will persist for longer. 
+%At the other limit of independent species, the LV theory simplifies to classical niche theory, and a further theory of the apportionment of resources is needed to predict biodiversity. 
 
-So, while the absolute number that is the biodiversity of an ecosystem cannot distinguish between niche and neutral theories, the abundance distribution should be able to do so. 
+%\section{Outlook}
+%%It seems we cannot come to any conclusions of what kind of niche overlap is typical in nature based on measured biodiversities, at least not using the absolute number of different species in an ecosystem. 
+%The complete niche overlap that Hubbell uses in his famous neutral theory of biodiversity and biogeography \cite{Hubbell2001} suggests, based on the Moran with immigration results above, that invasion [fixation before extinction] attempts will rarely be successful. 
+%A successfully invading species will take a long time to do so, as compared to the results of incomplete niche overlap from earlier in the chapter, but this timescale is still much less than the timescale that a successful invader will persist, as based on the previous chapter. 
+%Thus Hubbell's model implies few species of large abundance and a more even distribution of abundances from large to small. 
+%Regarding the small population, transient species that fail to establish themselves persist longer in the Moran limit, dying out very quickly in systems with incomplete niche overlap, when they do die out. 
+%Again, the theory behind Hubbell's model suggests a wealth of small population species should be present in an ecosystem, compared to one dominated by niches, even largely overlapping niches. 
+
+For incomplete niche overlap, the number of species in a system, as well as their abundances, depends on how their $K_i$'s are distributed. 
+This can be connected back to theories of the apportionment of resources common to niche theories of biodiversity \cite{}. 
+%So, while the absolute number of extant species that is the biodiversity of an ecosystem cannot distinguish between niche and neutral theories, the abundance distribution should be able to do so. 
 Unfortunately calculating the abundance distribution as a function of immigration rate, ecosystem carrying capacity, and niche overlap is outside of the scope of this thesis. 
-I can however make a qualitative argument. 
 Hubbell's species abundance distribution is well known, and is similar to that of Fisher's log series distribution when diversity is high \cite{Fisher1943,Alonso2004}. 
-Based on my results above, an observed species distribution that is greater than Hubbell's at high diversity but lesser at low diversity is a signature of an ecosystem influenced by niches, with the species interactions being less than completely neutral (while still not necessarily being selective). %NTS:::reminder this distinction should be in the beginning
-
-%NTS:::okay, and then some sort of conclusion and/or synopsis?
+Given that Hubbell's theory is equivalent to the Moran model with immigration, I can make a qualitative argument as to how this will be disrupted with incomplete niche overlap. 
+Those species in disparate niches will exist at their local carrying capacity, and will not be suppressed by their neighbours, thus there should be more species at higher abundance. 
+Only those species that have a naturally low carrying capacity and those that have high niche overlap with others in the system will be found at low abundance or in a transient state. 
+Based on my results, an observed species distribution that is greater than Hubbell's at high abundance but lesser at low abundance is a signature of an ecosystem influenced by niches. 
+%, with the species interactions being less than completely neutral (while still not necessarily being selective). %NTS:::reminder this distinction should be in the beginning

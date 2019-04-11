@@ -12,6 +12,8 @@
 %NTS:::in intro, go over pdf and quasi pdf and pmf
 %NTS:::in intro, do Langevin to FP, and point out Langevin is often done even more wrongly?
 
+%NTS:::in CH1, point out that inverting the matrix gives perfect match with true results
+%NTS:::in CH1, Langevin is the same as Fokker-Planck (though it is often done even worse)
 
 \section{Introduction} \label{Introduction}% - MattheW
 
@@ -97,7 +99,7 @@ Instead of the continuous, fractional populations of equation \ref{logistic}, I 
 I assume that each birth event is independent and distributed exponentially with a probability $b_n\,dt$ of occurring in each infinitesimal time interval $dt$, and this is similarly assumed for death events. %too technical? Or esoteric?
 In this chapter/to this end I use the birth rate
 \begin{equation}
-b_n = (1 + \delta)\,r\,n - \frac{r/,q}{K}n^2 = r\,n\left(1+\delta-q\frac{n}{K}\right)
+b_n = (1 + \delta)\,r\,n - \frac{r\,q}{K}n^2 = r\,n\left(1+\delta-q\frac{n}{K}\right)
 \label{birth}
 \end{equation}
 and death rate
@@ -255,7 +257,7 @@ The first approximation I will regard is the Fokker-Planck (FP) equation, which 
 Starting from the master equation \ref{master-eqn} and expanding the $\pm 1$ terms as $P_{n\pm 1} \approx P_n \pm \partial_n P_n + \partial^2_n P_n$ we arrive at the popular Fokker-Planck equation:
 %. This is known as the Van Kampen expansion \cite{}. - actually the Kramers-Moyal expansion \cite{Gardiner2004 or whomever}
 \begin{equation}
-\partial_t P_n(t) = - \partial_n\big( (b_n - d_n) P_n(t) \big) + \frac{1}{2} \partial_n^2 \Big( (b_n + d_n) P_n(t) \Big). \label{FP}
+\partial_t P_n(t) = - \partial_n\big( (b_n - d_n) P_n(t) \big) + \frac{1}{2} \partial_n^2 \Big( (b_n + d_n) P_n(t) \Big). \label{FPch1}
 \end{equation}
 Used the KM expansion \cite{Gardiner2004}. Pawula theorem says 2 or infinite \cite{Risken}. %NTS
 I have been cavalier; more precisely, we need a large parameter, which I denote $K$, to do the expansion. Typically in bio the large parameter is volume. Then $x=n/K$ is something like density, and is the parameter about which we expand, requiring that $|1/K| \ll 1$. 
@@ -264,8 +266,8 @@ The more pedagogical Fokker-Planck equation is then
 \begin{equation}
 \partial_t P(x,t) = - \partial_x\big( (b(x) - d(x)) P(x,t) \big) + \frac{1}{2 K} \partial_x^2 \Big( (b(x) + d(x)) P(x,t) \Big),
 \end{equation}
-which is equivalent to equation \ref{FP} above for $b(x) = b_n/K$ and similarly for $d$. 
-Instead of a difference differential equation for the probability, equation \ref{FP} is a partial differential equation for the probability density. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
+which is equivalent to equation \ref{FPch1} above for $b(x) = b_n/K$ and similarly for $d$. 
+Instead of a difference differential equation for the probability, equation \ref{FPch1} is a partial differential equation for the probability density. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
 The first term on the right hand side is called the drift term and corresponds to the dynamical equation at the deterministic limit, when fluctuations are neglected. 
 The second term is the diffusion term and describes the magnitude of the effect of stochasticity on the system. 
 A quasi-steady state can be calculated when the time derivative $\partial_t P_n(t)$ is small. 
@@ -274,10 +276,10 @@ That is,
 \ln P_n^{ss} \propto \frac{2(b_n - d_n) - \partial_n(b_n + d_n)}{(b_n + d_n)}. 
 \end{equation}
 By analogy with Boltzmann statistics, the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Zhou-ish}. 
-Equation \ref{FP} can also be solved directly to give a MTE \cite{Gardiner2004}. 
+Equation \ref{FPch1} can also be solved directly to give a MTE \cite{Gardiner2004}. 
 For ease of reference, I leave the equation here:
 \begin{equation}
-\tau(n) = \int \frac %NTS
+\tau(n) = %\int \frac %NTS
 \end{equation}
 
 %NTS:::expand the below?
@@ -292,7 +294,7 @@ Another method frequently utilized is the WKB approximation \cite{}.
 Generally, the WKB method involves approximating the solution to a differential equation with a large parameter (such as $K$) by assuming an exponential solution (an ansatz) of the form
 \begin{equation}
 \P_n \backsim e^{K\sum_i \frac{1}{K^i}S_i(n)}.
-\label{ansatz}
+\label{WKBansatz}
 \end{equation}
 Starting again from the masters equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016,etc}.%careful, Assaf2016 is an arXiv paper
 To leading order, only $S_0(n)$ is needed. 
@@ -342,7 +344,7 @@ The flux of the probability to the absorbing state is thus given by the expressi
 \end{equation}
 This same equation can be applied to different methods and algorithms that have produced quasi-stationary distributions. % for which we have an expression for $P_1$.
 
-\ifffalse %NTS:::make this into a sentence or two, maybe
+\iffalse %NTS:::make this into a sentence or two, maybe
 %A - Jeremy
 By omitting negligeable terms from the full solution to the MTE, equation \ref{analytic_mte}, we can heavily reduce the computational runtime in our calculation.
 This becomes important at large population sizes, as the the number of terms in the analytical solution scale with the maximal size of the population.

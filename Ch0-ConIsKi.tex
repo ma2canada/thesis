@@ -1,7 +1,11 @@
 \chapter{Ch0-Introduction}
+%NTS:::in INTRO chapter, mention that my interest is in the hard problems far from equilibrium; not just stochastics (which are already more complicated than deterministics) but the rare events like first passages
+%NTS:::in INTRO, "minimal working model" rather than null model
+%NTS:::in intro, talk about birth-death processes
+%NTS:::in intro, go over pdf and quasi pdf and pmf
+%NTS:::in intro, do Langevin to FP, and point out Langevin is often done even more wrongly?
 
 \section{Introduction}
-
 This thesis is concerned with demographic stochastics. That is, the randomness inherent in systems with a discrete state space. 
 In biology this arises naturally in ecological systems. 
 %The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
@@ -126,6 +130,7 @@ I will do my best to provide a summary here, to contextualize my research.
 
 
 \section{Niches}
+%NTS:::somewhere (maybe Ch2) need to be explicit what is meant by neutral, what is meant by simply symmetric
 \subsection{Concept of a niche, and the debates therein}
 Of course species \emph{aren't} the same as each other. 
 Some would live happily as the only animals on an island, and others would die out in such a situation. 
@@ -207,7 +212,7 @@ There are applications in many disciplines, including linguistics, economics, bi
 The giants Wright and Fisher were pioneers in applying randomness and statistical reasoning, in the biological context and in general. 
 In biology there were renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell. 
 %include figure of 1dlog stoch vs det!!!!!!!
-\begin{figure}%[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{single-logistic.pdf}
 	\caption{\emph{A single logistic system with deterministic and stochastic solutions.} The smooth red line shows the deterministic solution to a one dimensional logistic differential equation with carrying capacity $K=1000$, which the system asymptotically approaches. The jagged blue and purple lines are each an instantiation of a `noisy', or stochastic, version of the logistic equation, as simulated using the Gillespie algorithm. Notice that the stochastic versions tend to follow their deterministic analogue but with some fluctuations, sometimes being greater than the deterministic result, sometimes being lesser. }
