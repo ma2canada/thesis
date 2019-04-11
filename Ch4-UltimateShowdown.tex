@@ -8,19 +8,24 @@ Even the relatively fast results of the Moran model, which scale linearly with $
 The fastest reproducing model organism is the \emph{e. coli} bacterium, which reproduces every twenty minutes in ideal conditions. 
 A carrying capacity as low as $10^3$ would show fixation in the Moran limit in a week, but the complete extinction of the population (as described in the first chapter) would take longer than life has existed on the Earth. %NTS:::"first" chapter.
 %NTS:::comment on Lenski
-%NTS:::somewhere talk about how this isn't a problem, that this is a sort of null model, and works theoretically - if anything is off from this, it allows us to ask pointed "in what way" questions. 
-
+%NTS:::somewhere talk about how this isn't a problem, that this is a sort of null model, and works theoretically - if anything is off from this, it allows us to ask pointed "in what way" questions. Minimal working model
 
 
 \section{Applications of the theory}
- (coalescent theory, phylogenic construction, ...?)
+%(coalescent theory, phylogenic construction, the obvious of applying it to real biological systems, gut microbiome, ...?)
+%\section{Extensions of the theory} - combine with applications
+%(eg. would eventually recover Hubbell)
 
+The obvious application of the theories investigated in this thesis is to biological systems of few competing species or strains within constant environments. 
+This is somewhat artificial, but there are some systems for which it is relevant. 
+%see the previous paragraph for experimental tests
+%Any microfluidic work will start with one or two species in a constrained environment. 
+Microfluidic work, in addition to its testing capabilities, could model systems with flow, like industrial food processing or the digestive tract. 
+The \emph{C. elegans} gut microbiome work of Gore and others \cite{Gore, but also zerbrafish?} suggests that the theories in this thesis could be applicable to microbiota more generally, be they in the gut or lungs or other areas \cite{,,,???}. 
+My results rely on a well-mixed assumption, so environments like the gut or the ocean surface are good candidates, but situations like plaque growth or trees(desert scrubs?) are not. %NTS:::this and next sentence
+Species need not rely on the environment to mix them well; animals that are mobile or trees with far-travelling seeds would also be candidates. 
+%NTS:::more citations above
 
-\section{Extensions of the theory}
- (eg. would eventually recover Hubbell)
-
-
-\section{Miscellanea}
 % (plasmids instead of species)
 Chapters 2 and 3 briefly touch on the idea of small population sizes. 
 For instance, the second chapter's figure \ref{heatmap} suggests that the exponential term is less relevant than the algebraic term when it comes to the fixation time of two competing species as compared to a similarly sized Moran-like system. 
@@ -28,7 +33,7 @@ Indeed, exponential dependence is only dominant when system sizes are large.
 This large population size is relevant in many (if not most) biological contexts, from \emph{e. coli} and their typical $10^6 - 10^8$ bacteria/mL density \cite{Lenski} to hare in Canada's arctic which are more spread out but number in the ten thousands \cite{or whatever}. 
 But not all biology is overflowing with individuals. 
 One example is that of plasmids in a cell \cite{Ingalls}. 
-
+%
 Plasmids are small loops of DNA that typically code for a few/handful genes, often one of which confers some antibiotic resistance. \cite{that bio textbook - Wilson?}
 Their reproduction can be thought of as asexual, since only one plasmid copy is required as a template to make a new copy. 
 Plasmid copy numbers, the average number of copies of a plasmid per cell, tend to be low, ranging from $10^1$ to $10^3$. 
@@ -45,16 +50,50 @@ The niche in this case is defined by the replication inhibitor, and niche overla
 Similar to plasmids, the number of mitochondria in a cell is small and tends to be controlled within a cell. 
 In [brewer's] yeast there are typically $34\pm 2$ mitochondria per cell \cite{bionumbers}. 
 Of interest to researchers is how the integrity of mitochondrial DNA is maintained \cite{Nunn}. 
-Sometimes a mitochondrion will have large deletions in its DNA. 
+Sometimes a mitochondrion will have large deletions in its DNA \cite{???}. 
 There are conflicting selection forces in this system: the mutant mitochondria [presumably] reproduce faster than the wildtype but hinder the viability of the cell, hence its reproduction. 
 But when one mutant arises in a population, what is the chance it will fixate, and will fixation occur before the cell reproduces? 
 The analyses of chapter 3 are relevant to such a problem. 
 
-Of course, some of the assumptions underlying my theories might fail, and this is especially true for systems will small population sizes. 
-The results outlined in this thesis should be applied with caution. 
-%NTS:::c.f. part in experimental section above where I explain that this is a null model to compare to other theories or from which tobase other theories
+Coalescent theory is a model that predicts the time in the past when two variants of a gene most recently shared a common ancestor \cite{???}. 
+In its simplest form it treats all mutants (at least, all that survived to the present day) as equally viable, interacting with other variants as strongly as they do with themselves \cite{?}. 
+In this way it is like a Moran model, or a symmetric Lotka-Volterra model with complete niche overlap. 
+%The time it predicts since the last common ancestor is almost exponential in the genetic distance between mutants \cite{}. %incorrect
+The time it predicts since the last common ancestor is approximately exponentially distributed, with a mean proportional to the system size \cite{?}. 
+An inclusion of incomplete niche overlap, such as has been investigated in chapter 2, would only act to increase the estimated times. 
+Niche overlap less than one would be most appropriate for very disimilar variants that now serve different but equally vital purposes in the organism. 
+The longer timescale of incomplete niche overlap of course would not change the historical record. 
+Rather, coalescent theory is used to make inferences about historical population genetic parameters, like mutation rate and population size. 
+For those genes to which incomplete niche overlap applies, the longer timescales are counteracted by a smaller population size or greater mutation rate. 
+Conversely, if we know the historic population size and mutation rate, we could infer the niche overlap between disparate gene variants. 
+Phylogenetic reconstruction is related to coalescent theory, and would be similarly affected by incomplete niche overlap \cite{???}. 
+%NTS:::coalescent theory also discusses the variance of time to most recent common ancestor
+
+%NTS:::FOR HERE AND IN PREVIOUS CHAPTER, READ DYNAMICS SECTION OF WIKIPEDIA UNTB (HUBBELL)
+As discussed in the previous chapter, the Hubbell model also relies on assumptions similar to those of the Moran model, to the point that it is effectively a Moran model with immigration \cite{Hubbell2001,others?}. 
+It is used to predict the number of species that on average can be found in a system, and the distribution of abundances of the species therein. 
+As with coalescent theory, the underlying assumption of Hubbell's neutral theory is that species occupy the same niche. 
+This is effectively what he means by the term ``neutral'', a claim which has been controversial \cite{???}. 
+Apologists defend the theory by explaining that, in an abstracted sense, species in the same trophic level are effectively competing with each other as much as they compete with themselves \cite{???}. 
+The alternative to neutral theory is traditionally taken to be niche theory, the idea that each species in a system occupies its own niche, and any newcomers must either die out as a transient species or invade a niche, suppressing and evicting its previous occupant. 
+I have shown, in chapter 3, that there are other alternatives. 
+My research investigated the situation where two species have overlapping, but not necessarily identical, niches, such that they do not exclude each other entirely. 
+Neither is selected for, and I have focussed on symmetric interactions where each species affects the other to the same degree, has the same carrying capacity, and turnover rate. 
+Thus I situate myself among those theories which accommodate both niche and neutral theories \cite{???}. 
 
 %NTS:::ANYTHING ELSE???
+
+%NTS:::paragraph on assumptions/limitations - here, earlier? maybe at end of section, maybe after first paragraph, maybe at start
+Of course, some of the assumptions underlying my theories might fail, and this is especially true for systems will small population sizes. 
+The results outlined in this thesis should be applied with caution. 
+%NTS:::c.f. part in experimental section above where I explain that this is a null model to compare to other theories or from which to base other theories
+%well mixed, not spacial
+%constant environment
+%phenomenology like $r$, $K$, and $a$
+%no life stage structure
+%lumping all non-focal species together
+%where mutant strains come from - clearest for SNPs in genes, but the theory is least applicable to them (unless Moran or selective) - to be symmetric requires two mutations [not true! could increase metabolism of one reactant while decreasing enzymatic activity of another] - SNP can be synonymous or not
+%asexual
 
 
 \section{Conclusions and retrospective}
