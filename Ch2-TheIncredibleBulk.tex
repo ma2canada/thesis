@@ -6,7 +6,7 @@
 
 
 \section*{pre-intro note}
-This chapter is based on a paper written by me and my supervisor, currently submitted to Royal Society Interfaces journal. 
+This chapter is based on a paper written by me and my supervisor Anton Zilman, currently submitted to Royal Society Interfaces journal. 
 
 \section{Introduction}
 
@@ -28,7 +28,7 @@ Then the stochastic fluctuations in the species numbers become important \cite{V
 I will return to the mathematical formulation of these concepts later. %NTS:::could expand these last two sentences. 
 
 Stochastic effects, arising either from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017b}, or the intrinsic stochasticity of individual birth and death events within the population \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}, modify the deterministic picture. 
-As in the previous chapter, I focus on this latter type of stochasticity, known as demographic noise. %NTS:::this should be in the intro. 
+As in the previous chapter, I focus on this latter type of stochasticity, known as demographic noise. %NTS:::this should be in the intro. - it now is
 Demographic noise causes fluctuations of the populations abundances around the deterministic steady state until a rare large fluctuation leads to extinction of one of the species \cite{Kimura1968,Lin2012,Chotibut2015}. 
 In systems with a deterministically stable co-existence point, the mean time to extinction is typically exponential in the population size \cite{Norden1982,Kamenev2008,Assaf2010,Ovaskainen2010}, as was seen in the previous chapter. 
 Exponential scaling is commonly considered to imply stable long term co-existence for typical biological examples with relatively large numbers of individuals \cite{Ovaskainen2010,Lin2015}.
@@ -77,6 +77,12 @@ I return to this point in the following sections within the discussion of the Lo
 
 
 \section{Minimal model of interacting species and the derivation of 2D LV model} %NTS:::this section can be expanded, see two page summary I wrote on this. 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{two-resources}
+	\caption{\emph{A simple two species two resource model that obtains the Lotka-Voltera model} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). }
+\end{figure}%NTS:::this isn't referenced in the text; furthermore the model in the text is slightly different, with each species producing both waste product
+
 As a minimal example, in this section we introduce a model of two interacting species whose dynamics is constrained by two secreted factors. Each species $x_i$ has basal per capita birth rate $\beta_i$, death rate $\mu_i$, and each generates the secreted soluble factors $t_j$ at rates $g_{ji}$. Each factor $t_i$ is degraded at a rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. Positive $e_{ij}$ may correspond to metabolic wastes, toxins or anti-proliferative signals \cite{Jacob1989,Maplestone1992,VanMelderen2009,Rankin2012,Shen2015,Wynn2015}, while negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{Maplestone1992,Reya2001,Wink2003}. The model kinetics is encapsulated in the following equations for the turnover of the species numbers:
 \begin{align}
 \dot{x}_1 &= \beta_1 x_1 - \mu_1 x_1 - e_{11} t_1 x_1 - e_{12} t_2 x_1 \notag \\

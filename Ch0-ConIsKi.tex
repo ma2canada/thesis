@@ -2,125 +2,271 @@
 %NTS:::in INTRO chapter, mention that my interest is in the hard problems far from equilibrium; not just stochastics (which are already more complicated than deterministics) but the rare events like first passages
 %NTS:::in INTRO, "minimal working model" rather than null model
 %NTS:::in intro, talk about birth-death processes
-%NTS:::in intro, go over pdf and quasi pdf and pmf
+%NTS:::in intro, go over pdf and quasi pdf and pmf - or chapter 1
 %NTS:::in intro, do Langevin to FP, and point out Langevin is often done even more wrongly?
+%NTS:::need to explain why MTE is important
+%NTS:::AUDIENCE
+%NTS:::GAP
+%NTS:::SIGNIFICANCE
+%NTS:::either somewhere or throughout, be clear about what has been done and what is novel.
+%NTS:::What are the gaps in the literature? What did I contribute to closing those gaps? What are my questions? What do I find? And WHY is this important? [significance]
+%NTS:::Anton says "Define big questions. explain what were the existing gaps in the literature and what your thesis contributed in terms of closing those gaps"
 
 \section{Introduction}
-This thesis is concerned with demographic stochastics. That is, the randomness inherent in systems with a discrete state space. 
-In biology this arises naturally in ecological systems. 
-%The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
-%"strategic lit review"
-%"gap"
-%"thesis" "in this paper I will..."
-%"roadmap"
-%"short significance"
-Stochastics, as applied in the biological context, was first done by Kimura when calculating the dynamics of gene frequencies in a population. %something re ecological context... Wright Fisher, Moran, the other big names, etc
-Kimura, and most theoretical ecologists since, employed the Fokker-Planck equation, a partial differential equations method which further approximates the system by assuming continuous population sizes %cf. discrete state space
-In the context of population ecology, the similar Moran model of two species is the cleanest example of two competing species in an ecosystem, with eventually one going extinct and one fixating after some short characteristic time dependent on the system size. 
-However, this model assumes the two species are identical, and that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
-Some recent researchers have addressed this by noticing that results similar to that of Moran are found in one limit of the famous generalized Lotka-Volterra equations with stochastic fluctuations. 
-They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
-None, however, have looked at how the system transitions between its slow and fast limits. 
-Most have also restricted themselves to uncontrolled approximations
-This is where I situate my research. 
-In this thesis I will show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
-To accomplish this I shall first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional Lotka-Volterra toy model. 
-Thence I will investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
-I do this with an arbitrarily accurate technique for calculating mean fixation times. 
-Finally, by regarding the opposite process to fixation, I can comment on the stability of the 2D model with regards to invasion attempts. 
-The obvious consequence of my research is a better null hypothesis for the dynamics of small homogeneous communities like the human microbiomes. 
-More generally the results are of significance in estimations of timescale for paleontology and phylogeny. 
+\iffalse
+An invasive species kills out the locals...
+A mutant bacterium can digest a previously-useless chemical; a few generations later all the bacteria in the system possess this ability. 
+Moths coloured like the local tree bark are killed less frequently, allowing them to reproduce more often. 
+The ecological community concludes that when species compete for resources, ultimately only one will survive as it outcompetes all others unto their death. 
+But one ecologist looks through a microscope at a slide of seawater and marvels at the variety of plankton he sees. 
+How can there be such a diversity of these simple organisms that live all mixed together in the mid ocean surface where there are so few resources? 
+Surely one of them consumes faster, or reproduces faster, or is more efficient in some way? Surely one of them is more fit for survival than the others? 
+And yet, here they are, an array of microorganisms in unexpectedly large numbers. 
+\fi
 
+\section{Motivation and Background}% and such}
+``What is biophysics?''
+This is a question I have been asked by family and friends innumerable times through my doctorate. 
+The short answer is that it is the application of ``physics thinking'' to biological problems. 
+Classical biophysics involves laser optics and protein radii. 
+The biggest contingent at a modern biophysical society meeting are those who do molecular dynamics simulations of protein folding. 
+I usually say that I have the mathematical and problem-solving skills of a physicist and am interested in biological problems, specifically ecology. 
+In reality my research would be at home in a physics department, or in applied mathematics, mathematical ecology, systems biology. 
+It has been an issue finding conferences to go to, in that my research tends to be more mathematical and technical than what most biologists care for, but with different end goals than the mathematicians, who are more interested in proofs and existence rather than the physical and biological effects and outcomes. 
+%OR
+This thesis is presented as a requirement for the completion of my doctorate of philosophy in physics - and that is the last time I will mention physics in this thesis. 
+My field is mathematical biology. 
+Physics falls somewhere in between math and biology, being very quantitative but also concerned with the real world, and so that’s where my research ended up. 
+But I could have just as easily been housed in applied mathematics, or ecology, or systems biology, or a number of other niche fields. 
+The biology is the motivation; the mathematics is what allows one to get things done. 
+Mathematical modelling can allow for quantitative predictions, something that was missing from the “stamp collecting” pre-modern biology. 
+Mathematical modelling is also powerful in its qualitative predictions. 
+In setting up a model we start with our basic understanding of the problem, but the act can enlighten us to the system: it may reveal unexpected phases, or tell us what to perturb (and how) to get a desired effect. %eg ???, Allee
+The qualitative can also inform government policy or life philosophy. %eg conservation efforts, Malthus
 
+I apply mathematics to biological problems. In particular, I apply stochastic analysis to problems in ecology. 
+The application of mathematics allows for quantitative analysis of problems, which in turn leads to a greater ability to have statistical certainty when interpreting data. 
+Math can also allow you to uncover unforseen aspects of a problem. 
+You write down a simple model which is biologically inspired and seems sound, then further investigation yields a novel qualitative regime of the system. 
+%This is what happened to me, as I rediscovered (half a decade too late, it turned out) that the generalized Lotka-Volterra model recreates the Moran model in a particular parameter limit. 
+%OR
+Mathematical ecology is the oldest discipline of mathematical biology, with its relevance dating back at least since Malthus used a model of exponential growth to argue that overpopulation would lead to widespread famine and disease, and that was more than two hundred years ago. 
+It is certainly older than modern biology, with DNA only being recognized for what it was sixty years ago. 
+About a century ago, Lotka and Volterra extended the logistic equation of Verhulst and applied it to biological systems, arriving at the famous predator-prey equations. 
+Midway through the last century, Wright, Fisher, and Moran proposed urn models that demonstrate fixation in a way that is easily intuited and also treatable mathematically. 
+Around the same time Kimura was revolutionizing genetics by proposing models that could account for the evolution and eventual fixation or extinction of mutant alleles. 
+Ecology benefited from the island biogeography theory of MacArthur and Wilson. 
+In the last couple decades there has been debate as to the extent of neutral versus niche effects in ecological dynamics, sparked by Hubbell’s unified neutral theory of biodiversity and biogeography. 
+The history of mathematical and theoretical biology, especially as applied to ecology, is punctuated by significant models like these inspiring deeper investigations of both the quantitative details and qualitative trends that the biological world might contain. 
+%NTS:::citations?
 
-\section{Motivation and background and such}
-\subsection{Biodiversity}
-In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.'' 
-This is better known as the competitive exclusion principle. %, and its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}. 
-That is, in systems with few resources and therefore few niches, one expects that only few species will persist at any given time. 
-But this is not what is observed in nature. 
-Hutchinson outlined the problem with his famous paradox of the plankton \cite{Hutchinson1961}; %but see also \cite{Corderro2016}
-in the top layer of the open ocean there are only a few energy sources and very few minerals or vitamins, yet the number of different phytoplankton living in what seems like the same environment is astounding. 
+%\subsection{Biodiversity}
+%problems
+The application of mathematics to ecology opens up the possibility of addressing a variety of problems central to the field. 
+%extinction
+One of the simplest problems, and one treated in this thesis, is: What is the probability of and timescale over which a species will go extinct in an ecosystem \cite{Badali2019a,Badali2019b}? 
+%fixation
+There is the related question of: Given two competing species in a system, what is the probability of extinction of either species before the other, and the timescale over which this occurs? 
+In an ecosystem with competing species, when all but one species has gone extinct, that final species is said to have fixated in the system. 
+%conservation
+The lifetime and extinction of species is both of theoretical interest and a pressing concern for humanity, as we exist in an epoch of unprecedented rates of extinction. 
+Conservation biology is a driving motivation for me in both my academic and personal life. 
+It is concerned with managing and maintaining the biodiversity on Earth, to avoid excessive rates of extinction. 
+%biodiversity
+Biodiversity, simply put, refers to the number of species or genetic strains in an ecosystem. 
+%abundance distributions
+In more detail, biodiversity is sometimes characterized by allele frequency within a species or the abundance distribution of different species. %NTS:::need to explain allele frequency explicitly? %NTS:::heterozygosity
+The abundance distribution is the curve that results from binning each species based on its population in the system, such that the first bin indicates the number of species that have a local population of only one organism (or a number falling in the first bin's range), the second bin is the number of species with abundance two (or a population in the second bin's range), and so on. 
+%NTS:::in chapter 3 should explain in more detail that if the species are idential/neutral then the abundance disribution is simply an unnormalized stationary distribution (one which possibly has to be normalized based on the size of each bin)
+
+I would like to highlight the issue of biodiversity, one of the persistent problems in modern ecology \cite{May1999,Chesson2000,Pennisi2005,Kelly2008}. % is that of biodiversity. 
+In 1961 Hutchinson published ``The paradox of the plankton’’ \cite{Hutchinson1961}, in which he speculated about an apparent contradiction: for plankton living in the upper layer of the ocean far from shore there are few different resources on which to live, yet there is an immense diversity of different species of plankton that appear to coexist. 
+Surely those that reproduce the quickest or use the resources most efficiently would outcompete all others such that only the fittest would survive. 
+This principle of competitive exclusion, sometimes called Gause’s Law \cite{Gause1934} states that ``two species cannot coexist if they share a single [ecological] niche.''
+%In biology there is a law, or principle, named for Gause \cite{Gause1934}, which states that ``two species cannot coexist if they share a single [ecological] niche.''
+%This is better known as the competitive exclusion principle. %, and its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}.
+%That is, i
+In systems with few resources and therefore few niches, one expects that only few species will persist at any given time.
+%But this is not what is observed in nature.
+%Hutchinson outlined the problem with his famous paradox of the plankton \cite{Hutchinson1961}; %but see also \cite{Corderro2016}
+%in the top layer of the open ocean there are only a few energy sources and very few minerals or vitamins, yet the number of different phytoplankton living in what seems like the same environment is astounding.
 The expectation is that in this homogeneous ecosystem with extreme nutrient deficiency the competition should be severe, and only a few species should persist, many fewer than the number observed. 
-A variety of solutions have been proposed but there is as yet no consensus \cite{Roy2007}. 
+A variety of solutions have been proposed to resolve the paradox of the plankton but there is as yet no consensus \cite{Roy2007}.
+These include: the system is approaching a steady state of fewer species but very slowly; there exist other limiting factors like resources or toxins overlooked by scientists that help define more niches; environmental fluctuations or oscillations stabilize the system; spatial heterogeneity allows for local extinction but supports the great biodiversity on larger length scales; the system is stabilized by life-history traits of the plankton; the system is stabilized by the presence of predators to the plankton; there is symbiosis or commensalism between the various plankton species. 
+This lack of consensus is a gap in the literature, one that I contribute to by calculating the lifetime of a species, either surviving independently or undergoing competition with another species of varying similarity. 
 
+The competitive exclusion principle is sometimes considered tautological \cite{Hutchinson1957}. 
+To others, it can be derived, as through mathematical models that have the dynamics of two species trending toward the death of one or the other of them \cite{MacArthur1967,McGehee1977a,Bomze1983}. 
+%NTS:::need to talk of limiting similarity? See MacArthur and Levins, May
+Its veracity and applicability have been debated since before it was named \cite{Grinnell1917,Elton1927,Hutchinson1957,MacArthur1967,Leibold1995}. 
+%
+%paragraph on limiting factors, interactions mediated by b vs d
+Most theories explaining competitive exclusion, especially those which are mathematical in nature, make an argument from limiting factors. 
+These are factors external to the species that affect its birth or death rate. 
+They can be abiotic, like nutrients, toxins, waste products, or living space, or these factors can be biotic, like predators or prey. 
+A series of papers from McGehee and Armstrong \cite{Armstrong1976,McGehee1977a,Armstrong1980} showed that, if coexistence is defined as having a stable fixed point with positive population of multiple species in a deterministic differential equations model of species and limiting factors, coexistence of all species is impossible if the number of species is greater than the number of limiting factors. 
+That is, the number of different species that can coexist is limited to the number of different limiting factors. 
+In an ecosystem there are a finite number of different limiting factors; when it is full of its allowed number of species and additional species enters the system it either dies out or will replace one of the existing species. 
+This is exactly what the principle of competitive exclusion predicts. 
+Note that these limiting factors can be ones that affect a species' rate of birth or its rate of death. 
+In either case, two species do not interact with each other directly; rather, the presence of one species modifies the amount of factor existent in the system, which in turn affects the birth rate and/or death rate of the other species, and vice versa. 
+There are some subtleties to coexistence or the absence thereof, which I will be exploring in this thesis, but it suffices the reader to know that the idea of limiting factors is one theory which justifies the competitive exclusion principle, albeit with discrete niches. 
+
+\iffalse
 %More generally, problems of biodiversity...
-The problem has persisted for more than half a century, and people continue to research the more general problem of biodiversity and its causes \cite{May1999,Chesson2000,Pennisi2005,Kelly2008}. 
-%Could be as complicated as abundance distributions. 
-Sometimes the research question is complicated, manifesting itself as a difficulty in describing the origin of species abundance distributions. 
-%Why should there be many rare species and only a few common ones? 
-The development of Hubbell's neutral theory was motivated to explain observed abundance distributions \cite{Hubbell2001}. 
-It contrasts with niche theories of resource apportionment; whereas the former assumes that all species compete with each other, the latter assumes that each species grows based on the apportionment it is allocated and does not touch the resources of other species. 
+The problem has persisted for more than half a century, and people continue to research the more general problem of biodiversity and its causes \cite{May1999,Chesson2000,Pennisi2005,Kelly2008}.
+%Could be as complicated as abundance distributions.
+Sometimes the research question is complicated, manifesting itself as a difficulty in describing the origin of species abundance distributions.
+%Why should there be many rare species and only a few common ones?
+The development of Hubbell's neutral theory was motivated to explain observed abundance distributions \cite{Hubbell2001}.
+It contrasts with niche theories of resource apportionment; whereas the former assumes that all species compete with each other, the latter assumes that each species grows based on the apportionment it is allocated and does not touch the resources of other species.
 %Could be as simple as coexistence or time until fixation
-Problems in biodiversity can be simpler. 
-One question this text asks is how long a single species is expected to survive, given favourable conditions \cite{Badali2}. 
-Much research has been done on two species competing with each other, as a reduction of the full problem of biodiversity \cite{many}. 
+Problems in biodiversity can be simpler.
+One question this text asks is how long a single species is expected to survive, given favourable conditions \cite{Badali2}.
+Much research has been done on two species competing with each other, as a reduction of the full problem of biodiversity \cite{many}.
 Whether two species will coexist, and for how long, is of essential importance to the larger problem of biodiversity. 
+\fi		
 
-The theory has many applications. 
-Most obvious, and most pressing to society, is the realm of conservation biology. Biodiversity is often used as an indicator of the health of an ecosystem. A clearer understanding of the forces that maintain biodiversity could provide new and easier metrics for evaluating the health of an ecosystem, and hence the efficacy of various conservation efforts. 
-The mechanisms of species maintenance are related to those of speciation, and stability of an ecosystem can refer to both avoiding collapse and avoiding invasion. Invasion of a new mutant or immigrant strain or species into the system is a problem deeply intertwined with that of biodiversity maintenance. This problem too is of obvious interest in the study of ecosystems. 
-Invasion is also relevant in the healthcare world. We are only recently learning, for example, about the composition of the gut microbiome in humans and its relation to health. The balance of different species in ones gut seems to be important for avoiding illness. Imbalance of the microbiome composition, or invasion of a new species, can greatly impact a person's wellbeing, and a theory of whether an invasion will be successful and how long it might persist would go a long way toward diagnostics and prognostication. 
-The other end of the process, namely the extinction of a species, also has a number of applications. Other than the obvious modern ecological ones, extinction times are useful in paleontology. The fossil record shows a number of species in different epochs, and these data make more sense in the light of a consistent theory of species survival and eventual decline. 
-Similarly, extinction and fixation times are already used in the construction of phylogenetic trees. The more accurate a theory of extinction timescales developed, the more precise we can perform phylogenetic analyses. 
+%NTS:::a bunch of leftover junk is what this paragraph is
+%One question this text asks is how long a single species is expected to survive, given favourable conditions \cite{Badali2}. - also cite above		
+%but also see if the following paragraphs can be included		
+%Biodiversity [not defined]		
+%Species abundance distributions		
+%Hubbell		
+%Niche theories		
+%The development of Hubbell's neutral theory was motivated to explain observed abundance distributions \cite{Hubbell2001}.		
+%It contrasts with niche theories of resource apportionment; whereas the former assumes that all species compete with each other, the latter assumes that each species grows based on the apportionment it is allocated and does not touch the resources of other species.		
+
+%applications, it seems
+The theories dealt with in this thesis have many applications. 
+Most obvious, and arguably most pressing to society, is the realm of conservation biology. Biodiversity is often used as an indicator of the health of an ecosystem \cite{McKane2000,Pimm1988,Kalyuzhny2014,Peterson1997,Shaffer1981}. 
+A clearer understanding of the forces that maintain biodiversity could provide new and easier metrics for evaluating the health of an ecosystem, and hence the efficacy of various conservation efforts.
+The mechanisms of species maintenance are related to those of speciation, and an ecosystem losing stability can refer to both its collapse or invasion of a foreign species. 
+Invasion of a new mutant or immigrant strain or species into the system is a problem deeply intertwined with that of biodiversity maintenance \cite{Hubbell2001}. 
+This problem too is of obvious interest in the study of ecosystems. 
+Invasion is also relevant in the domain of health care. 
+We are only recently learning, for example, about the composition of the microbiome in humans and its relation to health \cite{Coburn2015,Korem2015,Manichanh2010,Theriot2014,Kinross2011}. 
+The balance of different species in ones gut seems to be important for avoiding illness. 
+Imbalance of the microbiome composition, or invasion of a new species, can greatly impact a person's wellbeing, and a theory of whether an invasion will be successful and how long it might persist would go a long way toward diagnostics and prognostication.
+The other end of the process, namely the extinction of a species, also has a number of applications. 
+Other than the obvious modern ecological ones, extinction times are useful in paleontology. 
+The fossil record shows a number of species in different epochs, and these data make more sense in the light of a consistent theory of species survival and eventual decline. %NTS:::don't have any citations
+Similarly, extinction and fixation times are already used in the construction of phylogenetic trees \cite{Rogers2014,Rice2004,Blythe2007}. 
+The more accurate a theory of extinction timescales developed, the more precisely we can perform phylogenetic analyses. 
+Mapping existent species to their common ancestors falls under the purview of coalescent theory \cite{Kingman1982}. %NTS:::other citations?
+%NTS:::probably should explain in more detail what coalescent and phylogenetic theory actually do
+This is part of the impact of my research, in that I calculate extinction times to arbitrary accuracy, using a controlled approximation largely ignored in the literature. 
+
+
+%if the applications paragraph above is kept then it makes more sense to flow to neutrality; however, if the previous paragraph is on limiting factors it makes more sense to go to niches
 
 
 %\subsection{Extinction/Fixation/Coexistence}
 
 
 \section{Neutrality}
-\subsection{Moran and other simple stochastic models}
-Start with a simple model of fixation with 2 species, for which we can calculate the time to one species taking over the system. 
-The Moran model \cite{Moran1962} is such a model, a classic urn model used in population dynamics in a variety of ways. 
-Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time. 
-But really it can describe any system where individuals of different species or strains undergo strong but unselective competition in some closed or finite ecosystem. 
+%NTS:::somewhere (maybe Ch2) need to be explicit what is meant by neutral, what is meant by simply symmetric
+%\subsection{Moran and other simple stochastic models}
+The simplest version of coalescent theory and phylogenetic tree reconstruction is based on neutral models \cite{Kingman1982,Rice2004}. 
+%They describe how the relative proportion of genes in a gene pool might change over time
+Neutral models, especially those of Wright, Fisher, and Moran, are minimal models that show random extinction and fixation. 
+These models allow not just for fixation probabilities but also the distribution of times such a random occurrence might take. 
+%Start with a simple model of fixation with 2 species, for which we can calculate the time to one species taking over the system.
+In fact these models can describe any system where individuals of different species or strains undergo strong but unselective competition in some closed or finite ecosystem, especially those constrained by space. 
+Such ecosystems include any of the microbiomes, of humans \cite{Coburn2015,Kinross2011} or others \cite{Theriot2014,Wolfe2014,Roeselers2011,Ofiteru2010,Bucci2011,Vega2017}. These microbiomes have limited space and so any death of an organism is quickly replaced by the birth of another. Immigration is rare due to the closed nature of the system. 
+Other example systems have a limited number of resources hence a finite number of species, and due to a lack of mobility or distance from biodiversity reservoirs do not often see the introduction of new species, as in the soil or the ocean surface \cite{Friedman2017,Cordero2016}. 
+%The Moran model \cite{Moran1962} is sufficiently simple that it can be described in words. 
+%Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time.
 
-To arrive at the Moran model we must make some assumptions. 
-Whether these are justified depends on the situation being regarded. 
-The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species and the state of the system. 
-This makes the Moran model a neutral theory, and any evolution of the system comes from chance rather than from selection. 
+The Moran is a classic urn model used in population dynamics in a variety of ways, yet it is easy to arrive at, requiring only a few simplifying assumptions. 
+%To arrive at the Moran model we must make some assumptions.
+Whether these are justified depends on the situation being regarded, so they should be applied judiciously. 
+The misapplication or unthinking application of assumptions is one of the motivations of chapter one of this thesis. %NTS:::chapter number
+The first assumption toward the Moran model is that no individual is better than any other in terms of reproducing faster or living longer; that is, whether an individual reproduces or dies is independent of its species and the state of the system. %NTS:::can talk about fitness (here or later)
+This makes the Moran model a neutral theory, and any evolution of the system comes from chance rather than from selection.
+The next assumption is that the population size is fixed, owing to the (assumed) strict competition for resources or space in the system. 
+That is, every time there is a birth the system becomes too crowded and a death follows immediately. Alternately, upon death there is a free space in the system that is filled by a subsequent birth.
+In the classic Moran model each pair of birth and death event occurs at a discrete time step (cf. the Wright-Fisher model, where each step is longer and involves $N$ of these events, but the limiting dynamics are the same). 
+This assumption of discrete time can be relaxed without a qualitative change in results, as will be reviewed in chapter 3. %NTS:::chapter number
+The Moran model is most appropriate for modeling a small system of asexually reproducing organisms, like bacteria in an enclosed space. %like a tooth's cavity?
 
-Next we assume that the the population size is fixed, owing to the (assumed) strict competition in the system. 
-That is, every time there is a birth the system becomes too crowded and a death follows immediately. Alternately, upon death there is a free space in the system that is filled by a subsequent birth. 
-In the classic Moran model each pair of birth and death event occurs at a discrete time step (cf. the Wright-Fisher model, where each step involves $N$ of these events). 
-This assumption of discrete time can be relaxed without a qualitative change in results. 
-
-In the Moran model, each step there is a birth and a death. 
-A species is chosen for either according to its frequency. 
-There is an equal net rate of change, in both increasing and decreasing the frequency. 
-The system fluctuates until either the species dies (extinction) or all others die (fixation). 
-Both of these cases are absorbing states, so once the system reaches either it will never change. 
-Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk, and therefore the probability of extinction occurring before fixation is known. 
+In the Moran model, each time step involves a birth and a death event.
+For each event the participating species is chosen with a chance proportional to its abundance in the system. 
+Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk, which is a solved problem. %and therefore the probability of extinction occurring before fixation is known.
+And since each event has an equal probability of happening for a given species, the frequency of that species tends to stay constant on average. 
+%There is an equal net rate of change, in both increasing and decreasing the frequency.
+However, due to the randomness inherent to model a species' frequency in fact fluctuates. 
+This fluctuation is not indefinite: there are two states from which the system cannot exit and thus only accumulate in probability of occurrence. 
+These static states are extinction and fixation: the species has no chance of reproducing when at zero population (extinction) and does not change abundance when it is the only species in the system (fixation) as it constantly is both reproducing and dying with unit probability each time step. 
+%The system fluctuates until either the species dies (extinction) or all others die (fixation).
+Both of these cases are absorbing states, so called since once the system reaches either it will stay in that state indefinitely. 
 In this system we can define the first passage time as the time the system takes to reach either fixation \emph{or} extinction. 
-Its calculation is also known. 
+The first passage time can also be calculated, and its mean gives an estimate of the time two species will coexist in a system (or the inverse fixation rate of the system). 
 
-Under the approximation of continuous population fraction the Moran model effectively becomes that of Kimura \cite{Kimura1983}. 
-Kimura was inspired by alleles rather than species, but the rationale is similar. 
-In each generation each organism provides many copies of its genome, which are chosen indiscriminately (because each organism has two copies of its genome, a factor of two shows up in Kimura's results when compared those of Moran). 
-Following a few assumptions, Kimura calculates the new mean and variance of the system, hence generating a diffusion equation. 
-Applying the Fokker-Planck approximation to the Moran model obtains the same equation, hence the claim that Kimura's results are similar to those of Moran. 
-Kimura's model similarly can be modified to include many biological effects, like selection. 
-The works of Kimura are well-respected and highly motivated a change in biology to be more quantitative and predictive. 
-Most of Kimura's predictions are numerical by necessity, as no nice analytic forms exist for the solutions. 
-Furthermore, transient behaviour was especially difficult to capture in the models, so only steady states are regarded. 
-Nevertheless, Kimura's ground-breaking work is powerful and wide-ranging. 
-Chapter 4 of this thesis compares some of its outcomes to those from a Kimura paper published decades earlier. 
-His legacy is inescapable. 
+%NTS:::include a Moran (and Hubbell??) figure of some sort
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{MoranExample}
+	\caption{\emph{Example Time Steps of the Moran Model} Here is a sample Moran model with $K=12$ individuals, initially $n=3$ of which are red. In the first time step, a red individual is chosen to reproduce (which would happen with probability $3/12$) and a blue one dies (probability $9/12$). This increases the number of red individuals in the system. Other possibilities each time step are that the number of reds remains the same or decreases. There is a non-zero chance that in as few as three steps a colour will have fixated in the system. Over time the probability of fixation increases such that it is almost certain the system will fixate eventually. Once only one colour remains in the system the chance that a different colour reproduces (and is thus introduced into the system) is zero, since there are none of that different colour around to reproduce. }
+\end{figure}
 
-The seminal work of Hubbell \cite{Hubbell2001} is also similar to that of Moran, but Hubbell is a much more controversial figure than Kimura. 
-Hubbell, like Moran, was concerned with species, but did not limit himself to Moran's pedagogical choice of two. 
-Hubbell assumes that each organism from any species competes equally with all others, and therefore as with Moran its probability of reproducing or dying is proportional to its fraction of the population. 
-But Hubbell does not predict fixation probabilities and times. 
-Rather, he calculates the distribution of species abundances that should be present within his neutral model. 
-Following the arguments of Hubbell, one can get an estimate of the expected biodiversity of a community. 
-The abundance distribution he predicts matches well with experimental observations in a variety of biological contexts, from trees to birds to microbiomes. 
-Nevertheless, Hubbell's neutral theory is contentious. 
+%there is also a chance here to talk about neutral vs symmetric
+The unbiased random walk underlying the Moran model suggests that it is a neutral theory. %do I need to explain this more?
+In short, a neutral theory is one for which intraspecies interactions are the same as interspecies interactions. 
+That is, an organism competes equally strongly with members of its own species as with those of other species. 
+No species is distinguished or exceptional in a neutral theory. 
+Thus, unless the whole system's net population is increasing or decreasing, a given organism (and hence its species) is equally likely to reproduce or die, and on average its species abundance is constant. 
+Whether and why different species should regard each other the same as themselves is a matter of debate and apologists \cite{Hubbell2001,Leibold2006,Leigh2007,Rosindell2011}. 
+I would like to clarify the difference between neutral theories and those that are simply symmetric. 
+One could formulate a model where intraspecies interactions are different than interspecies interactions, but the intraspecies interactions are the same for each species, as are the interspecies interactions. 
+In a symmetric model a given species behaves an another would in its situation, but not necessarily as another does, given that they are in different situations (namely, who species are typically at different abundances). 
+In a symmetric theory an exchange of labels between two species has the same effect as an exchange of population sizes. 
+For the bulk of this thesis I deal with symmetric theories, with a neutral theory being one limit thereof. 
+Neutral theories are a subset of symmetric theories, since a neutral theory in which each species does not distinguish between self and others automatically allows for an exchange of species labels with no noticeable effect beyond exchanging abundances. 
+%NTS:::this paragraph needs work
+
+%NTS:::"I already outlined some of the historic greats in mathematical biology, including WFM. Kimura and Hubbell also fall under the banner of those who developed neutral theories." 
+In the background section I mentioned some of the historic greats in mathematical biology, including Wright, Fisher, and Moran. 
+Kimura and Hubbell also fall under the banner of those who developed neutral theories. 
+Under the approximation of continuous population fraction the Moran model effectively becomes that of Kimura \cite{Kimura1983}.
+Kimura was inspired by alleles rather than species, but the rationale is similar. %define allele, explain why this should be neutral
+Alleles are the different variants/species of a gene, the segment of DNA that serves a single function. 
+Most non-lethal mutations to an existing allele tend to leave its function entirely unchanged, which clearly makes for a neutral theory. 
+Whereas Moran deals with discrete numbers of individual organisms, Kimura approximates the state space of allele populations as continuous, choosing to deal with allele frequency rather than number. 
+%NTS:::"The timings are also different." - are they though? Yes
+Applying the Fokker-Planck approximation to the Moran model obtains the same probability equations as Kimura, hence the claim that Kimura's results are similar to those of Moran.
+In each generation each organism provides many copies of its genome, which are chosen indiscriminately (because each organism has two copies of its genome, a factor of two shows up in Kimura's fixation time results when compared those of Moran). 
+Following a few assumptions, Kimura calculates the new mean and variance of the system after one generation of breeding, which are applied in a diffusion equation. 
+Kimura's model can be modified to include many biological effects, like selection. 
+The works of Kimura are well-respected and highly motivated a change in biology to be more quantitative and predictive. %I'm ignoring Anton's comment that this is both obvious and overstated
+Most of Kimura's predictions are numerical by necessity, as no nice analytic forms exist for the solutions.
+%Furthermore, transient behaviour was especially difficult to capture in the models, so only steady states are regarded.
+%Nevertheless, Kimura's ground-breaking work is powerful and wide-ranging.
+%Chapter 3 of this thesis compares some of its outcomes to those from a Kimura paper published decades earlier. 
+In chapter 3 of this thesis I arrive at some analytical results to describe qualitatively different regimes of a Moran model with immigration, and compare these outcomes to some of Kimura's results. %NTS:::chapter number
+%His legacy is inescapable.
+%Anton asks, "What is the main point of this paragraph?"
+
+%MacArthur and Wilson \cite{MacArthur1967a}
+The seminal work of Hubbell \cite{Hubbell2001} is also similar to that of Moran, but Hubbell is a much more controversial figure than Kimura.
+Whereas Kimura regarded allele mutations which were often synonymous and therefore neutral, Hubbell argues that different species also follow neutral behaviour and calculates the steady state abundance distribution that follows from such an assumption plus a constant influx of immigrants. %of the same trophic level
+%Hubbell, like Moran, was concerned with species, but did not limit himself to Moran's pedagogical choice of two.
+Hubbell assumes that each organism from any species competes equally with all others, and therefore as with Moran the species' probability of reproducing or dying is proportional to its fraction of the population.
+But Hubbell does not predict fixation probabilities and times.
+Rather, he calculates the distribution of species abundances that should be present within his neutral model, given that there is immigration into (or speciation in) the system and that each immigrant is from a new species. 
+Following the arguments of Hubbell, one can get an estimate of the expected biodiversity of a community, the number of species that should exist in the trophic level (those species which generally consume upon the same set of prey and are preyed upon by the same set of predators). 
+The abundance distribution he predicts matches well with experimental observations in a variety of biological contexts, from trees to birds to microbiomes \cite{Hubbell2001}. 
+The Moran model with immigration analyzed in chapter 3 can be thought of as a modification of Hubbell's theory with recurring immigrants from the same species. 
+While I do discuss abundance distributions I also calculate extinction probability and timescale, something Hubbell's work does not address, as he was motivated entirely by the big picture, indifferent about the average dynamics of an individual species. 
+
+As stated previously, Hubbell's neutral theory is contentious. 
 The idea that each species competes with all others to the same degree as intraspecies competition strains credibility. 
-Surely the differences between species matters! 
-Of course there are differences between species; even the staunchest neutralist would agree. 
-But slight perturbations from Hubbell's theory do not significantly alter its results. 
-What's more, while everyone concedes that there are differences between species, some argue that these differences do not matter. 
-In some sense, they claim, the species are equivalent and behave neutrally, which is why Hubbell's theory seems to work so well in such disparate ecologies. 
+%Surely the differences between species matters! 
+%Of course there are differences between species; even the staunchest neutralist would agree. 
+However, slight perturbations from Hubbell's theory do not significantly alter its results. 
+%What's more, while everyone concedes that there are differences between species, some argue that these differences do not matter. 
+%In some sense, they claim, 
+Furthermore, supporters claim that in some sense the different species are equivalent and behave neutrally, which is why Hubbell's theory seems to work so well in such disparate ecologies \cite{Hubbell2006}. 
 The examples presented in Hubbell's seminal book are compelling, and there may be some truth to these claims. 
 The other side of the debate insists that species differences are the cause of observed abundance distributions. 
 In particular, the environment can be divided into various ecological niches, and it is how these niches are uniquely used by their occupying species that determines the biodiversity of the ecosystem. 
@@ -130,163 +276,413 @@ I will do my best to provide a summary here, to contextualize my research.
 
 
 \section{Niches}
-%NTS:::somewhere (maybe Ch2) need to be explicit what is meant by neutral, what is meant by simply symmetric
-\subsection{Concept of a niche, and the debates therein}
-Of course species \emph{aren't} the same as each other. 
-Some would live happily as the only animals on an island, and others would die out in such a situation. 
-Some can aerobically digest citrate, and others cannot. 
-This is the domain of the competitive exclusion principle. In any given niche, one species will eventually dominate (and usually this is the species optimized to that niche, though this is not necessary for the definition of Gause' law). 
-This begs the question, what is an ecological niche? 
+%DIDN'T MORAN ALSO SHOW EXCLUSION? WHAT'S THE DIFFERENCE HERE??
+The Moran model shows fixation in a system, so what advantage does niche theory have? 
+Firstly, the concept of a niche is intuitive, certainly more intuitive than neutrality of Hubbell's theory of biodiversity and biogeography. 
+But Hubbell's theory, with its immigration, does not have exclusion, instead predicting a succession of species on a timescale of order inverse immigration rate. 
+And it is not competitive, in that species are not outcompeting each other, being equally matched as they are (this being the quality that makes it a neutral theory). 
+%\subsection{Concept of a niche, and the debates therein}
+%Of course species \emph{aren't} the same as each other.
+%Some would live happily as the only animals on an island, and others would die out in such a situation.
+%Some can aerobically digest citrate, and others cannot.
+%This is the domain of the competitive exclusion principle. 
+%In any given niche, one species will eventually dominate, as per the competitive exclusion principle. %(and usually this is the species optimized to that niche, though this is not necessary for the definition of Gause' law).
+The competitive exclusion principle states that in any given niche one species will eventually dominate. %(and usually this is the species optimized to that niche, though this is not necessary for the definition of Gause' law).
+This begs the question, what is an ecological niche?
 
-On the theory of niches, Hutchinson \cite{Hutchinson1957} says, ``Just \emph{because} the theory is analytically true and in a certain sense tautological, we can trust it in the work of trying to find out what has happened'' to allow for coexistence of species. 
-In principle, species coexist because they inhabit different niches. 
-The concept of niches is an old one, over a century old, and was popularized by Grinnell \cite{Grinnell1917}. 
-There is therefore over a century of debate as to the meaning of a niche, as there is ambiguity in its use. 
-Following Leibold \cite{Leibold1995}, I refer to the definition of a niche according to the two major camps as the habitat or requirement niche and the functional or impact niche. 
+The concept of niches is an old one, over a century old, and was popularized by Grinnell \cite{Grinnell1917}.
+There is therefore over a century of debate as to the meaning of a niche, as there is ambiguity in its use.
+On the theory of niches, Hutchinson \cite{Hutchinson1957} says, ``Just \emph{because} the theory is analytically true and in a certain sense tautological, we can trust it in the work of trying to find out what has happened'' to allow for coexistence of species.
+In principle, species coexist because they inhabit different niches.
+Following Leibold \cite{Leibold1995}, I refer to the definition of a niche according its two major uses: as the habitat or requirement niche and the functional or impact niche.
 
-Grinnell \cite{Grinnell1917} refers to those environmental considerations that a species can live with as what defines the niche. 
-These include those organisms on different trophic levels than the species, like their predators and prey, but not those on the same trophic level that might compete with them. 
-Hutchinson \cite{Hutchinson1957} was in the same camp as Grinnell, and has provided one of the most enduring conceptualizations of a niche, that of an ``\emph{n}-dimensional hypervolume'' in the space of factors that could affect the growth or death of a species. 
-For each factor there is some range at which the species can reproduce faster than it dies out. 
-This is true both for abiotic factors such as temperature, and biotic factors like the concentration of predators. 
-Sometimes these ranges are bounded by zero, sometimes they are unbounded, and sometimes they depend on the values of the other factors involved. 
-But in the space of all these factors, Hutchinson calls the fundamental niche that the volume in which the species would have a greater birth rate than death rate. 
+The requirement niche:
+%Grinnell \cite{Grinnell1917} refers to those environmental considerations that a species can live with as what defines the niche.
+Grinnell \cite{Grinnell1917} defines a niche as those ecological conditions that a species can live within. 
+These ecological conditions include environmental levels and those organisms on different trophic levels than the species, like their predators and prey, but not those on the same trophic level that might compete with them.
+Hutchinson \cite{Hutchinson1957} has a similar point of view to that of Grinnell, and has provided one of the most enduring conceptualizations of a niche, that of an ``\emph{n}-dimensional hypervolume'' in the space of factors that could affect the growth or death of a species.
+For each factor there is some range at which the species can reproduce faster than it dies out.
+This is true both for abiotic factors such as temperature, and biotic factors like the concentration of predators.
+Sometimes these ranges are bounded by zero (eg. cannot survive with no carbon source), sometimes they are unbounded (eg. no amount of prey is too much), and sometimes they depend on the values of the other factors involved (eg. salt is fine for sea creatures so long as there is an appropriate amount of water along with it). 
+But in the space of all these factors, Hutchinson calls the fundamental niche that volume in which the species would have a greater birth rate than death rate. 
 He defines the realized niche as the point or subspace in this high dimensional space that the species effectively experiences, given that it is existing and potentially coexisting in an ecosystem. 
-This also lends a natural definition of niche overlap, as the (normalized) overlap of the fundamental niches of two species. 
-A simple model of two species suggests that the functional niche tells us whether the coexistence point of two species is physical \cite{checkit}. 
+This also lends a natural definition of niche overlap, as the (normalized) overlap of the fundamental niches of two species \cite{MacArthur1967}. 
+The requirement niche tells us whether the coexistence point of two species is physical, according to simple model of two species \cite{Holt1994}. 
 %McGehee and Armstrong do not stake a claim in the debates on the definition of a niche, but likely they would side with Hutchinson
+It is inherently linked to the argument of limiting factors as the delimiters of niches as outlined earlier \cite{Armstrong1976,McGehee1977a,Armstrong1980}. %NTS:::chapter number - but also, do I do it here AND in chapter 1 AND in chapter 2???
 
-The other usage of the term niche was popularized by Elton \cite{Elton1927} and MacArthur \& Levins \cite{MacArthur1967}, that of a functional or impact niche. 
+The other usage of the term niche, that of a functional or impact niche, was popularized by Elton \cite{Elton1927} and MacArthur \& Levins \cite{MacArthur1967}. 
 Whereas the requirement niche focuses on what factors a species needs to live, the impact niche looks at how the species affects these factors. 
-Their conception of a niche describes how a species influences its environment, or how that species fits in a food web; essentially, what its role is in an ecosystem. 
-This idea is especially attractive to those who study keystone species, but is intuitively understood by anyone who has surveyed a variety of ecosystems. 
-In every ecosystem with flowers there is something that pollinates them; in every ecosystem with cells that grow cellulose cell walls there is something that can digest that cellulose; in every system with prey there are predators. %I don't like how this sentence is executed
-Whether the pollinator is a bird or any number of insect species is irrelevant; this role exists in the ecosystem, and so a species evolves to occupy this niche. 
-A simple model of two species suggests that the impact niche tells us whether a coexistence point of two species is stable \cite{checkit}. 
+Their conception of a niche describes how a species influences its environment, or how that species fits in a food web; essentially, what role it plays in an ecosystem. 
+This idea is especially attractive to those who study keystone species \cite{May1999,Chesson2000,Leibold2006} (those species that play a disproportionate or critical role in maintaining an ecosystem) but is easily understood from an elementary understanding of what an ecosystem is. 
+%intuitively understood by anyone who has surveyed a variety of ecosystems. 
+By way of example, in every ecosystem with flowers there is something that pollinates them. 
+%; in every ecosystem with cells that grow cellulose cell walls there is something that can digest that cellulose; 
+%in every system with prey there are predators. %I don't like how this sentence is executed
+Whether the pollinator is a bird or an insect species is irrelevant; this role exists in the ecosystem, and so a species evolves to occupy this niche. 
+The niche, in this view point, is the role the species plays in the ecosystem with regards to the other species and the environment; how it impacts the system. 
+As per one simple model of two species, the impact niche tells us whether a coexistence point of two species is stable \cite{Tilman1982textbook}. 
 %Turns out this relates to the stability of a coexistence point. 
 
-Both of these categories of semantics for the word niche have their use. 
-There has been some work to resolve the discrepancies that arise when the two definitions conflict \cite{Leibold1995,Leibold2006}. 
-This thesis tends to favour the requirement niche definition but ultimately remains agnostic to the debate. 
-So long as niches exist in some sense, and a niche overlap parameter can be defined, the results I arrive at are sound. 
-I felt it would be remiss were I not to include a brief summary of the debates associated with the definition of an ecological niche, hence the preceding section. 
+Both of these categories of semantics for the word niche have their use.
+The literature shows attempts to resolve the discrepancies that arise when the two definitions are at odds \cite{Leibold1995,Leibold2006}. 
+%NTS:::example of conflict
+%For example, an impact niche argument might view a primary consumer species as keeping the population of other primary consumers down by way of reducing the producer population... NO GOOD
+This thesis tends to favour the requirement niche definition, based on an argument of limiting factors and explained more fully in chapter 2, but ultimately remains agnostic to the debate. %NTS:::Anton thinks I have a precise definition of a niche
+So long as niches exist in some sense, and a niche overlap parameter can be defined, the results I arrive at are sound.
+%I felt it would be remiss were I not to include a brief summary of the debates associated with the definition of an ecological niche, hence the preceding section.
 
 %***MAYBE REORDER: NICHE CONCEPT, McGEHEE AND ARMSTRONG, LOTKA-VOLTERRA, /THEN/ TOXINS
 
 %\subsection{Concept of competitive exclusion} %was covered in diversity?
-%\subsection{Niche partitioning/apportionment} %here or after LV? or in appendix
+%\subsection{Niche partitioning/apportionment} %here or after LV? or in _appendix_ <---
 
-\subsection{Lotka-Volterra}
-%Long history, from 1D Verhulst and 2D predator-prey. 
-The original Lotva-Volterra model was introduced over a century ago to describe the dynamics of a population of a predator and its prey. 
-It can be seen as an extension of the Verhulst, or logistic, equation, from one to two dimensions. 
+\section{Deterministic Models}
+%\section{Mathematical Models}
+%\section{Generalized Lotka-Volterra Models}
+%\subsection{Lotka-Volterra}
+%see Bomze (from wikipedia) for complete categorization
+%Long history, from 1D Verhulst and 2D predator-prey.
+%How is this related to niches?
+
+%limiting factors - for a brief introduction, see chapter 1; a more detailed example can be found in chapter 2
+The limiting factor argument for defining the number of niches in an ecosystem is largely taken from Armstrong and McGehee \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
+%These arguments were discovered independently (albeit four decades too late) by the current author and are summarized in chapter 2
+These arguments are summarized in chapter 2. %NTS:::chapter number
+In the same place I show an example of starting from two limiting factors and arriving at a generalized Lotka-Volterra model. 
+%
+The original Lotva-Volterra model was introduced around a century ago to describe the dynamics of a population of a predator and its prey.
+It can be seen as an extension of the Verhulst, or logistic, equation, from one to two dimensions.
 %SHOW at least a 1D log, if not the deterministic LV?
-These days the generalized Lotka-Volterra model is the accepted terminology for a dynamical system that depends linearly and quadratically on the populations modelled, with no explicit time dependence. 
-%A stochastic 2D model will be the main model used in this thesis. 
-A stochastic 2D model will be the main model used in this thesis, except for the next chapter, which exhaustively explores the stochastic Verhulst model. 
+In its modern incarnation the generalized Lotka-Volterra model is typically written as 
+\begin{align*}
+%\frac{\dot{x}_1}{r_1 x_1} &= 1 - \frac{(x_1 + a_{12}x_2)}{K_1} \\
+%\frac{\dot{x}_2}{r_2 x_2} &= 1 - \frac{(a_{21}x_1 + x_2)}{K_2}. 
+\dot{x}_1 &= r_1 x_1 \left(1 - x_1/K_1 - a_{12}x_2/K_1\right) \\
+\dot{x}_2 &= r_2 x_2 \left(1 - a_{21}x_1/K_2 - x_2/K_2\right). 
+\end{align*}
+The generalized Lotka-Volterra model is the accepted terminology for a dynamical system that depends linearly and quadratically on the populations modelled, with no explicit time dependence. 
+The Verhulst model is one of these equations with its $a=0$. 
+The classic Lotka-Volterra model is attained by taking the $K$'s to infinity, keeping the $a/K$ ratios positive and finite, choosing $r$ to be negative for the predator and positive for the prey. 
+This predator prey model has oscillating dynamics about a center fixed point. 
+%It has been used to model bacteria and bacteriophage \cite{Iranzo2013}, and other contexts \cite{Smith2016,Peckarsky2008,Cox2010,Parker2009,Bomze1983,Zhu2009,wikipedia}
+To restrict our investigation to viable species in the same trophic level (treating predators and prey of the species of interest as being some of the limiting factors) we assume $K$ is finite and $r$ is positive. 
+More details of the Lotka-Volterra model will be provided as they become relevant, particularly in chapter 2. %NTS:::chapter number
+%A stochastic 2D model will be the main model used in this thesis.
+%A stochastic 2D model will be the main model used in this thesis, except for the next chapter, which exhaustively explores the stochastic Verhulst model.
+Chapter 1 is inspired by the single logistic equation, while chapter 3 further explores the 2D generalized Lotka-Volterra model then considers a Moran model with immigration. 
+Some authors \cite{Lin2012,Constable2015,Chotibut2015,Young2018} have observed that for certain parameter values that the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. 
+They did not examine how the effect on the dynamics as the Moran limit is approached; the transition to this limit is one of the main investigations of this thesis. 
+
+\iffalse
 %phase space figure - later
-The deterministic limit of the 2D model has fixed points corresponding to neither species surviving, one, the other, or both. 
+The deterministic limit of the 2D model has fixed points corresponding to neither species surviving, one, the other, or both.
 %parameter space figure - later
-The position and stability of these points depends on the main parameters of the model, namely the growth rates, the carrying capacities, and the competition between species, called herein the niche overlap. 
-Carrying capacity is a common phenomenological parameter that measures the number or density of organisms an ecosystem can support, in the absence of competitors. 
-By growth rate I mean the timescale of approach toward the carrying capacity, typically measured experimentally by fitting a line to a semi-logarithmic plot of the growth curve. 
+The position and stability of these points depends on the main parameters of the model, namely the growth rates, the carrying capacities, and the competition between species, called herein the niche overlap.
+Carrying capacity is a common phenomenological parameter that measures the number or density of organisms an ecosystem can support, in the absence of competitors.
+By growth rate I mean the timescale of approach toward the carrying capacity, typically measured experimentally by fitting a line to a semi-logarithmic plot of the growth curve.
 %LV-Moran correspondence - more later
-Some authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for certain parameter values that the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis. 
+Some authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for certain parameter values that the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis.
+\fi
+
+%Parameters in LV
+The parameters in the Lotka-Volterra equation are easy to understand, albeit hard to measure. 
+The turnover rate $r$ gives the maximum growth rate a species can achieve, specifically when first colonizing an empty system, such that the intraspecific ($1/K$) and interspecific ($a/K$) competition terms are small. 
+The parameter $K$ is called the carrying capacity of the ecosystem, the maximum population the system can sustain in the absence of competitor species, given the resources available and other limiting factors present in the system. 
+%r/K popularized by MacArthur and Wilson \cite{MacArthur1967a}
+Together, these two parameters, which are the only two that show up in a single logistic equation $\dot{x}=rx(1-x/K)$, motivate $r/K$ selection theory, coined by MacArthur and Wilson \cite{MacArthur1967a}. 
+The theory of $r/K$ selection posits that there is a trade-off between the quantity and the quality of offspring, so most species favour either having many offspring ($r$-selection) or fewer high-quality offspring ($K$-selection) that persist close to the carrying capacity of the system. 
+This heuristic fell out of favour in the 1980s as it had ambiguities in interpretation when compared to data. %\cite{wikipedia}
+%
+%niche overlap
+The other parameters in the Lotka-Volterra equations are the $a$'s. 
+These parameters represent the niche overlap between the two species, or the ratio of interspecific to intraspecific competition. 
+They can be derived from limiting factors in at least two ways (see \cite{MacArthur1967} for one example and \cite{MacArthur1970} or chapter 2 of this thesis for a different argument).  %NTS:::chapter number
+%Various authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for one limit of niche overlap the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis (see chapter 2). %NTS:::chapter number - already written in the paragraph above
+There is an unresolved debate in the field as to how niche overlap should be measured or defined \cite{Klopfer1961,Pianka1973,Pianka1974,Abrams1977,Hurlbert1978,Connell1980,Abrams1980,Schoener1985,Chesson1990,Leibold1995,Chesson2008}. 
+
+%generally parameters, phenomenology
+The confusion and debate that surrounds niche overlap and other such parameters originates because they are phenomenological parameters rather than strictly physical ones. 
+A phenomenological parameter is one that is consistent with reality without being directly based on physical interactions. 
+In principle these parameters can be derived from physical, measureable ones: the efficiency of a bacterium digesting one molecule of glucose and storing the energy in ATP can be characterized/measured, as can the rate of glucose uptake and its concentration in a system; all of these factors along with a myriad of others combine to generate the carrying capacity of the system. 
+The problem is that there are too many factors, and so many are unknown, that it is easier simply to subsume them all into the one phenomenological parameter of carrying capacity and use that in our modelling and analyses. 
+Phenomenological parameters can be measured: after some time of growing in the sugar water the bacteria will reach a (roughly) steady number; this is the carrying capacity. 
+
+%what is a model
+To avoid future confusion, I shall provide a quick note about how the term model is used in this thesis. 
+%Especially f
+For the first chapter, a model is defined by its specific choice of parameters as well as its mathematical form. %NTS:::chapter number
+This conflicts with how many people use the word model, to mean the mathematical equations with generic parameters unassigned values. 
+%It is possible 
+I also adopt this usage in chapters 2 and 3, as I explore the effect of taking the niche overlap to unity, such that the interspecies interactions become as strong as the interspecies ones. %NTS:::chapter number
+
+The history of mathematical ecology is punctuated by arguments and controversy, large and small. % - as start of math? assuming the above is just LV, then math contains deterministic and stochastic
+I have already outlined a few, including the interpretation of competitive exclusion, of what is meant by a niche and the difference between requirement and impact niche, what is niche overlap and how to measure it, the applicability of $r/K$ selection theory, and whether neutral theories are appropriate in an ecological context or whether niche theories suffice. 
+\iffalse
+competitive exclusion
+niche vs neutral
+requirement vs impact niche
+niche overlap and how to measure
+r/K selection
+and also the use (and misuse) of stats
+deterministic vs stochastic - more a utility than a debate
+\fi
+There is also a long history of both use and misuse of statistics \cite{May2004}. 
+Within the mathematics side of mathematical biology, other than the statistics necessary to deal with experimental data, the formulation of models can be categorized as either deterministic or stochastic. 
+This is not a debate so much as a choice of utility, of what is most appropriate to model a given system. 
+It is possible to switch between deterministic and stochastic dynamics. 
+
+Deterministic models are characterized by the use of differential equations, or, more rarely, difference equations. 
+Again this comes down to a matter of utility and applicability. 
+Difference equations are equations of the form $x_{t} = f(x_{t-1})$, where the state at at time $t$ depends in some way on the state at a previous time. 
+They are appropriate for situations where time can be considered discrete, as with species that have seasonal mating or periodic life cycles. %\cite{Campos2004}
+Both differential and difference equations can also be ``delayed'', depending on earlier states, but this is only infrequently used because it results in equations that are difficult to solve. 
+
+Deterministic differential equations can be divided into ordinary differential equations (ODEs) and partial differential equations (PDEs). 
+In an ecological context this choice depends on what is being modelled. 
+If the system is well-mixed, if every constituent member organism or moiety could in principle interact with any other, an ODE is appropriate. 
+This well-mixed assumption is one I employ throughout the entirety of this thesis. 
+In contrast, PDEs allow for the modelling of spatially distributed systems, such as chemicals diffusing during embryonic development \cite{Houchmandzadeh2002}, nutrient distribution in a biofilm \cite{Bucci2011}, or muskrats and minks across Canada \cite{Haydon2001}. 
+%PDEs for spatial, like pair of rodents populating England, or a crow teaching other crows to open boxes
+%KPZ is a good example
+Spatially distributed systems, which allow for local competitive exclusion while globally maintaining biodiversity, are proposed as one resolution to the paradox of the plankton \cite{Chesson2000,Roy2007}. 
+
+%linking paragraph to stochastics...
+%SDEs in with stochastics (I guess specifically with approximations) or here
+Another common category of differential equations is stochastic differential equations. 
+These are not deterministic; rather, two realizations of a solution with the same initial conditions can give different results. 
+Stochastic differential equations, and stochastic analyses more generally, are introduced in the next section. 
 
 
-
-\section{Stochastics}
-\subsection{introduction}
+\section{Stochastic Analysis}
+%\subsection{introduction}
 As stated before, a stochastic version of the two-dimensional generalized Lotka-Volterra model makes up the bulk of this thesis. 
 %stochastics = randomness, noise
-What is meant by ``stochastic''? 
-Stochasticity is the technical term for randomness or noise in a system. 
-Whereas the solution to a logistic differential equation would simply increase continuously (and differentiably) toward its asymptote at the carrying capacity, a stochastic version would allow for deviations from this trajectory, sometimes decreasing rather than steadily increasing toward the steady state, and thereupon fluctuating about the carrying capacity. 
+%What is meant by ``stochastic''?
+Stochasticity is the technical term for randomness or noise in a system. %NTS:::Anton thinks any reader would know what stochasticity is
+Whereas over time the solution to a logistic differential equation simply increases continuously (and differentiably) toward its asymptote at the carrying capacity, a stochastic version allows for deviations from this trajectory, sometimes decreasing rather than steadily increasing toward the steady state, and thereafter fluctuating about the carrying capacity. 
 See figure \ref{singlelog} for a visual example. 
-In rare cases the fluctuations can even bring the system to a population of zero, in which case it does not recover. 
-This is known as extinction, and is the main object of study in this thesis. 
-Stochasticity has other uses too. 
-It is the natural way to capture the difficulties of performing experiments, accounting for the imprecision of measurement and issues arising from sampling. 
-More broadly, we need stochastics because of nature's inherent randomness and because of the course-graining and phenomenological modelling necessarily done in biology (and indeed, in every scientific endeavor whose purview is not nanoscopic). %we observe inherent randomness in nature
-There are applications in many disciplines, including linguistics, economics, biology, neuroscience, chemistry, and cryptography, to name a few. 
-The giants Wright and Fisher were pioneers in applying randomness and statistical reasoning, in the biological context and in general. 
-In biology there were renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell. 
-%include figure of 1dlog stoch vs det!!!!!!!
+%It is the natural way to capture the difficulties of performing experiments, accounting for the imprecision of measurement and issues arising from sampling. 
+%More broadly, w
+We need to include stochasticity in our models because of nature's inherent randomness. 
+% and because of the course-graining and phenomenological modelling necessarily done in biology (and indeed, in every scientific endeavor whose purview is not nanoscopic). %we observe inherent randomness in nature
+Especially with the course-graining and phenomenological modelling done in biology for which we cannot account all elements it is necessary to include randomness in our models. 
+Depending on the system of interest, this stochasticity may or may not be relevant: it is usually most important for systems with highly variable environments or small typical population sizes. 
+Beyond biology, there are applications of stochasticity in many disciplines, including linguistics, economics, neuroscience, chemistry, game theory, and cryptography, to name a few \cite{Schuster1983,BrianArthur1987,Borgers1997,Hofbauer2003,Pemantle2007,Blythe2007,Hilbe2011,Yan2013}. %\cite{wikipedia Stochasticity page}
+In the biological context Wright and Fisher were pioneers in applying randomness and statistical reasoning. %, in the biological context and in general. 
+Since then there have been renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell, and with new mathematical and computational developments it is popular today. %NTS:::Anton says everyone is blabbering about stochasticity - I am unsure if this is a good thing or a bad thing
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{single-logistic.pdf}
 	\caption{\emph{A single logistic system with deterministic and stochastic solutions.} The smooth red line shows the deterministic solution to a one dimensional logistic differential equation with carrying capacity $K=1000$, which the system asymptotically approaches. The jagged blue and purple lines are each an instantiation of a `noisy', or stochastic, version of the logistic equation, as simulated using the Gillespie algorithm. Notice that the stochastic versions tend to follow their deterministic analogue but with some fluctuations, sometimes being greater than the deterministic result, sometimes being lesser. }
 \end{figure} \label{singlelog}
 
-\subsection{Extinction rates from demographic and environmental stochasticity}
-It is a matter of common knowledge from the literature that demographic fluctuations lead to extinction times scaling exponentially in the system size, whereas environmental noise gives polynomial scaling \cite{Ovaskainen20X6}. 
-That is, if $K$ is the constant or mean system size, then demographic fluctuations lead to
+I have made an argument for the use of stochasticity in our modelling to more accurately capture the physical world. 
+The fluctuations caused by this stochasticity also empower us to find new features in our models. 
+In rare cases the fluctuations can bring a system to a population of zero, in which case it does not recover. 
+This arrival at zero population is known as extinction, and is the main phenomenon of study in this thesis. 
+Extinction is not typically seen in the deterministic analogue to these stochastic models. 
+%Beyond allowing for extinction that would not otherwise be possible (in an analogous deterministic system), stochasticity has other uses too. 
+Coupled to extinction is fixation, since if all species but one have gone extinct then the remaining one has fixated. 
+The probability of extinction or fixation can be calculated. 
+For both extinction and fixation, the time before this occurs is distributed, and one can define a mean time. 
+More generally in the field of stochastic analysis this is known as a mean first passage time, the mean time before a system first reaches some predefined state or collection of states. 
+Not only the first passage time is distributed; before the system has gone extinct, its own state is a random variable. 
+Any realization of a stochastic system is of course only in one state at a time, but since different realizations will give different trajectories it is necessary to employ statistical tools like a probability distribution to describe the likelihood of being in a given state at a given time. 
+With a frequentist interpretation, the probability distribution also gives how a population will be distributed within different replicate experiments, or independent measurements. 
+If multiple species are independent or equivalent we can infer the abundance distribution from the probability distribution. 
+And if the the system has attains some sort of steady state then the probability distribution should match the frequency of repeated measurements, with the caveat that the measurements are taken infrequently enough that the system can relax back to steady state after each. 
+%NTS:::did not explicitly talk about conditional stuff
+
+%\subsection{Extinction rates from demographic and environmental stochasticity}
+Stochasticity comes in two flavours, originating from different causes. 
+%environmental
+It can arise from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017b}, in that limiting factors like resource availability or temperature fluctuate over time. 
+To be clear, I am not talking about the natural dynamics of these quantities due to daily cycles or in response to a species affecting them. 
+Rather, a system at $300K$ might occasionally, and randomly, have one patch warmer than the average, and another part cooler. 
+The more abstracted and phenomenological the model, the less clear the cause of these fluctuations, but the more likely they are to occur. 
+If the sources of noise are independent and many, an invocation of the central limit theorem suggests that a phenomenological parameter will have a Gaussian probability distribution about its mean value. 
+%demographic
+But even if the environment is entirely controlled, there can be stochasticity in the system. 
+Whereas a deterministic system like the logistic one shown in figure \ref{singlelog} has a continuous solution with the population growing smoothly to the carrying capacity, this is not possible in a real biological system, as the number of organisms is quantized. 
+There can be two bacteria or three, but not two and a half. 
+Constraining the system to integer values, and the inherent randomness in the birth and death times of the individuals, leads to demographic noise \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}. 
+Demographic stochasticity is the focus of my thesis. 
+For both environmental and demographic stochasticity it is usually obvious how to recover the deterministic analogue, by taking the noise to zero. %need to cite?
+Going the other way, from deterministic to stochastic, is obvious for incorporating environmental noise only; the inclusion of demographic fluctuations is less trivial, and is one of the focuses of chapter 1 of this thesis. %need to cite? %NTS:::chapter number 
+%MOAR??
+
+It is accepted in the literature that demographic noise in a system whose deterministic analogue has a stable fixed point leads to extinction times scaling exponentially in the system size \cite{Leigh1981,Lande1993,Kamenev2008,Cremer2009a,Dobrinevski2012,Yu2017}. 
+That is, if $K$ is the constant or mean system size, then demographic fluctuations lead to:
 \begin{equation*}
 \tau \propto e^{cK}
 \end{equation*}
-and environmental noise leads to
+for some constant $c$. 
+This scaling is most readily observed in the logistic system \cite{Norden1982,Foley1994,Allen2003a,Doering2005,Assaf2006,Assaf2010,Assaf2016}, which is also covered in chapter 1. %NTS:::chapter number
+For the record, environmental noise in the logistic system is polynomial \cite{Foley1994,Ovaskainen2010}:
 \begin{equation*}
-\tau \propto K^d,
+\tau \propto K^d
 \end{equation*}
-for some constants $c,d$
-This system size is often taken to be the carrying capacity \cite{um...}. 
-%I only care about demographic fluctuations. Environmental fluctuations can be someone else's problem. 
-This thesis only concerns itself with demographic fluctuations. 
-Environmental fluctuations are a very real phenomenon that I nevertheless ignore. 
-Consider this research as a null model; if the environment is constant then the results of the below research holds. 
-Most real systems will not be represented by my results, but it gives a baseline against which to contrast. 
+for some constant $d$. 
+Polynomial dependence is also found when there is no fixed point in the deterministic analogue, or one of neutral stability, like the Moran model \cite{Cremer2009,Dobrinevski2012}. 
+When the deterministic fixed point is unstable extinction happens even in the deterministic limit, and is logarithmic when starting from the fixed point \cite{Lande1993,Dobrinevski2012}:
+\begin{equation*}
+\tau \propto \ln(K). 
+\end{equation*}
+In all these cases $K$ is the system size, typically taken to be some measure of the magnitude of the fixed point when relevant. 
+Often this fixed point is the carrying capacity. 
+For those systems where the fixed point is stable, the extinction time also does not tend to depend on the initial conditions \cite{Chotibut2015}, as the deterministic draw to the fixed point is greater than the destabilizing effects of noise, and it is only a rare fluctuation that leads to extinction. 
+A mean time to extinction that is exponential in the population size is commonly considered to imply stable long term existence for typical biological examples, which have large numbers of individuals \cite{Ovaskainen2010,Lin2015}. 
+Thus a sub-exponential extinction time implies exclusion of a species, and a reduction of the biodiversity of the ecosystem. 
 
-The above extinction time scaling equations come from the Fokker-Planck equation. 
-There are many ways to calculate the mean time to extinction (MTE). 
-For most of my research I calculate the extinction time exactly, following a textbook formulation, or at least to arbitrary accuracy. 
-There also exist many approximation techniques to deal with stochastic problems, as I will outline below. 
+%logistic both \cite{Foley1994,Ovaskainen2010} generic demo and 'neutral' \cite{Cremer2009,Dobrinevski2012} logistic demo \cite{Norden1982,Foley1994,Assaf2010,many others} generic demographic \cite{Leigh1981,Lande1993,Kamenev2008}
+%Consider this research as a null model; if the environment is constant then the results of the below research holds.
+%Most real systems will not be represented by my results, but it gives a baseline against which to contrast.
+%In systems with a deterministically stable co-existence point, the mean time to extinction is typically exponential in the population size \cite{Norden1982,Cremer2009a,Assaf2010,Ovaskainen2010}, as was seen in the previous chapter. %but contrast with \cite{Antal2006}
+%Exponential scaling is commonly considered to imply stable long term co-existence for typical biological examples with relatively large numbers of individuals \cite{Ovaskainen2010,Lin2015}.
+%The Moran model, which has demographic noise but which does not have an attracting fixed point with zero fluctuations, shows polynomial extinction times - %remind that there is a det stoch correspondence
 
+%NTS:::Anton's comment:You still havent told us why is it [MTE] an important thing to calculate, and how does it relate to species diversity and niche concept
 
-\subsection{Approximation techniques}
-%With the existence of a system size parameter $K$, it opens some approximations. 
+%NTS:::should mention birth-death, as opposed to other discrete space Markov models
+%NTS:::maybe should also mention Markov at some point
+%Demo uses master equation, a different beast - MORE BEFORE ENV? YES
+Demographic fluctuations are best modelled using the master equation. 
+The master equation describes the evolution of a probability distribution function. 
+It is a differential equation in time and a difference equation in the population size, which accounts for the integer number of organisms. 
+%The above extinction time scaling equations come from the Fokker-Planck equation.
+Stochastic analysis of systems with environmental noise is done using the Kolmogorov equations, the forward equation of which is more commonly known in the physics community as the Fokker-Planck equation. 
+Equivalent to the Fokker-Planck equation is the Langevin equation, which is the easiest formulation of a stochastic equation to envision. 
+A Langevin equation is also known as a stochastic differential equation (SDE) and is a regular differential equation or series of equations with a random noise term added. 
+%WHAT DOES IT MEAN TO "SOLVE" one of these equations?
+The solution is therefore a random variable. 
+Simulating a particular realization of the solution gives a different trajectory every time. 
+Instead, for all random variables, to solve a system means something different. 
+Typically what is meant by solving is either finding the probability distribution function, or its moments, or just the first moment. 
+When referring to the extinction time, as I do throughout this thesis, I imply the mean time to extinction (MTE), or more generally the mean first passage time. 
+For this reason both the master equation and the Kolmogorov equations describe the evolution of the probability distribution function. 
+%FP is also an approximation of the master equation. 
+Using the Kramers-Moyal expansion one can approximate the master equation as a Fokker-Planck equation. 
+%There are many ways to calculate the mean time to extinction (MTE).
+Both are hard to solve: a solution can be found for one dimensional systems, but in general not for higher dimensions. 
+The dimensionality, in an ecological context, is given by the number of distinct species or strains being modelled. 
+I will provide more details throughout the thesis, but especially in chapter 1 where I investigate various approximations to the master equation. %NTS:::chapter number
+%NTS:::need citations for this chapter?
+For most of my research I calculate the extinction time exactly, following a textbook formulation, or at least to arbitrary accuracy \cite{Nisbet1982,Norden1982}. 
+There also exist many approximation techniques to deal with stochastic problems, as I briefly outline below. %%%%%%%%%%%%%%%%%%%%%NTS:::remove this, remove previous sentence?
+
+SDEs can be simulated similarly to regular DEs, with a smaller time step giving a more accurate solution. 
+Particular realizations of solutions to the master equation are found via the Gillespie algorithm, also knows as the stochastic simulation algorithm \cite{Gillespie1977,Cao2006}. 
+The probability distribution associated with these particular solutions is found by aggregating many simulations, can be used to verify the aptitude of various approximations. 
+%\subsection{Approximation techniques}
+%With the existence of a system size parameter $K$, it opens some approximations.
 %Others simply rely on $n>>1$ or $P_n>>P_{n-1}$
 %The popular ones are FP (and Gaussian), van Kampen, WKB
 %I also do some matrix funny business (and could do eigenvalue)...
-The existence of a system size parameter $K$ raises the possibility of approximation to the master equation, the equation which underlies all processes with demographic stochasticity. 
-The aforementioned Fokker-Planck equation is an expansion of the master equation to continuous populations, going from a difference-differential equation to a partial differential equation. 
-The results tend to look Gaussian about the deterministic dynamics and behave well near the fixed point. 
-However, since extinction invariably happens near zero population, which is far from the fixed point for large system size, the Fokker-Planck approximation is expected to fail. 
-It nevertheless does better than expected, and has utility in some contexts. 
-It is also the easiest equation to use, both in terms of solution and further approximations, so it remains the most popular. 
+The existence of a system size parameter $K$ raises the possibility of approximation to the master equation. %, the equation which underlies all processes with demographic stochasticity.
+The aforementioned Fokker-Planck equation is an expansion of the master equation in $1/K$ to continuous populations, going from a difference-differential equation to a partial differential equation. %or system of first order differential equations
+The results tend to look Gaussian distributed about the deterministic dynamics and near stable fixed points. %Anton wants this line cut
+%However, since extinction invariably happens near zero population, which is far from the fixed point for large system size, the Fokker-Planck approximation is expected to fail.
+As stated previously, extinction originates from a rare fluctuation away from the fixed point to zero population, so the Fokker-Planck approximation is expected to perform poorly. 
+%It nevertheless does better than expected, and has utility in some contexts.
+%It is also the easiest equation to use, both in terms of solution and further approximations, so it remains the most popular.
+It nevertheless does better than expected, and its ease of use makes it a popular choice in the literature. 
 %The van Kampen expansion to the master equation gives a similar equation, which is identical in the limit of... small noise?
-
-Recently popular is the WKB expansion. 
-Rather than just expanding about the fixed point as is effectively the case for Fokker-Planck, WKB expands about the most probable trajectory. 
-The WKB approach makes an ansatz solution to the master equation, which results in an effective Hamilton-Jacobi equation for some action-like object of the system. 
-Upon solving the Hamiltonian mechanics the action need only be integrated along the route to fixation in order to estimate the mean time. 
-
+%
+Another popular approximation is the WKB expansion.
+Rather than just expanding about the fixed point as is the case for Fokker-Planck, WKB expands about the most probable trajectory.
+%The WKB approach makes an ansatz solution to the master equation, which results in an effective Hamilton-Jacobi equation for some action-like object of the system.
+%Upon solving the Hamiltonian mechanics the action need only be integrated along the route to fixation in order to estimate the mean time.
+%
 %others like Kramers, eigenvalue, mine
+Most of my own approximations are more accurate, though I occasionally make use of the Fokker-Planck approximation as a supporting technique to allow for analytic intuition. 
 The main technique employed in this thesis is related to the formal solution to the master equation. 
-In principle this involves inverting a semi-infinite matrix. 
-By introducing a cutoff to the matrix I can calculate the mean fixation time. 
+%In principle this involves inverting a semi-infinite matrix.
+The MTE comes from inverting the matrix of transition rates, which in principle is semi-infinite, accounting for population values between zero and infinity. 
+By introducing a cutoff to the matrix I can calculate the MTE. 
 Varying the cutoff allows for arbitrary accuracy. 
+In this way I find the extinction times for two species systems more accurately than any other approximation approach employed in the literature. 
+This in turn allows me to capture not just the exponential dependence on carrying capacity that dominates the MTE, but also the prefactor, which becomes relevant as the Lotka-Volterra system transitions to the Moran limit. 
+
+%gillespie, matrix, eigenvalues, FP, WKB, small n, 1/d1P1...
 
 
+%NTS:::WHAT ARE THE BIG QUESTIONS? WHAT IS THE THESIS STATEMENT???
+%One of the simplest problems, and one treated in this thesis, is: What is the probability of and timescale over which a species will go extinct in an ecosystem \cite{Badali2019a,Badali2019b}? 
+%HOW to calculate these things
+%coexistence, as it pertains to biodiversity
+%Various authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for one limit of niche overlap the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis (see chapter 2). %NTS:::chapter number
+%my interest is in the hard problems far from equilibrium; not just stochastics (which are already more complicated than deterministics) but the rare events like first passages
 
-\section{Structure of remaining thesis}
 
-The remaining structure of the thesis is as follows. 
-First, I use the exact techniques introduced in section XXX to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. 
+\section{Structure of Thesis}
+
+The major questions of this thesis are: What are the probability and timescale of a single species extinction in an ecosystem? How should the probability and MTE be calculated? Inspired by problems of biodiversity, what is the mean time to fixation of two competing species? Conversely, what is the probability and timescale of invasion of a second species into an ecosystem occupied by a first? 
+The structure of the thesis is as follows. 
+
+First, I use the exact techniques mentioned above and introduced more completely in sections 2.3 and 2.4 to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. %NTS:::chapter/section number
+I find that those species with high birth and death rates, and those for whom competition acts to increase death rate rather than reduce their birth rate, tend to go extinct more rapidly. %CONCLUSION
 With the simplicity of this test system I explore the applicability of various common approximation techniques. 
-The exact techniques and the approximations together make up chapter XXY, regarding a one dimensional system. 
-This chapter is also being prepared as a paper for publication. 
-The natural extension from a one dimensional logistic is to couple two such systems together; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter XXZ. 
-First a symmetric system is investigated, and the mean time to fixation is used as a tool to diagnose the longevity of the two interacting species. 
+I conclude the Fokker-Planck approximation works well close to the deterministic fixed point, but incorrectly estimates the scaling of the extinction time with system size. The WKB approximation performs better, but misidentifies the prefactor to the exponential scaling. %CONCLUSION
+The exact techniques and the approximations together make up chapter 1, regarding a one dimensional system. %NTS:::chapter number
+This chapter is being prepared as a paper for publication \cite{Badali2018a}. 
+
+The natural extension from a one dimensional logistic is to couple two such systems together; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter 2. %NTS:::chapter number
+%First a symmetric system is investigated, and t
+The mean time to fixation is used as a tool to diagnose the longevity of the two interacting species. 
 The overlap of their ecological niches is the parameter that controls the transition between effective coexistence and rapid fixation. 
-Next the corresponding asymmetric model is explored. 
-Along with the MTE, my analysis uncovers a typical route to fixation, the discussion of which wraps up this chapter. 
-The final chapter introducing novel research, chapter XYX, extends the scope of this thesis to invasion of a new species into an already occupied niche. 
+I determine that two species will effectively coexist unless they have complete niche overlap, even if they have only a slight niche mismatch. %CONCLUSION
+%Next the corresponding asymmetric model is explored. 
+Along with the MTE, my analysis uncovers a typical route to fixation, or rather a lack of a typical route, the discussion of which wraps up this chapter. %kinda CONCLUSION
+
+The final chapter introducing novel research, chapter 3, extends the scope of this thesis to invasion of a new species into an already occupied niche. %NTS:::chapter number
 I calculate the probability of a successful invasion as a function of system size and niche overlap. 
 Then the MTE conditioned on the success of the invasion is analyzed. 
+I discover that the closer the invader is to having complete niche overlap with the established species, the less likely it is to successfully invade, and the longer an invasion attempt will take before it is resolved. %CONCLUSION
 Once these timescales are developed, I regard the Moran model modified to account for repeated invasions of the same species. 
 %This is compared with some steady state numerical results from Kimura. 
-Chapter XYY covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
-%NTS:::somewhere need to put in who contributed to what. 
-%NTS:::either somewhere or throughout, be clear about what has been done and what is novel. 
+%I demonstrate that, with system size $K$ and relevant immigrant probability $g$, an immigration rate of $1/K g$ is the critical value for determining the qualitative abundance distribution. %CONCLUSION
+I identify the critical value of the immigration rate above which a species will have a moderate population size and below which the population is either large or largely absent in its contribution to the abundance distribution. %CONCLUSION
+Chapter 2 and half of chapter 3 together form another paper being reviewed for publication \cite{Badali2018}. %NTS:::chapter numbers
+
+The conclusions chapter covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
+
+%NTS:::somewhere need to put in who contributed to what.
+%some good verbs: confirm find infer establish identify discover demonstrate show
+
+
+\iffalse
+
+Background
+Gap
+Thesis
+Roadmap
+Significance
+
+A SUGGESTED FORMAT FOR CHAPTER 1 OF THE DISSERTATION*  
+Introduction/Background
+-A general overview of the area or issue from which the problem will be drawn and which the study will investigate
+Statement of the Problem
+-A clearly and concisely detailed explanation of the problem being studied, ie, “While evidence of this relationship have been established in the private schools in Kansas, no such relationship has been investigated within the public schools of Missouri.”  
+Conceptual Framework for the Study
+-The theoretical base from which the topic has evolved. This information is the material that undergirds and provides basic support for the study.
+Purpose of the Study
+-What the study will investigate. There should be one or two paragraphs to introduce the research questions and hypotheses.
+Research Questions
+-Listed as 1. . . . 2. . . . 3. . . . . . . n.
+Definition of Terms
+-The terms in this section should be terms directly related to the research that will be used by you throughout the study.  
+Procedures  
+-A brief description of the procedures and methodology used to accomplish the study
+Significance of the Study
+-Its importance to practice, to the discipline or to the field
+Limitations of the Study
+-Limitations to the study over which the researcher has no control.  
+Organization of the Study
+-How the study and chapters will be organized
+
+\fi
+
 
 
