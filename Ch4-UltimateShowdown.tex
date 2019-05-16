@@ -100,6 +100,47 @@ The results outlined in this thesis should be applied with caution.
  (techniques, how to think of niche, competitive exclusion)
 Retrospect of previous contents, especially from the intro
 
+\iffalse
+The major questions of this thesis are: What are the probability and timescale of a single species extinction in an ecosystem? How should the probability and MTE be calculated? Inspired by problems of biodiversity, what is the mean time to fixation of two competing species? Conversely, what is the probability and timescale of invasion of a second species into an ecosystem occupied by a first? 
+The structure of the thesis is as follows. 
+First, I use the exact techniques mentioned above and introduced more completely in sections 2.3 and 2.4 to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. %NTS:::chapter/section number
+I find that those species with high birth and death rates, and those for whom competition acts to increase death rate rather than reduce their birth rate, tend to go extinct more rapidly. %CONCLUSION
+With the simplicity of this test system I explore the applicability of various common approximation techniques. 
+I conclude the Fokker-Planck approximation works well close to the deterministic fixed point, but incorrectly estimates the scaling of the extinction time with system size. The WKB approximation performs better, but misidentifies the prefactor to the exponential scaling. %CONCLUSION
+The exact techniques and the approximations together make up chapter 1, regarding a one dimensional system. %NTS:::chapter number
+This chapter is being prepared as a paper for publication \cite{Badali2018a}. 
+The natural extension from a one dimensional logistic is to couple two such systems together; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter 2. %NTS:::chapter number
+%First a symmetric system is investigated, and t
+The mean time to fixation is used as a tool to diagnose the longevity of the two interacting species. 
+The overlap of their ecological niches is the parameter that controls the transition between effective coexistence and rapid fixation. 
+I determine that two species will effectively coexist unless they have complete niche overlap, even if they have only a slight niche mismatch. %CONCLUSION
+%Next the corresponding asymmetric model is explored. 
+Along with the MTE, my analysis uncovers a typical route to fixation, or rather a lack of a typical route, the discussion of which wraps up this chapter. %kinda CONCLUSION
+The final chapter introducing novel research, chapter 3, extends the scope of this thesis to invasion of a new species into an already occupied niche. %NTS:::chapter number
+I calculate the probability of a successful invasion as a function of system size and niche overlap. 
+Then the MTE conditioned on the success of the invasion is analyzed. 
+I discover that the closer the invader is to having complete niche overlap with the established species, the less likely it is to successfully invade, and the longer an invasion attempt will take before it is resolved. %CONCLUSION
+Once these timescales are developed, I regard the Moran model modified to account for repeated invasions of the same species. 
+%This is compared with some steady state numerical results from Kimura. 
+%I demonstrate that, with system size $K$ and relevant immigrant probability $g$, an immigration rate of $1/K g$ is the critical value for determining the qualitative abundance distribution. %CONCLUSION
+I identify the critical value of the immigration rate above which a species will have a moderate population size and below which the population is either large or largely absent in its contribution to the abundance distribution. %CONCLUSION
+Chapter 2 and half of chapter 3 together form another paper being reviewed for publication \cite{Badali2018}. %NTS:::chapter numbers
+The conclusions chapter covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
+%NTS:::somewhere need to put in who contributed to what.
+%some good verbs: confirm find infer establish identify discover demonstrate show
+\fi
+\iffalse
+Big Questions:
+How long will a single species exist with only intraspecies interactions?
+What mathematical techniques are effective to model such an extinction? 
+How long will a species exist with intra and interspecies interactions? That is, how long will two species coexist given some niche overlap? In particular, how does it transition from the effective coexistence of exponential scaling of MTE with carrying capacity to the relatively fast extinction of algebraic scaling as found in the Moran model/limit? 
+For an ecosystem with an already established species, what is the probability of success and the timescale of an invasion attempt? How do these probabilities and times depend on niche overlap? 
+With repeated immigration of a species, how will that species be distributed in a [neutral] system? In particular, how does the distribution depend on the immigration rate? 
+What is the timescale of species transient existence in a neutral model with repeated immigrants? 
+Is v=1/gN or gv=1/N the same as a model with v’=gv and g=1? - looks like it should be
+\fi
+
+
 
 \section{Next steps for the research}
 %NTS:::in INTRO chapter, mention that my interest is in the hard problems far from equilibrium; not just stochastics (which are already more complicated than deterministics) but the rare events like first passages
