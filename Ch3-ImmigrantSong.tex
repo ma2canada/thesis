@@ -13,17 +13,28 @@ Note also that I talk about foreign invading immigrants in this chapter. This is
 
 
 \section{Introduction}%NTS:::skipping draft 1 intro revisions for now (as with Ch2)
+The previous chapter regarded an ecosystem with two competing species, and asked questions about the mean time until one of the species goes extinct and the other fixates in the system. 
+In this chapter I aim to look at the reverse problem; starting with a system with one species, what is the probability and timescale that a second one will enter, given some overlap between the niches of the extant and immigrating species. 
+First I would like to motivate the problem and discuss where a new species entering a system might come from. 
+
 %"strategic lit review"
-Kimura is famous for introducing the Fokker-Planck equation to a genetic context, and more generally for promoting mathematical modeling in biology. 
-One of the topics he treated in this way, in this case with Crow, is that of a population undergoing random drift and linear pressure \cite{Crow1956,Kimura1964}. 
-``Under the term linear pressure,'' he writes, ``we include the pressures of gene mutations and of migration.'' 
-While his inspiration is primarily gene frequencies as they evolve in time, he also notes that the modeling involved looks similar to the case of a population experiencing immigration. 
-In this sense it is similar to the island model of Wilson and MacArthur  and its extensions \cite{MacArthur2001,Hubbell2001,Kessler2015}. % and extensions (?!) of Moran Wright Fisher
-In both cases the theories regard the dynamics of a population after the arrival of a potential invader, where this invader could be a mutant or immigrant. 
+%Kimura is famous for introducing the Fokker-Planck equation to a genetic context, and more generally for promoting mathematical modeling in biology. 
+%The work of Kimura and Crow offers a suggestion, that new genes arise from gene mutations and migration. 
+%One of the topics he treated in this way, in this case with Crow, is that of a population undergoing random drift and linear pressure \cite{Crow1956,Kimura1964}. 
+%``Under the term linear pressure,'' he writes, ``we include the pressures of gene mutations and of migration.'' 
+Many of the historical giants I included in the introductory chapter have considered the problem of the arrival of a new strain or species in one way or another. 
+Kimura and Crow analyzed the evolution of the probability of a single allele in a population, one that arose via genetic mutation or immigration , to find its fixation probability \cite{Crow1956,Kimura1964,Kimura1968}. 
+MacArthur and Wilson considered islands receiving an influx of immigrants from a neighbouring mainland to find the total number of distinct species on an island \cite{MacArthur1963,MacArthur1967}. 
+Hubbell builds off of MacArthur and Wilson to predict the abundance distribution of species in a system balanced between influx of new species and extinction of extant ones \cite{Hubbell2001}. 
+New species can arise from speciation or from a larger reservoir. 
+Bearing these historical precedents in mind, I do not distinguish where a new strain or species might enter from in my modelling below; mutation, speciation, and immigration are all viable. 
+What is important is that a distinctive second species is attempting to invade an already occupied system. 
+
 %"gap"
 However, mathematically the approach has typically been with the Fokker-Planck equation, which I argued earlier is not the fundamental way of representing systems with demographic noise. %NTS:::do this.
 And in terms of the biology, the cases regarded have been either when the invader is under positive or negative selection \cite{Kimura1955} or else when they are truly neutral \cite{Kimura1956,Hubbell2001}. %NTS:::previously explain truly neutral vs unbiased. %get a better reference than Hubbell - see niche vs neutral presentation
 What has \emph{not} been done is to look at an invasion attempt into an established niche when the invader has partial niche overlap with the established species. 
+
 %"thesis" "in this chapter I will..."
 This is what I aim to do in this chapter, using a matrix cutoff to solve the backward master equation. 
 Furthermore, the literature typically argues that invasion attempts are rare and so they may be treated independently, but this need not always be the case, depending on the immigration rate. %NTS:::in more detail point out that mutation is less applicable than immigration, since its likely to have repeat species immigrating but not so for mutations, unless there is a common mutation for some reason or if we clump all equivalent mutants into one category of invader.
@@ -514,10 +525,10 @@ See figure \ref{stationary-fig2} for a visualization of the steady-state probabi
 	\caption{PDF of stationary Moran process with immigration. Metapopulation focal fraction $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
-%\begin{picture}(100,100)
-%\put(0,0){\includegraphics[width=0.8\textwidth]{Moran-withimmigration-fig1}}
-%\put(10,10){$x$ axis}
-%\end{picture}
+\begin{picture}(100,100)
+\put(0,0){\includegraphics[width=0.4\textwidth]{Moran-withimmigration-fig1}}
+\put(10,10){$x$ axis}
+\end{picture}
 
 While the population probability distribution is difficult to calculate before steady state, the mean and variance of the distribution are more tractable at all times. 
 %We can easily calculate the mean and variance of the population distribution as a function of time before reaching steady state. 

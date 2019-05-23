@@ -3,22 +3,37 @@
 %NTS:::
 %explain truly neutral vs unbiased
 %generalized LV, expansion of coupled log
+%NTS:::somewhere (maybe Ch2) need to be explicit what is meant by neutral, what is meant by simply symmetric
+%NTS:::can talk about fitness (here or later)
+%NTS:::limiting factors argument
+%NTS:::why MTE is important
+%NTS:::conditional
+%NTS:::in INTRO or should mention birth-death, as opposed to other discrete space Markov models
+%NTS:::in INTRO or maybe should also mention Markov at some point
+\iffalse
+"strategic lit review"
+"gap"
+"thesis" "in this paper I will..."
+"roadmap"
+"short significance"
+\fi
 
 
 \section*{pre-intro note}
-This chapter is based on a paper written by me and my supervisor Anton Zilman, currently submitted to Royal Society Interfaces journal. 
+This chapter is based on a paper written by me and my supervisor Anton Zilman, currently submitted to Royal Society Interfaces journal \cite{Badali2018}. 
 
 \section{Introduction}
 
 Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2016}, the immune system \cite{Weinstein2009,Desponds2015,Stirk2010} and other ecosystems \cite{Tilman1996,Naeem2001}. 
-Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Rice2004,Blythe2007}. 
+Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
 Nevertheless, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood.
-%NTS:::some of this stuff would also be good to say in the introduction
+%NTS:::some of this stuff would also be good to say in the introduction - significance
 
-One common theory, known as the Gause's rule or the competitive exclusion principle, postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state, and that species is said to have fixated \cite{Hardin1960,Mayfield2010,Kimura1968,Nadell2013}. 
+%One common theory, known as the Gause's rule or the competitive exclusion principle, postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state, and that species is said to have fixated \cite{Hardin1960,Mayfield2010,Kimura1968,Nadell2013}. 
+The competitive exclusion principle postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state, and that species is said to have fixated \cite{Hardin1960,Mayfield2010,Kimura1968,Nadell2013}. 
 However, the exact definition of an ecological niche varies and is still a subject of debate \cite{Leibold1995,Hutchinson1961,Abrams1980,Chesson2000,Adler2010,Capitan2017,Fisher2014}, and maintenance of biodiversity of species that occupy similar niches is still not fully understood \cite{May1999,Pennisi2005,Posfai2017}. 
 Commonly, the number of ecological niches can be related to the number of limiting factors that affect growth and death rates, such as metabolic resources or secreted molecular signals like growth factors or toxins, or other regulatory molecules \cite{Armstrong1976,McGehee1977a,Armstrong1980,Posfai2017}. 
-Observed biodiversity can also arise from the turnover of transient mutants or immigrants that appear and go extinct in the population \cite{Hubbell2001,Desai2007,Carroll2015}.
+Observed biodiversity can also arise from the turnover of transient mutants or immigrants that appear and go extinct in the population, as in Hubbell's model \cite{Hubbell2001,Desai2007,Carroll2015}.
 
 Deterministically, ecological dynamics of mixed populations has been commonly described as a dynamical system of the numbers of individuals of each species and the concentrations of the limiting factors \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
 Steady state co-existence typically corresponds to a stable fixed point in such dynamical system, and the number of stably co-existing species is typically constrained by the number of limiting factors. 
@@ -28,20 +43,25 @@ Then the stochastic fluctuations in the species numbers become important \cite{V
 I will return to the mathematical formulation of these concepts later. %NTS:::could expand these last two sentences. 
 
 Stochastic effects, arising either from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017b}, or the intrinsic stochasticity of individual birth and death events within the population \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}, modify the deterministic picture. 
-As in the previous chapter, I focus on this latter type of stochasticity, known as demographic noise. %NTS:::this should be in the intro. - it now is
+As in the previous chapter, I focus on this latter type of stochasticity, known as demographic noise. 
 Demographic noise causes fluctuations of the populations abundances around the deterministic steady state until a rare large fluctuation leads to extinction of one of the species \cite{Kimura1968,Lin2012,Chotibut2015}. 
 In systems with a deterministically stable co-existence point, the mean time to extinction is typically exponential in the population size \cite{Norden1982,Kamenev2008,Assaf2010,Ovaskainen2010}, as was seen in the previous chapter. 
-Exponential scaling is commonly considered to imply stable long term co-existence for typical biological examples with relatively large numbers of individuals \cite{Ovaskainen2010,Lin2015}.
+Exponential scaling is commonly considered to imply stable long term co-existence for typical biological examples with relatively large numbers of individuals \cite{Ovaskainen2010,Lin2015}. 
 
 By contrast, in systems with a neutral manifold that restore fluctuations off the manifold but not along it, mean extinction timescales as a power law with the population size, indicating that the co-existence fails in such systems on biologically relevant timescales \cite{Kimura1955,Moran1962,Lin2012,Chotibut2017a}. 
 This type of stochastic dynamics parallels the stochastic fixation in the classical Moran-Fisher-Wright model that describes strongly competing populations with fixed overall population size \cite{Wright1931,Fisher1930,Moran1962,Kimura1968,Rice2004,Rogers2014,Stirk2010,Capitan2017}.
 
-A broad class of dynamical models (reviewed below) of multi-species populations interacting through limiting factors can be mapped onto the class of models known as generalized Lotka-Volterra (LV) models, which allow one to conveniently distinguish between various interaction regimes, such as competition or mutualism, and which have served as paradigmatic models for the study of the behavior of interacting species \cite{Volterra1926,Bomze1983,Chesson1990,Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012,Gabel2013,Kessler2015,Young2018}. %NTS:::could expand on LV, either here or in intro or both. 
-Remarkably, the stochastic dynamics of LV type models is still incompletely understood, and has recently received renewed attention motivated by problems in bacterial ecology and cancer progression \cite{VanMelderen2009,Stirk2010,Fisher2014,Chotibut2015,Capitan2017,Kessler2014}. %cut Nowak 2006.%NTS:::I can change this!!!
+%A broad class of dynamical models (reviewed below) of multi-species populations interacting through limiting factors can be mapped onto the class of models known as generalized Lotka-Volterra (LV) models, which allow one to conveniently distinguish between various interaction regimes, such as competition or mutualism, and which have served as paradigmatic models for the study of the behavior of interacting species \cite{Volterra1926,Bomze1983,Chesson1990,Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012,Gabel2013,Kessler2015,Young2018}. %NTS:::could expand on LV, either here or in intro or both. 
+As is reviewed below, a broad class of dynamical models of multi-species populations interacting through limiting factors can be mapped onto the generalized Lotka-Volterra model. 
+Lotka-Volterra models allow one to conveniently distinguish between various interaction regimes, such as competition or mutualism, and which have served as paradigmatic models for the study of the behavior of interacting species \cite{Volterra1926,Bomze1983,Chesson1990,Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012,Gabel2013,Kessler2015,Young2018}. 
+Remarkably, the stochastic dynamics of LV type models is still incompletely understood, and has recently received renewed attention motivated by problems in bacterial ecology and cancer progression \cite{VanMelderen2009,Stirk2010,Fisher2014,Chotibut2015,Capitan2017,Kessler2014}. %cut Nowak 2006.%NTS:::I can change [remove?] this [sentence?]!!!
+There has also been the observation that for certain parameter values that the stochastic 2D generalized Lotka-Volterra model exhibits similar dynamics to the Moran model \cite{Lin2012,Constable2015,Chotibut2015,Young2018}. 
+How the system transitions from the typical LV results of MTE scaling exponentially with system size to the algebraic times of the Moran model is the main result of this chapter. 
+The results outline the conditions of niche overlap and carrying capacity that allow two species to co-exist (and conversely, those that will lead to relatively quick fixation). 
 
 In this chapter, I analyse a model of two competing species with the emphasis on the transition from deterministic co-existence to stochastic fixation. %, and the population stability with respect to mutation and invasion. 
-I use a master equation and first passage formalism that enables numerically solution to arbitrary accuracy in all regimes. 
-First I will provide a definition of ecological niche and a derivation of the competitive LV model, and examine its regimes of deterministic stability. 
+I use the master equation and first passage formalism that enables numerically solution to arbitrary accuracy in all regimes. %NTS:::this was not introduced in chapter 1
+First I will provide a definition of ecological niche [do I?!?] and a derivation of the competitive LV model, and examine its regimes of deterministic stability. 
 Then I will introduce the stochastic description of the LV model and analyse fixation times as a function of the niche overlap between the two species. 
 These results will be compared to known analytic limits, included here for completeness. 
 I will make further comparisons to the Fokker-Planck and WKB approximations before concluding with a general discussion of the results. 
@@ -54,6 +74,8 @@ I will make further comparisons to the Fokker-Planck and WKB approximations befo
 %NTS:::this section could be expanded a bit, maybe with a cartoony figure of nullclines converging. 
 %NTS:::consider also uncommenting the commented out swath. 
 %NTS:::in fact I have a longer version somewhere, I could just use that...
+%NTS:::yeah, this and the next section should be expanded, to include more discussion, including discussion of (one form of) competitive exclusion!!!
+%NTS:::also point out that these two sections are not original (or rather they are, but thirty years too late) but I use them to demonstrate comp excl and niche overlap
 Quite generally, the dynamics of a system of $N$ asexually reproducing species that interact with each other only through $M$ limiting factors (such as food, soluble signaling and growth/death factors, toxins, metabolic waste) and experience no immigration can be described by the following system of equations for the species $x_1,...,x_N$ and the limiting factor densities $f_1,...,f_M$ \cite{Armstrong1976,McGehee1977a,Armstrong1980}:
 \begin{align}\label{eq-xi}
 \dot{x}_i &= \beta_i\big(\vec{f}\big)x_i - \mu_i\big(\vec{f}\big) x_i,
@@ -77,6 +99,7 @@ I return to this point in the following sections within the discussion of the Lo
 
 
 \section{Minimal model of interacting species and the derivation of 2D LV model} %NTS:::this section can be expanded, see two page summary I wrote on this. 
+%NTS:::this SHOULD be expanded, to point out deterministic competitive exclusion - or maybe previous section?
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{two-resources}
@@ -313,7 +336,7 @@ The sparse matrix LU decomposition algorithm is implemented with the C++ library
 %NTS:::could move this to the appendix
 %The Moran model \cite{Moran1962} is similar to the Wright-Fisher model \cite{Wright,Fisher} in the limit of large $K$.
 Here I derive the mean fixation time for the Moran model \cite{Moran1962}, which will be used later as a limiting case of the Lotka-Volterra dynamics. 
-Previous authors have already shown that this is the limit \cite{blah}, and the fixation time for the Moran model is already known \cite{Moran1962}. I only include it here for completeness. 
+Previous authors have already shown that this is the limit \cite{Lin2012,Constable2015,Chotibut2015}, and the fixation time for the Moran model is already known \cite{Moran1962}. I only include it here for completeness. 
 The Wright-Fisher model gives similar results for large $K$, but is less intuitable, dealing as it does with a whole generation at a time, rather than one birth and one death. %pedagogical \cite{Wright1931}. 
 
 In the classical Moran model, at each time step, an individual is chosen at random to reproduce. In order to keep the population constant, another one is chosen at random to die. %It is a discrete time model, hence instead of rates it has probabilities.
@@ -858,6 +881,7 @@ However, it gets an incorrect prefactor, being $\propto \sqrt{K}$ rather than $\
 
 
 \section{Route to Fixation}
+%NTS:::refer to the previous chapter, as this is a comment on WKB
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{{RouteToFixation}}
@@ -919,13 +943,14 @@ Recently, the connection between deterministic models of the LV type and stochas
 Much of the recent studies of these systems employed various approximations, such as the Fokker-Planck approximation \cite{Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012}, WKB approximation \cite{Kessler2007,Gabel2013} or game theoretic \cite{Antal2006} approach. 
 The results of these approximations typically differ from the exact solution of the master equation, especially for small population sizes \cite{Doering2005,Kessler2007,Ovaskainen2010,Assaf2016,Badali2018}, as was discussed in more detail in the previous chapter. 
 In this chapter, I have interrogated stochastic dynamics of a system of two competing species using a numerically arbitrarily accurate method based on the first passage formalism in the master equation description. 
-The algorithmic complexity of this method scales algebraically with the population size rather than with the exponential scaling of the fixation time, (as is the case with the Gillespie algorithm \cite{Gillespie1977}) enabling us to capture both the exponential tails and the algebraic prefactors in the fixation/extinction times for both small and large population sizes. %really it only captures the mean rather than the exponential tail, but the point is it's not an approximation that ignores the tail nor with underlying assumptions about the solution except that it's rare for fluctuations to reach $C_K$ %NTS:::this comment?
+The algorithmic complexity of this method scales algebraically with the population size rather than with the exponential scaling of the fixation time, (as is the case with the Gillespie algorithm \cite{Gillespie1977}) enabling us to capture both the exponential behaviour and the algebraic prefactors in the fixation/extinction times for both small and large population sizes. %really it only captures the mean rather than the exponential tail, but the point is it's not an approximation that ignores the tail nor with underlying assumptions about the solution except that it's rare for fluctuations to reach $C_K$ %NTS:::this comment?
+This accuracy is needed in order to observe the transition from slow, exponentially dominated processes to the algebraically fast fixation of the Moran limit. 
 
 Stochastic fluctuations allow the system to escape from the deterministic co-existence fixed point towards fixation. 
 If the escape time is exponential in the (typically large) system size, in practice it implies effective co-existence of the two species around their deterministic co-existence point. 
 If the time is algebraic in $K$, as in degenerate niche overlap case (closely related to the classical Moran model), the system may fixate on biological timescales \cite{Kimura1964,Moran1962}. 
 For those biological systems with small characteristic population sizes, exponential scaling does not dominate the fixation time; power law and prefactor become more relevant. 
-Figure \ref{coexistvsfixate} shows that a niche overlap as low as $0.8$, for a carrying capacity around $6$, has rapid fixation, more rapid than a corresponding Moran model. 
+Figure \ref{coexistvsfixate} shows that a niche overlap as low as $0.8$, for a carrying capacity around $6$, has rapid fixation, more rapid than a corresponding Moran model. %NTS:::grossly too specific
 The transition between the exponential scaling of effective co-existence time to the rapid stochastic fixation in the Moran limit is governed by the niche overlap parameter, which for example can be derived in terms of the dynamics and interactions of the species and their secreted growth and death factors. %, as seen in section II. 
 % which can be derived in terms the dynamics of the species turnover governed by the exchange of the secreted growth and death factors (section II)[PLEASE CHECK - I do not understand this clause and it is anyways only an example, not a general statement]
 
@@ -944,13 +969,14 @@ Similar to the exponential term, the exponent of the algebraic prefactor is also
 %Our results suggest that even minute differences in niche overlap, i.e. in how different species interact with their shared environment, allow them to co-exist. % \cite{Hutchinson1961,May1999}
 Niche overlap between two species, the similarity in how they interact with their shared environment, is of critical importance in determining whether they will co-exist. 
 %Still, for large  populations, the co-existence time depends strongly on the niche overlap between the species through the character of the escape time $\sim \exp(f(a)K)$. [nEEDS one  more revisionnn]. !!!!!!!
-For typically large biological populations, effective co-existence occurs when escape time grows exponentially with the carrying capacity, which is the case for even slightly mismatched niches. Only when niche overlap is complete will fixation be relatively rapid. 
+For typically large biological populations, effective co-existence occurs when escape time grows exponentially with the carrying capacity, which is the case for even slightly mismatched niches. 
+Any niche mismatch leads to species which tend to exist for long times near their respective carrying capacities; in effect, niche models are apt even for large niche overlap. 
+Only when niche overlap is complete will fixation be relatively rapid, algebraic in $K$. 
 %For small carrying capacity systems, the situation is more complicated...
+%For smaller populations, the pre-exponential term starts to become important. %NTS:::include a line about this?
 This has important implications for understanding the long term population diversity in many systems, such as human microbiota in health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial microbiota used in fermented products \cite{Wolfe2014}, and evolutionary phylogeny inference algorithms \cite{Rice2004,Blythe2007}. 
-For smaller populations, the pre-exponential term starts to become important. 
-My results serve as a neutral model base for problems such as maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015} or strain survival in cancer progression \cite{Ashcroft2015}. The theoretical results can also be tested and extended based on experiments in more controlled environments, such as the gut microbiome of a \textit{c. elegans} \cite{Vega2017}, or in microfluidic devices \cite{Hung2005}.
-
-
+My results show that the generalized Lotka-Volterra model serves well as an extension to neutral models for problems such as maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, strain survival in cancer progression \cite{Ashcroft2015}, or the generation of coalescent or phylogenetic trees \cite{Kingman1982,Rice2004,Rogers2014}. 
+The theoretical results can also be tested and extended based on experiments in more controlled environments, such as the gut microbiome of a \textit{c. elegans} \cite{Vega2017}, or in microfluidic devices \cite{Hung2005}. %more in the final chapter 4
 
 %The important comparison, the main result of the paper, is between competing species that have complete niche overlap, compared to pairs where there is a slight niche overlap:
 %in the former case we expect the mean time to fixation to grow linearly with the system size, whereas in the latter case the fixation time should have some exponential component, allowing for much longer coexistence times.
