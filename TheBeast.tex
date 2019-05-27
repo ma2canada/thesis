@@ -54,6 +54,7 @@
 \usepackage[numbers,sort&compress]{natbib}%or cite instead of natbib
 %\numberwithin{equation}{section} %%%%%%%%%%%%%%%
 \graphicspath{{C:/Users/lenov/Documents/latex/thesis/figureItOut/}}
+\setcounter{chapter}{-1}
 %% The standard packages `geometry' and `setspace' are already loaded by
 %% `ut-thesis' -- see their documentation for details of the features
 %% they provide.  In particular, you may use the \geometry command here
@@ -123,6 +124,31 @@
 \begin{abstract}
 %% *** Put your Abstract here. ***
 %% (At most 150 words for M.Sc. or 350 words for Ph.D.)
+%NTS:::391 words rather than 350
+This thesis is concerned with demographic stochastics. That is, the randomness inherent in systems with a discrete state space. 
+In biology this arises naturally in ecological systems. 
+%The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
+%"strategic lit review"
+%"gap"
+%"thesis" "in this paper I will..."
+%"roadmap"
+%"short significance"
+Stochastics, as applied in the biological context, was first done by Kimura when calculating the dynamics of gene frequencies in a population. %something re ecological context... Wright Fisher, Moran, the other big names, etc
+Kimura, and most theoretical ecologists since, employed the Fokker-Planck equation, a partial differential equations method which further approximates the system by assuming continuous population sizes %cf. discrete state space
+In the context of population ecology, the similar Moran model of two species is the cleanest example of two competing species in an ecosystem, with eventually one going extinct and one fixating after some short characteristic time dependent on the system size. 
+However, this model assumes the two species are identical, and that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
+Some recent researchers have addressed this by noticing that results similar to that of Moran are found in one limit of the famous generalized Lotka-Volterra equations with stochastic fluctuations. 
+They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
+None, however, have looked at how the system transitions between its slow and fast limits. 
+Most have also restricted themselves to uncontrolled approximations
+This is where I situate my research. 
+In this thesis I will show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
+To accomplish this I shall first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional Lotka-Volterra toy model. 
+Thence I will investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
+I do this with an arbitrarily accurate technique for calculating mean fixation times. 
+Finally, by regarding the opposite process to fixation, I can comment on the stability of the 2D model with regards to invasion attempts. 
+The obvious consequence of my research is a better null hypothesis for the dynamics of small homogeneous communities like the human microbiomes. 
+More generally the results are of significance in estimations of timescale for paleontology and phylogeny. 
 \end{abstract}
 
 %% Anything placed between the abstract and table of contents will
@@ -180,7 +206,7 @@
 %%  of your thesis at a time by using `\includeonly'.                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% *** Include chapter files here. ***
+% *** Include chapter files here. ***
 \include{Ch0-ConIsKi}
 \include{Ch1-TheLoneliestNumber}
 \include{Ch2-TheIncredibleBulk}
@@ -198,7 +224,8 @@
 %% *** Set the bibliography file. ***
 %% ("thesis.bib" by default; change as needed)
 %\bibliography{paper1-6final}
-\bibliography{thesis}
+%\bibliography{thesis}
+\bibliography{library}
 
 %% *** NOTE ***
 %% If you don't use bibliography files, comment out the previous line

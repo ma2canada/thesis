@@ -452,8 +452,8 @@ It generalizes to multiple dimensions without conceptual difficulty.
 Mathematically, at higher dimensions WKB necessitates solving a Hamiltonian system, in order to find a likely route to extinction along which to integrate; an analytic solution cannot be derived in general, and a symplectic integrator is necessary to find the numeric trajectory \cite{}. 
 Nevertheless, in this one-dimensional case I find an analytic expression for the mean time to extinction using the WKB approximation to be
 \begin{equation}
-\tau_{\text{WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K} \sqrt{\frac{(1+\delta-q)^2}{\delta q + (1-q)(1+\delta)/K}} \exp \left{ K\left( %\frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + %\frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) + 
-	\ln\left[\frac{K(1+\delta)-q}{K\delta + (1-q)}\right] \right}.
+%\tau_{\text{WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K} \sqrt{\frac{(1+\delta-q)^2}{\delta q + (1-q)(1+\delta)/K}} \exp \left{ K\left( %\frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + %\frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) + 
+%	\ln\left[\frac{K(1+\delta)-q}{K\delta + (1-q)}\right] \right}.
 \end{equation}
 We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which always gives an analytic result:
 \begin{equation}
@@ -464,6 +464,7 @@ We can contrast this with the Gaussian approximation to the Fokker-Planck equati
 % \exp\left{ K\frac{2(1+\delta-q)}{(1-2q)^2} \ln\left[ \frac{K 2(1+\delta-q)}{K(1+2\delta)+(1-2q)} %\right] - \frac{K-1}{(1-2q)} \right}
 %\end{equation}
 Both formulae are dominated by their exponential dependence on $K$. 
+%NTS:::somewhere don't just put the asymptotic, put the full gamma function etc solution
 This is to be expected, as the true solution with $\delta,q = 0$ increases as $\frac{1}{K}e^K$ \cite{Lande1993}. 
 %WE SHOULD CHECK THIS FOR JUST DELTA OR JUST q=0, TO SEE IF THERE IS A NICE FORM OF THE SOLUTION IN THESE LIMITS, TO WHICH WE CAN COMPARE - there isn’t, it’s all hypergeometric
 It is the prefactor multiplying with the carrying capacity in the exponential that is of critical importance in determining the qualitative behaviour of the MTE. 
