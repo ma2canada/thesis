@@ -21,11 +21,12 @@
 \fi
 
 
-\section*{pre-intro note}
-This chapter is based on a paper written by me and my supervisor Anton Zilman, currently submitted to Royal Society Interfaces journal \cite{Badali2018}. 
+%\section*{pre-intro note}
+This chapter is based on a paper written by me and my supervisor Anton Zilman, which will be published in a Royal Society journal \cite{Badali2018}. 
 
 \section{Introduction}
 
+\iffalse
 Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2016}, the immune system \cite{Weinstein2009,Desponds2015,Stirk2010} and other ecosystems \cite{Tilman1996,Naeem2001}. 
 Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
 Nevertheless, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood.
@@ -36,6 +37,7 @@ The competitive exclusion principle postulates that due to abiotic constraints, 
 However, the exact definition of an ecological niche varies and is still a subject of debate \cite{Leibold1995,Hutchinson1961,Abrams1980,Chesson2000,Adler2010,Capitan2017,Fisher2014}, and maintenance of biodiversity of species that occupy similar niches is still not fully understood \cite{May1999,Pennisi2005,Posfai2017}. 
 Commonly, the number of ecological niches can be related to the number of limiting factors that affect growth and death rates, such as metabolic resources or secreted molecular signals like growth factors or toxins, or other regulatory molecules \cite{Armstrong1976,McGehee1977a,Armstrong1980,Posfai2017}. 
 Observed biodiversity can also arise from the turnover of transient mutants or immigrants that appear and go extinct in the population, as in Hubbell's model \cite{Hubbell2001,Desai2007,Carroll2015}.
+\fi
 
 Deterministically, ecological dynamics of mixed populations has been commonly described as a dynamical system of the numbers of individuals of each species and the concentrations of the limiting factors \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
 Steady state co-existence typically corresponds to a stable fixed point in such dynamical system, and the number of stably co-existing species is typically constrained by the number of limiting factors. 
@@ -102,10 +104,10 @@ I return to this point in the following sections within the discussion of the Lo
 
 \section{Minimal model of interacting species and the derivation of 2D LV model} %NTS:::this section can be expanded, see two page summary I wrote on this. 
 %NTS:::this SHOULD be expanded, to point out deterministic competitive exclusion - or maybe previous section?
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{two-resources}
-	\caption{\emph{A simple two species two resource model that obtains the Lotka-Voltera model} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). }
+	\includegraphics[width=0.5\textwidth]{two-resources}
+	\caption{\emph{A simple two species two resource model that derives the Lotka-Voltera model} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). }
 \end{figure}%NTS:::this isn't referenced in the text; furthermore the model in the text is slightly different, with each species producing both waste product
 
 As a minimal example, in this section we introduce a model of two interacting species whose dynamics is constrained by two secreted factors. Each species $x_i$ has basal per capita birth rate $\beta_i$, death rate $\mu_i$, and each generates the secreted soluble factors $t_j$ at rates $g_{ji}$. Each factor $t_i$ is degraded at a rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. Positive $e_{ij}$ may correspond to metabolic wastes, toxins or anti-proliferative signals \cite{Jacob1989,Maplestone1992,VanMelderen2009,Rankin2012,Shen2015,Wynn2015}, while negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{Maplestone1992,Reya2001,Wink2003}. The model kinetics is encapsulated in the following equations for the turnover of the species numbers:
@@ -218,7 +220,7 @@ Finally, when $\gamma=1$ (corresponding to  $a_{12}=1/a_{21}=K_1/K_2$), both the
 
 
 \section{Deterministic stability of the Lotka-Volterra model}
-\begin{figure}[ht!]
+\begin{figure}[h]
 	\centering
 	\begin{minipage}{0.44\linewidth}
 		\centering
@@ -231,7 +233,7 @@ Finally, when $\gamma=1$ (corresponding to  $a_{12}=1/a_{21}=K_1/K_2$), both the
 	\caption{\emph{Left: stability phase diagram of the co-existence fixed point for $K_1=K_2=K$.} The co-existence fixed point $C=\left(\frac{K_1-a_{12} K_2}{1-a_{12}a_{21}},\frac{K_2-a_{21} K_1}{1-a_{12}a_{21}}\right)$ is stable in the green region and unstable in the blue region; in the white regions it is non-biological. Colored dots indicate the parameter range studied in the paper. The numbered regions correspond to different biological different regimes; see text.
 	%Regions 4-6 correspond to competitive exclusion, with only single species fixed point $A$ or $B$ being stable (or both, in the bistable regime 5). In region 7 the populations experience unbounded growth.
 	For the degenerate case $a_{12}=a_{21}=1$, indicated by the red dot, the co-existence fixed point is replaced by a line of marginal stability, shown in the Right Panel.
-	\emph{Right: phase space of the coupled logistic model.} Colored dots show $C$ at the indicated values of the niche overlap $a$. The fixed point is stable for $a<1$. At $a=0$ the two species evolve independently. As $a$ increases, the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of marginally stable fixed points, corresponding to the Moran model. The dashed lines illustrate the deterministic flow of the system: black is for $a=0.5$, and orange for $a=1.1$. The zoom inset illustrates the stochastic transitions between the discrete states of the system. Fixation occurs when the system reaches either of the axes. See text for details.
+	\emph{Right: phase space of the coupled logistic model.} Colored dots show $C$ at the indicated values of the niche overlap $a$. The fixed point is stable for $a<1$. At $a=0$ the two species evolve independently. As $a$ increases, the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of marginally stable fixed points, corresponding to the Moran model. The dashed lines illustrate the deterministic flow of the system: black is for $a=0.5$, and orange for $a=1.2$. The zoom inset illustrates the stochastic transitions between the discrete states of the system. Fixation occurs when the system reaches either of the axes. See text for details.
 	} \label{phasespace}
 \end{figure}
 
@@ -308,14 +310,8 @@ Some diagonal elements are modified to ensure the reflecting boundary at $x_i=C_
 %I have found that the choice $C_K=5K$ is more than sufficient to calculate the mean fixation times to at least three significant digits of accuracy.
 
 
-\section{Comparison with the Gillespie algorithm}% and choice of cutoff parameter}
+%\section{Comparison with the Gillespie algorithm}% and choice of cutoff parameter}
 %NTS:::Anton thinks I should remove and/or revise this; I did not address his comments in the first round
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.7\textwidth]{coupled-logistic-data-vs-Gillespie.pdf}
-	\caption{\emph{Directly solving the (truncated) master equation agrees with Gillespie simulations.} Solid lines come from directly solving the backwards master equation by inverting the transition matrix, after a cutoff has been applied to the matrix to make it finite. Dashed lines are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm. }
-	\label{Gillespie}
-\end{figure}
 
 Numerical results obtained from the Gillespie algorithm are accurate, assuming a sufficient number are averaged over \cite{Gillespie1977}. 
 Unfortunately even for a system size as small as $K=20$ some of the simulations took over ten million steps before fixating. 
@@ -326,12 +322,44 @@ Any simulations that do not finish will be from the tail end of the distribution
 
 Inverting the truncated transition matrix, as has been done in this chapter, is a much faster computational problem, and is hindered by insufficient RAM rather than interminable runtimes. 
 Changing the cutoff means that the solution can be arbitrarily precise. 
-In figure \ref{Gillespie}, the direct solution from inverting the truncated transition matrix compares favourably with the Gillespie simulations. 
+In the left panel of figure \ref{lntauvK}, the direct solution from inverting the truncated transition matrix compares favourably with the Gillespie simulations. 
 
 %\section*{Parameter Choices}
 To ensure accuracy of the mean times to 0.1\% or better I choose $C_K=5K$. 
 This is largely excessive and even $C_K=2K$ is sufficient for all but the smallest carrying capacities, for which it is least important to be accurate. 
 The sparse matrix LU decomposition algorithm is implemented with the C++ library Eigen \cite{eigenweb}. 
+
+\iffalse
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{coupled-logistic-data-vs-Gillespie.pdf}
+	\caption{\emph{Directly solving the (truncated) master equation agrees with Gillespie simulations.} Solid lines come from directly solving the backwards master equation by inverting the transition matrix, after a cutoff has been applied to the matrix to make it finite. Dashed lines are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm. }
+	\label{Gillespie}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.95\textwidth]{{coupled-logistic-data}}
+	\caption{\emph{Dependence of the fixation time on carrying capacity and niche overlap.}
+		%Fixation time as a function of carrying capacity $K$ for different values of niche overlap $a$.
+		The lowest line, $a=1$, recovers the Moran model results with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$.
+	} \label{lntauvK}
+\end{figure}
+\fi
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{coupled-logistic-data-vs-Gillespie.pdf}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{coupled-logistic-data.pdf}
+	\end{minipage}
+	\caption{\emph{Dependence of the fixation time on carrying capacity and niche overlap.}
+		\emph{Left:} Dotted lines come from directly solving the backwards master equation by inverting the transition matrix as per equation \ref{explicit-tau}, after a cutoff has been applied to the matrix to make it finite. Dashed lines connecting crosses are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm with tau-leaping \cite{Gillespie1977,Cao2006}. The simulations and direct solution are in good agreement, as one would expect. 
+		\emph{Right:} The same direct solution data as in the left panel are extended to larger carrying capacities. The lowest line, $a=1$, recovers the Moran model results in solid green with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$. At $a=0$ the systems acts as two independent stochastic logistic systems, and matches that limit as shown with the solid purple line. 
+	} \label{lntauvK}
+\end{figure}
 
 
 \section{Mean fixation time in the classical Moran model}
@@ -366,14 +394,14 @@ Integrating, using the boundary conditions  $\tau(0) = \tau(K)=0$, gives
 \begin{equation}
 \tau(n) = -\Delta t\,K^2\left(\frac{n}{K}\ln\left(\frac{n}{K}\right)+\frac{K-n}{K}\ln\left(\frac{K-n}{K}\right)\right).
 \end{equation}\label{Morantime}
-\begin{figure}%[ht]
-	\centering
-	%\includegraphics[width=0.7\textwidth]{moran-comparison-64-3}
-	\includegraphics[width=0.7\textwidth]{morantimespicturename.png}
-	\caption{\emph{The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$.}  Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
-		%For comparison, the dashed green line is the same coupled logistic model but with $a=0.9$. 
-	} \label{ICfig}
-\end{figure}%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
+%\begin{figure}%[ht]
+%	\centering
+%	%\includegraphics[width=0.7\textwidth]{moran-comparison-64-3}
+%	\includegraphics[width=0.7\textwidth]{morantimespicturename.png}
+%	\caption{\emph{The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$.}  Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
+%		%For comparison, the dashed green line is the same coupled logistic model but with $a=0.9$. 
+%	} \label{ICfig}
+%\end{figure}%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
 
 For the initial condition analogous to the co-existence point, $n = K/2$, this gives
 \begin{equation*}
@@ -396,7 +424,7 @@ Then define the probability of the birth happening by \emph{by} time $t$ is $F(t
 Assuming independence, a birth and a death event have happened by time $t$ with probability $F(t)G(t)$, and the distribution of this time is given by $\partial_t[F(t)G(t)]$. 
 The average time of a birth and death is then
 \begin{align*}
- \Delta t &= \int_{0}^{\infty} t \partial_t[FG] dt = \int_{0}^{\infty} t \partial_t[FG] = \int_{0}^{\infty} t \left(f(t) + g(t) - (b+d)e^{-(b+d)t}\right) \\notag \\
+ \Delta t &= \int_{0}^{\infty} t \partial_t[FG] dt = \int_{0}^{\infty} t \partial_t[FG] = \int_{0}^{\infty} t \left(f(t) + g(t) - (b+d)e^{-(b+d)t}\right) \notag \\
           &= \frac{1}{b} + \frac{1}{d} - \frac{1}{b+d} = \frac{b^2 + b d + d^2}{b (b+d) d}.
 \end{align*}
 In principle this should be averaged over all combinations of the two species giving birth and dying, weighted by the probabilities of each pairing. 
@@ -413,7 +441,7 @@ and therefore
 \begin{equation}
 \tau = 3\ln(2)\, K. \label{morantime}
 \end{equation}
-The fixation time of the Moran model agrees well with the results of the coupled logistic model for complete niche overlap, as shown in Figure \ref{ICfig}. 
+The fixation time of the Moran model agrees well with the results of the coupled logistic model for complete niche overlap, as shown in the left panel of figure \ref{etimedistr}. 
 %NTS:::reference soft manifold stuff
 
 %In the deterministic model the WFM line arises at complete niche overlap.
@@ -481,14 +509,30 @@ r\,\tau \simeq \frac{1}{K}e^K
 to leading order \cite{Lande1993}.
 \fi
 
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{morantimespicturename.png}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{etimedistr1D16K.png}
+	\end{minipage}
+	\caption{\emph{Exploration of the niche overlap limits of the coupled logistic model.}
+		\emph{Left:} The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$. Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
+		%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
+		\emph{Right:} The extinction time distribution of a one-dimensional logistic model is dominated by a single exponential tail. The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. This informs my two-dimensional independent limit $a=0$, as the minimum of two exponential distribution is an exponential distribution. 
+	} \label{etimedistr}
+\end{figure}
 
 \section{Fixation time of the coupled logistic model in the independent limit}
-\begin{figure}[ht]
-	\includegraphics[width=0.7\textwidth]{etimedistr1D16K.png}
-	\caption{\emph{Extinction time distribution of the logistic model is dominated by a single exponential tail.} 
-		%Distribution of the extinction times of a single logistic model. 
-		The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. } \label{etimedistr}
-\end{figure}
+%\begin{figure}[ht]
+%	\includegraphics[width=0.7\textwidth]{etimedistr1D16K.png}
+%	\caption{\emph{Extinction time distribution of the logistic model is dominated by a single exponential tail.} 
+%		%Distribution of the extinction times of a single logistic model. 
+%		The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. } \label{etimedistr}
+%\end{figure}
 
 Here we calculate the mean fixation time in the independent limit of the coupled logistic model given a distribution of extinction times for a single logistic model. The fixation occurs when either of the species goes extinct. 
 Denoting the probability distribution of the extinction times for either of independent species as $p(t)$ and its cumulative as $F(t)=\int_{s=0}^t p(s)ds$, the probability that \emph{either} of the species goes extinct in the time interval $[t,t+dt]$, is the probability of species 1 going extinct while species 2 has not plus the probability that species 2 goes extinct while species 1 has not, since these are the two possibilities. 
@@ -505,7 +549,8 @@ The mean time to fixation $\langle t\rangle$ is
 %\includegraphics[width=0.7\textwidth]{etimedistr1D16K.png}
 %\caption{\emph{Extinction time distribution dominated by a single exponential tail.} Distribution of the extinction times of a single logistic model. The bulk of the probability density is modelled by an exponential distribution with the same mean.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. }
 %\end{figure} \label{etimedistr} %The inset is the same plot but with a log-scaled ordinate axis.
-As shown in Figure \ref{etimedistr}, the probability distribution of fixation times of a single species is dominated by the exponential tail. It can be approximated as
+As shown in the right panel of figure \ref{etimedistr}, the probability distribution of fixation times of a single species is dominated by the exponential tail. 
+It can be approximated as
 \begin{equation}
 p(t) = \alpha e^{-\alpha t},\;\;\;\;  F(t) = 1 - e^{-\alpha t}
 \end{equation}
@@ -535,24 +580,15 @@ This expression can be also derived using the backward equation formalism \cite{
 The matrix inversion was performed using LU decomposition algorithm implemented with the C++ library Eigen \cite{eigenweb}, which has algorithimic complexity of the calculation scaling algebraically with $K$.
 Increasing the cutoff $C_K$ enables calculation of the mean fixation times to an arbitrary accuracy.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.95\textwidth]{{coupled-logistic-data}}
-	\caption{\emph{Dependence of the fixation time on carrying capacity and niche overlap.}
-		%Fixation time as a function of carrying capacity $K$ for different values of niche overlap $a$.
-		The lowest line, $a=1$, recovers the Moran model results with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$.
-	} \label{lntauvK}
-\end{figure} %NTS:::Moran limit vs WFM limit
-
-The left panel of Figure \ref{lntauvK} shows the calculated fixation times with the initial condition at the deterministically stable co-existence fixed point as a function of the carrying capacity $K$ for different values of the niche overlap $a$. 
+The right panel of figure \ref{lntauvK} shows the calculated fixation times with the initial condition at the deterministically stable co-existence fixed point as a function of the carrying capacity $K$ for different values of the niche overlap $a$. 
 In the limit of non-interacting species ($a=0$), each species evolves according to an independent stochastic logistic model, and the  probability distribution of the fixation times is a convolution of the extinction time distributions of a single species, which are dominated by a single exponential tail \cite{Norden1982,Hanggi1990,Ovaskainen2010}. 
 Mean extinction time of a single species can be calculated exactly as in the previous chapter, and asymptotically for $K\gg 1$ it varies as $\frac{1}{K} e^K$ \cite{Lande1993} giving for the overall fixation time in the two species model  $\tau \simeq \frac{1}{2K} e^K$ as in Equation (\ref{indietime}).
-This analytical limit is shown in Figure \ref{lntauvK} in a black dashed line and agrees well with the numerical results of Equation (\ref{explicit-tau}). 
-From the biological perspective, for sufficiently large $K$, the exponential dependence of the fixation time on $K$ implies that the fluctuations do not destroy the stable co-existence of the two species. %NTS:::ensure that this is elaborated upon elsewhere. 
+This analytical limit is shown in figure \ref{lntauvK} as a solid purple line and agrees well with the numerical results of Equation (\ref{explicit-tau}). 
+From the biological perspective, for sufficiently large $K$, the exponential dependence of the fixation time on $K$ implies that the fluctuations do not destroy the stable co-existence of the two species. %NTS:::ensure that this is elaborated upon elsewhere - appendix?
 
-In the opposite limit of complete niche overlap, $a=1$, any fluctuations along the line of neutrally stable points are not restored, and the system performs diffusion-like motion that closely parallels the random walk of the classic Moran model \cite{Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012,Kessler2007}. 
+In the opposite limit of complete niche overlap, $a=1$, any fluctuations along the line of neutrally stable points are not restored, and the system performs diffusion-like motion that closely parallels the random walk of the classic Moran model \cite{Antal2006,Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012,Kessler2007,Young2018}. 
 The Moran model shows a relatively fast fixation time scaling algebraically with $K$ \cite{Moran1962,Lin2012}, $\tau \simeq \ln(2) K^2 \Delta t$; see Equation (\ref{morantime}). 
-The fixation time predicted by the Moran model is shown in Figure \ref{lntauvK} as a red dotted line and shows excellent agreement with our exact result. 
+The fixation time predicted by the Moran model is shown in figure \ref{lntauvK} as a solid green line and shows excellent agreement with my exact result. 
 %Note that the average time step $\Delta t$ in the corresponding Moran model is $\Delta t \approx 1/K$ because the mean transition time in the stochastic LV model is proportional to $1/(rK)$ close to the Moran line \cite{Chotibut2015}; see the Supplementary Information for more details. 
 The relatively short fixation time in the complete niche overlap regime implies that the population can reach fixation on biologically realistic timescales. 
 
@@ -562,6 +598,7 @@ The exponential scaling is expected for systems with a deterministically stable 
 However, the Fokker-Planck and WKB approximations, while providing the qualitatively correct dominant scaling, do not correctly calculate the scaling of the polynomial prefactor and the numerical value of the exponent simultaneously \cite{Kessler2007,Ovaskainen2010,Badali2018}, as was shown in the previous chapter.
 For large population sizes and timescales, effective species co-existence will be typically observed experimentally whenever the fixation time has a non-zero exponential component. %, $f(a)\neq 0$. % [[need to cite that pop sizes are large?]].
 
+\iffalse
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.95\textwidth]{{functionalKa9}}
@@ -570,6 +607,7 @@ For large population sizes and timescales, effective species co-existence will b
 \end{figure}% from equations (\ref{morantime}) and (\ref{indietime}), which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the WFM limit
 %NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RERUN AND CORRECTED
 %NTS:::from Anton, "You can't have figures that occupy the whole page" - yes but I can?!?
+\fi
 
 To quantitatively investigate the transition from the exponentially stable fixation times to the algebraic scaling in the complete niche overlap regime, we use the ansatz
 \begin{equation}
@@ -577,7 +615,7 @@ To quantitatively investigate the transition from the exponentially stable fixat
 \end{equation}
 In the  Moran limit, $a=1$, we expect $f(1)=0$, $g(1)=1$, and $h(1)=\ln\big(\ln(2)\big)$ as follows from equation (\ref{morantime}). In the independent species limit with zero niche overlap, $a=0$, equation (\ref{indietime}) suggests $f(0)=1$, $g(0)=-1$, and $h(0)=-\ln(2)$. 
 %In the  Moran limit, $a=1$, we expect $f(1)=0$, $g(1)=1$. In the independent species limit with zero niche overlap, $a=0$, we expect $f(0)=1$ and $g(0)=-1$. 
-Figure \ref{ansatzplot} shows the ansatz functions $f(a)$, $g(a)$, and $h(a)$, obtained by numerical fit to the fixation times as a function of $K$ shown in Figure \ref{lntauvK}. 
+The left panel of figure \ref{ansatzplot} shows the ansatz functions $f(a)$, $g(a)$, and $h(a)$, obtained by numerical fit to the fixation times as a function of $K$ shown in Figure \ref{lntauvK}. 
 The numerical results agree well with the expected approximate analytical results for $a=0$ and $a=1$ with small discrepancies attributable to the approximate nature of the limiting values. 
 Notably, $f(a)$, which quantifies the exponential dependence of the fixation time on the niche overlap $a$, smoothly decays to zero at $a=1$: only when two species have complete niche overlap ($a=1$) does one expect rapid fixation dominated by the algebraic dependence on $K$. 
 In all other cases the mean time until fixation is exponentially long in the system size \cite{Hanggi1990,Ovaskainen2010}. 
@@ -603,14 +641,30 @@ Even two species that occupy \emph{almost} the same niche ($a\lesssim1$) effecti
 
 %???!!!Some implications of the above results are addressed in the Discussion section below.
 
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.59\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{functionalKa9}
+	\end{minipage}
+	\begin{minipage}{0.39\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{coexist-vs-fixate.pdf}
+	\end{minipage}
+	\caption{\emph{Niche overlap controls the transition from co-existence to fixation.}
+		\emph{Left:} Blue line: $f(a)$ from the ansatz of Equation (\ref{ansatz}) characterizes the exponential dependence of the fixation time on $K$; it  smoothly approaches zero as the niche overlap reaches its Moran line value $a=1$. Green line: $g(a)$ quantifies the scaling of the pre-exponential prefactor $K^{g(a)}$ with $K$. Yellow line: $h(a)$ is the multiplicative constant. Dashed bars represent a 95\% confidence interval. The dots at the extremes $a=0$ and $a=1$ are the expected asymptotic values from equations (\ref{morantime}) and (\ref{indietime}), which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the Moran limit. 
+		%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
+		\emph{Right:} In part of the parameter space, fixation is always fast. The white area shows where two species are expected to effectively co-exist, while the black shading identifies the regime where fixation is faster than a similarly-sized Moran model. Fixation is estimated by extrapolating the ansatz parameter fits to the $a,K$ parameter space. %NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE rerun AND CORRECTED
+	} \label{ansatzplot}
+\end{figure}
 
 \section{Co-existence versus fixation in parameter space}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.45\textwidth]{coexist-vs-fixate.pdf}
-	\caption{\emph{Parameter space in which fixation is fast.} The white area shows where two species are expected to effectively co-exist, while the black shading identifies the regime where fixation is faster than a similar Moran model. Fixation is estimated by extrapolating the ansatz parameter fits to the $a,K$ parameter space. }
-	\label{coexistvsfixate}
-\end{figure}%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE rerun AND CORRECTED
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[width=0.45\textwidth]{coexist-vs-fixate.pdf}
+%	\caption{\emph{Parameter space in which fixation is fast.} The white area shows where two species are expected to effectively co-exist, while the black shading identifies the regime where fixation is faster than a similar Moran model. Fixation is estimated by extrapolating the ansatz parameter fits to the $a,K$ parameter space. }
+%	\label{coexistvsfixate}
+%\end{figure}%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE rerun AND CORRECTED
 
 I make the claim that when biological system sizes are large, a fixation time that scales exponentially with carrying capacity effectively implies co-existence. 
 This is typically the case. 
@@ -619,7 +673,7 @@ I want to get a better sense of when the exponential scaling is relevant, especi
 To this end I compare the expected mean fixation time with that of the Moran model. 
 The ansatz $e^{h(a)}K^{g(a)}e^{f(a)K}$ is fit to the data and then used to estimate the fixation time at a variety of parameter values. 
 This time is compared to the fixation time of a Moran model with the same carrying capacity. 
-In figure \ref{coexistvsfixate} the shaded region represents those parameter combinations for which the estimated fixation is faster than the corresponding Moran model. 
+In the right panel of figure \ref{ansatzplot} the shaded region represents those parameter combinations for which the estimated fixation is faster than the corresponding Moran model. 
 For example, a carrying capacity of about $35$ organisms is sufficient to allow for effective co-existence of two species which are not more than $99\%$ identical in their niches. This is a small population size in most biological contexts. 
 %As is evident, a carrying capacity of forty is fully sufficient to allow for effective co-existence of two species which are not identical in their niches. 
 Even for systems with a smaller carrying capacity, unless the two species are more similar they are expected to co-exist for long times before fixation. 
@@ -710,7 +764,7 @@ As expected, the well depth is proportional to carrying capacity $K$.
 %Kramer's theory suggests that extinction time should scale exponentially with the well depth. 
 %Notice that well depth is proportional to carrying capacity $K$, and so e
 Even the Gaussian approximation to the already approximate Fokker-Planck equation shows the extinction time scaling exponentially with $K$. 
-What is more, the exponential scaling disappears as niche overlap $a$ approaches unity, just as with the ansatz (shown in figure \ref{ansatzplot}). 
+What is more, the exponential scaling disappears as niche overlap $a$ approaches unity, just as with the ansatz (shown in the left panel of figure \ref{ansatzplot}). 
 The correlation between the two species diverges in this parameter limit, such that they are entirely anti-correlated. 
 Whereas the well has a single lowest point at the co-existence fixed point for partial niche overlap, at $a=1$ the potential shows a trough of equal depth going between the two axial fixed points. 
 This is the Moran line, along which diffusion is unbiased; diffusion away from the Moran line is restored, as the system is drawn toward the bottom of the trough. 
@@ -768,6 +822,7 @@ The result of exponential scaling of the fixation time except when the Moran lin
 % but neither of these simplifications are strictly necessary. 
 However, the evidence is not as clear as in the symmetric case. 
 
+\iffalse
 %\begin{figure}%[ht]
 %	\centering
 %	\includegraphics[width=0.7\textwidth]{asym-K1overK2is1a12is5-new.pdf}
@@ -791,26 +846,60 @@ However, the evidence is not as clear as in the symmetric case.
 	\label{asymmetrica}
 \end{figure}% from equations (\ref{morantime}) and (\ref{indietime}), which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the WFM limit
 
-\iffalse
 For instance, rather than investigating along the line $a_{12} = a_{21}$ as in the left panel of Figure \ref{phasespace}, one could instead consider a horizontal line in $a_{12}-a_{21}$ space. 
 Keeping the $K_{ij}$'s still equal, I apply the same $e^{h(a_{21})}K^{g(a_{21})}e^{f(a_{21})K}$ ansatz to fixation time data generated with $a_{12}$ held at $a_{12}=0.5$, allowing $a_{21}$ to vary between $0$ and $1$. 
-This generates figure \ref{asymmetrica}. % above. 
+This generates panel A of figure \ref{asymmetricaK}. % above. 
 Similar to the corresponding figure \ref{ansatzplot}, it is evident that the fixation time only loses its exponential scaling with carrying capacity when $a_{21}=1$. 
 As $a_{21}$ approaches $1$, however, the fixed point is not replaced by the Moran line of semi-stable fixed points, but rather merges with the fixed point on $x$-axis (specifically, at $(K,0)$), and the fixation time starting from the fixed point is exactly zero. 
 The exponential dependence is lost, but for a different reason. 
 %This is also why the exponential term was not as relevant in the first place. 
 Even prior to this merging, moving the fixed point, the point about which the system fluctuates, closer to an axis is similar to decreasing the effective carrying capacity, hence the scaling with the true carrying capacity is lessened. 
 This partially explains why the exponential fit parameter $f(a_{21})$ is weak even when $a_{21}=0$. 
-The right panel of figure \ref{asymmetrica} shows the comparison of the ansatz fit with the pseudo-potential well of the previous section. 
+Panel B of figure \ref{asymmetrica} shows the comparison of the ansatz fit with the pseudo-potential well of the previous section. 
 The Gaussian pseudo-potential shows a similar trend, though quantitatively it remains incorrect. 
 \fi
 
-Figure \ref{asymmetrica} shows the dependence of the fixation time on the niche overlap $a_{21}$ while keeping $a_{12}=0.5$ for $K_1=K_2\equiv K$; using the similar ansatz, I apply the same $\tau=e^{h(a_{21})}K^{g(a_{21})}e^{f(a_{21})K}$. 
+\begin{figure*}[h]
+	\centering
+	\begin{minipage}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{asym-K1overK2is1a12is5-new.pdf}
+		%\caption[Network2]%
+		{{A}}
+		%\label{fig:mean and std of net14}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.475\textwidth}  
+		\centering 
+		\includegraphics[width=\textwidth]{asym-vs-Gaussian}
+		%\caption[]%
+		{{B}}    
+		%\label{fig:mean and std of net24}
+	\end{minipage}
+	\vskip\baselineskip
+	\raggedright
+	\begin{minipage}[b]{0.475\textwidth}   
+		\centering 
+		\includegraphics[width=\textwidth]{asym-K1overK2is2a12overa21is4.pdf}
+		%\caption[]%
+		{{C}}    
+		%\label{fig:mean and std of net34}
+	\end{minipage}
+	\caption{\emph{Breaking the parameter symmetries.}
+		\emph{Panel A:} As in figure \ref{ansatzplot}, lines come from fitting the ansatz of equation \ref{ansatz} to data generated from equation \ref{explicit-tau}. In this case the niche overlap symmetry is broken and $a_{12}=0.5$. The exponential dependence on carrying capacity is non-zero except at $a_{21}=1$, at which point the ``co-existence'' fixed point is coincident with the fixed point on the $x$-axis. 
+		\emph{Panel B:} The ansatz fit from panel A is compared with the Gaussian well depth at the same parameter values. The non-zero exponential dependence is observed in the Gaussian approximation as well. 
+		\emph{Panel C:} The symmetry is broken in carrying capacity, such that $K_2=2K_1$. The ansatz is fit to $K_1$. The exponential dependence is non-zero except at the appearance of the Moran line at $a_{21}=1/2$. The extreme points are the expected asymptotic values. 
+	} \label{asymmetricaK}
+\end{figure*}
+
+Panel A of figure \ref{asymmetricaK} shows the dependence of the fixation time on the niche overlap $a_{21}$ while keeping $a_{12}=0.5$ for $K_1=K_2\equiv K$; using the similar ansatz, I apply the same $\tau=e^{h(a_{21})}K^{g(a_{21})}e^{f(a_{21})K}$. 
 As the niche overlap $a_{21}$ changes from $0$ to $1$, the location of the co-existence fixed point shifts from $(K/2,K/4)$ to $(K,0)$. 
 Accordingly, the fixation time starting from the fixed point maintains its exponential scaling with carrying capacity up until $a_{21}=1$, where the fixed time is equal to zero, as reflected in the shape of the of $h(a_{21})$. 
 Notably, in this asymmetric case the exponential scaling function $f(a_{21})$ is much weaker compared to the symmetric case, partially because the fixed point is located closer to an axis that in the symmetric case even at $a_{21}=0$. 
-The right panel of Figure \ref{asymmetrica} shows the comparison of the results of the ansatz fit with the estimates of the exponential part of the fixation time using Kramers'/Fokker-Planck pseudo-potential described in the previous section that explains the observed trends of $f(a_{21})$.
+Panel B of Figure \ref{asymmetricaK} shows the comparison of the results of the ansatz fit with the estimates of the exponential part of the fixation time using Kramers'/Fokker-Planck pseudo-potential described in the previous section that explains the observed trends of $f(a_{21})$. 
+The Gaussian pseudo-potential shows a similar trend to the data, though quantitatively it remains incorrect. 
 
+\iffalse
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{asym-K1overK2is2a12overa21is4.pdf}
@@ -820,11 +909,10 @@ The right panel of Figure \ref{asymmetrica} shows the comparison of the results 
 	\label{asymmetricK}
 \end{figure}
 
-\iffalse
-Next let us consider breaking the symmetry such that the Moran line can still be recovered. % in a range more analogous to the parameter range explored in the main paper. 
+Next let us consider breaking the symmetry such that the Moran line can still be recovered, in a range more analogous to the parameter range explored in the symmetric case. 
 The carrying capacity symmetry is broken, such that $K_2 = 2 K_1$. 
 The two species are still independent when $a_{12}=a_{21}=0$, but in this case the Moran line exists when $a_{12} = 2$ and $a_{21} = 1/2$. 
-Figure \ref{asymmetricK} shows the ansatz explored along $a_{12}=4 a_{21}$. %, as $a_{21}$ varies between the independent and Moran limits. 
+Panel C of figure \ref{asymmetricaK} shows the ansatz explored along $a_{12}=4 a_{21}$. %, as $a_{21}$ varies between the independent and Moran limits. 
 These niche overlap parameters are chosen such that they range from independence of both species when $a_{12} = a_{21} = 0$, to those that create the Moran line. % in the other extreme. 
 The behaviour is very similar to that shown previously, with the exponential dependence transitioning smoothly to zero only at the Moran line. 
 %Thus w
@@ -852,11 +940,11 @@ I include the caveat that fixation will also be fast when the co-existence fixed
 %NTS:::put/emphasize this in the previous chapter.
 The Fokker-Planck equation for extinction time is \cite{Nisbet1982}
 \begin{equation}
--r = \frac{n}{K}(K-n)\frac{\partial\tau_{FP}}{\partial n}+\frac{1}{2}\frac{n}{K}(K+n)\frac{\partial^2\tau_{FP}}{\partial n^2}.  
+-\frac{1}{r} = \frac{n}{K}(K-n)\frac{\partial\tau_{FP}}{\partial n}+\frac{1}{2}\frac{n}{K}(K+n)\frac{\partial^2\tau_{FP}}{\partial n^2}.  
 \end{equation}
 The solution to this equation is
 \begin{equation} \label{fpe-etime}
-r\,\tau_{FP}[n_0] = \int^{n_0}_0 dn\frac{\int_n^N dm\frac{2K}{m(K+m)}\exp[\int^m_0dn'\frac{2(K-n')}{(K+n')}]}{\exp[\int^n_0dm\frac{2(K-m)}{(K+m)}]}.  
+r\,\tau_{FP}[n_0] = \int^{n_0}_0 dn\frac{\int_n^\infty dm\frac{2K}{m(K+m)}\exp[\int^m_0dn'\frac{2(K-n')}{(K+n')}]}{\exp[\int^n_0dm\frac{2(K-m)}{(K+m)}]}.  
 \end{equation}
 It is difficult to solve analytically. 
 If we approximate the underlying population distribution as Gaussian, however, an analytic solution is easy to obtain:
