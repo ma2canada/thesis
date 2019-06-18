@@ -1,5 +1,7 @@
-\chapter{Ch3-AsymmetricLogistic}
+%\chapter{Ch3-AsymmetricLogistic}
+\chapter{Going from One Species to Two}
 %NTS:::EXTIRPATED means locally extinct
+%NTS:::just before submission, switch all the $K$s to $N$s
 
 %Should I include the other symmetry breaks here? Or in the previous chapter? In previous chapter
 
@@ -7,7 +9,7 @@
 %The previous chapter should end with a brief discussion of abundances and coalescents. Such a discussion will naturally motivate this chapter - perhaps the discussion should be at the start of this chapter. 
 
 %\section{pre-intro}%NTS
-This chapter is based on a paper written by me and my supervisor Anton Zilman, which will be published in a Royal Society journal \cite{Badali2018}. 
+The first half of this chapter is based on a paper written by me and my supervisor Anton Zilman, which will be published in a Royal Society journal \cite{Badali2018}. 
 %Half of this research has been submitted, in conjunction with the previous chapter, to be published in Journal of the Royal Society: Interfaces. 
 
 %Note also that I talk about foreign invading immigrants in this chapter. This is not meant to be related to human immigrants into a country (which I view favourably). 
@@ -80,19 +82,18 @@ The application is in neutral theories like that of Hubbell \cite{Hubbell2001}; 
 Neutral theories of the maintenance of biodiversity argue that no species truly establishes itself, and biodiversity is maintained by transient species in the system. 
 Calculation of the steady state number of species requires the time that these transient species exist in the system. 
 %It is worth noting that inevitably all the species in the theoretical work below are transient, on one timescale or another. 
-My results hold both for a species in an ecosystem (hence its relevance to conservation biology, where biodiversity is a marker of ecosystem robustness) and a gene in a population (hence its use in calculating heterozygosity, which confers resilience to environmental changes). 
-There are also more practical applications, like the susceptibility of a microbiome ecosystem like the gut or lungs to invasion, say from salmonella or pneumococcus. 
-%NTS:::citations for the last two sentences (eg Gutmann)
+My results hold both for a species in an ecosystem (hence its relevance to conservation biology, where biodiversity is a marker of ecosystem robustness) \cite{Peterson1997,McKane2003,Green2005,Bickford2007} and a gene in a population (hence its use in calculating heterozygosity, which confers resilience to environmental changes) \cite{Kimura1971,Kawecki2004,Korolev2011,Pennings2014}. 
+There are also more practical applications, like the susceptibility of a microbiome ecosystem like the gut or lungs to invasion, say from salmonella or pneumococcus \cite{Kinross2011,Koenig2011,Roeselers2011,Fisher2014a,Theriot2014,Corander2017,Amor2019}. 
 
 \iffalse
-Transient co-existence during the fixation/extinction process of immigrants/mutants has also been proposed as a mechanism for observed biodiversity in a number of contexts \cite{Kimura1964,Dias1996,Hubbell2001,Chesson2000,Leibold2006,Kessler2015,Vega2017}. 
+Transient coexistence during the fixation/extinction process of immigrants/mutants has also been proposed as a mechanism for observed biodiversity in a number of contexts \cite{Kimura1964,Dias1996,Hubbell2001,Chesson2000,Leibold2006,Kessler2015,Vega2017}. 
 The extent of this biodiversity is constrained by the interplay between the residence times of these invaders and the rate at which they appear in a settled population. 
 In the previous sections we calculated the fixation times in the two species system starting from the deterministically stable fixed point. 
 In this section we investigate the complementary problem of robustness of a stable population of one species with respect to an invasion of another species, arising either through mutation or immigration, and investigate the effect of niche overlap and system size on the probability and mean times of successful and failed invasions. 
 \fi
 
 
-\section{Defining Invasion in the Two-Dimensional Lotka-Volterra Model}
+\section{Defining Invasion in the 2D Lotka-Volterra Model}
 
 As before, I employ the symmetric generalized LV model with niche overlap $a$ and carrying capacity $K$. 
 I study the case where the system starts with $K-1$ individuals of the established species and $1$ invader. 
@@ -108,14 +109,14 @@ The species' dynamics are described by the birth and death rates defined by Equa
 
 An invasion is unsuccessful if the invading species dies out before establishing itself in the system. 
 There are many ways to define what it means for a species to be established, and I will outline one such definition below. 
-Deterministically the system would grow to asymptotically approach the co-existence fixed point; deterministically, all invasion attempts are successful, and stochasticity is required for nontrivial invasion probabilities. 
+Deterministically the system would grow to asymptotically approach the coexistence fixed point; deterministically, all invasion attempts are successful, and stochasticity is required for nontrivial invasion probabilities. 
 In a stochastic system, the populations could very easily fluctuate \emph{near} the fixed point without touching that exact point. This would overestimate the time to establishment, or even misrepresent a successful invasion as unsuccessful if the system gets near the fixed point without reaching it but then goes extinct. 
-%(Indeed, there is a non-zero probability that the established species dies out before the system reaches the co-existence fixed point, which clearly should count as a successful invasion but would ultimately count as unsuccessful once the invader species also goes extinct.) 
-Indeed, there is even a chance the established species dies out before the system reaches the co-existence fixed point, which would be counted as an unsuccessful invasion. 
-For these reasons a successful invasion should not be defined as the system arriving at the co-existence point. 
+%(Indeed, there is a non-zero probability that the established species dies out before the system reaches the coexistence fixed point, which clearly should count as a successful invasion but would ultimately count as unsuccessful once the invader species also goes extinct.) 
+Indeed, there is even a chance the established species dies out before the system reaches the coexistence fixed point, which would be counted as an unsuccessful invasion. 
+For these reasons a successful invasion should not be defined as the system arriving at the coexistence point. 
 %Nor should invasion mean getting within a region of this fixed point, by the same arguments. 
 The same arguments hold for a defined region near the fixed point (for instance, within three birth or death events, or within a circle of radius $\varepsilon$): the region might by chance be avoided for a time even after the invader is more populous than the original species, which could even go extinct before the invader. 
-Inspired by the observation that in the symmetric case, the co-existence fixed point has the same population of each species, I consider the invasion successful if the invader grows to be half of the total population without dying out first. 
+Inspired by the observation that in the symmetric case, the coexistence fixed point has the same population of each species, I consider the invasion successful if the invader grows to be half of the total population without dying out first. 
 So long as the invader population matches that of the established species, regardless what random fluctuations may have made that population to be, the invasion is a success. %Anton says, "No need in rhetorics." What does that mean? Unclear. Does he not like my sentence structure? He wasn't explicit, and I do, so it stays. 
 I denote the probability of a invader success as $\mathcal{P}$. 
 
@@ -138,7 +139,7 @@ Similar equations describe $\tau_f$ \cite{Nisbet1982,Iyer-Biswas2015}.
 As in the previous chapter, I truncate the transition matrix and invert it in order to solve these equations. 
 
 
-\section{Results and some intuition behind them}
+\section{Invasion probability and times into the Lotka-Volterra model}
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.49\linewidth}
@@ -191,13 +192,14 @@ The invasion probability in this limit is dominated by the probability that the 
 \fi
 The upper panels of figure \ref{TsuccTfail} show the dependence of the mean time to successful invasion, $\tau_s$, on $K$ and $a$. 
 Increasing $K$ can have potentially contradictory effects on the invasion time, as it increases the number of births before a successful invasion on the one hand, while increasing the steepness of the potential landscape and therefore the bias towards invasion on the other. %EDIT:::Maddy was confused about this point, thinking the larger K making it steeper means it is more deterministic-like and fluctuations are less relevant - this is true, but does not explain why increasing K might reduce the time
-Nevertheless, the invasion time is a monotonically increasing function of $K$ for all values of $a$. In the complete niche overlap limit $a=1$ the invasion time scales linearly with the carrying capacity $K$, as expected from the predictions of the Moran model, $\tau_{s} = \Delta t K^2(K-1)\ln\left(\frac{K}{K-1}\right)$ with $\Delta t\simeq 1/K$, as explained above. %NTS:::more info?
+Nevertheless, the invasion time is a monotonically increasing function of $K$ for all values of $a$. 
+In the complete niche overlap limit $a=1$ the invasion time scales linearly with the carrying capacity $K$, as expected from the predictions of the Moran model, $\tau_{s} = \Delta t K^2(K-1)\ln\left(\frac{K}{K-1}\right)$ with $\Delta t\simeq 1/K$, as explained above. %NTS:::more info?
 %NTS:::$\Delta t \neq K$ but $3/K$, and only at equal pops, which is strictly not true here
 %in response to Anton's question, the asymptotic scaling of this is $\tau \sim K$ for large $K$ and $\Delta t \sim K$
 The quantitative discrepancy arises from the breakdown of the $\Delta t\simeq 1/K$ approximation off of the Moran line. %NTS:::say more? - yes!
 For all values $0\leq a<1$ the invasion time scales sub-linearly with the carrying capacity, indicating that successful invasions occur relatively quickly, even when close to complete niche overlap, where the invading mutant strongly competes against the stable species. 
 In the $a=0$ limit of non-interacting species, the invading mutant follows the dynamics of a single logistic system with the carrying capacity $K$, resulting in the invasion time that grows approximately logarithmically with the system size, as shown in the upper left panel of figure \ref{TsuccTfail} as a purple line. 
-This result is well-known in the literature, and is stated without reference for instance by Lande \cite{Lande1993}. %NTS:::also Parsons2018
+This result is well-known in the literature, often stated without reference \cite{Lande1993,Parsons2018}. 
 It is easy to see: by writing $\tau_s = \int dt = \int_{x_o}^{x_f} dx \frac{1}{\dot{x}}$ for initial state $x_0=1$ and final state $x_f=(1-\epsilon)K$ with small $\epsilon$ and large $K$ we get
 \begin{align*}
 \tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} = \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) = \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} = \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \\
@@ -290,10 +292,10 @@ For complete niche overlap the invasion probability goes asymptotically to zero,
 High niche overlap makes invasion difficult due to strong competition between the species. 
 In this regime, the times of the failed invasions become important because they set the timescales for transient species diversity. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader. 
-On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient co-existence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Hubbell2001,Chesson2000}. 
+On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient coexistence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Chesson2000,Hubbell2001}. 
 Full discussion of diversity in this regime is beyond of the scope of the present work. % but see \cite{Dias1996,Hubbell2001,Chesson2000}. 
-The weaker dependence of the invasion times on the population size and the niche overlap, as compared to the escape times of a stably co-existing system to fixation, imply that the transient co-existence is expected to be much less sensitive to the niche overlap and the population size than the steady state co-existence. 
-Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in the previous section) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters.%NTS:::section
+The weaker dependence of the invasion times on the population size and the niche overlap, as compared to the escape times of a stably coexisting system to fixation, imply that the transient coexistence is expected to be much less sensitive to the niche overlap and the population size than the steady state coexistence. 
+Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in the previous section) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters. 
 
 For species with low niche overlap, the probability of invasion is likely, and for large $K$ decreases monotonically as $1-a$ with the increase in niche overlap, independent of the population size $K$. 
 The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$ and is typically increasing with the niche overlap $a$.
@@ -301,8 +303,8 @@ The mean time of successful invasion is relatively fast in all regimes, and scal
 %NTS:::maybe have a small summary paragraph. Add a comment on if there are multiple species (and do tthis in chapter 2 as well)
 
 %For this reason we have calculated the mean failure time, the mean time of invasion, and the probability of such a success. 
-The fixation times of two co-existing species, discussed in the previous chapter, determine the timescales over which the stability of the mixed populations can be destroyed by stochastic fluctuations. 
-Similarly, the times of successful and failed invasions set the timescales of the expected transient co-existence in the case of an influx of invaders, arising from mutation, speciation, or immigration. 
+The fixation times of two coexisting species, discussed in the previous chapter, determine the timescales over which the stability of the mixed populations can be destroyed by stochastic fluctuations. 
+Similarly, the times of successful and failed invasions set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration. 
 Our results provide a timescale to which the rate of immigration or mutation can be compared. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
 In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected.
@@ -316,7 +318,7 @@ With different strains of invaders arising faster than the time it takes to supp
 
 
 %\section{Moran Reintroduction}
-\section{Moran model in more detail}
+\section{Known Moran model results}
 
 %EDIT:::Maddy has a good point, why didn't I just do LV but with multiple invasions? idk
 
@@ -354,7 +356,6 @@ In fact it can describe any system where individuals of different species/strain
 \fi
 
 \iffalse
-%NTS:::still need to redo this section (in particular, it's just a rehash from the Neutrality section of the Introduction chapter)
 To arrive at the Moran model we must make some assumptions.
 Whether these are justified depends on the situation being regarded.
 The first assumption is that no individual is better than any other; that is, whether an individual reproduces or dies is independent of its species. % and the state of the system.
@@ -372,7 +373,7 @@ This assumption of discrete time can be relaxed without a qualitative change in 
 In the classic Moran model, each iteration or time step involves a birth and a death event.
 Each organism is equally likely to be chosen (for either birth or death), hence a species is chosen according to its frequency, $f=n/N$, where $N$ is the total population and $n$ is the number of organisms of that species. 
 We focus on one species of population $n$, which will be referred to as the focal species. 
-Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species. % denoted with $n$. 
+Note that $N-n$ represents the remainder of the population, and need not all be the same species, so long as they are not the focal species \cite{Black2012}. % denoted with $n$. 
 %NTS:::emphasize this, pointing out that this theory therefore accounts for any number of species - maybe in the previous transitionary paragraphs. 
 The focal species increases in the population if one of its members gives birth (with probability $f$) while a member of a different species dies (with probability $1-f$); that is, in time step $\Delta t$ the probability of focal species increase is $b(n) = f(1-f)$. 
 Similarly, decrease in the focal species comes from a birth from outside the focal group and a death from within, such that the probability of decrease is $d(n) = (1-f)f$. 
@@ -392,8 +393,7 @@ This creates a continuous time analogue to the Moran model, with $b$ and $d$ ser
 The timescale is now in units of $\Delta t$, which is only relevant if one were to compare with other models, which I do not. 
 With this approximation I can employ the formulae explored in chapter 1 for quantities like quasi-stationary probability distribution and mean time to extinction. 
 
-%NTS:::hopefully this answers Anton's question of what is the purpose of why I include this
-For reference, I include the mean and variance of a focal population as a function of time \cite{Moran1962}, so that I may later compare with the immigration case. %NTS:::cite???
+For reference, I include the mean and variance of a focal population as a function of time \cite{Moran1962,Kimura1964,McKane2003}, so that I may later compare with the immigration case. 
 If the system starts with $n_0$ individuals of the focal species, then on average there should be $n_0$ individuals in the next time step as well.
 Therefore the mean population as a function of time is $\langle n\rangle(t) = n_0$. 
 Since the extremes of $n=0$ and $n=N$ are absorbing, the ultimate fate of the system is in one of these two states, despite the mean being constant. 
@@ -451,8 +451,7 @@ Note that it was not necessary to use the large $N$ approximation, there is an e
 though it is less clear how this scales with $N$ and $f$. 
 
 
-\section{Moran model with immigration}
-%NTS:::redo figures as per Maddy and Anton's comments
+\section{Steady state properties of Moran model with immigration}
 %NTS:::redo headings/section titles as per Maddy and Anton's comments
 %NTS:::be careful whether "system" means both the metapop and the local pop or whether it refers only to the Moran part, the local pop
 In section (\ref{DiscussionOfOneAttemptedInvasion}) I argued that qualitatively different steady states are expected depending on a comparison of the timescales of immigration/mutation/speciation and invasion attempts. 
@@ -469,7 +468,7 @@ His work reinvigorated the debate between niche and neutral mechanisms of biodiv
 Early numerical solution of the Hubbell model was done by Bell \cite{Bell2001}. %, and work similar to that of Hubbell was done by McKane and Sol\'{e} \cite{McKane2003} among others \cite{???}. 
 Ultimately, it is simply a Moran model with immigration, where the immigrant species is never from one of the extant species (from Hubbell's perspective, the newcomers arise via speciation rather than immigration or simple mutation). 
 Hubbell composed his theory to describe species abundance curves, rather than my interests of the population probability distribution or lifetime of a single species. 
-By an abundance curve I mean a Preston plot, a plot of the number of species that belong in bins of logarithmically increasing population size \cite{Hubbell2001}. 
+By an abundance curve I mean a Preston plot, a plot of the number of species that belong in bins of exponentially increasing population size \cite{Hubbell2001}. 
 This contrasts with the stationary probability distribution of the population (or abundance) of a single species. 
 %EDIT:::Maddy is confused with the diff between pop distribution and prob distr - it's probably fine
 %For comparison, Crow and Kimura \cite{Crow1956,Kimura1983} treat the problem with both continuous time and continuous populations (ie. population densities), arriving at some numerical results but not much else...
@@ -495,7 +494,6 @@ Again I define a fractional abundance $f=n/N$ of the species on which I focus.
 %Biologically this can correspond to eg. new bacteria being drawn into a microbiome or new mutants arising within a population. 
 %Traditionally t
 The Moran population is treated as a rapidly evolving population, with immigrants coming from a more static metapopulation of larger size and diversity. 
-%NTS:::immigrants could also be mutants, especially regarding SNPs
 %We shall see if the Moran population acts as a reservoir, and generally what its dynamics are. 
 As with the Moran population, the metapopulation contains the focal species and other species, with new parameters $m$, $M$ and $g$ being analogous to $n$, $N$ and $f$. 
 That is, an immigrant into the Moran population is a member of the focal species with probability $g$, and of another species with probability $1-g$. 
@@ -535,7 +533,7 @@ Notice that setting the immigration rate $\nu$ to zero recovers the classic Mora
 %You could as before approximate this as a differential equation, but the problem is that the bounds won't make sense.  
 
 %\subsection{steady state}
-If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then the model corresponds to the Moran model with selection \cite{???}, which I will not explicitly treat, though it is included in the general treatment below. %!!! is tihs necessary? %NTS:::citation
+If a new mutant or immigrant species is unlikely to enter again (ie. if $g\simeq 0$) then the model corresponds to the Moran model with selection \cite{Taylor2004,Claussen2005,Lambert2006,Blythe2007,Parsons2007,Pigolotti2013,Chalub2016,Czuppon2017}, which I will not explicitly treat, though it is included in the general treatment below. %!!! is tihs necessary? 
 Also included here results similar to those of the Moran limit of section \ref{DiscussionOfOneAttemptedInvasion} above, with a single immigrant entering the community and then either successfully invading or going (locally) extinct. 
 %Here we regard the case where it is possible to draw in the species of interest from the metacommunity, before it goes extinct in the focus community (ie. $\nu g \gg 1/\tau$). %reservoir
 Since there is immigration from the static metacommunity, the system will never truly fixate, as there will always be immigrants of the `extinct' species to be reintroduced to the population.  
@@ -554,8 +552,9 @@ where
 \begin{align*}
  q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \\
  q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
- q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
-     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
+% q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
+%     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
+ q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1
 \end{align*}
 recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-\nu) + \nu N(1-g)i}$.
 %\begin{equation*}
@@ -624,12 +623,11 @@ These qualitatively different outcomes suggest some critical parameter combinati
 %\end{figure}
 \setlength{\unitlength}{1.0cm}
 \begin{figure}[h]
-%NTS:::address Anton's figure comments
 	\centering
 	%NTS:::\put(10,0){$F_N$}
 %	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability}
 	\includegraphics[width=0.6\textwidth]{Moran-withimmigration-fig1}
-	\caption{PDF of stationary Moran process with immigration. Metapopulation focal fraction is $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
+	\caption{\emph{PDF of stationary Moran process with immigration.} Metapopulation focal fraction is $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour. Notice that the curvature of the distribution inverts around $\nu=2/N$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}
 %\begin{picture}(100,100)
@@ -691,7 +689,7 @@ This is true even if the initial population fraction was almost entirely of the 
 Ultimately there is only one fate, hence no variance. 
 %The memory of the initial abundance does not affect these results at long times. 
 
-For $g\notin {0,1}$ I would first like to consider the low immigration case when the time $1/\nu$ between immigration events is longer than the timescale of the classic Moran model, which scales proportional to $N$. 
+For $g\notin \{0,1\}$ I would first like to consider the low immigration case when the time $1/\nu$ between immigration events is longer than the timescale of the classic Moran model, which scales proportional to $N$. 
 In this case we recover similar results to the no immigration case of the Moran model. 
 Instead of $f_0(1-f_0)N^2$ from the Moran model we get $\sigma^2(\infty) \approx g(1-g) N^2$, with the metapopulation focal species abundance $g$ acting analogously to the initial abundance $f_0$. 
 %This is because the fixation time of the Moran model, which goes like $N$, is much faster than the immigration time $1/\nu$. 
@@ -733,7 +731,7 @@ It spends most of its time resting in the fixated state, rarely seeing a new imm
 When immigration is frequent the system follows the metapopulation and is maintained at moderate population in the system. 
 Deviations away from the metapopulation abundance are suppressed and the probability of having $n$ focal organisms gathers near the mean value $g N$. 
 These regimes will be investigated further in the following paragraphs. 
-%NTS:::figure out why there's a gap here - nah
+%NTS:::figure out why there's a gap here - nah - I think it's to please the big titles, which cannot be split, or isolated from their sheep
 %EDIT:::Anton asks for subheadings to make it easier to follow the low and high immigration considerations
 
 Like the mean, another way to characterize the distribution is the extremum, which for large immigration rate corresponds to the mode of the system. 
@@ -771,8 +769,7 @@ This analysis agrees with the observation that there are multiple regimes in par
 When immigration is large, $\epsilon/\gamma \approx N\nu \gg 1$, and the maximum or mode of the distribution matches with the mean. 
 The bulk of the probability is centred near $g N$. 
 But in the opposite limit, when the probability is concentrated at zero and one, the minimal value is half way between these two. 
-%NTS:::Anton is rightly confused by this following sentence/line. 
-%No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. 
+%No conclusion should be drawn from this, as it is the point of least probability, and anyway the mean remains $gN$. %cut because confusing
 
 The question remains, how does the distribution switch between these two qualitatively different regimes as $\nu$ changes. 
 \iffalse
@@ -827,9 +824,9 @@ If the metapopulation is equally likely as not to provide an immigrant of the fo
 %EDIT:::commenting on Gore
 Regarding the results of the Gore lab \cite{Vega2017} one observes two qualitatively different regimes. 
 In those experiments, $g=0.5$ and $N=35,000$ for wild type worms or $4,700$ for the immune-compromised strain. 
-They vary the external bacterial concentration, of which $\nu$ should be a monotonically increasing function. 
+They vary the external bacterial concentration, of which $\nu$ should be a monotonically increasing function (ranging from $0.1/N \lesssim \nu \lesssim 100/N$). 
 At low bacterial concentration (and therefore low $\nu$), the system has a bimodal population probability distribution dominated by peaks at extinction and fixation. 
-At high bacterial concentration the distribution is more peaked toward the middle. %NTS:::see paper for an estimate of \nu
+At high bacterial concentration the distribution is more peaked toward the middle. %NTS:::see paper for an estimate of \nu - I think $N\nu$ is from .05 to 50?
 My research predicts that the immune-compromised worms should require a greater external bacterial concentration before the bimodal to unimodal transition is observed when compared to the wild type. 
 The evidence from the data is not obvious. 
 
@@ -846,6 +843,8 @@ The metapopulation is expected to contain many species, thus when any one of the
 For each species $i$ that $N\nu>1/g_i$ we expect it to exist in the system, and so the number of species with $g_i$'s greater than $1/(N\nu)$ gives a estimate of the expected number of species extant in the system when immigration is frequent. 
 To this extent, the distribution of $g_i$'s in the metapopulation prescribes the biodiversity of the local system. 
 
+
+\section{Dynamical properties of Moran model with immigration}
 %\subsection{dynamics}%EDIT
 Figure \ref{stationary-fig2} gives the probability distribution of the species of interest at steady state, but does not allow us to infer anything about the timescales or dynamics of the system. 
 %In this section I ask the question: what happens to the focal species at intermediate abundance?
@@ -858,7 +857,7 @@ As is standard practice, we take $b(0)=d(N)=0$, which allows us to find the mean
 %The difference between these results and the results earlier in this chapter is that there is still immigration into the system as it is evolving, which alters the dynamics depending on the rate $\nu$ and the immigrant focal fraction $g$. 
 Unlike in the coupled logistic model considered earlier, in this model this mean first passage time is affected by the continual influx of immigrants, and depends on immigration rate $\nu$ and focal fraction $g$. 
 
-The technique I employ follows that laid out in the chapter 1 \cite{Nisbet1982}. %NTS:::
+The technique I employ follows that laid out in the chapter 1 \cite{Nisbet1982}. %NTS:::chapter number
 Define the temporary extinction probability $E_i$ as the probability that the focal species goes extinct in this modified system with absorbing states at $n=0$ and $n=N$, \emph{i.e.} the system reaches the former before the latter, given that it starts at $n=i$. 
 Then $E_i = \frac{b(i)}{b(i)+d(i)}E_{i+1} + \frac{d(i)}{b(i)+d(i)}E_{i-1}$. 
 Further define $S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}$. 
@@ -907,8 +906,7 @@ See the appendix.
 %	\includegraphics[height=8cm]{Moran-withimmigration-extinctionprob}\llap{\makebox[\wd1][c]{\includegraphics[height=4cm]{Moran-withimmigration-extinctionprob-zoomed}}}
 	\includegraphics[height=8cm]{Moran-withimmigration-fig2}\llap{\makebox[\wd1][l]{\includegraphics[height=4cm]{Moran-withimmigration-fig2-insert}}}
 	\caption{Probability of first going extinct rather than fixating, given starting population of the focal species. Metapopulation focal fraction is $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour; red is $10/N$, orange is $5/N$, green is $3/N$, blue is $2/N$, purple is $1/N,$ and grey is $0.2/N$ (same as in figure \ref{stationary-fig2}). The black line is the regular Moran result without immigration. The inset shows that immigration acts to lower the probability of extinction as compared to the Moran model for some $f$ less than $g$, even though $g<0.5$ and more often than not the immigrant is not from the focal species. } \label{extnprobfig-ihope}
-\end{figure}%NTS:::see Anton's notes on fixing the figure
-%NTS:::"Put this figure into a proper order" - WHAT DOES THAT MEAN?!?
+\end{figure}
 \begin{figure}[ht]
 	\centering
 	%	\includegraphics[width=\textwidth]{Moran-withimmigration-extinctionprob}\llap{\makebox[0.5\wd1][l]{\includegraphics{Moran-withimmigration-extinctionprob-zoomed}}}%[width=0.5\textwidth]
@@ -933,7 +931,8 @@ Certainly for large immigration rate and population size, for $g<0.5$ the tempor
 But all parameter combinations (with $g\neq 0,1$) result in a leveling of the probability as compared to the Moran model (in black). %NTS:::need to discuss these results in discussion
 %EDIT:::LOOK AT TIDYING THIS WHOLE PARAGRAPH - also the figure caption
 
-%\subsection*{conditioned times}%EDIT:::
+%\subsection*{UNconditioned times}%EDIT:::
+\emph{Unconditioned First Passage Time} \\
 Similar to the extinction probabilities, we can write the unconditioned mean first passage time to either temporary fixation or extinction of the focal species \cite{Nisbet1982}:
 %\begin{equation}
 %\tau[i] = \frac{\Delta t}{b(i)+d(i)} + \frac{b(i)}{b(i)+d(i)}\tau[i+1] + \frac{d(i)}{b(i)+d(i)}\tau[i-1]. 
@@ -970,7 +969,7 @@ I once again remind the reader that since the metapopulation continues to send i
 %	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-fig3}
 %%	\caption{Mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.1$, system size is $N=50$, and immigration rate is $\nu=0.01$. The grey line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gN$. } \label{extntimefig}
 %	\caption{Mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.4$, system size is $N=100$, and immigration rate $\nu$ is coloured as before. The black line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gN$. } \label{extntimefig}
-%\end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
+%\end{figure}
 %NTS:::could also find the time a species exists in a system (allowing for fixation to be temporary but extinction to be permanent) but this is either not very meaningful (if the immigration is common - because if immigrants are coming in 1+ times during your transient existence then they'll also quickly come in shortly after you go extinct) or else it is just Moran without immigration conditioned on going extinct
 \begin{figure}[h]
 	\centering
@@ -989,6 +988,7 @@ I once again remind the reader that since the metapopulation continues to send i
 \end{figure}
 
 %\subsection*{Discussion}
+\emph{Conditioned First Passage Times} \\
 %Obviously, the conditional times matter
 In interpreting the unconditioned mean time I made reference to the times conditioned on local focal fixation or extinction. 
 With the clock stopping when the focal population first reaches $0$ or $N$ individuals, I calculate the conditional times, respectively to extinction and to fixation. 
@@ -1044,7 +1044,7 @@ For instance, a low focal species population close to zero is more likely to go 
 %%	\includegraphics[scale=1]{Moran-withimmigration-condtimesmall}
 %	\includegraphics[width=0.8\linewidth]{Moran-withimmigration-fig4}
 %	\caption{Mean time to fixation or extinction, conditioned on that event happening, given starting population/fraction. $g=0.7$, $N=100$, $\nu$ varies from 0.3 (highest) to 0.0001 (lowest). Grey is regular Moran results without immigration. } \label{condextntimefig}
-%\end{figure}%NTS:::update this figure with new colours and more conditions; as in the previous figures. 
+%\end{figure}
 
 
 \section{Discussion}
@@ -1070,7 +1070,7 @@ The invader is least likely to be successful in the Moran limit when niche overl
 For invaders that are mutants of the extant wild type species, this $a=1$ is the niche overlap they are most likely to experience, and so the more similar a mutant is to the wildtype, the less likely it is to reach half the population size, which is how I have defined a successful invasion. 
 
 Whether or not a mutant invasion is successful, the timescale is longest when niche overlap is high. %second and third figures
-The times of successful and failed invasions into a stable population set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration \cite{Hubbell2001,Desai2007}. 
+The times of successful and failed invasions into a stable population set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration \cite{Hubbell2001,Desai2007,Carroll2015}. 
 The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$. 
 By contrast, high niche overlap makes invasion difficult due to strong competition between the species. 
 In this regime, the times of the failed invasions become particularly salient because they set the timescales for transient species diversity. %EDIT:::redundant/in conflict with three lines earlier

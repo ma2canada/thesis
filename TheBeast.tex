@@ -48,6 +48,7 @@
 %% *** Add \usepackage declarations here. ***
 \usepackage{amsmath, amsthm, amssymb, color} %for... stuff
 \usepackage{subfig} %For subfigures
+%\usepackage{subcaption}
 \usepackage{graphicx}	% needed for including graphics e.g. EPS, PS
 \usepackage[usenames,dvipsnames]{xcolor} %%%%%%%%%%%%%
 \usepackage[normalem]{ulem} %for striking out text
@@ -80,7 +81,7 @@
 %% *** Change this example to appropriate values. ***
 \degree{Doctor of Philosophy}
 \department{Physics}
-\gradyear{2018}
+\gradyear{2019}
 \author{MattheW Badali}
 \title{Extinction, Fixation, and Invasion in an Ecological Niche}
 %\title{Coexistence and Extinction of Competing Species}
@@ -124,31 +125,108 @@
 \begin{abstract}
 %% *** Put your Abstract here. ***
 %% (At most 150 words for M.Sc. or 350 words for Ph.D.)
-%NTS:::391 words rather than 350
-This thesis is concerned with demographic stochastics. That is, the randomness inherent in systems with a discrete state space. 
-In biology this arises naturally in ecological systems. 
-%The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
+%NTS:::391 words rather than 350 - before edits
+
 %"strategic lit review"
 %"gap"
 %"thesis" "in this paper I will..."
 %"roadmap"
 %"short significance"
+
+%outline the general field, what are the big challenges, what has been done, what are the gaps, how this work closes those gaps
+%some good verbs: confirm find infer establish identify discover demonstrate show
+
+\iffalse
+%It is concerned with managing and maintaining the biodiversity on Earth, to avoid excessive rates of extinction. 
+The famous ``paradox of the plankton'' points out that in some ecosystems there are more species than expected, given the principle of competitive exclusion, which states that in each ecological niche one species should outcompete all others, to their extinction and its fixation. 
+Despite the importance of biodiversity in conservation biology and human health, the mechanisms of its maintenance as species invade and go extinct are poorly understood. 
+Proposed theories of biodiversity are usually niche or neutral. 
+%Niche models like that of Lotka and Volterra have too many parameters, and neutral models like those of Moran or Hubbell are controversial. 
+Niche models like the Lotka-Volterra model typically show longer extinction times compared to neutral models like that of Moran. 
+Recently, however, researchers have demonstrated that Moran-like dynamics are a limiting case of the Lotka-Volterra model with stochastic fluctuations. 
+\fi
+
+Remarkable biodiversity exists in biomes such as the human microbiome, the ocean surface, and every speck of soil. % soil, the immune system and other ecosystems. 
+%Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
+Despite their importance in human health and conservation biology, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood. %, industrial processes,
+The competitive exclusion principle postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state. %, and that species is said to have fixated. 
+However, maintenance of biodiversity of species that occupy similar niches is still not fully understood. 
+Biodiversity decreases as species go extinct, which is often caused by interactions with other species. 
+Stochastic fluctuations allow for an otherwise stable population to exhibit extinction. 
+Mathematical biologists employ stochastic models like the Moran or Lotka-Volterra models to emulate extinction or species competition. 
+
+The Moran model is the cleanest example of two competing species in an ecosystem in which eventually one goes extinct and the other fixates. 
+The extinction occurs on a short timescale with a characteristic dependence on system size. 
+Recently, some authors have observed that the Lotka-Volterra model, which typically has a long extinction timescale, exhibits dynamics similar to those of the Moran model in one parameter limit. 
+Given the widespread use of these models in mathematical biology, this correspondence of models is significant, but no one has investigated how the system transitions between its slow and fast extinction limits. 
+%They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
+%However, no one has looked at how the system transitions between its slow and fast extinction limits. 
+%Most have also restricted themselves to uncontrolled approximations. 
+%This is where I situate my research. 
+%To contribute to the problem of biodiversity I look at Lotka-Volterra systems with one or two species, systems which include the randomness inherent in populations with their discrete state space, called demographic stochasticity. 
+To contribute to the problem of biodiversity I look at how the Lotka-Volterra model's transition depends on its parameters. %, including the overlap of the two species' ecological niches. 
+%In this thesis I show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
+I show that competing species can coexist unless their ecological niches entirely overlap. 
+%I also discover that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
+%
+%To accomplish my goals I first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional toy model. 
+%Thence I investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
+%Thence 
+I identify the nature of the transition by calculating the mean extinction time with an arbitrarily accurate technique. % largely overlooked in the literature. % to the Moran limit
+This technique also allows me to appraise the stability of the Lotka-Volterra and Moran models with regards to immigrant invasion attempts. 
+My research predicts at what parameter values two species will effectively coexist, or whether one will be susceptible to the invasion of the other. 
+This allows me to make some general comments on why ecosystems should display such biodiversity. %: in short, it is because no two species occupy exactly the same niche. 
+%My results are also of significance in estimations of timescale for paleontology and phylogeny. 
+
+\iffalse
+Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2016}, the immune system \cite{Weinstein2009,Desponds2015,Stirk2010} and other ecosystems \cite{Tilman1996,Naeem2001}. 
+Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
+Nevertheless, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood.
+The competitive exclusion principle postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state, and that species is said to have fixated \cite{Hardin1960,Mayfield2010,Kimura1968,Nadell2013}. 
+However, the exact definition of an ecological niche varies and is still a subject of debate \cite{Leibold1995,Hutchinson1961,Abrams1980,Chesson2000,Adler2010,Capitan2017,Fisher2014}, and maintenance of biodiversity of species that occupy similar niches is still not fully understood \cite{May1999,Pennisi2005,Posfai2017}. 
+%Commonly, the number of ecological niches can be related to the number of limiting factors that affect growth and death rates, such as metabolic resources or secreted molecular signals like growth factors or toxins, or other regulatory molecules \cite{Armstrong1976,McGehee1977a,Armstrong1980,Posfai2017}. 
+%Observed biodiversity can also arise from the turnover of transient mutants or immigrants that appear and go extinct in the population, as in Hubbell's model \cite{Hubbell2001,Desai2007,Carroll2015}.
+We employ the reasoning of physics, and its workhorse mathematics, to problems of ecology to make headway against the confusions of the field of ecology. 
+
+%The lifetime and extinction of species is both of theoretical interest and a pressing concern for humanity, as we exist in an epoch of unprecedented rates of extinction. 
+%Conservation biology is a driving motivation for me in both my academic and personal life. 
+%It is concerned with managing and maintaining the biodiversity on Earth, to avoid excessive rates of extinction. 
+%The mechanisms of maintenance of biodiversity are poorly understood. 
+The famous ``paradox of the plankton'' says that there are more species than one would expect, given the principle of competitive exclusion, which states that in each ecological niche one species should outcompete all others, to their extinction and its fixation. 
+%!!!say something about biodiversity
+To contribute to this problem I look at systems with one or two species, systems which include the randomness inherent in populations with their discrete state space, called demographic stochasticity. 
+Stochastic fluctuations allow for an otherwise stable population to exhibit extinction. 
+The Moran model is the cleanest example of two competing species in an ecosystem in which eventually one goes extinct and the other fixates. 
+The extinction occurs on a short timescale with a characteristic dependence on system size. 
+\iffalse
+%EDIT need big picture context of biodiversity
+This thesis is concerned with demographic stochasticity; that is, the randomness inherent in systems with a discrete state space. 
+In biology this arises naturally in ecological systems. 
+%The number of living bacteria in a droplet of water can be forty two or forty three, but it cannot be forty two and a half; that half bacterium would more aptly be considered `dying' than `living'. 
 Stochastics, as applied in the biological context, was first done by Kimura when calculating the dynamics of gene frequencies in a population. %something re ecological context... Wright Fisher, Moran, the other big names, etc
-Kimura, and most theoretical ecologists since, employed the Fokker-Planck equation, a partial differential equations method which further approximates the system by assuming continuous population sizes %cf. discrete state space
-In the context of population ecology, the similar Moran model of two species is the cleanest example of two competing species in an ecosystem, with eventually one going extinct and one fixating after some short characteristic time dependent on the system size. 
+Kimura, and most theoretical ecologists since, employed the Fokker-Planck equation, a partial differential equations method which further approximates the system by assuming continuous population sizes. %cf. discrete state space
+In the context of population ecology, the similar model by Moran is the cleanest example of two competing species in an ecosystem, in which eventually one of them goes extinct and one fixates after some short characteristic time dependent on the system size. 
+\fi
 However, this model assumes the two species are identical, and that they compete with each other (interspecies) as strongly as they compete with themselves (intraspecies). 
-Some recent researchers have addressed this by noticing that results similar to that of Moran are found in one limit of the famous generalized Lotka-Volterra equations with stochastic fluctuations. 
+Recently, some researchers have addressed this by noticing that results similar to that of Moran are found in one limit of the famous generalized Lotka-Volterra equations with stochastic fluctuations. 
 They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
-None, however, have looked at how the system transitions between its slow and fast limits. 
-Most have also restricted themselves to uncontrolled approximations
+However, no one has looked at how the system transitions between its slow and fast extinction limits. 
+%Most have also restricted themselves to uncontrolled approximations. 
 This is where I situate my research. 
-In this thesis I will show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
-To accomplish this I shall first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional Lotka-Volterra toy model. 
-Thence I will investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
+In this thesis I show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
+To accomplish this I first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional Lotka-Volterra toy model. 
+Thence I investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
 I do this with an arbitrarily accurate technique for calculating mean fixation times. 
-Finally, by regarding the opposite process to fixation, I can comment on the stability of the 2D model with regards to invasion attempts. 
+Finally, by studying the opposite process to fixation, I comment on the stability of the 2D model with regards to invasion attempts. 
+\iffalse
+%EDIT need stronger "so what", and longer
 The obvious consequence of my research is a better null hypothesis for the dynamics of small homogeneous communities like the human microbiomes. 
 More generally the results are of significance in estimations of timescale for paleontology and phylogeny. 
+\fi
+My research predicts at what parameter values two species will effectively coexist, or whether one will be susceptible to the invasion of the other. 
+This allows me to make some general comments on why ecosystems should display such biodiversity: in short, it is because no two species occupy exactly the same niche. 
+My results are also of significance in estimations of timescale for paleontology and phylogeny. 
+\fi
 \end{abstract}
 
 %% Anything placed between the abstract and table of contents will
@@ -174,9 +252,40 @@ More generally the results are of significance in estimations of timescale for p
 
 %% This generates an "acknowledgements" section, if needed
 %% (uncomment to have it appear in the document).
-%\begin{acknowledgements}
-%% *** Put your Acknowledgements here. ***
-%\end{acknowledgements}
+\iffalse
+\begin{acknowledgements}
+% *** Put your Acknowledgements here. ***
+``What is biophysics?''
+This is a question I have been asked by family and friends innumerable times through my doctorate. 
+The short answer is that it is the application of ``physics thinking'' to biological problems. 
+Classical biophysics involves laser optics and protein radii. 
+The biggest theory contingent at a modern biophysical society meeting are those who do molecular dynamics simulations of protein folding (and the most common experimental setup is single protein microscopy). 
+I usually say that I have the mathematical and problem-solving skills of a physicist and am interested in biological problems, specifically ecology. 
+In reality my research would be at home in a physics department, or in applied mathematics, mathematical ecology, systems biology. 
+It has been an issue finding conferences to go to, in that my research tends to be more mathematical and technical than what most biologists care for, but with different end goals than the mathematicians, who are more interested in proofs and existence rather than the physical and biological effects and outcomes. 
+%OR
+This thesis is presented as a requirement for the completion of my doctorate of philosophy in physics - and that is the last time I will mention physics in this thesis. 
+My field is mathematical biology. 
+Physics falls somewhere in between math and biology, being very quantitative but also concerned with the real world, and so that’s where my research ended up. 
+But I could have just as easily been housed in applied mathematics, or ecology, or systems biology, or a number of other niche fields. 
+The biology is the motivation; the mathematics is what allows one to get things done. 
+Mathematical modelling can allow for quantitative predictions, something that was missing from the “stamp collecting” pre-modern biology. 
+Mathematical modelling is also powerful in its qualitative predictions. 
+In setting up a model we start with our basic understanding of the problem, but the act can enlighten us to the system: it may reveal unexpected phases, or tell us what to perturb (and how) to get a desired effect. %eg ???, Allee
+The qualitative can also inform government policy or life philosophy. %eg conservation efforts, Malthus
+%NTS:::cite Laudato si
+
+I apply mathematics to biological problems. In particular, I apply stochastic analysis to problems in ecology. 
+The application of mathematics allows for quantitative analysis of problems, which in turn leads to a greater ability to have statistical certainty when interpreting data. 
+Math can also allow you to uncover unforeseen aspects of a problem. 
+You write down a simple model which is biologically inspired and seems sound, then further investigation yields a novel qualitative regime of the system. 
+This is what happened to me, as I rediscovered (half a decade too late, it turned out) that the generalized Lotka-Volterra model recreates the Moran model in a particular parameter limit. 
+
+Conservation biology is a driving motivation for me in both my academic and personal life. 
+
+\end{acknowledgements}
+\fi
+
 
 %% This generates the Table of Contents (on a separate page).
 \tableofcontents
@@ -187,11 +296,12 @@ More generally the results are of significance in estimations of timescale for p
 
 %% This generates the List of Figures (on a separate page), if needed
 %% (uncomment to have it appear in the document).
-%\listoffigures
+\listoffigures
 
 %% You can add commands here to generate any other material that belongs
 %% in the head matter (for example, List of Plates, Index of Symbols, or
 %% List of Appendices).
+%\include{Unappendectomy}
 
 %% End of the preliminary sections: reset page style and numbering.
 \end{preliminary}
@@ -207,7 +317,8 @@ More generally the results are of significance in estimations of timescale for p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % *** Include chapter files here. ***
-\include{Ch0-ConIsKi}
+%\include{Ch0-ConIsKi}
+\include{Ch0-KiIsCon}
 \include{Ch1-TheLoneliestNumber}
 \include{Ch2-TheIncredibleBulk}
 \include{Ch3-ImmigrantSong}
@@ -221,6 +332,7 @@ More generally the results are of significance in estimations of timescale for p
 %% (change according to your preference/requirements)
 \bibliographystyle{plain}
 \bibliographystyle{unsrt}
+%\bibliography{natbib}
 %% *** Set the bibliography file. ***
 %% ("thesis.bib" by default; change as needed)
 %\bibliography{paper1-6final}
