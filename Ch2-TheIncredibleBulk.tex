@@ -12,6 +12,7 @@
 %NTS:::in INTRO or should mention birth-death, as opposed to other discrete space Markov models
 %NTS:::in INTRO or maybe should also mention Markov at some point
 %NTS:::add Kessler2015 to those that observe the Moran limit and treat the LV model stochastically
+%NTS:::be clear in chapters 2 and 3 that I am choosing interactions to affect death rate
 
 \iffalse
 "strategic lit review"
@@ -257,7 +258,7 @@ O = (0,0) \quad A = (0,K_2) \quad B = (K_1,0) \quad C = (\frac{K_1-a_{12} K_2}{1
 \end{equation}
 The origin $O$ is the fixed point corresponding to both species being extinct, and is unstable with positive eigenvalues equal to $r_1$ and $r_2$ along the corresponding on-axis eigendirections. 
 The single species fixed points $A$ and $B$ are stable on-axis (with eigenvalues $-r_1$ and $-r_2$, respectively), but are unstable with respect to invasion if point $C$ is stable, reflected in the positive second eigenvalue equal to $r_2(1-a_{21}K_1/K_2)$ and $r_1(1-a_{12}K_2/K_1)$, respectively. 
-Fixed point $C$ corresponds to the coexistence of the two species and is stable in the green shaded region in the left panel of Figure \ref{phasespace}, which shows the stability diagram of the system for $K_1=K_2$. \cite{Neuhauser1999,Cox2010,Chotibut2015}. %NTS:::could/should also include similar diagrams for broken symmetry
+Fixed point $C$ corresponds to the coexistence of the two species and is stable in the green shaded region in the left panel of figure \ref{phasespace}, which shows the stability diagram of the system for $K_1=K_2$. \cite{Neuhauser1999,Cox2010,Chotibut2015}. %NTS:::could/should also include similar diagrams for broken symmetry
 
 The different regions of the phase space in Figure \ref{phasespace} have different biological interpretations \cite{May2001,Abrams1977}. 
 Parasitism, or predation/antagonism, occurs in regions 2 and 6 of $(a_{12}, a_{21})$ space, where $a_{12}a_{21}<0$, with one species gaining from a loss of the other. 
@@ -302,7 +303,7 @@ b_i/x_i &= r_i \\
 d_i/x_i &= r_i\frac{x_i+a_{ij}x_j}{K_i}.  \label{deathrate}
 \end{aligned}
 \end{equation}
-In terms of the previous chapter, this corresponds to choosing $\delta = 0$ and $q=0$. 
+In terms of the previous chapter, this corresponds to choosing $\delta = 0$ and $q=0$. %EDIT:::does this want justification?
 In the deterministic limit of negligible fluctuations the model recovers the mean field competitive Lotka-Volterra Equations (\ref{mean-field-eqns}) \cite{Lin2012}. 
 
 The system is characterized by the vector of probabilities $P(s,t|s^0)$ to be in a state $s=\{x_1,x_2\}$ at time $t$, given the initial conditions $s^0=(x_1^{0},x_2^{0})$: $\vec{P}(t)\equiv\big(\dots,P(s,t|s^0),\dots \big)$ \cite{Munsky2006}. 
@@ -455,7 +456,8 @@ and therefore
 \begin{equation}
 \tau = 3\ln(2)\, K. \label{morantime}
 \end{equation}
-The fixation time of the Moran model agrees well with the results of the coupled logistic model for complete niche overlap, as shown in the left panel of figure \ref{etimedistr}. 
+The fixation time of the Moran model agrees well with the results of the coupled logistic model for complete niche overlap, as shown in figure \ref{ICfig}. 
+%the left panel of figure \ref{etimedistr}. 
 %NTS:::reference soft manifold stuff
 
 %In the deterministic model the WFM line arises at complete niche overlap.
@@ -523,6 +525,7 @@ r\,\tau \simeq \frac{1}{K}e^K
 to leading order \cite{Lande1993}.
 \fi
 
+\iffalse
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{0.49\linewidth}
@@ -536,8 +539,16 @@ to leading order \cite{Lande1993}.
 	\caption{\emph{Exploration of the niche overlap limits of the coupled logistic model.}
 		\emph{Left:} The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$. Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
 		%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
-		\emph{Right:} The extinction time distribution of a one-dimensional logistic model is dominated by a single exponential tail. The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. This informs my two-dimensional independent limit $a=0$, as the minimum of two exponential distribution is an exponential distribution. 
+		\emph{Right:} The extinction time distribution of a one-dimensional logistic model is dominated by a single exponential tail. The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. This curve informs my two-dimensional independent limit $a=0$, as the minimum of two exponential distribution is an exponential distribution. 
 	} \label{etimedistr}
+\end{figure}
+\fi
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{morantimespicturename.png}
+	\caption{\emph{Moran-like dynamics in the Moran limit of niche overlap in the coupled logistic model.}
+	The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$. Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
+	} \label{ICfig}
 \end{figure}
 
 \section{Fixation time of the coupled logistic model in the independent limit}
@@ -563,7 +574,7 @@ The mean time to fixation $\langle t\rangle$ is
 %\includegraphics[width=0.7\textwidth]{etimedistr1D16K.png}
 %\caption{\emph{Extinction time distribution dominated by a single exponential tail.} Distribution of the extinction times of a single logistic model. The bulk of the probability density is modelled by an exponential distribution with the same mean.  Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. }
 %\end{figure} \label{etimedistr} %The inset is the same plot but with a log-scaled ordinate axis.
-As shown in the right panel of figure \ref{etimedistr}, the probability distribution of fixation times of a single species is dominated by the exponential tail. 
+As shown in figure \ref{etimedistr} from the previous chapter, the probability distribution of fixation times of a single species is dominated by the exponential tail. %the right panel of 
 It can be approximated as
 \begin{equation}
 p(t) = \alpha e^{-\alpha t},\;\;\;\;  F(t) = 1 - e^{-\alpha t}
@@ -1001,11 +1012,11 @@ To gain deeper insight into the fixation dynamics, in this section I calculate t
 This gives the mean total time the system resides in state $s$, given that it starts in state $s^0$. 
 As with the fixation times, the dependence on the initial state is weak, so long as that initial state is not near an axis. 
 Whereas I previously analyzed the fixation time scaling, the residency times themselves proffer some insight into the system. 
-The results are shown as a contour plot in Figure \ref{extinctionroutes}, where  pink  corresponds to the high occupancy sites and green to the rarely visited ones, for two different niche overlaps, one at and the other far from the Moran limit. 
-The set of states lying along the steepest descent lines of the contour plot, shown as the black line, can be thought of as a ``typical" trajectory \cite{Gabel2013,Matkowsky1984,Kessler2007}. 
+The results are shown as a contour plot in figure \ref{extinctionroutes}, where  pink  corresponds to the high occupancy sites and green to the rarely visited ones, for two different niche overlaps, one at and the other far from the Moran limit. 
+The set of states lying along the steepest descent lines of the contour plot, shown as the black line, can be thought of as a ``typical'' trajectory \cite{Gabel2013,Matkowsky1984,Kessler2007,McKane2004,Baxter2005}. 
 However, even for two species close to complete niche overlap the system trajectory visits many states far from this line. 
 This departure is even greater for weakly competing species, where the system covers large areas around the fixed point before the rare fluctuation that leads to fixation occurs \cite{Gottesman2012}. 
-These deviations from a ``typical'' trajectory are related to the inaccuracy of the WKB approximation in calculating the scaling of the pre-exponential factor \cite{Assaf2016,Gottesman2012,Lande1993}; see also the previous chapter. %NTS:::WKB has a typical trajectory? Was that in the previous chapter?? 
+These deviations from a ``typical'' trajectory are related to the inaccuracy of the WKB approximation in calculating the scaling of the pre-exponential factor \cite{Assaf2016,Gottesman2012,Lande1993,Assaf2010}; see also the previous chapter. %NTS:::WKB has a typical trajectory? Was that in the previous chapter?? 
 
 %NTS:::write more about gaussian business
 This occupancy landscape can be qualitatively thought of as an effective Lyapunov function/effective potential of the system dynamics \cite{Zhou2012}, although the LV system does not possess a true Lyapunov function - an issue that also arises in the Fokker-Planck approximation \cite{Zhou2012,Chotibut2015}. 

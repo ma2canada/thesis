@@ -549,13 +549,16 @@ the difference equation of which can be solved in steady state to give
 \widetilde{P}_n = \frac{q_n}{\sum_{i=0}^N q_i}
 \end{equation}
 where
-\begin{align*}
- q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \\
- q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
-% q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
-%     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
- q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1
-\end{align*}
+\begin{equation*}
+q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}
+\end{equation*}
+%\begin{align*}
+% q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \\
+% q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
+%% q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
+%%     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
+% q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1
+%\end{align*}
 recalling that $\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-\nu) + \nu N(1-g)i}$.
 %\begin{equation*}
 %\frac{b(i)}{d(i)} = \frac{i(N-i)(1-\nu) + \nu Ng(N-i)}{i(N-i)(1-\nu) + \nu N(1-g)i}. 
@@ -920,15 +923,18 @@ See the appendix.
 \end{figure}
 \fi
 
-%EDIT:::LOOK AT TIDYING THIS WHOLE PARAGRAPH - also the figure caption
+%EDIT:::LOOK AT TIDYING THIS WHOLE PARAGRAPH - also the figure caption - did it a bit
 Unsurprisingly, when immigrants of the focal species are uncommon ($g<0.5$) the temporary extinction probability $E_i$ is generally increased compared to the Moran model without immigration. 
 %Unsurprisingly, having immigrants coming in that are less often from the focal species ($g<0.5$) largely acts to increase the probability of the focal species going extinct first. %but does it ever cross the Moran result??? - yes; see inset
-The exception, as highlighted in the right panel of figure \ref{extnprobfig-ihope}, is observed for some $n/N$ values less than $g$, when the focal fraction in the metapopulation is notably greater than in the local system; in this case the immigration acts to stabilize the population, lessening the probability of extinction before fixation. %EDIT:::rewrite because it confused Anton
+%The exception, as highlighted in the right panel of figure \ref{extnprobfig-ihope}, is observed for some $n/N$ values less than $g$, when the focal fraction in the metapopulation is notably greater than in the local system; in this case the immigration acts to stabilize the population, lessening the probability of extinction before fixation. %EDIT:::rewrite because it confused Anton
+The exception, as highlighted in the right panel of figure \ref{extnprobfig-ihope}, is observed for some $n/N$ values less than $g$; in this case the immigration acts to stabilize the population, lessening the probability of extinction before fixation. %EDIT:::I have no idea why, nor at what value this happens
 %See the right panel of figure \ref{extnprobfig-ihope}. 
 %The exception is for some $n/N$ values less than $g$; it seems that for low immigration or population size there is a reduction in the extinction probability, as emphasized in the inset of figure \ref{extnprobfig-ihope}. 
-Unlike with the steady state results, the different trends for the extremes of $N\nu$ compared to $1/g$ and $1/(1-g)$ are less pronounced. 
-Certainly for large immigration rate and population size, for $g<0.5$ the temporary extinction is almost certain, as is fixation for $g>0.5$. 
-But all parameter combinations (with $g\neq 0,1$) result in a leveling of the probability as compared to the Moran model (in black). %NTS:::need to discuss these results in discussion
+Unlike with the steady state results, the different trends for the extremes of $N\nu$ compared to $1/g$ and $1/(1-g)$ are less pronounced; there is no qualitative change at the critical parameter ratio. 
+One observation is that immigration acts to reduce dependence of the temporary extinction probability on initial conditions. 
+In all parameter combinations (with $g\neq 0,1$) the probability is more level, more horizontal, as compared to the Moran model (in black). %NTS:::need to discuss these results in discussion
+%Certainly for large immigration rate and population size, for $g<0.5$ the temporary extinction is almost certain, as is fixation for $g>0.5$. 
+At large immigration rate, for instance the red line in figure \ref{extnprobfig-ihope}, $g$ has a significant effect on the probability, almost guaranteeing that temporary extinction is certain for $g<0.5$, and temporary fixation for $g>0.5$. 
 %EDIT:::LOOK AT TIDYING THIS WHOLE PARAGRAPH - also the figure caption
 
 %\subsection*{UNconditioned times}%EDIT:::

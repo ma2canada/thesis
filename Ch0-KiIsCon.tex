@@ -60,7 +60,7 @@ It is certainly older than modern biology, with the structure of DNA only being 
 About a century ago, Lotka \cite{Lotka1920} and Volterra \cite{Volterra1926} extended the logistic equation of Verhulst \cite{Verhulst1838} and applied it to biological systems, arriving at the famous predator-prey equations. 
 Midway through the last century, Wright \cite{Wright1931}, Fisher \cite{Fisher1930}, and Moran \cite{Moran1962} proposed urn models that demonstrate fixation and extinction in a way that is easily intuited and also treatable mathematically. 
 Around the same time, Kimura was revolutionizing genetics by proposing models that could account for the evolution and eventual fixation or extinction of mutant alleles \cite{Crow1956,Kimura1964}. 
-Ecology benefited from the island biodiversity theory of MacArthur and Wilson \cite{MacArthur1963,MacArthur1967}. 
+Ecology benefited from the island biodiversity theory of MacArthur and Wilson \cite{MacArthur1967}. %MacArthur1963,
 In the last couple decades there has been debate as to the extent of neutral versus niche effects in ecological dynamics, sparked by Hubbell's unified neutral theory of biodiversity and biogeography \cite{Hubbell2001}. 
 The history of mathematical and theoretical biology, especially as applied to ecology, is punctuated by significant models like these inspiring deeper investigations of both the quantitative details and qualitative trends that the biological world might contain. 
 
@@ -181,7 +181,7 @@ This begs the question, what is an ecological niche?
 
 The concept of niches is an old one, over a century old, and was popularized by Grinnell \cite{Grinnell1917}.
 There is therefore over a century of debate as to the meaning of a niche, as there is ambiguity in its use.
-On the theory of niches, Hutchinson \cite{Hutchinson1957} says, ``Just \emph{because} the theory is analytically true and in a certain sense tautological, we can trust it in the work of trying to find out what has happened'' to allow for coexistence of species.
+On the theory of niches, Hutchinson \cite{Hutchinson1961} says, ``Just \emph{because} the theory is analytically true and in a certain sense tautological, we can trust it in the work of trying to find out what has happened'' to allow for coexistence of species.
 In principle, species coexist because they inhabit different niches.
 Following Leibold \cite{Leibold1995}, I refer to the definition of a niche according its two major uses: as the habitat or requirement niche and the functional or impact niche.
 \fi
@@ -198,7 +198,7 @@ The requirement niche:
 %Grinnell \cite{Grinnell1917} refers to those environmental considerations that a species can live with as what defines the niche.
 Grinnell \cite{Grinnell1917} defines a niche as those ecological conditions that a species can live within. 
 These ecological conditions include environmental levels and those organisms on different trophic levels than the species, like their predators and prey, but not those on the same trophic level that might compete with them.
-Hutchinson \cite{Hutchinson1957} agrees with Grinnell, and has provided one of the most enduring conceptualizations of a niche, that of an ``\emph{n}-dimensional hypervolume'' in the space of factors that could affect the growth or death of a species.
+Hutchinson \cite{Hutchinson1961} agrees with Grinnell, and has provided one of the most enduring conceptualizations of a niche, that of an ``\emph{n}-dimensional hypervolume'' in the space of factors that could affect the growth or death of a species.
 For each factor there is some range at which the species can reproduce faster than it dies out.
 This is true both for abiotic factors such as temperature, and biotic factors like the concentration of predators.
 Sometimes these ranges are bounded by zero (eg. cannot survive with no carbon source), sometimes they are unbounded (eg. no amount of prey is too much), and sometimes they depend on the values of the other factors involved (eg. salt is fine for sea creatures so long as there is an appropriate amount of water along with it). 
@@ -314,15 +314,13 @@ They can be derived from limiting factors (see \cite{MacArthur1967} for one exam
 %Various authors \cite{Lin2012,Constable2015,Chotibut2015} have observed that for one limit of niche overlap the stochastic 2D generalized Lotka-Volterra model exhibits dynamics similar to those of the Moran model. The transition to this limit is one of the main investigations of this thesis (see chapter 2). %NTS:::chapter number - already written in the paragraph above
 There is an unresolved debate in the field as to how niche overlap should be measured or defined \cite{Klopfer1961,Pianka1973,Pianka1974,Abrams1977,Hurlbert1978,Connell1980,Abrams1980,Schoener1985,Chesson1990,Leibold1995,Chesson2008}. %EDIT:::I disagree with Anton
 
-%EDIT:::paragraph
-The parameter space of the deterministic Lotka-Volterra model presented above shows a variety of regimes of the relationship between the two species \cite{Neuhauser1999,there is another I'm sure of it}. 
+The parameter space of the deterministic Lotka-Volterra model presented above shows a variety of regimes of the relationship between the two species \cite{Neuhauser1999,Cox2010,Chotibut2015}. 
 It is also summarized in chapter 2. %NTS:::chapter number
-The Lotka-Volterra model is of further interest because recent research has shown that inclusion of noise to the model recovers dynamics similar to the Moran model in a certain parameter limit \cite{so so many}. 
+The Lotka-Volterra model is of further interest because recent research has shown that inclusion of noise to the model recovers dynamics similar to the Moran model in a certain parameter limit \cite{Lin2012,Constable2015,Chotibut2015,Young2018}. 
 %Several researchers have recently also demonstrated that shows neutral
 The Moran model is a neutral model that shows qualitatively different dynamics. 
 The Moran model also underpins the Hubbell model, which is the simplest model that successfully describes abundance distributions in ecosystems with high biodiversity. 
-In niche models like the Lotka-Volterra model each species exists at its carrying capacity, and abundance distributions have to be predicted by more complicated models called niche partitioning or apportionment \cite{hopefully these are somewhere}. 
-%NST:::citations in this paragraph
+In niche models like the Lotka-Volterra model each species exists at its carrying capacity, and abundance distributions have to be predicted by more complicated models called niche partitioning or apportionment \cite{MacArthur1957,Sugihara2003,Leibold1995}. 
 
 
 \section{Neutral theories}
@@ -440,7 +438,7 @@ Hubbell predicts the distribution of species abundances, a binned plot of the nu
 %The abundance distribution is the curve that results from binning each species based on its population in the system, such that the first bin indicates the number of species that have a local population of only one organism (or a number falling in the first bin's range), the second bin is the number of species with abundance two (or a population in the second bin's range), and so on, with the bin size doubling each time. 
 %By an abundance curve I mean a Preston plot, a plot of the number of species that belong in bins of exponentially increasing population size \cite{Hubbell2001}. 
 Following the arguments of Hubbell, one can get an estimate of the expected biodiversity of a community, the number of species that should exist in the trophic level (those species which generally consume upon the same set of prey and are preyed upon by the same set of predators). %EDIT:::Anton suggests cutting this sentence
-The abundance distribution he predicts matches well with Fisher's log series distribution \cite{Fisher1943,Alonso2004} and with experimental observations in a variety of biological contexts, from trees to birds to microbiomes \cite{Hubbell2001}. 
+The abundance distribution he predicts matches well with Fisher's log series distribution \cite{Fisher1943,McKane2003} and with experimental observations in a variety of biological contexts, from trees to birds to microbiomes \cite{Hubbell2001}. 
 The Moran model with immigration analyzed in chapter 3 can be thought of as a variant of Hubbell's theory with recurring immigrants from the same species. %NTS:::chapter number
 While I do discuss abundance distributions I also calculate the (temporary) extinction probability and timescale, something Hubbell's work does not address (but see \cite{McKane2003,Azaele2005,Pigolotti2013,Kalyuzhny2014,Kessler2015} for approximate solutions or models with speciation rather than immigration). 
 %, as he was motivated entirely by the big picture, indifferent about the average dynamics of an individual species. 
@@ -506,7 +504,7 @@ Each stochastic model has a deterministic analogue that is arrived at as fluctua
 The time before extinction is a random variable and hence follows a probability distribution with a defined mean. 
 More generally in the field of stochastic analysis this is known as a mean first passage time, the mean time before a system first reaches some predefined state or collection of states. 
 %Not only the first passage time is distributed; before the system has gone extinct, its own state is a random variable. 
-The first passage time is random because the state itself is a random variable, described by its own probability distribution. 
+The first passage time is random because the state itself is a random variable, described by its own probability distribution over states. 
 %Any realization of a stochastic system is of course only in one state at a time, but since different realizations will give different trajectories it is necessary to employ statistical tools like a probability distribution to describe the likelihood of being in a given state at a given time. 
 The probability distribution of being at a given state (in a biological context, a population size) evolves in time according to its master equation. 
 %Equation \ref{master-eqn-intro} is the master equation for a birth death process, one that only allows transitions of increasing or decreasing one individual at a time. 
@@ -516,11 +514,11 @@ The master equation for a birth-death process, one that only allows transitions 
 \label{master-eqn-intro}
 \end{equation}
 
-%!!!NTS:::INSERT JEREMY'S FIGURE HERE!!!
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{MoranExample}
-	\caption{\emph{1D lattice figure.} This is just a placeholder. Make sure to reference this in the text as well!} \label{latticefig}
+	\includegraphics[width=0.8\textwidth]{lattice-fig1}
+	\caption{\emph{Each realization of a birth-death process is a random walk on a lattice.} Each node of the lattice corresponds to a population size. Birth jumps the system one node to the right and death moves it one left, toward the absorbing state at zero population. A system with one species only need a one dimensional lattice; each additional species requires an additional dimension to represent the combination of populations for each species. The master equation describes how a probability distribution on the lattice evolves in time. 
+	} \label{latticefig}
 \end{figure}
 %NTS:::reference this figure somewhere in the text
 
@@ -534,17 +532,17 @@ The master equation for a birth-death process, one that only allows transitions 
 %\subsection{Extinction rates from demographic and environmental stochasticity}
 Stochasticity originates from two main causes. 
 %environmental
-It can arise from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017b}, in that limiting factors like resource availability or temperature fluctuate over time. 
+It can arise from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017a}, in that limiting factors like resource availability or temperature fluctuate over time. 
 %To be clear, I am not talking about the natural dynamics of these quantities due to daily cycles or in response to a species affecting them. 
 %Rather, a system at $300K$ might occasionally, and randomly, have one patch warmer than the average, and another part cooler. 
 %The more abstracted and phenomenological the model, the less clear the cause of these fluctuations, but the more likely they are to occur. 
 %If the sources of noise are independent and many, an invocation of the central limit theorem suggests that a phenomenological parameter will have a Gaussian probability distribution about its mean value. 
 %demographic
 %But even if the environment is entirely controlled, there can be stochasticity in the system. 
-%Whereas a deterministic system like the logistic one shown in figure \ref{singlelog} has a continuous solution with the population growing smoothly to the carrying capacity, this is not possible in a real biological system, as the number of organisms is quantized. 
+%Whereas a deterministic system like the logistic one shown in figure \ref{singlelogfig} has a continuous solution with the population growing smoothly to the carrying capacity, this is not possible in a real biological system, as the number of organisms is quantized. 
 %There can be two bacteria or three, but not two and a half. 
 It is also intrinsic to any system with a finite countable size. 
-A deterministic system like the logistic one shown in figure \ref{singlelog} has a continuous solution, but the number of bacteria cannot vary continuously between 999 and 1000 but is discretized. 
+A deterministic system like the logistic one shown in figure \ref{singlelogfig} has a continuous solution, but the number of bacteria cannot vary continuously between 999 and 1000 but is discretized (see figure \ref{latticefig}). 
 Constraining the system to integer values, and the inherent randomness in the birth and death times of the individuals, leads to demographic noise \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}. 
 Demographic stochasticity is the focus of my thesis. 
 %For both environmental and demographic stochasticity it is usually obvious how to recover the deterministic analogue, by taking the noise to zero. %need to cite?
@@ -591,7 +589,7 @@ A sub-exponential extinction time implies exclusion of a species, and a reductio
 %Demographic fluctuations can be modelled using the master equation, that describes the evolution of a probability distribution function \cite{Nisbet1982,Gardiner2004a}. 
 %It is a differential equation in time and a difference equation in the population size, which accounts for the integer number of organisms. %EDIT:::Anton disagrees
 %The master 
-Stochastic equations are generally hard to solve, with a solution only reliably being found for one dimensional systems of birth-death processes \cite{Nisbet1982,Gardiner2004a,others???}. %, those which only increase or decrease by one individual at a time. 
+Stochastic equations are generally hard to solve, with a solution only reliably being found for one dimensional systems of birth-death processes \cite{Nisbet1982,Gardiner2004a,Hanggi1990}. %, those which only increase or decrease by one individual at a time. 
 The dimensionality, in an ecological context, is given by the number of distinct species or strains being modelled. 
 Particular realizations of solutions to the master equation are found via the Gillespie algorithm, also knows as the stochastic simulation algorithm \cite{Gillespie1977,Cao2006}. 
 For most of my research I calculate the mean time to extinction exactly, or at least to arbitrary accuracy, following a textbook formulation that involves inverting the transition matrix \cite{Nisbet1982,Norden1982,Parsons2007,Parsons2010}. 
@@ -675,16 +673,16 @@ First, I use the exact techniques mentioned above and introduced more completely
 %Specifically, chapter 1 is an exercise in care
 %Specifically, the results of chapter 1 indicate that intraspecies interactions are most impactful to the mean time to extinction when they increase death rates rather than reduce birth rates. 
 %I find that those species with high birth and death rates, and those for whom competition acts to increase death rate rather than reduce their birth rate, tend to go extinct more rapidly. %CONCLUSION
-Chapter 1 is largely technical in nature, though I do show that intraspecies interactions are most prone to lead to extinction when they increase death rates rather than reduce birth rates. 
+Chapter 1 is largely technical in nature, though I do show that intraspecies interactions are most prone shorten the time until extinction when they lead to increased death rates rather than reduced birth rates. 
 %Essentially, 
 %Intuitively, given two systems with the same average or deterministic dynamics, the one with the greater birth and death rates will have larger fluctuations, a broader probability distribution function, and faster first passage times. 
 %With the simplicity of this test system I explore the applicability of various common approximation techniques. 
 The simple system considered in this chapter also affords a thorough comparison of the common approximation techniques to stochastic problems. % and all are found wanting, with WKB performing best and Fokker-Planck often adequate. 
-I demonstrate the Fokker-Planck approximation works well close to the deterministic fixed point, but incorrectly estimates the scaling of the extinction time with system size, as is known by.... 
+I demonstrate the Fokker-Planck approximation works well close to the deterministic fixed point, but incorrectly estimates the scaling of the extinction time with system size, as has been shown before \cite{Grasman1983,Doering2005}. 
 The WKB approximation performs better, but misidentifies the prefactor to the exponential scaling. %CONCLUSION
 The failure of Fokker-Planck exists in the literature \cite{Grasman1983,Doering2005,Ovaskainen2010,Yu2017}, but to my knowledge the WKB method is trusted to be exact, and no one has done a careful investigation of these approximation techniques (but see \cite{Allen2003a,Yu2017}). 
 The exact techniques and the approximations together make up chapter 1, regarding a one dimensional system. %NTS:::chapter number
-This chapter is being prepared as a paper for publication \cite{Badali2018a}. 
+This chapter is being prepared as a paper for publication \cite{Badali2019b}. 
 
 The natural extension from a one dimensional logistic is to couple two such systems together. 
 %; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter 2. %NTS:::chapter number
@@ -705,7 +703,7 @@ Once these timescales are developed, I regard the Moran/Hubbell model modified t
 %This is compared with some steady state numerical results from Kimura. 
 %I demonstrate that, with system size $K$ and relevant immigrant probability $g$, an immigration rate of $1/K g$ is the critical value for determining the qualitative abundance distribution. %CONCLUSION
 I identify the critical value of the immigration rate above which a species will have a moderate population size and below which the population is either large or largely absent in its contribution to the abundance distribution. %CONCLUSION
-Chapter 2 and half of chapter 3 together form another paper being reviewed for publication \cite{Badali2018}. %NTS:::chapter numbers
+Chapter 2 and half of chapter 3 together form another paper being reviewed for publication \cite{Badali2019a}. %NTS:::chapter numbers
 
 %HOW DO THESE CHAPTERS ANSWER THE QUESTIONS I HAVE POSED?!?
 %NTS:::chapter numbers below
@@ -713,13 +711,13 @@ In the final chapter I address some of the big questions I have raised.
 %Specifically, chapter 1 is an exercise in care
 %Specifically, the results of chapter 1 indicate that intraspecies interactions are most impactful to the mean time to extinction when they increase death rates rather than reduce birth rates. 
 %The simple system considered also afforded a thorough comparison of the approximation techniques to stochastic problems and all are found wanting, with WKB performing best and Fokker-Planck often adequate. 
-Based on chapter 2 I infer when two species will coexist, and discover that even a small departure from Hubbell's assumption of neutrality drastically complicates its predictions. 
+Based on chapter 2 I infer when two species will coexist, and discover that even a small departure from Hubbell's assumption of neutrality drastically complicates his predictions. 
 So long as there are slight differences in their niches the many species of plankton can coexist. 
 %Chapter 3 shows that invasion is likeliest when the invader's niche overlap is minimal with the resident species. 
 %However, there is not a qualitative difference as niche overlap approaches unity. 
-Chapter 3 does not show a qualitative difference in invasion probabilities as niche overlap approaches unity. 
+Chapter 3 does not show as extreme a qualitative difference in invasion probabilities as niche overlap approaches unity. 
 %This chapter also treats a Moran/Hubbell model with repeated immigrants from a stable reservoir of species, finding that a given species is likely to be rare in the system unless its reservoir population is greater than a critical parameter combination inversely proportional to the immigration rate and system size. %this is a very long and awkward sentence
-But between its analysis of invasion into the Lotka-Volterra model and its steady state solution of the Moran model with immigration...
+But between its analysis of invasion into the Lotka-Volterra model and its steady state solution of the Moran model with immigration it reinforces that abundance curves cannot be predicted by Hubbell's simple model if there is niche mismatch. 
 %Thus the abundance distribution can be inferred from the distribution in the reservoir. 
 The final chapter is also where I explore experimental tests, applications and extensions of the results arrived at in this thesis, and suggest next steps for this research, both continuations and implementations to novel situations. 
 %The conclusions chapter covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
