@@ -53,6 +53,9 @@
 \usepackage[usenames,dvipsnames]{xcolor} %%%%%%%%%%%%%
 \usepackage[normalem]{ulem} %for striking out text
 \usepackage[numbers,sort&compress]{natbib}%or cite instead of natbib
+%\usepackage[backend=biber,style=phys]{biblatex}
+%\usepackage[backend=bibtex]{biblatex} %from Andrei, trying instead of natbib
+%\addbibresource{library-thesis.bib}
 %\numberwithin{equation}{section} %%%%%%%%%%%%%%%
 \graphicspath{{C:/Users/lenov/Documents/latex/thesis/figureItOut/}}
 \setcounter{chapter}{-1}
@@ -98,10 +101,10 @@
 
 %% List only down to subsections in the table of contents;
 %% 0=chapter, 1=section, 2=subsection, 3=subsubsection, etc.
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 
 %% Make each page fill up the entire page.
-\flushbottom
+%\flushbottom
 
 
 %%%%%%%%%%%%      MAIN  DOCUMENT      %%%%%%%%%%%%
@@ -321,7 +324,9 @@ Conservation biology is a driving motivation for me in both my academic and pers
 \include{Ch0-KiIsCon}
 \include{Ch1-TheLoneliestNumber}
 \include{Ch2-TheIncredibleBulk}
-\include{Ch3-ImmigrantSong}
+%\include{Ch3-ImmigrantSong}
+\include{Ch3-Immigrant}
+\include{Ch3-Song}
 %\include{Ch4-should be part of the previous chapter probably}
 \include{Ch4-UltimateShowdown}
 
@@ -330,7 +335,7 @@ Conservation biology is a driving motivation for me in both my academic and pers
 \addcontentsline{toc}{chapter}{Bibliography}
 %% *** Set the bibliography style. ***
 %% (change according to your preference/requirements)
-\bibliographystyle{plain}
+%\bibliographystyle{plain}
 \bibliographystyle{unsrt}
 %\bibliography{natbib}
 %% *** Set the bibliography file. ***
@@ -338,6 +343,8 @@ Conservation biology is a driving motivation for me in both my academic and pers
 %\bibliography{paper1-6final}
 %\bibliography{thesis}
 \bibliography{library-thesis}
+%\printbibliography
+
 
 %% *** NOTE ***
 %% If you don't use bibliography files, comment out the previous line

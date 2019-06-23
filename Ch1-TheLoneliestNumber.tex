@@ -1,6 +1,6 @@
 %\chapter{Ch1-SingleLogistic}
 %\chapter{A Single, Self-Interacting Species}
-\chapter{Going from One Species to Zero}%ASK:::what do you think of these headers? What do you think of the restructured ch4, ch0?
+\chapter{Extinction: Transition from One Species to Zero}%ASK:::what do you think of these headers? What do you think of the restructured ch4, ch0?
 
 %NTS:::
 %motivation for logistic equation
@@ -16,10 +16,10 @@
 
 %NTS:::in CH1, point out that inverting the matrix gives perfect match with true results
 %NTS:::in CH1, Langevin is the same as Fokker-Planck (though it is often done even worse)
-%NTS:::Markov
+%NTS:::basal birth rate, basal death rate
 
 %\section*{pre-intro note}
-This chapter is based on a paper written by myself, Jeremy Rothschild, and our supervisor Anton Zilman, which is currently be prepared for submission \cite{Badali2018a}. 
+This chapter is based on a paper written by myself, Jeremy Rothschild, and our supervisor Anton Zilman, which is currently be prepared for submission \cite{Badali2019b}. 
 
 \section{Introduction} \label{Introduction}% - MattheW
 
@@ -32,34 +32,34 @@ This chapter is based on a paper written by myself, Jeremy Rothschild, and our s
 Interactions are what make physics interesting. 
 So too in biology, interactions between organisms lead to the more interesting, and biologically realistic, situations. 
 Later chapters of this thesis will look at interactions between different species. 
-First, it will be useful to consider self interactions, that is to say, interactions between members of the same species. 
-The inclusion of intraspecies interactions into a model of one species already leads to successful biological models, of use in that they curb unlimited grown and lead to stable populations. 
+First it will be useful to consider self interactions, that is to say interactions between members of the same species. 
+The inclusion of intraspecies interactions into a model of one species already leads to successful biological models, of use in that they curb unlimited grown and lead to stable populations \cite{Verhulst1838,Ovaskainen2010,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}. 
 Biologically, interactions mean that the birth or death rate of an organism is influenced by the number of other organisms present in the system. 
 Specifically, the per capita birth rate can be reduced by the presence of competitors, for instance if the competitors reduce the resource abundance and growth is slowed \cite{Nadell2008,Vulic2001}. 
 Alternatively, the per capita death rate can be increased by neighbours, perhaps due to secreted factors like toxins or waste products introduced by those neighbours \cite{Greenhalgh1990,VanMelderen2009,Rankin2012}. 
 The biological reality determines how this shows up in a mathematical model that captures the growth and decay of the population. 
-In either case the interactions are modelled mathematically as a nonlinear term in the equations \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
+In either case the interactions are modelled mathematically as a nonlinear term in the equations \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Nasell2001}. %Fujita1953
 %
 The oldest model of intraspecies interactions is named for Verhulst \cite{Verhulst1838}, and is also called the logistic equation. 
-The logistic equation has seen wide use in a number of biological contexts \cite{Ovaskainen2010,Wallace2002,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}. 
+The logistic equation has seen wide use in a number of biological contexts \cite{Ovaskainen2010,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}. %Wallace2002
 
 %history of use
 While the logistic model has been widely employed, it has not been thoroughly studied in a stochastic context. 
-Specifically, applying demographic stochasticity to a logistic model involves four parameters (interaction effects on birth and death, as well as their intrinsic per capita values). 
+Specifically, applying demographic stochasticity to a logistic model involves four parameters (interaction effects on birth and death, as well as their basal per capita values). 
 In my search of the literature on the subject I have not seen an exhaustive study of the effect of all four parameters on quantities of stochastic importance, like the mean time to extinction, despite the solution being entirely tractable. 
 %
-One problem with going from deterministic to stochastic dynamics is that the mapping is not unique; many stochastic problems give the same deterministic limit as noise becomes negligible, as the deterministic dynamics are given by the difference between birth and death rates \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004a}. 
-Some of the parameters that define the stochastic model do not show up in the deterministic limit; I refer to these as ``hidden’’ parameters. 
+One subtlety with the stochastic problem is that the mapping from deterministic to stochastic dynamics is not unique; many stochastic models give the same deterministic limit as noise becomes negligible, since the deterministic dynamics are given by the difference between birth and death rates \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004a}. 
+Some of the parameters that define the stochastic model do not show up in the deterministic limit; I refer to these as ``hidden'' parameters. 
 %For this reason I argue that the stochastic description should be explicitly chosen and motivated, for any analysis which involves stochasticity even in part. 
 %In this chapter I will justify my argument in two ways, both of which use the ubiquitous example of the Verhulst, or logistic, model. 
 Using the metrics of the quasi-stationary probability distribution function (QSD) and the mean time to extinction (MTE) I will show that the allocation of linear and nonlinear contributions between the birth and death rate, as given by the ``hidden'' parameters, has a drastic effect. %NTS:::use QPDF, use MTE?
 
 %I will evaluate the validity of various commonly employed approximation techniques. 
 I will also use the simple system of a logistic model with demographic noise to evaluate some of the more common approximation techniques used in the literature. 
-The Fokker-Planck equation, for example, has a long history of use, and despite it being known to fail \cite{Grasman1983,Doering2005}, is still a popular choice today \cite{two million}. 
-Also known as the backward Kolmogorov equation, in approximates the master equation with a partial differential equation for the probability distribution for continuous time and population density, rather than the discretized population state space on which the master equation acts. 
-A more recently developed approximation technique is the WKB method \cite{a million}, which also considers a continuous state space, and defines a conjugate variable to the population size, such that the system evolves in this expanded space. 
-The WKB method generally compares to simulations more favourably than the Fokker-Planck equation \cite{Yu2017}, but is also known to be occasionally incorrect \cite{Assaf2010}, and can be supplemented by a small $n$ approximation \cite{Gardiner2004a,Assaf2010}. 
+The Fokker-Planck equation, for example, has a long history of use, and despite it being known to fail \cite{Grasman1983,Doering2005}, is still a popular choice today \cite{Kimura1955,Mangel1977,Roozen1987,Leigh1981,Lande1993,Foley1994,Traulsen2006,Parsons2007,Parsons2010,Chotibut2015,Constable2015,Lin2015,Iyer-Biswas2015,Yu2017,Young2018}. 
+Also known as the backward Kolmogorov equation, it approximates the master equation with a partial differential equation for the probability distribution for continuous time and population density, rather than the discretized population state space on which the master equation acts \cite{Nisbet1982,Gardiner2004a}. 
+A more recently developed approximation technique is the WKB method \cite{Doering2005,Assaf2006,Kessler2007,Ovaskainen2010,Assaf2016}, which also considers a continuous state space, and defines a conjugate variable to the population size, such that the system evolves in this expanded space. 
+The WKB method generally compares to simulations more favourably than the Fokker-Planck equation \cite{Yu2017}, but is also known to be occasionally incorrect \cite{Assaf2010}. %, and can be supplemented by a small $n$ approximation \cite{Gardiner2004a,Assaf2010}. 
 
 \iffalse
 %As deterministic dynamics have a longer history of being applied in a biological context than their stochastic analogues, and as deterministic mathematics are easier to solve, many researchers start with a deterministic approach to their problem of choice. 
@@ -69,7 +69,7 @@ This does indeed simulate a noisy system, and these stochastic differential equa
 Such an approach is suitable for continuous systems of quantities like density or concentration. 
 But for systems with demographic noise where the organisms are quantized one must be more careful...
 
-The deterministic equation I consider in this chapter is the logistic equation, one of the most common models to describe a biological system \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
+The deterministic equation I consider in this chapter is the logistic equation, one of the most common models to describe a biological system \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
 It shows up in epidemiology \cite{Assaf2009,others?}, biodiversity \cite{Hubbell2001?,others?}, and generally as a default for modelling a population that grows to a constant value \cite{bacteria OD, eg}. %NTS:::references
 For a population of $n$ individuals, I will be dealing with stochastic equations that give the deterministic limit
 \begin{equation}
@@ -79,11 +79,11 @@ For a population of $n$ individuals, I will be dealing with stochastic equations
 where $r$ is a rate constant and $K$ is a carrying capacity, a phenomenological measure of the system size. 
 The deterministic equation arises as a large population limit of a stochastic system \cite{Nisbet1982,Gardiner2004,Rouzine2001}; namely it is the difference of the stochastic birth and death rates. 
 Therefore when starting from only a deterministic equation there is some freedom to choose the stochastic rates for birth ($b_n$) and death ($d_n$). 
-As the choice of birth and death rates contains ambiguity, researchers have leeway in making their decision, resulting in a variety of similar but distinct models \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
+As the choice of birth and death rates contains ambiguity, researchers have leeway in making their decision, resulting in a variety of similar but distinct models \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
 These models, despite showing the same limit when fluctuations are small, are not equivalent for the stochastic measures chosen in this chapter. 
 %I will demonstrate the mathematical significance of these differences, and comment on the biological meaning of the concerned parameters. %suggesting which values would be appropriate in which situations. 
 %
-The logistic equation includes interactions between organisms by introducing a nonlinearity into the birth or death rates \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
+The logistic equation includes interactions between organisms by introducing a nonlinearity into the birth or death rates \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
 Biologically this means the per capita birth rate is reduced by the presence of competitors, for instance if the competitors reduce the resource abundance and growth is slowed \cite{Nadell2008,Vulic2001}. 
 Alternatively, the per capita death rate can be increased by neighbours, perhaps due to secreted factors like toxins or waste products introduced by those neighbours \cite{Greenhalgh1990,VanMelderen2009,Rankin2012}. 
 The biological reality determines how this shows up in a mathematical model that captures the growth and decay of the population. 
@@ -116,12 +116,12 @@ Finally, a discussion of the results will conclude that increasing the birth and
 \fi
 
 
-\section{1D logistic model}% - MattheW
+\section{One species logistic model}% - MattheW
 
 The simplest model of an isolated population has linear birth and death terms (that is, the per capita birth and death rates are constant: $b_n/n=\beta$, $d_n/n=\mu$). 
 The difference between per capita birth and death gives a rate constant $r$, the Malthusian or exponential growth rate, such that the deterministic per capita growth would be $\frac{1}{n}\frac{dn}{dt} = r$. 
 This model is a classic but gives the outcome of population explosion \cite{Malthus1798}. 
-Even in the stochastic case, there is a finite probability of population explosion, and the mean diverges \cite{Nisbet1982}. 
+Even in the stochastic case there is a finite probability of population explosion, and the mean diverges \cite{Nisbet1982}. 
 %, as probably is the case with constant birth/death (immigration/emigration) or any combination of these two. [find examples]
 To mathematically curb this infinite growth, and to biologically allow for intraspecies interactions, a non-linear term is required. 
 A quadratic is the simplest non-linearity so it serves as a popular choice for modelling intraspecies interactions, giving equation
@@ -129,28 +129,37 @@ A quadratic is the simplest non-linearity so it serves as a popular choice for m
 \frac{dn}{dt} = r\,n\left(1-\frac{n}{K}\right),
 \label{logistic}
 \end{equation}
-in the deterministic case \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}. 
+in the deterministic case \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Nasell2001}. %,Fujita1953
 %$\frac{1}{n}\frac{dn}{dt} = r\left(1-\frac{n}{K}\right)$ in the deterministic case. 
 One interpretation is that the rate constant is inhibited by the density of the population, hence a decrease by $n/K$. %, giving the desired quadratic term. 
 %This $r\,n^2/K$ is the quadratic term that models the intraspecies interactions and how they act to inhibit growth. 
 The parameter $K$ is the carrying capacity, a phenomenological measure of the system size. 
 
 Extinction occurs when the system reaches $n=0$, an absorbing state. %, with flux from small populations. 
-In this thesis I consider only birth-death processes, so extinction only occurs from the last individual organism dying before reproducing. 
-This adds motivation to the choice of a quadratic equation, since many dynamical systems can be approximated by a truncated Taylor series expansion at small population relative to the characteristic system size. 
+In this thesis I consider only birth-death processes, so extinction only occurs from the last individual organism dying before reproducing. %"last one" maybe sounds better
+This adds motivation to the choice of a quadratic equation, since many dynamical systems can be approximated by a truncated Taylor series expansion at a population small relative to the characteristic system size. 
 %For any per capita dynamics $r\,f(n/\tilde{K})$ with some large system parameter $\tilde{K}$ that gives exponential growth at small population we can write an expansion $f(n/\tilde{K})\approx f(0) + f'(0)n/\tilde{K}$. 
 %Defining $K\equiv-\tilde{K}/f'(0)$ we recover the logistic equation for small populations. 
 For example, if exponential growth is inhibited by Michaelis-Menten kinetics such that $\frac{1}{n}\frac{dn}{dt} = r\left(1-\frac{n}{n+\tilde{K}}\right)$, at small population the dynamics are the same as the logistic equation, with $K=\tilde{K}$. 
-Since I concern myself with extinction, it is exactly the dynamics of small populations that interests me; the population can have different behaviour at large $n$, but my MTE results should still hold validity. 
+Since I concern myself with extinction, it is exactly the dynamics of small populations that interests me; the population can have different behaviour at large $n$, but my MTE results should at least remain a good estimate. %should still hold validity. 
 %Note that the QSD will in general be different, and that most approximation techniques considered in this chapter work best near the mean of the QSD rather than near the small population sizes relevant to extinction. 
 
-Extinction occurs at $n=0$, an unstable fixed point of the logistic equation, whereas there is a stable fixed point at $n^*=K$. 
+%Extinction occurs at $n=0$, an unstable fixed point of the logistic equation, whereas there is a stable fixed point at $n^*=K$. 
+The origin is an unstable fixed point of the logistic equation, whereas there is a stable fixed point at $n^*=K$. 
 %The logistic equation \ref{logistic} has fixed points at extinction and the carrying capacity, $n=0$ and $n=K$ respectively. 
 Common practice in dynamical systems analysis is to rescale variables to remove parameters and simplify the system. 
-Since we are dealing with continuous time we can remove the rate constant from our equation, by rescaling the time by $r$. 
+Since we are dealing with continuous time we can remove the rate constant from our equation, by rescaling the time by $1/r$. 
 Similarly, in the deterministic equation \ref{logistic} we could rescale $n$ by $K$ and have no remaining parameters. 
 However, in the stochastic version we cannot apply this latter rescaling, because of the implicit population scale of $\pm1$ organism for each birth/death event. 
 The integer number of organisms in systems with demographic noise has an implicit population scale of 1. 
+See figure \ref{latticefig}. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{lattice-fig1}
+	\caption{\emph{Each realization of a birth-death process is a random walk on a lattice.} Each node of the lattice corresponds to a population size. Birth jumps the system one node to the right and death moves it one left, toward the absorbing state at zero population. A system with one species only need a one dimensional lattice; each additional species requires an additional dimension to represent the combination of populations for each species. The master equation describes how a probability distribution on the lattice evolves in time. 
+	} \label{latticefig}
+\end{figure}
 
 %NTS:::EDIT:::let's be honest here, \delta is just the basal death rate
 %Here we have assumed that the stochasticity comes from the discretization of the population, that it must exist at integer values, in opposition with the results of a deterministic model like equation \ref{logistic}. 
@@ -158,7 +167,7 @@ The integer number of organisms in systems with demographic noise has an implici
 The system being constrained to integer populations gives a clear example of why the deterministic analysis is insufficient. 
 Instead of the continuous, fractional populations of equation \ref{logistic}, one must define birth and death rates. 
 %Instead of a birth rate $b_n$ we 
-I assume that each birth event is independent and distributed exponentially with a probability $b_n\,dt$ of occurring in each infinitesimal time interval $dt$, and similarly for death events. 
+As is standard, I assume that each birth event is independent and distributed exponentially with a probability $b_n\,dt$ of occurring in each infinitesimal time interval $dt$, and similarly for death events \cite{Nisbet1982,Gardiner2004a,VanKampen1992}. 
 The Markov property underlying most stochastic processes studied, including those in this thesis, is that future events only depend on the present state \cite{Nisbet1982,Gardiner2004a,VanKampen1992}, hence a birth event happening with the same probability in each time interval, given that the state is the same at the start of each of those intervals. 
 %and this is similarly assumed for death events. %too technical? Or esoteric?
 In this chapter I use the birth rate
@@ -172,7 +181,12 @@ d_n = \delta\,r\,n + \frac{r(1-q)}{K} n^2 = r\,n\left(\delta+(1-q)\frac{n}{K}\ri
 \label{death}
 \end{equation}
 %Note that I introduce two new parameters in the equations \ref{birth} and \ref{death}: 
-In addition to $r$ and $K$, equation \ref{birth} and \ref{death} has two ``hidden'' parameters: $q\in[0,1]$ shifts the nonlinearity between the death term and the birth term, whereas the parameter $\delta\in[0,\infty)$ establishes a scale for the contribution of linear terms in both the birth and death rates. 
+These rates are used in the master equation
+\begin{equation}
+\frac{dP_n}{dt} =  b_{n-1}P_{n-1}(t) + d_{n+1}P_{n+1}(t) - (b_n+d_n)P_n(t).
+\label{master-eqn}
+\end{equation}
+In addition to $r$ and $K$, equations \ref{birth} and \ref{death} have two ``hidden'' parameters: $q\in[0,1]$ shifts the nonlinearity between the death term and the birth term, whereas the parameter $\delta\in[0,\infty)$ establishes a scale for the contribution of linear terms in both the birth and death rates. 
 I include the parameter $\delta$ to account for the stochastic relevance of the absolute values of the per capita birth and death rates; in the deterministic limit only their difference $r$ affects the dynamics of the system. 
 Parameter $q$ describes where the intraspecies inhibition acts: a $q$ near unity implies competition for resources and a decreased effective birth rate, whereas a low $q$ near zero reflects more direct conflict, with intraspecies interactions resulting in greater death rates of organisms. 
 Note that so long as $q\leq 1$ the death rate is positive semi-definite for the domain of interest. 
@@ -192,7 +206,7 @@ N = \frac{1+\delta}{q}K.
 \label{maxN}
 \end{equation}
 Therefore I limit the calculations to the biologically relevant range $n\in[0,N]$. % and, for completeness to our study, we can readily check that for our range of parameters $N\geq K$. 
-Already it is evident that the ``hidden" parameters of $\delta$ and $q$ have an effect on the system, as different values of the parameters will naturally define a range of states accessible in the model. 
+Already it is evident that the ``hidden'' parameters of $\delta$ and $q$ have an effect on the system, as different values of the parameters will naturally define a range of states accessible in the model. 
 %Note that so long as $q\leq 1$ the death rate is positive semi-definite for the domain of interest. % as defined previously does not imply any necessary subtle manipulation of the population range since the death rate is always positive (except at $n=0$) in the range of $q$ and $\delta$ described earlier. 
 %The lower bound of the population range for all models is at our unstable fixed point representing an extinct species $n=0$.
 At $n=0$ both the birth and death rates go to zero, as they should, for it to be an absorbing state. %EDIT:::Anton says this is repetitive; whatever
@@ -201,13 +215,9 @@ At $n=0$ both the birth and death rates go to zero, as they should, for it to be
 \section{Quasi-stationary probability distribution function}% - Jeremy
 
 %A probability distribution function is a useful mathematical tool to describe the state of a dynamical system.
-A probability distribution function is a necessary mathematical tool to describe the state of a stochastic dynamical system.
+%A probability distribution function is a necessary mathematical tool to describe the state of a stochastic dynamical system.
+The evolution of the distribution in the single birth and death process is captured in the master equation \ref{master-eqn} \cite{Nisbet1982,Gardiner2004a}. 
 I denote $P_n(t)$ as the probability that the population is composed of $n$ organisms at time $t$.
-The evolution of the distribution in the single birth and death process is captured in the master equation \cite{Nisbet1982,Gardiner2004a}
-\begin{equation}
-\frac{dP_n}{dt} =  b_{n-1}P_{n-1}(t) + d_{n+1}P_{n+1}(t) - (b_n+d_n)P_n(t).
-\label{master-eqn}
-\end{equation}
 Note that ultimately at large times the probability of being at population size $n\neq 0$ decays to zero, as more and more of the probability gets drawn to the absorbing state. 
 %This is due to the stochasticity of the births and deaths and the nature of the absorbing state $n=0$ with no possibility of recovery. % [reference probability distribution leaking to zero definitely].
 %NTS:::prove this? show this with reference to Nisbet and Gurney?
@@ -216,8 +226,8 @@ However, the approach to the true steady state is slow (on the order of the MTE;
 Prior to reaching extinction, the system tends more rapidly toward a quasi-stationary distribution. 
 That is, after some autocorrelation time, the system reaches a state that changes very little as it slowly leaks probability into the absorbing state at extinction. 
 
-I am interested in this conditional probability distribution function $P_n^c$: the probability distribution of the population conditioned on not being in the steady extinct state. 
-It is found by renormalizing the probability of being at each state $n$ by the total probability that the system has not yet gone extinct:
+I want to solve this conditional probability distribution function $P_n^c$: the probability distribution of the population conditioned on not being in the steady extinct state. 
+It is found by renormalizing the probability of being at each state $n$ by the total probability that the system has not yet gone extinct \cite{Nisbet1982}:
 \begin{equation*}
  P_n^c = \frac{P_n}{1-P_0}.
 \end{equation*}
@@ -227,7 +237,7 @@ The dynamics of this conditional distribution are described by a slightly differ
 \label{masters2}
 \end{equation}
 After an initial transient period, this conditional probability will stabilize to a steady $\tilde{P}^c_n$ for which $d/dt\,\tilde{P}_n^c=0$. 
-The steady state of this distribution is referred to as the quasi-stationary distribution (QSD), not to be confused with the true stationary distribution of the population which is the state where $\tilde{P}_n(t\rightarrow\infty)=\delta_{n,0}$. 
+The steady state of this distribution is referred to as the quasi-stationary distribution (QSD), not to be confused with the true stationary distribution of the population which is $\tilde{P}_n(t\rightarrow\infty)=\delta_{n,0}$, extinction. 
 
 %NTS:::talk about autocorrelation time, actually do it. 
 
@@ -246,15 +256,15 @@ The steady state of this distribution is referred to as the quasi-stationary dis
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure1-A}
+		\includegraphics[width=1.0\linewidth]{MeanProb}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure1-B}
+		\includegraphics[width=1.0\linewidth]{Var}
 	\end{minipage}
-	\caption{\emph{Quasi-stationary probability distribution function for varying $\delta$ and $q$.} Lightness of the line indicates an increase of $q$ or $\delta$ in the left and right panels respectively. Carrying capacity $K=100$. 
-	\emph{Left:} The QSD has increasing variance with decreasing $q$. $\delta=1.0$. 
-	\emph{Right:} The QSD has increasing variance with increasing $\delta$. $q=0.06$. 
+	\caption{\emph{Characterizing the quasi-stationary probability distribution function for varying $\delta$ and $q$.} Lightness indicates an increased mean or variance in the left and right panels respectively. Carrying capacity $K=100$. 
+	\emph{Left:} The QSD has decreasing mean with increased $\delta$ or decreased $q$. 
+	\emph{Right:} The QSD has increasing variance with increased $\delta$ or decreased $q$. 
 	}
 	\label{qsd}
 \end{figure}%NTS:::NEED TO INCLUDE THE COLORBAR!!!
@@ -267,13 +277,13 @@ The steady state of this distribution is referred to as the quasi-stationary dis
 %The accuracy of the algorithm is determined by the time interval $\Delta t$ and reducing this value increases the runtime of the algorithm as more steps are needed to get a steady state solution.
 %Decreasing the time step $\Delta t$ increases both the accuracy and the runtime, such that an arbitrarily accurate distribution takes a prohibitively long time to calculate. 
 %We settle for $\Delta P^c_n<\epsilon = 10^{-16}$. 
-To calculate the QSD I employ a textbook algorithm \cite{Nisbet1982}: at steady state equation \ref{masters2} can be rearranged to relate $\tilde{P}_{n+1}$ to $\tilde{P}_n$ and $\tilde{P}_{n-1}$:
+To calculate the QSD I employ a textbook algorithm \cite{Nisbet1982}: at steady state equation \ref{masters2} can be rearranged to relate $\tilde{P}_{n+1}$ to $\tilde{P}_n$ and $\tilde{P}_{n-1}$
 \begin{equation}
 \widetilde{P}^c_{i} = \frac{- \widetilde{P}^c_{i-2}b(i-2) 
 	+ \big(b(i-1)+d(i-1)\big)\widetilde{P}^c_{i-1} 
 	- \widetilde{P}^c_{i-1}\widetilde{P}^c_{1}d(1)}{d(i)}.
 \end{equation}
-Given that $b_0=0$ there is a lower cutoff and so the whole distribution can be written in terms of $\tilde{P}_1$, which is then solved by normalization. 
+Given that $b_0=0$ there is a lower cutoff and so the whole distribution can be written in terms of $\tilde{P}_1$, which is then solved by normalization of the total probability to unity. 
 The outcome of this algorithm is seen in figure \ref{qsd} for different values of $q$ and $\delta$. 
 %The former technique is shown in figure \ref{qsd}, for different values of $q$ and $\delta$. %NTS:::get your own figure
 %Results of this algorithm, for different values of $q$ and $\delta$, are presented in Figure \ref{qsd}. 
@@ -287,15 +297,15 @@ Decreasing $q$ has a similar but lesser effect to increasing $\delta$. %decreasi
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\linewidth]{etimedistr1D16K.png}
-	\caption{\emph{The extinction time distribution of a one-dimensional logistic model is dominated by a single exponential tail.} 
+	\caption{\emph{The extinction time distribution of a single species logistic model is dominated by a single exponential tail.} 
 	The bulk of the probability density is modelled by an exponential distribution with the same mean, shown in the red dotted line. 
 	Data are generated using using the Gillespie algorithm for $K=16$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. 
 	} \label{etimedistr}
 \end{figure}
 
-As described earlier, the system ultimately goes to the absorbing extinct state, with some distribution of (first passage) extinction times. %, at a rate which on average occurs as the inverse of the mean time to extinction $\tau$. 
+As described earlier, the system ultimately goes to the absorbing extinct state $n=0$, with some distribution of (first passage) extinction times. %, at a rate which on average occurs as the inverse of the mean time to extinction $\tau$. 
 %The time in which this happens is a random variable, the mean of which is the mean time to extinction $\tau_e$. %NTS:::this should be in introduction (only?)
-In many cases, including the single logistic model, the MTE nicely characterizes the entire distribution of exit times, which are observed to look roughly exponential, as shown in figure \ref{etimedistr}.  
+In many cases, including the single logistic model, the MTE characterizes the entire distribution of exit times \cite{Hanggi1990,Bel2010}, which are observed to look roughly exponential, as shown in figure \ref{etimedistr}.  
 Because the absorbing point is deterministically repelling and, as the QSD shows, the system spends most of its time near the deterministic fixed point at $n=K$, extinction events are rare, as are trajectories that get close to extinction. 
 These extinction attempts can be considered as almost independent, since the autocorrelation time is so much shorter than the time between attempts \cite{Hanggi1990,Lande1993}. %NTS:::references???
 The system has repeated, independent events that occur with at a constant rate; it is Poissonian, hence the distribution of extinction times is exponential and described by its mean, the MTE \cite{Hanggi1990,Leigh1981,Lande1993,Foley1994}. 
@@ -303,7 +313,7 @@ The system has repeated, independent events that occur with at a constant rate; 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\textwidth]{Figure2}
-	\caption{\emph{Exploring the mean time to extinction in the parameter space.} Recall that $q$ shifts the nonlinearity between the birth and death rates: for $q=0$ the nonlinearity is purely in the death rate, for $q=1$ nonlinearity appears only in birth. The birth and death rates are increased simultaneously with $\delta$. Extinction occurs more rapidly as $\delta$ increases or $q$ decreases. } \label{mteCP}
+	\caption{\emph{Exploring the mean time to extinction in the parameter space.} The parameter $q$ shifts the nonlinearity between the birth and death rates: for $q=0$ the nonlinearity is purely in the death rate, for $q=1$ nonlinearity appears only in birth. The birth and death rates are increased simultaneously with $\delta$. Extinction occurs more rapidly as $\delta$ increases or $q$ decreases. } \label{mteCP}
 \end{figure}
 
 For one-species systems it is well known how to exactly solve the MTE for a birth-death process. 
@@ -324,8 +334,8 @@ where
 %q_i = \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}
 %\end{equation*}
 \begin{align}
-q_0 &= \frac{1}{b(0)} = \frac{1}{\nu g} \notag \\
-q_1 &= \frac{1}{d(1)} = \frac{N^2}{(N-1)(1-\nu) + \nu N(1-g)} \\
+%q_0 &= \frac{1}{b(0)} \\
+q_1 &= \frac{1}{d(1)} \\
 % q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
 %     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
 q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1 \notag
@@ -351,7 +361,7 @@ Thus the mean time to extinction from neighbouring states are related, which lea
 	\subfloat[\emph{Varying $\delta$}]{\includegraphics[width=0.5\textwidth]{Figure3-A}\label{mte:delta}}
 	\hfill
 	\subfloat[\emph{Varying $q$} ]{\includegraphics[width=0.5\textwidth]{Figure3-B}\label{mte:q}}
-	\caption{\emph{Mean time to extinction for varying $\delta$ and $q$} Each line represents a slice in Figure \ref{mteCP}: Figure \ref{mte:delta} are vertical slices which show how, for different values of $q$, the $\delta$ affects $\tau$. Similarly Figure \ref{mte:q} are horizontal slices which show how, for different values of $\delta$, the $q$ affects $\tau$. As in Figure \ref{qsd}, lightness of the line indicates an increase of \ref{mte:delta} $q$ and \ref{mte:q} $\delta$}
+	\caption{\emph{Mean time to extinction for varying $\delta$ and $q$.} Each line represents a slice in Figure \ref{mteCP}: Figure \ref{mte:delta} are vertical slices which show how, for different values of $q$, the $\delta$ affects $\tau$. Similarly Figure \ref{mte:q} are horizontal slices which show how, for different values of $\delta$, the $q$ affects $\tau$. As in Figure \ref{qsd}, lightness of the line indicates an increase of \ref{mte:delta} $q$ and \ref{mte:q} $\delta$}
 	\label{mte}
 \end{figure}
 \fi
@@ -360,13 +370,13 @@ Thus the mean time to extinction from neighbouring states are related, which lea
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure3-A}
+		\includegraphics[width=1.0\linewidth]{Fig3A}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure3-B}
+		\includegraphics[width=1.0\linewidth]{Fig3B}
 	\end{minipage}
-	\caption{\emph{Mean time to extinction for varying $\delta$ and $q$.} Each line represents a slice in figure \ref{mteCP}. As in figure \ref{qsd}, lightness of the line indicates an increase of $q$ or $\delta$ in the left and right panels respectively. 
+	\caption{\emph{Mean time to extinction for varying $\delta$ and $q$.} Each line represents a slice in figure \ref{mteCP}. Lightness of the line indicates an increase of $q$ or $\delta$ in the left and right panels respectively. 
 	\emph{Left:} Vertical slices of the heat map show how $\delta$ affects $\tau$ for different values of $q$. 
 	\emph{Right:} Horizontal slices of the heat map show how $q$ affects $\tau$ for different values of $\delta$. 
 	}
@@ -377,42 +387,49 @@ Combining equations \ref{birth} and \ref{death} with the solution for the mean t
 Little intuition can be gained from the mathematical expression, but the numerical results of the MTE, as shown in figure \ref{mteCP}, are more interpretable. 
 A typical trajectory starting from $n$ goes first to the deterministic fixed point $K$ and fluctuates about that point before a large fluctuation leads to its extinction. 
 %The mean time to extinction depends on the initial population size $n$, however 
-Since the time for the population to reach carrying capacity is insignificant compared to the extinction time, the MTE is largely independent of the initial population, and I write $\tau(n) \approx \tau(K) \equiv \tau_e$ for all $n$ here and for most of this thesis. %maybe \cite{Chotibut2015}
-This approximation only fails for small $n$. %NTS:::show this? in a graph? 
-It is well known that $\tau_e$ scales as $e^K$ \cite{Ovaskainen2010} and this is indeed what I observe (shown in the right panel of figure \ref{techn}). %NTS:::show this too? In a graph??, see supplemental information. 
+Since the time for the population to reach carrying capacity is insignificant compared to the extinction time, the MTE is largely independent of the initial population \cite{Chotibut2015}, and I write $\tau(n) \approx \tau(K) \equiv \tau_e$ for all $n$ here and for most of this thesis. %maybe \cite{Chotibut2015} or Munsky?
+This approximation only fails for small $n$ \cite{Chotibut2015}. %NTS:::show this? in a graph? %EDIT:::cite others?
+It is well known that $\tau_e$ scales as $e^K$ \cite{Lande1993,Ovaskainen2010} and this is indeed what I observe (shown in the right panel of figure \ref{techn}). %NTS:::show this too? In a graph??, see supplemental information. 
 What is less well known is the dependence on the hidden parameters $\delta$ and $q$. %NTS:::have I introduced the term "hidden parameters"?
 Figure \ref{mte} shows that the MTE depends on the values of $\delta$ and $q$, parameters that appear in the births and deaths but do not appear in the deterministic equation. %hence are called "hidden"
+
+%EDIT:::!!!CONSIDER INCLUDING THE DERIVATION WITH q,\delta=0 IN HERE
 
 %Increasing $\delta$ causes $\tau_e$ to decrease whereas increasing $q$ has the effect of increasing $\tau_e$. 
 %We can synonymously describe these phenomena in the language of population dynamics:
 Increasing the scaling of the linear terms $\delta$ in birth and death rates has a tendency to decrease $\tau_e$. 
-On the other hand, shifting the nonlinearity from the death to the birth rate, in other words increasing $q$, causes an increase in $\tau_e$. 
+%On the other hand, shifting the nonlinearity from the death to the birth rate, in other words increasing $q$, causes an increase in $\tau_e$. 
+A decrease in $\tau_e$ is also observed as $q$ is decreased, shifting the nonlinearity from the birth to the death rate. 
 Just as increasing both the birth and death rates (via increased $\delta$ or decreased $q$) broadens the QSD, so too does it decrease the MTE. 
-Note that the effect of $q$ is magnified for smaller values of $\delta$ and weaker for larger values of $\delta$; that is, the intraspecies interactions modelled by the quadratic term matter more when the intrinsic birth and death rates are both relatively low. 
+Note that the effect of $q$ is magnified for smaller values of $\delta$ and weaker for larger values of $\delta$; that is, the intraspecies interactions modelled by the quadratic term matter more when the basal birth and death rates are both relatively low. 
 Again I remind the reader that in all of the above calculations the same average dynamics $b(n)-d(n)$ were maintained. 
 %: see figure \ref{mte}. 
-A more detailed interpretation and justification of these results appears in the discussion section below, but it bears noting that the effects of the hidden parameters on the MTE can be quite drastic. 
-In the limit of $\delta=0$ and $q=1$ there is no death, $d_n=0 \forall n$, and the system simply grows to the carrying capacity and rests there, never going extinct. 
+A more detailed interpretation and justification of these results appears in the discussion section below, but the simple explanation is that those changes which act to broaden the QSD also increase the probability of being near, and hence reaching, extinction. 
+It bears noting that the effects of the hidden parameters on the MTE can be quite drastic. 
+In the limit of $\delta=0$ and $q=1$ there is no death, $d_n=0 \,\text{ }\forall n$, and the system simply grows to the carrying capacity and rests there, never going extinct. 
 
 
 \section{Approximations}% - Both
 
+%EDIT:::Anton really wants the e^K/K derivation
+
 %[Why we need approximations if we have the exact solution.] - Jeremy
 As shown above, for a one-species model it is possible to write down a closed form solution for the MTE $\tau_e$.
-However, finding a general solution for the mean time to extinction given multiple populations, and therefore higher dimensions, is not as trivial. Nor can a nice analytic expression be found, even for a single species. 
-Models of stochastic processes away from equilibrium are also difficult to study. 
+However, finding a general solution for the mean time to extinction given multiple populations, and therefore higher dimensions, is not as trivial. 
+Nor can an analytic expression be found, even for a single species. 
+%Models of stochastic processes away from equilibrium are also difficult to study. 
 Many approximations have been developed to accommodate these complications. 
 These approximations make analytic calculations possible or reduce numeric computing runtime significantly; therefore it is important to know which of these tools to use and when they are applicable. 
 Unfortunately the most popular approximation is known to fail in some situations \cite{Grasman1983,Doering2005}, and an exhaustive test with the approximations I highlight below has not been performed (but see \cite{Allen2003a,Yu2017}). 
 %the regime of parameter space in which each approximation is valid is not very well understood. 
-Using the same model system of a single logistic species I shall evaluate the Fokker-Planck equation, the Gaussian approximation to the Fokker-Planck equation, the WKB method, the small $n$ approximation, and some numerical methods. 
-Comparing them to the above exact results will grant insight into their utility. %will better inform choices researchers make in the future
+Using the same model system of a single logistic species I shall evaluate the Fokker-Planck equation, the Gaussian approximation to the Fokker-Planck equation, the WKB method, and some numerical methods. %the small $n$ approximation, 
+Comparing these approximations to the above exact results will grant insight into their utility. %will better inform choices researchers make in the future
 %NTS:::COULD ALSO EASILY ADD MOMENT CLOSURE - SEE ONE-SPECIES.PDF
 
 %numerics - Gillespie, matrix inverse, smallest magnitude eigenvalue
-One can write down the MTE for a one dimensional stochastic birth-death process. 
-In one and more dimensions the MTE can also be solved to arbitrary accuracy numerically. 
-Specifically, the Gillespie or stochastic simulation algorithm \cite{Gillespie1977,Cao2006} generates particular realizations/trajectories of a stochastic process that, taken in aggregate, obey the evolution of the probability distribution as given by the master equation \ref{master-eqn}. %samples from the distribution
+%One can write down the MTE for a one dimensional stochastic birth-death process. 
+In one and more dimensions the MTE can be solved to arbitrary accuracy numerically. % also
+Specifically, the Gillespie or stochastic simulation algorithm \cite{Gillespie1977,Cao2006} generates particular realizations of a stochastic process that, taken in aggregate, obey the evolution of the probability distribution as given by the master equation \ref{master-eqn}. %samples from the distribution %/trajectories
 The Gillespie algorithm is often used by researchers to verify their approximations \cite{Reichenbach2006,Black2012,Dobrinevski2012,Chotibut2015,Constable2015,Gooding-townsend2015,Young2018}, and I do the same here. % to simulate simple systems or verify more
 Unfortunately, as I referenced above, the MTE tends to scale exponentially with the system size, and the Gillespie algorithm tends to have a computational time proportional to the system time \cite{Gillespie1977}, and so it quickly becomes unusable for systems of large size. %NTS:::reference the figure %I'm not sure about the reference/citation for this
 The transition matrix inverse method alluded to in the introduction chapter and used in subsequent chapters of this thesis calculates the MTE to arbitrary accuracy. 
@@ -420,7 +437,7 @@ Essentially, equation \ref{mte-recurrence} can be written in matrix form as \cit
 \begin{equation}
 \hat{M}\vec{T} = -\vec{1} \label{matrix-method}
 \end{equation}
-with $\vec{T}_n = \tau(n)$ and elements of $\hat{M}$ being the birth and death rates into and out of each state. 
+with $\left(\vec{T}\right)_n = \tau(n)$ and elements of $\hat{M}$ being the birth and death rates into and out of each state. 
 If $N$ exists the matrix is finite and can be inverted; if not, a cutoff is introduces to make $\hat{M}$ finite \cite{Munsky2006,Parsons2007,Parsons2010}. 
 Since it involves inverting a matrix of size proportional to the system size to the power of the number of species it can be taxing on a computer's RAM. 
 A cruder yet faster and less RAM-intense numerical approximation is to take the negative reciprocal of the smallest magnitude eigenvalue \cite{Hanggi1990}:
@@ -469,7 +486,7 @@ To find the QSD the left-hand side of equation \ref{FPch1} is set to zero, resul
 \begin{equation}
 \ln P_n^{ss} \propto \frac{2(b_n - d_n) - \partial_n(b_n + d_n)}{(b_n + d_n)}. 
 \end{equation}
-By analogy with Boltzmann statistics, the negative of the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Roozen1987,Grasman1996,Zhou2012,Yan2013}. 
+By analogy with Boltzmann statistics, the negative of the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Roozen1987,Grasman1996,Zhou2012,Yan2013}, although in higher dimensions it cannot be defined \cite{Zhou2012,Badali2019a}. %EDIT:::refer to next chapter/appendix?
 
 %D.2 MattheW; FP Gaussian
 %NTS:::expand the below?
@@ -504,7 +521,7 @@ Generally, the WKB method involves approximating the solution to a differential 
 P_n \propto \exp \left\{ K \sum_i \frac{1}{K^i}S_i(n) \right\}.
  \label{WKBansatz}
 \end{equation}
-Starting from the masters equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}.%careful, Assaf2016 is an arXiv paper
+Starting from the master equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}.%careful, Assaf2016 is an arXiv paper
 %To leading order, only $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$ is needed. 
 To leading order, only 
 \begin{equation}
@@ -520,6 +537,7 @@ The quantity $S_0(n)$ can be interpreted as the action in a Hamilton-Jacobi equa
 As before, the MTE can be calculated from the QSD equation \ref{WKBansatz} using equation \ref{1overd1P1}. 
 %NTS:::show the equation for the WKB MTE
 
+\iffalse
 %C - MattheW; small n - SHOULD SMALL n BE CUT, SINCE IT ONLY WORKS IN 1D WHICH HAS A FULL SOLUTION ANYWAYS??
 Rather than approximating the probability distribution function near the fixed point, a different approximation can be done to estimate the probability distribution function near the absorbing state $n=0$. %NTS:::this still could be formulated simply as a steady state approximation - see Gardiner p.237
 If the bulk of the probability mass is centered on $K$ then the probability of being close to the absorbing state is small (note that this condition is similar to the quasi-stationary approximation, since the flux out of the system is proportional to the probability of being at a state close to $0$). 
@@ -535,6 +553,7 @@ P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}.
 $P_{1}$ can be found by ensuring the probability is normalized; despite the sum extending beyond the region for which $P_{n+1}\gg P_n$ is valid, the probability distribution generated from this small $n$ approximation is qualitatively reasonable. 
 It has been used in the literature, in conjunction with approximations that work near the fixed point, to verify numerical solutions of a one dimensional problem \cite{Assaf2010}. 
 It cannot easily be extended to higher dimensions. 
+\fi
 
 %\begin{figure}[h]
 %	\centering
@@ -555,7 +574,7 @@ It cannot easily be extended to higher dimensions.
 	\emph{Left:} The quasi-stationary probability distribution function is calculated using the exact QSD algorithm, and approximated with the Fokker-Planck equation, Fokker-Planck Guassian approximation, and WKB method. %NTS:::small n?!?!
 	The Fokker-Planck solution appears to be best. %NTS:::WHAAAAAAAAAAT!!!!!!!!!???????!?!?!?!?!?
 	All of the methods correctly capture the QSD near the deterministic fixed point, but start to diverge away from $K$. 
-	\emph{Right:} The mean time to extinction is calculated exactly using equation \ref{analytic_mte}. The same approximations as in the left panel are used, as is the QSD in conjunction with equation \ref{1overd1P1}. Small $n$ and WKB stay closest to the true solution. 
+	\emph{Right:} The mean time to extinction is calculated exactly using equation \ref{analytic_mte}. The same approximations as in the left panel are used, as is the QSD in conjunction with equation \ref{1overd1P1}. WKB stays closest to the true solution. %Small $n$ and 
 	}
 	\label{techn}
 \end{figure}
@@ -595,7 +614,7 @@ With increasing $K$ the divergence of each approximation becomes more evident:
 %From this difference we can evaluate in which regime certain approximations work best.
 %I find that 
 while no approximation works well for large $\delta$, many of them recover the correct scaling in $K$, albeit off by a factor. %yeah?
-For all other parameter regimes, the small $n$ and WKB approximations are both reasonable. % approximations for the exact results. %!!!CHECK if this is true for small n as well
+For all other parameter regimes, the WKB method is reasonable. % approximations for the exact results. %!!!CHECK if this is true for small n as well %small $n$ and 
 %, and Fokker-Planck QSD? And small n? And full FP%
 %I think we need to be a bit more specific with our assessment of the approximations
 %NTS:::say a bit more, here or in discussion%EDIT:::YEAH, AT LEAST A SENTENCE OR TWO
@@ -605,6 +624,54 @@ For all other parameter regimes, the small $n$ and WKB approximations are both r
 %	\includegraphics[width=0.6\textwidth]{Figure5}
 %	\caption{\emph{Techniques for calculating the mean time to extinction} Plotted as a function of the carrying capacity, a comparison of the ratio of the MTE of different techniques to that of the 1D sum reveals the ranges for which they are more accurate for approximating $\tau_{e}$.} \label{mte_techn}
 %\end{figure}
+
+%EDIT:::SHOULD THIS PARAGRAPH MOVE UP TO THE APPROXIMATIONS SECTION?? - I THINK SO, YEA
+%[Approximations] - MattheW
+%Fit to e^K? asymptotics? 
+%try q=1 for analytic - with d=0 this never dies!!
+%recheck analytic forms
+%look specifically at these forms at d=q=0, to compare with e^K/K
+%maybe compare to asymptotic forms of the sum, like (KK HypergeometricPFQ[{1, 1}, {2, 2 + dd KK}, (1 + dd) KK])/(1 + dd KK)
+%or
+%(KK HypergeometricPFQ[{1, 1, 1 - KK/qq - (dd KK)/qq}, {2, -(2/(-1 + qq)) - (dd KK)/(-1 + qq) + (2 qq)/(-1 + qq)}, qq/(-1 + qq)])/(1 + dd KK - qq)
+%Regarding the approximations, t
+The best candidate in most regimes appears to be the WKB approximation. 
+It generalizes to multiple dimensions without conceptual difficulty.
+Mathematically, at higher dimensions WKB necessitates solving a Hamiltonian system, in order to find the most probable route to extinction along which to integrate equation \ref{WKBaction}; an analytic solution cannot be derived in general, and a symplectic integrator is necessary to find the numeric trajectory \cite{Channell1990}. 
+In this one-dimensional case I find an analytic expression for the mean time to extinction using the WKB approximation to be
+\begin{align}
+\tau_{\text{WKB}} = &\frac{\sqrt{2 \pi K}}{\delta+(1-q)/K} \left(\frac{K(1+\delta)-q}{K\delta + (1-q)}\right) \sqrt{\frac{(1+\delta-q)^2}{\delta q + (1-q)(1+\delta)/K}} \\
+&\times \exp \left\{ K\left( \frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + \frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) \right\}. \notag
+\end{align}
+We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which, unlike the true solution to the Fokker-Planck equation, from equation \ref{FP-gaussian} always gives a closed form analytic result:
+\begin{equation}
+\tau_{\text{FP Gaussian}} = \frac{2}{1+2\delta} \sqrt{2 \pi K (1+\delta-q)} \exp\left\{\frac{K}{2(1+\delta-q)} \right\}.
+\end{equation}
+%\begin{equation}
+%\tau_{\text{FP WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K (1+\delta-1)}
+% \exp\left{ K\frac{2(1+\delta-q)}{(1-2q)^2} \ln\left[ \frac{K 2(1+\delta-q)}{K(1+2\delta)+(1-2q)} %\right] - \frac{K-1}{(1-2q)} \right}
+%\end{equation}
+Both formulae are dominated by their exponential dependence on $K$. 
+%NTS:::somewhere don't just put the asymptotic, put the full gamma function etc solution
+%This is to be expected, as the true solution with $\delta,q = 0$ increases as $\frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}. 
+This is to be expected, as it matches with the research community's intuition that systems with a deterministically stable fixed point scale as $\tau \propto e^{cK}$ \cite{Leigh1981,Lande1993,Kamenev2008,Cremer2009a,Dobrinevski2012,Yu2017}. 
+%WE SHOULD CHECK THIS FOR JUST DELTA OR JUST q=0, TO SEE IF THERE IS A NICE FORM OF THE SOLUTION IN THESE LIMITS, TO WHICH WE CAN COMPARE - there isn’t, it’s all hypergeometric
+%It is the prefactor multiplying with the carrying capacity in the exponential that is of critical importance in determining the qualitative behaviour of the MTE. 
+The qualitative behaviour of the MTE is most affected by the coefficient $c$. % when written as $\tau \propto e^{cK}$. 
+While I have not found a nice closed analytical form for the exact solution of the MTE in general, the asymptotic scaling for $\delta,q = 0$ is known to increase as $\tau_e \propto \frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}, with $c=1$. 
+The Gaussian Fokker-Planck solution has a coefficient $c=\frac{1}{2(1+\delta-q)}$, so we expect it to underestimate $\tau_e$ near $\delta,q = 0$ in parameter space. %hopefully this is shown in the figure
+%The WKB approximation has prefactor $\frac{1+\delta}{q}\ln(1+\delta) + \frac{\delta}{1-q}\ln(\delta) - \frac{1+\delta-1}{q(1-q)}\ln(1+\delta-q)$ for large $K$, which diverges for extremes of $q$ but should otherwise be reasonable. 
+The lowest order of a Taylor expansion in $\delta$ and $q$ of the WKB solution gives a coefficient of $c=1-1/K$, which nicely matches the expected limit. 
+The prefactor of the WKB solution that is algebraic in $K$ does not match with the true limit \cite{Assaf2010,Badali2019a,Badali2019b}, but it is less dominant than the exponential term. %NTS:::see the appendix???
+%The WKB approximation matches well for all $\delta$ and $q$ values, as seen in figure \ref{techn}. %EDIT:::THIS IS NOT CURRENTLY SEEN!!!
+%This agreement of the WKB method with the true solution is seen in figure \ref{techn}. 
+%The other technique that successfully approximates the true probability distribution and mean extinction time is the small $n$ approximation. %!!!CHECK THIS%
+%It assumes the probability distribution grows rapidly, which is justified for small $n$ and large $K$. 
+%Since the mean extinction time depends only on $P_1$ this technique gives a reasonable approximation for $\tau_e$. 
+%For most of these approximations the behaviour of the mte is in agreement with the exact solution as K grows, however it is off by a factor.
+%without an exact solution all we can do is compare these prefactors for each approximation.
+%We can find FP QSD prefactor and compare how it ranges with WKB (as that’s a good one.
+%I also remind readers that inverting the transition matrix, as will be done in the following chapters, gives numerical results practically identical to the analytic solution. 
 
 
 \section{Discussion}
@@ -629,7 +696,7 @@ By having the nonlinearity in the birth, one is assuming that the competition, m
 If it were present in the death the supposition is that the competition instead kills off individuals, for example with illness spreading more rapidly in denser populations \cite{Greenhalgh1990} or an increase in secreted toxins \cite{VanMelderen2009,Rankin2012}.
 %For many real biological populations, $q$ is between zero and one. %not true
 Although I have worked with a $q \in [0,1]$, there is no mathematical reason why $q$ could not take values outside this range. 
-Negative values of $q$ would increase both rates, with a physical meaning that the density dependence would in fact be beneficial for the birth rates, as in the Allee effect \cite{Chesson2000,Assaf2016}, and of greater contribution to the death rates. 
+Negative values of $q$ would increase both rates, with a physical meaning that the density dependence would in fact be beneficial for the birth rates, as in the Allee effect \cite{Chesson2000,Assaf2016}, and of even greater contribution to the death rates. 
 Any $q>1$ has the opposite effect of negatively impacting both rates, signifying that population density would reduce both the birth and death rates. %reduce death, ie. advantages of being in a herd
 %This can affect the cutoff, so be careful. 
 
@@ -658,52 +725,6 @@ Varying the parameters has another effect on the probability distribution, as th
 %It is readily checked, however, that this change in maximum population size has little to no effect on the MTE, by setting manual cutoffs in the numerical analysis and comparing the results to the true MTE. 
 By setting manual cutoffs in the numerical analysis and comparing the results to the true MTE I have checked that this change in maximum population size has no noticeable effect on the MTE. 
 
-%[Approximations] - MattheW
-%Fit to e^K? asymptotics? 
-%try q=1 for analytic - with d=0 this never dies!!
-%recheck analytic forms
-%look specifically at these forms at d=q=0, to compare with e^K/K
-%maybe compare to asymptotic forms of the sum, like (KK HypergeometricPFQ[{1, 1}, {2, 2 + dd KK}, (1 + dd) KK])/(1 + dd KK)
-%or
-%(KK HypergeometricPFQ[{1, 1, 1 - KK/qq - (dd KK)/qq}, {2, -(2/(-1 + qq)) - (dd KK)/(-1 + qq) + (2 qq)/(-1 + qq)}, qq/(-1 + qq)])/(1 + dd KK - qq)
-Regarding the approximations, the best candidate in most regimes appears to be the WKB approximation. 
-It generalizes to multiple dimensions without conceptual difficulty.
-Mathematically, at higher dimensions WKB necessitates solving a Hamiltonian system, in order to find the most probable route to extinction along which to integrate equation \ref{WKBaction}; an analytic solution cannot be derived in general, and a symplectic integrator is necessary to find the numeric trajectory \cite{Channell1990}. 
-In this one-dimensional case I find an analytic expression for the mean time to extinction using the WKB approximation to be
-\begin{align}
-\tau_{\text{WKB}} = &\frac{\sqrt{2 \pi K}}{\delta+(1-q)/K} \left(\frac{K(1+\delta)-q}{K\delta + (1-q)}\right) \sqrt{\frac{(1+\delta-q)^2}{\delta q + (1-q)(1+\delta)/K}} \\
-                    &\times \exp \left\{ K\left( \frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + \frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) \right\}. \notag
-\end{align}
-We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which, unlike the true solution to the Fokker-Planck equation, from equation \ref{FP-gaussian} always gives a closed form analytic result:
-\begin{equation}
-\tau_{\text{FP Gaussian}} = \frac{2}{1+2\delta} \sqrt{2 \pi K (1+\delta-q)} \exp\left\{\frac{K}{2(1+\delta-q)} \right\}.
-\end{equation}
-%\begin{equation}
-%\tau_{\text{FP WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K (1+\delta-1)}
-% \exp\left{ K\frac{2(1+\delta-q)}{(1-2q)^2} \ln\left[ \frac{K 2(1+\delta-q)}{K(1+2\delta)+(1-2q)} %\right] - \frac{K-1}{(1-2q)} \right}
-%\end{equation}
-Both formulae are dominated by their exponential dependence on $K$. 
-%NTS:::somewhere don't just put the asymptotic, put the full gamma function etc solution
-%This is to be expected, as the true solution with $\delta,q = 0$ increases as $\frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}. 
-This is to be expected, as it matches with the research community's intuition that systems with a deterministically stable fixed point scale as $\tau \propto e^{cK}$ \cite{Leigh1981,Lande1993,Kamenev2008,Cremer2009a,Dobrinevski2012,Yu2017}. 
-%WE SHOULD CHECK THIS FOR JUST DELTA OR JUST q=0, TO SEE IF THERE IS A NICE FORM OF THE SOLUTION IN THESE LIMITS, TO WHICH WE CAN COMPARE - there isn’t, it’s all hypergeometric
-%It is the prefactor multiplying with the carrying capacity in the exponential that is of critical importance in determining the qualitative behaviour of the MTE. 
-The qualitative behaviour of the MTE is most affected by the coefficient $c$. % when written as $\tau \propto e^{cK}$. 
-While I have not found a nice closed analytical form for the exact solution of the MTE in general, the asymptotic scaling for $\delta,q = 0$ is known to increase as $\tau_e \propto \frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}, with $c=1$. 
-The Gaussian Fokker-Planck solution has a coefficient $c=\frac{1}{2(1+\delta-q)}$, so we expect it to underestimate $\tau_e$ near $\delta,q = 0$ in parameter space. %hopefully this is shown in the figure
-%The WKB approximation has prefactor $\frac{1+\delta}{q}\ln(1+\delta) + \frac{\delta}{1-q}\ln(\delta) - \frac{1+\delta-1}{q(1-q)}\ln(1+\delta-q)$ for large $K$, which diverges for extremes of $q$ but should otherwise be reasonable. 
-The lowest order of a Taylor expansion in $\delta$ and $q$ of the WKB solution gives a coefficient of $c=1-1/K$, which nicely matches the expected limit. 
-The prefactor of the WKB solution that is algebraic in $K$ does not match with the true limit \cite{Assaf2010,Badali2019a,Badali2019b}, but it is less dominant than the exponential term. 
-%The WKB approximation matches well for all $\delta$ and $q$ values, as seen in figure \ref{techn}. %EDIT:::THIS IS NOT CURRENTLY SEEN!!!
-This agreement of the WKB method with the true solution is seen in figure \ref{techn}. 
-The other technique that successfully approximates the true probability distribution and mean extinction time is the small $n$ approximation. %!!!CHECK THIS%
-It assumes the probability distribution grows rapidly, which is justified for small $n$ and large $K$. 
-Since the mean extinction time depends only on $P_1$ this technique gives a reasonable approximation for $\tau_e$. 
-%For most of these approximations the behaviour of the mte is in agreement with the exact solution as K grows, however it is off by a factor.
-%without an exact solution all we can do is compare these prefactors for each approximation.
-%We can find FP QSD prefactor and compare how it ranges with WKB (as that’s a good one.
-I also remind readers that inverting the transition matrix, as will be done in the following chapters, gives results practically identical to the analytic solution. 
-
 %MattheW to end - swap these last two paragraphs?
 %%%How can experimentalists test this?
 How can the MTE be probed in a lab setting? 
@@ -713,7 +734,8 @@ However, as previously discussed, measuring the average dynamics alone is insuff
 %%%With a 96-well plate you can check the pdf
 %It is possible experimentally to corroborate some of the claims made in this chapter. 
 %For a bacterial species the birth rate could be inferred by the amount of reproductive byproduct present in a sample, for instance factors involved in DNA replication or cell division. %any citations?
-For example, in a bacterial species the birth rate can be inferred by the uptake and usage of radioisotope-doped nucleotides in nucleic acid synthesis \cite{Kirchman1982}. 
+%For example, i
+In a bacterial species the birth rate can be inferred by the uptake and usage of radioisotope-doped nucleotides in nucleic acid synthesis \cite{Kirchman1982}. 
 %The death rate is easily inferred from the birth rate and the average dynamics, or it can be measured using radioisotopes \cite{Servais1985}. %may be more difficult. Maybe with some microfluidics and single cell tracking? 
 The death rate is easily inferred from the birth rate and the average dynamics, or it too can be measured using radioisotopes \cite{Servais1985}. %may be more difficult. Maybe with some microfluidics and single cell tracking?
 %With these two rates and a couple of 96 well plates it should be a routine procedure to probe the quasi-steady state population probability distribution. 
@@ -723,7 +745,7 @@ In principle these rates could be compared to the MTE of an experimental system,
 %!!! CALCULATE HOW LONG THE LENSKI EXPERIMENT SHOULD GO ON FOR%
 %50000 generations in 22 years or 2000 generations in 1991 paper
 %5x10^7 /mL density and 10mL volume
-For example, assuming $\tau_e ~ e^K/K$, the famous Lenski experiment \cite{Lenski1991} which cultures $5\times 10^8$ bacteria each day and 6.64 generations a day will not reach its MTE for another $10^{10^8}$ years. Obviously a smaller carrying capacity would be required to reasonably measure the MTE. 
+For example, assuming $\tau_e \sim e^K/K$, the famous Lenski experiment \cite{Lenski1991} which cultures $5\times 10^8$ bacteria each day and 6.64 generations a day will not reach its MTE for another $10^{10^8}$ years. Obviously a smaller carrying capacity would be required to reasonably measure the MTE. 
 The QSD could be probed by either running many experiments in tandem or running one experiment for a long time (but not so long as the MTE) and repeatedly taking measurements, so long as the interval between measurements is longer than the autocorrelation time \cite{Hanggi1990}. %NTS:::I'm not so sure about this citation in this context
 
 %%%Consequences of our results
@@ -731,15 +753,16 @@ The use of approximations is widespread and necessary when using mathematics to 
 %One takeaway message of this chapter is that one must be mindful in their modelling. 
 I find that all approximations considered in this chapter accurately capture the QSD near the deterministic fixed point. %including, surprisingly, the small $n$ approximation, which is expected to work best for small $n$
 %I find that FP, WKB, and small $n$ are largely suitable in the models considered here, in that they recover the correct exponential scaling of the MTE with carrying capacity. 
-Regarding the MTE, the WKB and small $n$ approximations fare best, though WKB does incorrectly calculate the algebraic prefactor \cite{Assaf2010,Badali2019a,Badali2019b} and the small $n$ approximation cannot be extended to higher dimensions. %THEN WHY EVEN CONSIDER SMALL n???
+Regarding the MTE, the WKB approximation fares best, though it does incorrectly calculate the algebraic prefactor \cite{Assaf2010,Badali2019a,Badali2019b}. % and the small $n$ approximation cannot be extended to higher dimensions. %THEN WHY EVEN CONSIDER SMALL n??? %and small $n$ 
 %The biggest caveat is that FP fails for low values of $\delta$ and $q$, and at low $K$.  
 %I will nevertheless use the Fokker-Planck equation to motivate some results in the next chapter, despite selecting a model with $\delta,q = 0$. 
 %Other techniques do not fare so well. 
 %It is common knowledge that various approximations have situations in which they are more or less applicable. 
+I also remind readers that inverting the transition matrix, as will be done in the following chapters, gives numerical results practically identical to the analytic solution. 
 
 %Mindfulness in modelling not only refers to the method of solution, but to the choice of model itself. 
 %%%How other people should use our results
-Historically the choice of model seemed to be one of taste or mathematical convenience \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003,Norden1982,Newman2004,Allen2005,Fujita1953,Nasell2001}, so long as the deterministic limit was as desired. 
+Historically the choice of model seemed to be one of taste or mathematical convenience \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Nasell2001}, so long as the deterministic limit was as desired. %Fujita1953,
 %So long as the correct deterministic results were given, the choice of model was not discussed. 
 %We have shown that model selection has significant qualitative and quantitative effects on at least two metrics of interest in mathematical biology, including the MTE. 
 %I have shown that stochastic assumptions have significant qualitative and quantitative effects on at least two metrics of interest in mathematical biology, including the MTE.

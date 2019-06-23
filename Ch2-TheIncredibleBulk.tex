@@ -1,5 +1,5 @@
 %\chapter{Ch2-SymmetricLogistic}
-\chapter{Going from Two Species to One}
+\chapter{Fixation: Transition from Two Species to One}
 
 %NTS:::
 %explain truly neutral vs unbiased
@@ -24,7 +24,8 @@
 
 
 %\section*{pre-intro note}
-This chapter is based on a paper written by me and my supervisor Anton Zilman, which will be published in a Royal Society journal \cite{Badali2018}. 
+This chapter, along with the next one, is based on a paper written by me and my supervisor Anton Zilman, which is currently under revision for The Proceedings of the Royal Society Journal \cite{Badali2019a}. 
+%will be published in a Royal Society journal \cite{Badali2019a}. 
 
 \section{Introduction}
 
@@ -44,11 +45,12 @@ Observed biodiversity can also arise from the turnover of transient mutants or i
 \fi
 
 %competitive exclusion, paradox of the plankton, hubbell
-The previous chapter treated the tractable problem of a single species undergoing only intraspecies interactions. 
-Adding a second species complicates both the mathematics and the biology, but offers possible resolutions to the problem of biodiversity. 
-Competitive exclusion suggests that only one species will persist in each ecological niche \cite{competitive ???}, but ecosystems like the ocean surface seem to have more species than there are niches \cite{Hutchinson1961}. %NTS:::
+The previous chapter treated the tractable problem of a single species experiencing only intraspecies interactions. 
+Adding a second species complicates both the mathematics and the biology, but offers a step toward possible resolutions to the problem of biodiversity. 
+Where two species with overlapping niches can coexist, so too may more. %NTS:::blegh
+Competitive exclusion suggests that only one species will persist in each ecological niche \cite{Gause1934,Hardin1960,Palmer1994}, but ecosystems like the ocean surface seem to have more species than there are niches \cite{Hutchinson1961}. %NTS:::
 Niche and neutral models both address this ``paradox of the plankton'' but a resolution remains elusive. 
-Further study is required. 
+Further study is required, and I present my contributions in this chapter. 
 
 %summary:deterministic; stochastic; neutral; LV to neutral
 
@@ -59,7 +61,7 @@ Particularly pertinent for this chapter is the case when the interactions of the
 Then the stochastic fluctuations in the species numbers become important \cite{Volterra1926,Armstrong1980,Bomze1983,Chesson1990,Antal2006,Posfai2017}. 
 I will return to the mathematical formulation of these concepts later. %NTS:::could expand these last two sentences. 
 
-Stochastic effects, arising either from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017b}, or the intrinsic stochasticity of individual birth and death events within the population \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}, modify the deterministic picture. 
+Stochastic effects, arising either from the extrinsic fluctuations of the environment \cite{Kamenev2008a,Chotibut2017a}, or the intrinsic stochasticity of individual birth and death events within the population \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}, modify the deterministic picture. 
 As in the previous chapter, I focus on this latter type of stochasticity, known as demographic noise. 
 Demographic noise causes fluctuations of the populations abundances around the deterministic steady state until a rare large fluctuation leads to extinction of one of the species \cite{Kimura1968,Lin2012,Chotibut2015}. 
 In systems with a deterministically stable coexistence point, the mean time to extinction is typically exponential in the population size \cite{Norden1982,Kamenev2008,Assaf2010,Ovaskainen2010}, as was seen in the previous chapter. 
@@ -78,7 +80,8 @@ The results outline the conditions of niche overlap and carrying capacity that a
 
 In this chapter, I analyze a model of two competing species with the emphasis on the transition from deterministic coexistence to stochastic fixation. %, and the population stability with respect to mutation and invasion. 
 I use the master equation and first passage formalism that enables numerically solution to arbitrary accuracy in all regimes. %NTS:::this was not introduced in chapter 1
-First I will provide a definition of ecological niche [do I?!?] and a derivation of the competitive LV model, and examine its regimes of deterministic stability. %NTS:::do I?!?
+First I will provide a mathematical argument for competitive exclusion, a derivation of the competitive LV model, and an examination of the Lotka-Volterra regimes of deterministic stability, all of which are summarized from the literature and included for context. 
+%First I will provide a definition of ecological niche [do I?!?] and a derivation of the competitive LV model, and examine its regimes of deterministic stability. %NTS:::do I?!?
 Then I will introduce the stochastic description of the LV model and analyze fixation times as a function of the niche overlap between the two species. 
 These results will be compared to known analytic limits, included here for completeness. 
 I will make further comparisons to the Fokker-Planck and WKB approximations before concluding with a general discussion of the results. 
@@ -123,7 +126,12 @@ I return to this point in the following sections within the discussion of the Lo
 	\caption{\emph{A simple two species two resource model that derives the Lotka-Voltera model} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). } \label{toxinsfig}
 \end{figure}%NTS:::this isn't referenced in the text; furthermore the model in the text is slightly different, with each species producing both waste product
 
-As a minimal example, in this section I introduce a model of two interacting species whose dynamics is constrained by two secreted factors. Each species $x_i$ has basal per capita birth rate $\beta_i$, death rate $\mu_i$, and each generates the secreted soluble factors $t_j$ at rates $g_{ji}$. Each factor $t_i$ is degraded at a rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. Positive $e_{ij}$ may correspond to metabolic wastes, toxins or anti-proliferative signals \cite{Jacob1989,Maplestone1992,VanMelderen2009,Rankin2012,Shen2015,Wynn2015}, while negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{Maplestone1992,Reya2001,Wink2003}. The model kinetics is encapsulated in the following equations for the turnover of the species numbers:
+As a minimal example, in this section I introduce a model of two interacting species whose dynamics is constrained by two secreted factors. 
+Each species $x_i$ has basal per capita birth rate $\beta_i$, death rate $\mu_i$, and each generates the secreted soluble factors $t_j$ at rates $g_{ji}$. 
+For my purposes, a species is a collection of organisms with the same mean birth and death rates, that are distinguishable from members of other species. 
+Each factor $t_i$ is degraded at a rate $\lambda_i$, and affects the death rate of each bacterium linearly with the efficacy $e_{ij}$. 
+Positive $e_{ij}$ may correspond to metabolic wastes, toxins or anti-proliferative signals \cite{Jacob1989,Maplestone1992,VanMelderen2009,Rankin2012,Shen2015,Wynn2015}, while negative $e_{ij}$ would describe growth factors or secondary metabolites \cite{Maplestone1992,Reya2001,Wink2003}. 
+The model kinetics is encapsulated in the following equations for the turnover of the species numbers:
 \begin{align}
 \dot{x}_1 &= \beta_1 x_1 - \mu_1 x_1 - e_{11} t_1 x_1 - e_{12} t_2 x_1 \notag \\
 \dot{x}_2 &= \beta_2 x_2 - \mu_2 x_2 - e_{21} t_1 x_2 - e_{22} t_2 x_2 \label{eq-x-tox},
@@ -175,7 +183,11 @@ Written explicitly, this becomes the familiar generalized two-species competitiv
 \dot{x}_2 &= r_2 x_2 \left( 1 - \frac{a_{21} x_1 + x_2}{K_2} \right), \label{mean-field-eqns}
 \end{align}
 where $\frac{1}{K_i} = \frac{e_{ii} g_{ii}}{r_i \lambda_i} + \frac{e_{ij} g_{ji}}{r_i \lambda_j}$ and $\frac{a_{ij}}{K_i} = \frac{e_{ii} g_{ij}}{r_i \lambda_i} + \frac{e_{ij} g_{jj}}{r_i \lambda_j}$. %$r_i=\beta_i-\mu_i$,
-The turnover rates $r_i$ set the timescales of the birth and death for each species, and $K_i$ are known as the carrying capacities. The interaction parameters $a_{ij}$  provide a mathematical representation of the intuitive notion of the niche overlap between the species \cite{MacArthur1967,Abrams1980,Schoener1985,Chesson2008}. When $a_{ij}=0$, species $j$ does not affect the species $i$, and they occupy separate ecological niches. At the other limit, $a_{ij}=1$, the species $j$ compete just as strongly with species $i$ as species $i$ does within itself, and both species occupy same niche. We refer to the $a_{ij}$ as the niche overlap parameters.
+The turnover rates $r_i$ set the timescales of the birth and death for each species, and $K_i$ are known as the carrying capacities. 
+The interaction parameters $a_{ij}$ provide a mathematical representation of the intuitive notion of the niche overlap between the species \cite{MacArthur1967,Abrams1980,Schoener1985,Chesson2008}. 
+When $a_{ij}=0$, species $j$ does not affect the species $i$, and they occupy separate ecological niches. 
+At the other limit, $a_{ij}=1$, the species $j$ compete just as strongly with species $i$ as species $i$ does within itself, and both species occupy same niche. 
+I refer to the $a_{ij}$ as the niche overlap parameters.
 
 %This simple model illustrates the general principle described in the previous section. If each toxin affects both species in the same way, so that $e_{11}=e_{12}\equiv e_1$ and $e_{21}=e_{22}\equiv e_2$ equations (\ref{eq-xi}) and (\ref{eq-fj} can be rewritten as
 %\begin{align}\label{eq-x-tox}
@@ -223,7 +235,8 @@ These mathematical notions can be understood in a biologically illustrative exam
 %\alpha\gamma & \alpha\beta\gamma\delta
 \alpha\gamma & \alpha\beta\gamma
 \end{pmatrix},$
-where $\alpha$, $\beta$ and $\gamma$ are arbitrary real numbers \cite{Larson2016}. In this case Equation (\ref{eq-x-tox}) becomes
+where $\alpha$, $\beta$ and $\gamma$ are arbitrary real numbers \cite{Larson2016}. 
+In this case equation (\ref{eq-x-tox}) becomes
 \begin{align}
 \dot{x}_1 &= r_1 x_1\big(1 -        \alpha\left( t_1 + \beta t_2 \right) \big) \notag \\
 \dot{x}_2 &= r_2 x_2\big(1 - \gamma \alpha\left( t_1 + \beta t_2 \right) \big),
@@ -260,13 +273,13 @@ The origin $O$ is the fixed point corresponding to both species being extinct, a
 The single species fixed points $A$ and $B$ are stable on-axis (with eigenvalues $-r_1$ and $-r_2$, respectively), but are unstable with respect to invasion if point $C$ is stable, reflected in the positive second eigenvalue equal to $r_2(1-a_{21}K_1/K_2)$ and $r_1(1-a_{12}K_2/K_1)$, respectively. 
 Fixed point $C$ corresponds to the coexistence of the two species and is stable in the green shaded region in the left panel of figure \ref{phasespace}, which shows the stability diagram of the system for $K_1=K_2$. \cite{Neuhauser1999,Cox2010,Chotibut2015}. %NTS:::could/should also include similar diagrams for broken symmetry
 
-The different regions of the phase space in Figure \ref{phasespace} have different biological interpretations \cite{May2001,Abrams1977}. 
+The different regions of the phase space in Figure \ref{phasespace} have different biological interpretations \cite{Abrams1977,Neuhauser1999,Cox2010}. 
 Parasitism, or predation/antagonism, occurs in regions 2 and 6 of $(a_{12}, a_{21})$ space, where $a_{12}a_{21}<0$, with one species gaining from a loss of the other. 
 In the strong parasitism regime (region 6), where the positive $a_{ij}$ is greater than one, the parasite/predator drives the prey to extinction deterministically, and the only stable point is the predator's fixed point ($A$ or $B$). 
-Conversely, weak parasitism (region 2) allows coexistence of both species despite the detriment of one to the benefit of the other \cite{May2001,Chotibut2015}. 
+Conversely, weak parasitism (region 2) allows coexistence of both species despite the detriment of one to the benefit of the other \cite{Neuhauser1999,Cox2010,Chotibut2015}. 
 %NTS:::could easily expand this paragraph to five
 
-The regions with both $a_{ij}<0$ correspond to mutualistic/symbiotic interactions between the species \cite{Neuhauser1999,Cox2010,Chotibut2015,May2001}. 
+The regions with both $a_{ij}<0$ correspond to mutualistic/symbiotic interactions between the species \cite{Neuhauser1999,Cox2010,Chotibut2015}. %NTS:::what is ,May2001???
 Weak mutualism (region 3) is mathematically similar to weak competition in that it results in stable coexistence. 
 Strong mutualism (region 7) results in population explosion. 
 Detailed study of this regime lies outside of the scope of the present work (but see \cite{Meerson2008}).
@@ -295,7 +308,7 @@ The asymmetric case is also treated, with results qualitatively similar to the s
 %\section{Effects of Stochasticity}
 \section{The stochastic Lotka-Volterra model}
 Stochasticity naturally arises in the dynamics of the system from the randomness in the birth and death times of the individuals - commonly known as the demographic noise \cite{VanKampen1992,Elgart2004a,Parker2009,Assaf2006}. 
-Competitive interactions between the species can affect either the birth rates (such as competition for nutrients) or the death rates (such as toxins or metabolic waste), and in general may result in different stochastic descriptions \cite{Allen2003a,Badali2018}, as was discussed in the previous chapter. 
+Competitive interactions between the species can affect either the birth rates (such as competition for nutrients) or the death rates (such as toxins or metabolic waste), and in general may result in different stochastic descriptions \cite{Allen2003a,Badali2019b}, as was discussed in the previous chapter. 
 In this chapter, I follow others \cite{Lin2012,Gabel2013,Constable2015} in considering the case where the inter-species competition affects the death rates, so that the per capita birth and death rates $b_i$ and $d_i$ of species $i$ are:
 \begin{equation}
 \begin{aligned}
@@ -314,7 +327,7 @@ The forward master equation describing the time evolution of this probability di
 where $\hat{M}$ is the (semi-infinite) transition matrix. %The matrix $\hat{M}$ is sparse, with non-zero elements along the diagonal, $\hat{M}_{s,s}=-b_1(s)-b_2(s)-d_1(s)-d_2(s)$, and $\pm 1$ off the diagonal, $\hat{M}_{s,s+1}=d_2(s+1)$ and $\hat{M}_{s+1,s}=b_2(s)$.
 I do not include the absorbing states in my transition matrix, and the master equation \ref{matrix-master-eqn} as written does not preserve probability, as some of it leaks into fixation. 
 
-Because the approximate analytical and semi-analytical solutions of the master Equation (\ref{matrix-master-eqn}) often do not provide correct scaling in all regimes (\cite{Doering2005,Assaf2016,Badali2018}; see also the previous chapter), I analyse the master equation numerically in order to recover both the exponential and polynomial aspects of the mean time to fixation. 
+Because the approximate analytical and semi-analytical solutions of the master Equation (\ref{matrix-master-eqn}) often do not provide correct scaling in all regimes (\cite{Grasman1983,Doering2005,Assaf2016,Badali2019b}; see also the previous chapter), I analyze the master equation numerically in order to recover both the exponential and polynomial aspects of the mean time to fixation. 
 To enable numerical manipulations, I introduce a reflecting boundary condition at a cutoff population size $C_K>K$ for both species to make the transition matrix finite \cite{Munsky2006,Cao2016} and enumerate the states of the system with a single index \cite{Munsky2006} via the mapping of the two species populations $(x_1,x_2)$ to state $s$ as
 \begin{equation}
 s(x_1,x_2) = (x_1-1)C_K+x_2-1,
@@ -371,11 +384,11 @@ The sparse matrix LU decomposition algorithm is implemented with the C++ library
 		\includegraphics[width=1.0\linewidth]{coupled-logistic-data.pdf}
 	\end{minipage}
 	\caption{\emph{Dependence of the fixation time on carrying capacity and niche overlap.}
-		\emph{Left:} Dotted lines come from directly solving the backwards master equation by inverting the transition matrix as per equation \ref{explicit-tau}, after a cutoff has been applied to the matrix to make it finite. Dashed lines connecting crosses are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm with tau-leaping \cite{Gillespie1977,Cao2006}. The simulations and direct solution are in good agreement, as one would expect. 
+		\emph{Left:} Dotted lines come from directly solving the backwards master equation by inverting the transition matrix as per equation \ref{explicit-tau}, after a cutoff has been applied to the matrix to make it finite. Dashed lines connecting crosses are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm with tau-leaping. The simulations and direct solution are in good agreement, as one would expect. 
 		\emph{Right:} The same direct solution data as in the left panel are extended to larger carrying capacities. The lowest line, $a=1$, recovers the Moran model results in solid green with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$. At $a=0$ the systems acts as two independent stochastic logistic systems, and matches that limit as shown with the solid purple line. 
 	} \label{lntauvK}
 \end{figure}
-
+% \cite{Gillespie1977,Cao2006}
 
 \section{Mean fixation time in the classical Moran model}
 %NTS:::could move this to the appendix
@@ -423,7 +436,7 @@ For the initial condition analogous to the coexistence point, $n = K/2$, this gi
 \tau = \Delta t\,K^2\ln\left(2\right).
 \end{equation*}
 Recall that the Moran model counts one time unit $\Delta t$ every birth and death pair of events. 
-The correspondence between the Moran model and the related Wright-Fisher model occurs when the Moran model has undergone a number of births and deaths equal to the (fixed) population size of Wright-Fisher, often called the generation time \cite{um}. 
+The correspondence between the Moran model and the related Wright-Fisher model occurs when the Moran model has undergone a number of births and deaths equal to the (fixed) population size of Wright-Fisher, often called the generation time \cite{Blythe2007}. 
 The time scale regarded is important. 
 Similarly, for comparison between Moran and the coupled logistic model, one needs to match the time scales. 
 %Given that the Moran model time step corresponds to one birth and one death event, I make the comparison with the estimate 
@@ -449,6 +462,9 @@ This gives% $\Delta t = \frac{3}{K}
 \begin{equation}
 \Delta t = \frac{3}{2}\frac{1}{b} = \frac{3}{2}\frac{1}{K/2}  = \frac{3}{K}
 \end{equation}
+%%%%%%%%%%%%%%%%%%%%%NTS:::::::::::!!!!!!!!!!!!!SO AM I INCLUDING THIS OR NOT?!!!?!??!!? factor of 3
+%%%%%%%%%%%%%%%%%%%%%NTS:::::::::::!!!!!!!!!!!!!SO AM I INCLUDING THIS OR NOT?!!!?!??!!?
+%%%%%%%%%%%%%%%%%%%%%NTS:::::::::::!!!!!!!!!!!!!SO AM I INCLUDING THIS OR NOT?!!!?!??!!?
 %Since the coupled logistic model spends most of its time near the Moran line $x_1+x_2=K$ I assume that on average the Moran time step should be
 %%Since $b_i\left(x_1,K-x_1\right)=d_i\left(x_1,K-x_1\right)=K/2$ we get $\Delta t \approx 1/K$ and therefore
 %Since the initial conditions have equal populations of each species, and since $b_i\left(K/2,K/2\right)=d_i\left(K/2,K/2\right)=K/2$, I get $\Delta t \approx 1/K$.
@@ -560,7 +576,7 @@ to leading order \cite{Lande1993}.
 %\end{figure}
 
 Here I calculate the mean fixation time in the independent limit of the coupled logistic model given a distribution of extinction times for a single logistic model. The fixation occurs when either of the species goes extinct. 
-Denoting the probability distribution of the extinction times for either of independent species as $p(t)$ and its cumulative as $F(t)=\int_{s=0}^t p(s)ds$, the probability that \emph{either} of the species goes extinct in the time interval $[t,t+dt]$, is the probability of species 1 going extinct while species 2 has not plus the probability that species 2 goes extinct while species 1 has not, since these are the two possibilities. 
+Denoting the probability distribution of the extinction times for either of independent species as $p(t)$ and its cumulative as $F(t)=\int_{s=0}^t p(s)ds$, the probability that \emph{either} of the species goes extinct in the time interval $[t,t+dt]$, is the probability of species 1 going extinct while species 2 has not, plus the probability that species 2 goes extinct while species 1 has not, since these are the two possibilities. 
 That is,
 \begin{equation}
 p_{min}(t)dt = \bigg(p(t)\left(1-F(t)\right)+\left(1-F(t)\right)p(t)\bigg)dt = 2p(t)\left(1-F(t)\right)dt.
@@ -579,7 +595,7 @@ It can be approximated as
 \begin{equation}
 p(t) = \alpha e^{-\alpha t},\;\;\;\;  F(t) = 1 - e^{-\alpha t}
 \end{equation}
-with $\frac{1}{\alpha}\simeq \frac{1}{K}e^K$ from the previous section. %NTS:::from the previous chapter now
+with $\frac{1}{\alpha}\simeq \frac{1}{K}e^K$ from the previous chapter \cite{Lande1993,Lambert2005}. %NTS:::from the previous chapter now
 Finally, I obtain for the mean time to fixation
 \begin{equation}
 \langle t\rangle = \int_0^\infty dt\, t\, 2\alpha e^{-2\alpha t} = \frac{1}{2\alpha}. \label{indietime}
@@ -620,7 +636,7 @@ The relatively short fixation time in the complete niche overlap regime implies 
 The exponential scaling of the fixation time with $K$ persists for incomplete niche overlap described by the intermediate values of $0<a<1$. 
 However, both the exponential and the algebraic prefactor depend on the niche overlap $a$. 
 The exponential scaling is expected for systems with a deterministically stable fixed point \cite{Ovaskainen2010,Assaf2016,Gabel2013,Fisher2014,Doering2005}, as indicated in \cite{Chotibut2015,Dobrinevski2012,Lin2012} using Fokker-Planck approximation and in \cite{Gabel2013} using the WKB approximation. 
-However, the Fokker-Planck and WKB approximations, while providing the qualitatively correct dominant scaling, do not correctly calculate the scaling of the polynomial prefactor and the numerical value of the exponent simultaneously \cite{Kessler2007,Ovaskainen2010,Badali2018}, as was shown in the previous chapter.
+However, the Fokker-Planck and WKB approximations, while providing the qualitatively correct dominant scaling, do not correctly calculate the scaling of the polynomial prefactor and the numerical value of the exponent simultaneously \cite{Kessler2007,Ovaskainen2010,Badali2019b}, as was shown in the previous chapter.
 For large population sizes and timescales, effective species coexistence will be typically observed experimentally whenever the fixation time has a non-zero exponential component. %, $f(a)\neq 0$. % [[need to cite that pop sizes are large?]].
 
 \iffalse
@@ -707,7 +723,8 @@ Even for systems with a smaller carrying capacity, unless the two species are mo
 
 
 %\section{Fokker-Planck and the inability to write a potential}
-\section{Analysis of the Fokker-Planck approximation in this context} \label{FPsection}
+%\section{Analysis of the Fokker-Planck approximation in this context} \label{FPsection}
+\section{Fokker-Planck analysis in this context} \label{FPsection}
 %explain that we do this so that we can have an analytic estimate of the dependence of tau on K and a
 The most common approximation to the master equation is Fokker-Planck, which assumes the state space is continuous. 
 I attempt its use here to get an analytic estimate of the dependence of fixation time on $K$ and $a$. 
@@ -841,7 +858,7 @@ This is the Moran line, along which diffusion is unbiased; diffusion away from t
 Because everywhere along the Moran line is equally likely, the probability cannot be normalized, and the linearization approximation fails. This is to be expected, as it is an expansion about a fixed point, but the fixed point is replaced by the Moran line in the Moran limit of $a=1$. 
 
 
-\section{Breaking the parameter symmetries}
+\section{Breaking the parameter symmetries} \label{asymmetricsection}
 I have addressed the symmetric case of $K_1 = K_2 \equiv K$ and $a_{12} = a_{21} \equiv a$. 
 The result of exponential scaling of the fixation time except when the Moran line exists is true even when some symmetries are broken. 
 % but neither of these simplifications are strictly necessary. 
@@ -880,7 +897,7 @@ The exponential dependence is lost, but for a different reason.
 %This is also why the exponential term was not as relevant in the first place. 
 Even prior to this merging, moving the fixed point, the point about which the system fluctuates, closer to an axis is similar to decreasing the effective carrying capacity, hence the scaling with the true carrying capacity is lessened. 
 This partially explains why the exponential fit parameter $f(a_{21})$ is weak even when $a_{21}=0$. 
-Panel B of figure \ref{asymmetrica} shows the comparison of the ansatz fit with the pseudo-potential well of the previous section. 
+Panel B of figure \ref{asymmetricaK} shows the comparison of the ansatz fit with the pseudo-potential well of the previous section. 
 The Gaussian pseudo-potential shows a similar trend, though quantitatively it remains incorrect. 
 \fi
 
@@ -949,7 +966,7 @@ I include the caveat that fixation will also be fast when the coexistence fixed 
 Next let us consider breaking the symmetry such that the Moran line can still be recovered.
 The carrying capacity symmetry is broken, such that $K_2 = 2 K_1$.
 The two species are still independent when $a_{12}=a_{21}=0$, but in this case the Moran line exists when $a_{12} = 2$ and $a_{21} = 1/2$.
-Figure \ref{asymmetricK} shows the results when the symmetry is broken both in the carrying capacity and the niche overlap.
+Figure \ref{asymmetricaK} shows the results when the symmetry is broken both in the carrying capacity and the niche overlap.
 It shows the change in the fixation time as a function of the niche overlap $a_{21}$ for $K_2=2K_1\equiv K$ while the niche overlaps change along the line where $a_{12}=4 a_{21}$, starting from the independent case $a_{12}=a_{21}=0$ to $a_{12} = 2$ and $a_{21} = 1/2$ where the system reaches its corresponding Moran line.
 The observed behaviour is very similar to that shown in the symmetric case, with the exponential dependence transitioning smoothly to zero at the Moran line.
 
@@ -1024,7 +1041,7 @@ One way to deal with this issue is the linearization in the Fokker-Planck sectio
 This allows one to easily solve the Fokker-Planck equation in any system with an attractive deterministic fixed point. 
 More pertinently, linearizing the Fokker-Planck equation, as in Equation \ref{linFP} described above, allows one to get an estimate of the depth of the pseudo-potential: $\frac{(1-a)}{2(1+a)}K$. 
 %%Nevertheless, it 
-This provides an intuitive underpinning for the general exponential scaling in the incomplete niche overlap regime: the fixation process can be thought of as the Kramers'-type escape from a pseudo-potential well \cite{Berglund2011}. 
+This provides an intuitive underpinning for the general exponential scaling in the incomplete niche overlap regime: the fixation process can be thought of as the Kramers'-type escape from a pseudo-potential well \cite{Hanggi1990,Berglund2011}. 
 The Kramers result is dominated by $\tau \simeq \exp(\text{well depth})$, corresponding to the dominant scaling $\tau \simeq \exp(f(a)K)$. 
 As $a$ increases and the species interact more strongly, the potential well becomes less steep, resulting in weaker exponential scaling. 
 In the complete niche overlap limit, the pseudo-potential develops a soft direction along the Moran line that enables relatively fast escape towards fixation.
@@ -1056,7 +1073,7 @@ Recently, the connection between deterministic models of the LV type and stochas
 %Remarkably, the stochastic dynamics of LV type models is still incompletely understood, and has recently received renewed attention motivated by problems in bacterial ecology and cancer progression \cite{VanMelderen2009,Stirk2010,Fisher2014,Chotibut2015,Capitan2017,Kessler2015}. %cut Nowak 2006.
 
 Much of the recent studies of these systems employed various approximations, such as the Fokker-Planck approximation \cite{Chotibut2015,Dobrinevski2012,Fisher2014,Constable2015,Lin2012}, WKB approximation \cite{Kessler2007,Gabel2013} or game theoretic \cite{Antal2006} approach. 
-The results of these approximations typically differ from the exact solution of the master equation, especially for small population sizes \cite{Doering2005,Kessler2007,Ovaskainen2010,Assaf2016,Badali2018}, as was discussed in more detail in the previous chapter. 
+The results of these approximations typically differ from the exact solution of the master equation, especially for small population sizes \cite{Doering2005,Kessler2007,Ovaskainen2010,Assaf2016,Badali2019b}, as was discussed in more detail in the previous chapter. 
 In this chapter, I have interrogated stochastic dynamics of a system of two competing species using a numerically arbitrarily accurate method based on the first passage formalism in the master equation description. 
 The algorithmic complexity of this method scales algebraically with the population size rather than with the exponential scaling of the fixation time, (as is the case with the Gillespie algorithm \cite{Gillespie1977}) enabling us to capture both the exponential behaviour and the algebraic prefactors in the fixation/extinction times for both small and large population sizes. %really it only captures the mean rather than the exponential tail, but the point is it's not an approximation that ignores the tail nor with underlying assumptions about the solution except that it's rare for fluctuations to reach $C_K$ %NTS:::this comment?
 This accuracy is needed in order to observe the transition from slow, exponentially dominated processes to the algebraically fast fixation of the Moran limit. 
@@ -1065,7 +1082,7 @@ Stochastic fluctuations allow the system to escape from the deterministic coexis
 If the escape time is exponential in the (typically large) system size, in practice it implies effective coexistence of the two species around their deterministic coexistence point. 
 If the time is algebraic in $K$, as in degenerate niche overlap case (closely related to the classical Moran model), the system may fixate on biological timescales \cite{Kimura1964,Moran1962}. 
 For those biological systems with small characteristic population sizes, exponential scaling does not dominate the fixation time; power law and prefactor become more relevant. 
-Figure \ref{coexistvsfixate} shows that a niche overlap as low as $0.8$, for a carrying capacity around $6$, has rapid fixation, more rapid than a corresponding Moran model. %NTS:::grossly too specific
+Figure \ref{ansatzplot} shows that a niche overlap as low as $0.8$, for a carrying capacity around $6$, has rapid fixation, more rapid than a corresponding Moran model. %NTS:::grossly too specific
 The transition between the exponential scaling of effective coexistence time to the rapid stochastic fixation in the Moran limit is governed by the niche overlap parameter, which for example can be derived in terms of the dynamics and interactions of the species and their secreted growth and death factors. %, as seen in section II. 
 % which can be derived in terms the dynamics of the species turnover governed by the exchange of the secreted growth and death factors (section II)[PLEASE CHECK - I do not understand this clause and it is anyways only an example, not a general statement]
 
