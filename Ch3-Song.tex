@@ -807,7 +807,7 @@ In the research presented above, even though not all species are equal to each o
 That is, no species has been given an explicit fitness advantage. 
 The complete neutrality of Hubbell comes when the species not only interact with each other symmetrically but also interact with other species as strongly as they interact with themselves. 
 \fi
-
+\iffalse
 %My results describe the different regimes of the switching behaviour of the Moran population with immigration. 
 My results of the coupled logistic and Moran with immigration models allow predictions of the dynamic behaviour of a system with one extant species upon attempted invasion of a second, the focal species. 
 Suppose the focal species population starts in state $n=0$, before any mutations have arisen or immigrants have entered.  
@@ -834,16 +834,17 @@ Recent research from the Gore lab shows that these transient species can have la
 On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, they will buoy the population in the system, maintaining its presence. %buoy/stabilize
 I deal with both of these cases, high or low immigration rate, using the Moran model with immigration when the niche overlap is $a=1$. 
 For incomplete niche overlap, once a species successfully invades it will persist for long times, based on the results of chapter 2. 
-
+\fi
 %We can compare the time between successful invasions, and the time between attempted invasions, with mean first passage time to fixation or extinction once the invader is in the system, interpreted as the time each attempt takes (successful or not). 
 %For example, for $g=0.1$, $N=50$, $\nu=0.01$ this gives the invading immigrant an (unconditioned) attempt time of $\tau[1] = 243.138$, a time between attempts of $1/\nu(1-g) = 111.111$, and a time between successful attempts of $1/\nu(1-g)(1-E_1) = 7919.01$. 
 %In this example the first passage time is longer than the interval between attempts, and so we expect there to always be at least a transient presence of the species in the system. 
 %Only very infrequently will the species actually fixate in the system. 
 
-Within the Moran model with immigration I have explicitly considered the cases of high and low immigration rate. 
+The previous chapter modelled a single invading immigrant into a Lotka-Volterra system, an event which was assumed to happen infrequently enough that it would resolve before other invaders arrived. 
+Within the Moran model with immigration, analogous to the $a=1$ limit of the Lotka-Volterra model, I have explicitly considered the cases of high and low immigration rate. 
 When immigration is sufficiently high, such that $N\nu > \max\big(1/g,1/(1-g)\big)$, the focal species is maintained at steady state most often at a fractional abundance equal to that in the metapopulation from which the immigrants arrive. 
 For low immigration rate, specifically $N\nu < \min\big(1/g,1/(1-g)\big)$, the focal species spends the bulk of its time either temporarily extinct or else fixated in the local system (rather than in the metapopulation). 
-One way to characterize biodiversity is by the number of different species that reside in a system \cite{May1999,Hubbell2001,others?,Chesson2000?}. 
+One way to characterize biodiversity is by the number of different species that reside in a system \cite{May1999,Hubbell2001,Chesson2000}. 
 An estimate of the expected number of species in a system, at least when immigration is frequent, is given by the number of $g_i$'s greater than $1/(N\nu)$, where $g_i$ is the fractional abundance of species $i$ in the static large metapopulation that provides immigrants to the system. %EDIT:::Anton doesn't understand
 %NTS:::if I convolve an unknown distribution of g_i's with the distribution of a species with a given g_i and set this equal to that same unknown distribution of g_i's (perhaps accounting for the M vs N difference) can I solve for the unknown distribution? Neat research idea
 
@@ -862,7 +863,7 @@ An estimate of the expected number of species in a system, at least when immigra
 %Regarding the small population, transient species that fail to establish themselves persist longer in the Moran limit, dying out very quickly in systems with incomplete niche overlap, when they do die out. 
 %Again, the theory behind Hubbell's model suggests a wealth of small population species should be present in an ecosystem, compared to one dominated by niches, even largely overlapping niches. 
 
-For incomplete niche overlap, the number of species in a system, as well as their abundances, depends on how their $K_i$'s are distributed. 
+For incomplete niche overlap where species can effectively coexist (as studied in chapter 2), the number of species in a system, as well as their abundances, depends on how their $K_i$'s are distributed. %NTS:::chapter number
 This can be connected back to theories of the apportionment of resources common to niche theories of biodiversity \cite{MacArthur1957,Sugihara2003,Leibold1995}. 
 %So, while the absolute number of extant species that is the biodiversity of an ecosystem cannot distinguish between niche and neutral theories, the abundance distribution should be able to do so. 
 %Unfortunately calculating the abundance distribution as a function of immigration rate, ecosystem carrying capacity, and niche overlap is outside of the scope of this thesis. 
@@ -870,7 +871,7 @@ Calculating the abundance curve of systems will less than complete niche overlap
 I can, however, make qualitative arguments on how a lesser niche overlap would affect Hubbell's abundance curve, given that the Hubbell model is similar to the Moran model with immigration. 
 %Hubbell's species abundance distribution is well known, and is similar to that of Fisher's log series distribution when diversity is high \cite{Fisher1943,Alonso2004}. %EDIT:::maybe put this in the Intro chapter
 %Given that Hubbell's theory is equivalent to the Moran model with immigration, I can make a qualitative argument as to how this will be disrupted with incomplete niche overlap. 
-Those species in disparate niches will exist at their local carrying capacity, and will not be suppressed by their neighbours, thus there should be more species at higher abundance, higher mean population. 
+Those species in disparate niches will exist at their local carrying capacity modified by an averaged niche overlap with the community, and will be effectively unsuppressed by their neighbours, thus there should be more species at higher abundance, higher mean population. 
 Only those species that have a naturally low carrying capacity and those that have high niche overlap with others in the system will be found at low abundance or in a transient state. 
 Based on my results, an observed species abundance curve that shows more species at high abundance but lesser at low abundance when compared to the prediction of Hubbell is a signature of a non-neutral ecosystem influenced by niche differences. 
 %, with the species interactions being less than completely neutral (while still not necessarily being selective). %NTS:::reminder this distinction should be in the beginning

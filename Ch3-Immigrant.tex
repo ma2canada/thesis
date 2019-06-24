@@ -294,7 +294,8 @@ For complete niche overlap the invasion probability goes asymptotically to zero,
 High niche overlap makes invasion difficult due to strong competition between the species. 
 In this regime, the times of the failed invasions become important because they set the timescales for transient species diversity. 
 If the influx of invaders is slower than the mean time of their failed invasion attempts, most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader. 
-On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient coexistence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Chesson2000,Hubbell2001}. 
+On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, the new system will exhibit transient coexistence between the settled species and multiple invader strains, determined by the balance of the mean failure time and the rate of invasion \cite{Dias1996,Chesson2000,Hubbell2001,Desai2007,Carroll2015}. 
+Recent research from the Gore lab shows that these transient species can have lasting effects on the distribution of extant species \cite{Amor2019}. %, but I do not study the structure of the surviving species here. 
 Full discussion of diversity in this regime is beyond of the scope of the present work. % but see \cite{Dias1996,Hubbell2001,Chesson2000}. 
 The weaker dependence of the invasion times on the population size and the niche overlap, as compared to the escape times of a stably coexisting system to fixation, imply that the transient coexistence is expected to be much less sensitive to the niche overlap and the population size than the steady state coexistence. 
 Curiously, both niche overlap and the population size can have contradictory effects on the invasion times (as discussed in the previous section) resulting in a non-monotonic dependence of the times of both successful and failed invasions on these parameters. 
@@ -306,9 +307,29 @@ The mean time of successful invasion is relatively fast in all regimes, and scal
 
 %For this reason we have calculated the mean failure time, the mean time of invasion, and the probability of such a success. 
 The fixation times of two coexisting species, discussed in the previous chapter, determine the timescales over which the stability of the mixed populations can be destroyed by stochastic fluctuations. 
-Similarly, the times of successful and failed invasions set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration. 
+Similarly, the times of successful and failed invasions set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration \cite{Hubbell2001,Desai2007,Carroll2015}. 
 Our results provide a timescale to which the rate of immigration or mutation can be compared. 
+\iffalse
+Once the invader arrives the dynamics and its ultimate fate depend on how much its niche overlaps with the species currently present in the system. 
+It will be most excluded by those with high population and those with large niche overlap. 
+In the research above I have considered the case of only one extant species upon the arrival of an invader. 
+For species with low niche overlap, the probability of invasion is likely, and for large $K$ decreases monotonically as $1-a$ with the increase in niche overlap, independent of the population size $K$. %first figure
+The invader is least likely to be successful in the Moran limit when niche overlap is complete. 
+For invaders that are mutants of the extant wild type species, this $a=1$ is the niche overlap they are most likely to experience, and so the more similar a mutant is to the wildtype, the less likely it is to reach half the population size, which is how I have defined a successful invasion. 
+
+Whether or not a mutant invasion is successful, the timescale is longest when niche overlap is high. %second and third figures
+The times of successful and failed invasions into a stable population set the timescales of the expected transient coexistence in the case of an influx of invaders, arising from mutation, speciation, or immigration \cite{Hubbell2001,Desai2007,Carroll2015}. 
+The mean time of successful invasion is relatively fast in all regimes, and scales linearly or sublinearly with the system size $K$. 
+By contrast, high niche overlap makes invasion difficult due to strong competition between the species. 
+In the regime of high niche overlap, the times of the failed invasions become particularly salient because they set the timescales for transient species diversity. %EDIT:::redundant/in conflict with three lines earlier
+We must compare the rate of invasion attempts to the time to success or failure of an invasion attempt. 
+If the influx of invaders is slower than the mean time of their failed invasion attempts, most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader \cite{Dias1996,Hubbell2001,Chesson2000}. 
+%EDIT:::Gore \cite{Amor2019} shows that transients can affect the lasting distribution
+Recent research from the Gore lab shows that these transient species can have lasting effects on the distribution of extant species \cite{Amor2019}, but I do not study the structure of the surviving species here. 
+On the other hand, if individual invaders arrive faster than the typical times of extinction of the previous invasion attempt, they will buoy the population in the system, maintaining its presence. %buoy/stabilize
+\fi
 If the influx of invaders is slower than the mean time of their failed invasion attempts, each attempt is independent and has the invasion probability we have calculated. 
+%Most of the time the system will contain only one settled species, with rare ``blips'' corresponding to the appearance and quick extinction of the invader \cite{Dias1996,Hubbell2001,Chesson2000}. 
 In the extreme case of this, that is, if the time between invaders is even longer than the fixation times calculated in the previous chapter, then serial monocultures are expected.
 If the rate in is greater than the mean failure time, the system will diversify. 
 The balance between mutation or immigration coming into the system and these invaders failing to establish themselves determines how diverse a system will be. %NTS:::extend this discussion, hearken to the intro

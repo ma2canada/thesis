@@ -1,5 +1,5 @@
 %\chapter{Ch4-ClosingRemarks}
-\chapter{Conclusion}
+\chapter{Discussion}
 
 %NTS:::Anton says:
 %3. In the final remarls: I would start with general experimental systems first, and then briefly describe how your specific results could be tested. Not need to mention our collaboration with Milstein too much.
@@ -407,8 +407,8 @@ What I can say is that coexisting species need not be in entirely disparate nich
 I will now indulge in some speculation. 
 In this section I present some straightforward extensions of my research. 
 Also included are some more extensive next steps. 
-As with all my research, there is the obvious next step of applying my results to specific real biological systems, finding a way to estimate the phenomenological parameters based on measurable evidence, and then making predictions. 
-See the Experimental Tests section of this chapter for more details, but two promising systems are microfluidic devices \cite{Groisman2005} and small microbiomes like the gut of nematodes \cite{Vega2017}. 
+As with all my research, there is the next step of applying my results to specific real biological systems, finding a way to estimate the phenomenological parameters based on measurable evidence, and then making predictions. 
+See the experimental tests section of this chapter for more details, but two promising systems are microfluidic devices \cite{Groisman2005} and small microbiomes like the gut of nematodes \cite{Vega2017}. 
 
 \iffalse
 %From the first chapter: approximations
@@ -423,25 +423,30 @@ Current routinely used nets have millions of neurons, which corresponds to a car
 
 %From the first chapter: biology
 %In addition, t
-The content of the first chapter has some obvious extensions. 
-The ``hidden parameters'' were those that did not show up in the deterministic analogue of the system which nevertheless affect the stochastic dynamics. 
-Suppose we write the system as
+%The content of the first chapter has some obvious extensions. 
+The ``hidden parameters'' of chapter 1 were those that did not show up in the deterministic analogue of the system which nevertheless affect the stochastic dynamics. %NTS:::chapter number
+They have a natural extension to powers greater than quadratic:
+%Suppose we write the system as
 \begin{align*}
 	b(n) &= r\,n + f(n) \\
 	d(n) &= r\,n^2/K + f(n)
 \end{align*}
-for arbitrary $f(n)$. It is unclear how $f$ affects the stochastic measurable quantities like the MTE. 
-Writing $f$ as a polynomial, I predict the higher orders will have a lesser and lesser effect, and that there will be some conditions placed on $f^{(k)}(0)/k!$, the $k$th coefficient. 
+with an arbitrary $f(n)$. 
+It is unclear how $f$ affects the stochastic measurable quantities like the MTE. 
+Writing $f$ as a polynomial, I predict the higher orders will have a lesser and lesser effect, since the linear parameter $\delta$ is already has greater effect than the quadratic parameter $q$. 
+%and that there will be some conditions placed on $f^{(k)}(0)/k!$, the $k$th coefficient. 
 Furthermore, I investigated the deterministic equation $\dot{x} = r\,x(1-x/K)$. I speculate that any concave down system will behave similarly, as is the case with logistic difference equations \cite{Strogatz1994}. 
 %It is unclear what the effects of other forms would be. 
 %For instance, 
-Assaf and Meerson \cite{Assaf2016} included the Allee effect and found that the MTE still scales exponentially with carrying capacity; I predict there is an effective carrying capacity given by the distance between the stable and unstable fixed points. 
+Assaf and Meerson \cite{Assaf2016} included the Allee effect and found that the MTE still scales exponentially with carrying capacity; I predict there is an effective carrying capacity given by the distance between the stable and unstable fixed points, which could be generalizable to systems with multiple minima. 
 
+\iffalse
 %chapter 2 stuff - see if the Moran condition is ruined by adding anything (already measure zero); include evolution, possibly which would stabilize, possibly leading to greater likelihood of Moran
-In chapter 2 I regarded how the scaling of the extinction time changes as niche overlap increases from independence ($a=0$) to $a=1$, at which point the MTE is that of the Moran model. 
+In chapter 2 I regarded how the scaling of the extinction time changes as niche overlap increases from independence ($a=0$) to complete niche overlap ($a=1$), at which point the MTE is that of the Moran model. 
 %It is only in this one limit that coexistence is not long-lived (with the large population caveat examined in section 2.7); with the size of phasespace, this one point seems unlikely, being of measure zero. %%EDIT:::"redundant" says Anton
-Despite the biological significance of this limit, in phase space it is only one point, measure zero, and seems unlikely to arise randomly. 
-Perhaps there is a way to show convergence toward this point. %with a simple model
+Despite the biological significance of this limit, in parameter space it is only one point, of measure zero, and seems unlikely to arise randomly. 
+%Perhaps there is a way to show convergence toward this point. %with a simple model
+Perhaps there is a biological reason for convergence toward this point, that could be shown with a simple model. %with a simple model
 %A next step would be to account for mutation and evolution in this model. 
 If a mutant strain arises from a single population, it is likely to have a very similar niche to the wildtype, hence a large niche overlap. 
 And from there, what would the forces of evolution dictate? 
@@ -450,8 +455,10 @@ And from there, what would the forces of evolution dictate?
 One could simulate the evolution of the niche overlap (for instance following the work of MacArthur \cite{MacArthur1957}) in an individual based model with a given resource distribution. 
 %The desire to increase fitness might have a stabilizing effect on the system, encouraging differing niches. 
 %Or it might keep the niche overlap close to unity, which would go far to explaining why the Hubbell model has had such success. 
-It is unclear to me whether optimizing fitness would cause the niches to converge to better match the resource distribution, supporting neutral models, or diverge to minimize niche overlap and competition, supporting niche theory. 
-In any case, it would be insightful to see whether fitness considerations act to make the already-unlikely Moran limit entirely untenable, or whether this limit is actually a natural consequence of evolution. 
+The question is whether having selection optimize the fitness of the individuals would cause the niches to converge to better match the resource distribution, supporting neutral models, or diverge to minimize niche overlap and competition, supporting niche theory. 
+%In any case, it would be insightful to see whether fitness considerations act to make the already-unlikely Moran limit entirely untenable, or whether this limit is actually a natural consequence of evolution. 
+Do fitness considerations act to make the already-unlikely Moran limit entirely untenable, or is this limit actually a natural consequence of evolution? 
+\fi
 
 %chapter 2 stuff - selection (weak and strong)
 %NTS:::citations in this chapter
@@ -459,23 +466,25 @@ In any case, it would be insightful to see whether fitness considerations act to
 A natural extension of my work would be to include selection, explicit fitness advantages, to the system, for instance by increasing one $r$ to increase the birth rate while simultaneously increasing $K$ to keep the same death rate. 
 %NTS:::fitness is a tricky subject that I should address at some point
 %EDIT:::as Anton points out, changing r's doesn't change the fixed point, and even changing K's just moves it around but still has coexistence
-I have not done so already because selection has been treated many times in many ways \cite{a bunch???} and actually tends to act to simplify the system. 
-The higher fitness species rapidly fixates, quickly reducing the dimensionality of the problem. 
+I have not done so already because selection has been treated many times in many ways \cite{Chesson2000,Kawecki2004,Orr2005,Lambert2006,Leibold2006,Desai2007,Parsons2007,Patwa2008,Mayfield2010,Lin2012,Constable2016}. 
+Selection actually tends to simplify the system as the higher fitness species rapidly fixates, quickly reducing the dimensionality of the problem. 
 Nevertheless there are some advantages to how I treat stochastic systems that would aid the analysis of systems with selection. 
 In the independent limit any fitness advantage should be irrelevant, so there will at least be a transition between coexistence in the independent limit and rapid fixation otherwise. 
-What is more, most models with selection, including those of Kimura \cite{Kimura??} and Moran \cite{Moran with selection??} [and others???] must make the assumption that the effect of selection is weak, typically much less than $1/K$. 
-Inverting the transition matrix, as I do in chapter 2, is arbitrarily precise, and so does not suffer from any requirement of such an assumption. It can treat the range of selection, from weak to strong. 
+What is more, many models with selection, like that of Kimura, must make the assumption that the effect of selection is weak, typically much less than $1/K$ \cite{Kimura1964,Kimura1969,Kimura1983}. %\cite{Taylor2004,Etheridge2010,Lin2012,Chalub2016} %and Moran 
+Inverting the transition matrix, as I do in chapter 2, is arbitrarily precise, and so does not suffer from any requirement of such an assumption. 
+It can treat the range of selection, from weak to strong. 
 Not only does this give access to regimes not normally considered, it provides a way to verify the small selection results that rely on approximation. 
 %one more sentence?!?
+The way in which selection acts is to cause selective sweeps. 
 In the literature there is a debate about selective sweeps \cite{Jensen2014}, specifically whether it is more common for a new fit mutant to quickly fixate in a population, or whether it is more often the case that a mutant trait in a population is neutral until the environment changes, after which it is more fit and fixates. 
 The distinction between these hard and soft selective sweeps requires more careful treatment, with fewer assumptions; the method employed in chapter 2 of this thesis would be an ideal tool to use, given its arbitrary accuracy. 
 Selection can also be incorporated into the invasion dynamics of chapter 3. 
 
 %chapter 2-3 stuff - environmental noise
-One extension applicable to all my work, that I did not account for, is the inclusion of environmental noise. 
-This has a fundamentally different action on the system. 
+%One extension applicable to all my work, that I did not account for, is the inclusion of environmental noise. 
+Another extension to my work is the inclusion of environmental noise, which has a fundamentally different action on the system. 
 Whereas demographic stochasticity comes from the discrete nature of population sizes and therefore can be mapped onto a transition matrix or graph (as in figure \ref{phasespace}), environmental noise is continuous, especially for the phenomenological parameters I use, which cannot be fixed to any one cause, let alone a discrete one. 
-Such an advancement in my research would involve the abandonment of the transition matrix, and likely would require the use of Fokker-Planck, which I am dubious about, based on my findings in chapter 1. %EDIT:::"already said this above" - okay but that was a caveat not a next step, I think there's a slight distinction
+Such an advancement in my research would involve the abandonment of the transition matrix, and likely would require the use of the Fokker-Planck equation, which has its limits, as I demonstrated in chapter 1. %EDIT:::"already said this above" - okay but that was a caveat not a next step, I think there's a slight distinction %which sometimes fails, 
 
 \iffalse
 %chapter 3 stuff - check what happens to Hubbell/abundance with incomplete niche overlap
@@ -506,46 +515,55 @@ The theory has been modified to include explicit fitness advantage \cite{???} bu
 Seeing as decreasing the niche overlap from unity acts to increase the timescales of the system, as I have shown in this thesis, using my results to extend coalescent theory when appropriate would similarly suggest that variants diverged longer ago than the classic theory predicts. 
 \fi
 
-The techniques applied in this thesis, specifically the use of a truncated transition matrix being inverted to solve for the first passage times exactly, can easily be applied to other low species number systems. 
-The calculation for each point in parameter space is not lengthy; the main constraint is RAM, rather than time, and so a larger memory computer could deal with problems with larger carrying capacities or more species. %NTS::: can expand these past two sentences into a whole paragraph
-For example, in chapter 2 I considered a two dimensional generalized Lotka-Volterra system to explore competition between two species. 
-The Lotka-Volterra system has been generalized to any dimension, any number of species. 
-A judicious choice of parameters (\emph{e.g.} $a_{12}<0$, $a_{21}>0$) will recreate the predator-prey dynamics from which the generalized Lotka-Volterra system gets its name. 
+In chapters 2 and 3 I considered the two species stochastic generalized Lotka-Volterra model in the regime in which it had a stable fixed point or a line of marginal stability along which the stochastic trajectories diffused. %NTS:::chapter number
+%A judicious choice of parameters (\emph{e.g.} $a_{12}<0$, $a_{21}>0$) will recreate the predator-prey dynamics from which the generalized Lotka-Volterra system gets its name. 
+With a different choice of parameters it gives the predator-prey system, which has a fixed point of marginal stability, about which deterministic orbits cycle. 
 Gottesman and Meerson \cite{Gottesman2012} analyzed the predator-prey system using a clever rotating reference frame and the WKB approximation. 
-The deterministic system is marginally stable, with trajectories orbiting a zero-eigenvalue fixed point. 
-As such, I expect an algebraic time to extinction, as well as a stronger dependence on initial conditions. 
-However, the period depends on the value of the Lyapunov function associated with the orbit. %Lyapunov energy
-Thus as it ``diffuses'' tangentially to the orbit its characteristic time scale will change, which may complicate the analysis. 
+%The deterministic system is marginally stable, with trajectories orbiting a zero-eigenvalue fixed point. 
+%As such, I expect an algebraic time to extinction, as well as a stronger dependence on initial conditions. 
+%However, the period depends on the value of the Lyapunov function associated with the orbit. %Lyapunov energy
+%Thus as it ``diffuses'' tangentially to the orbit its characteristic time scale will change, which may complicate the analysis. 
 %It would be nice to get the arbitrarily correct data to compare to the approximate results of their research. 
 Arbitrarily correct data obtained via the matrix inverse (rather than the approximate results of WKB) allows for a complete analysis of the scaling of the MTE with system size. 
+One could look also at the effect of initial conditions on the MTE, whether the MTE is cyclic starting at different points along an orbit. 
 %Nevertheless, the data that can be generated by inverting a truncated transition matrix to solve the extinction time to arbitrary accuracy would be correct, regardless of the analysis. 
 %EDIT:::Anton: "does noise not completely destroy the orbits?" no
 
+The techniques applied in this thesis, specifically the use of a truncated transition matrix being inverted to solve for the first passage times exactly, can easily be applied to other low species number systems. 
+The calculation for each point in parameter space is not lengthy; the main constraint is RAM, rather than time, and so a larger memory computer could deal with problems with larger carrying capacities or more species. %NTS::: can expand these past two sentences into a whole paragraph
+For example, in chapter 2 I considered a two dimensional generalized Lotka-Volterra system to explore competition between two species. 
+The Lotka-Volterra system has been generalized to any dimension, any number of species, with a number of three species systems being of interest. 
+\iffalse
 %EDIT:::"no coulda woulda"
 From the two dimensional Lotka-Volterra system one arrives at the predator-prey system by choosing the parameters correctly. 
 One can also move to the third dimension, in order to account for a third species in the system. 
 This allows for the investigation of many systems of interest, with much more diversity. 
 The simplest extension in this regard would be to have three species all with overlapping niches \cite{MacArthur1970}. 
 I could observe how a species whose niche is situated between those of two others (such that they each overlap with the first species but not with each other) would go extinct more readily as the overlap of the encroaching species is increased. 
-
+\fi
 %RPS/limit cycles
-One model of three interacting species has species that each are excluded by one other and exclude the other, \emph{e.g.} $a_{12},a_{23},a_{31}>0$ and $a_{21},a_{32},a_{13}<0$.  
-For this reason it is called a rock-paper-scissors system, after the children's game. 
-In any pairwise competition there is a winner, but when all three are combined none has a clear advantage. 
-The model is not just fun, it is also relevant to real-world systems, for instance of lizards or bacteria \cite{Kerr2002,Kirkup2004,Berr2009}. 
-Such systems have stable limit cycles, which is another way of allowing for deterministic coexistence of species (along with fixed points) \cite{Smale1976,Armstrong1976}. %and chaos, and ???
+With three species the Lotka-Volterra model can show limit cycles, which is another way of allowing for deterministic coexistence of species (along with fixed points) \cite{Smale1976,Armstrong1976}. 
 This contradicts the intuition that the number of resources constrains the number of species that can exist in a system. 
-Fluctuations cause the system to ultimately end in extinction. 
 Future investigations will probe whether the MTE from a stable limit cycle also scales exponentially with the system size, and how the system size should be characterized given that there is no asymptotic population size. 
+This could serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
+%One model of three interacting species has species that each are excluded by one other and exclude the other, \emph{e.g.} $a_{12},a_{23},a_{31}>0$ and $a_{21},a_{32},a_{13}<0$.  
+%For this reason it is called a rock-paper-scissors system, after the children's game \cite{Kerr2002,Kirkup2004,Berr2009}. 
+%In any pairwise competition there is a winner, but when all three are combined none has a clear advantage. 
+%The model is not just fun, it is also relevant to real-world systems, for instance of lizards or bacteria \cite{Kerr2002,Kirkup2004,Berr2009}. 
+One example of a three species limit cycle system is called the rock-paper-scissors system, and occurs in biology in lizards and bacteria \cite{Kerr2002,Kirkup2004,Berr2009}. 
+%Such systems have stable limit cycles, which is another way of allowing for deterministic coexistence of species (along with fixed points) \cite{Smale1976,Armstrong1976}. %and chaos, and ???
+%This contradicts the intuition that the number of resources constrains the number of species that can exist in a system. 
+%Fluctuations cause the system to ultimately end in extinction. 
+%Future investigations will probe whether the MTE from a stable limit cycle also scales exponentially with the system size, and how the system size should be characterized given that there is no asymptotic population size. 
 %
 %3 species fewer resources highlighted by McGehee
 %Armstrong and McGehee showed that, despite there not being a fixed point at which all three species coexisted, there are conditions that allow for three species to indefinitely avoid extinction in a deterministic system with only one resource \cite{Armstrong1976,Smale1976}. 
 %I propose an investigation as to whether there is a qualitative difference in the extinction time of such a system as compared to one with the same number of species but a sufficient number of resources to allow for a coexistence fixed point. 
 %With stochastic analysis both such systems should eventually exhibit extinction, but the way the mean time scales with the population size scale of the systems could differ. 
-This could serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
+%This could serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
 %chaos
-Extending to three dimensions also allows for the possibility of observing a chaotic system \cite{Strogatz1994}. 
-It is unclear whether chaotic and non-chaotic regimes of a system can be distinguished upon the inclusion of stochastic fluctuations, but the scaling of the MTE may serve such a purpose. 
+Extension to three dimensions also allows for the possibility of observing a chaotic system \cite{Strogatz1994}. 
+It is an open question how best to distinguish between chaotic systems and non-chaotic systems with stochastic fluctuations \cite{May1999}, but the scaling of the MTE may serve such a purpose. 
 
 %Again I highlight work from the Gore lab, where they identified the different bacteria found in a soil sample and performed the combinatorial pairwise competitions \cite{Friedman2017}. 
 %One possible resolution of the unexpectedly large biodiversity one typically observes is that a rock-paper-scissors-like dynamic interaction cyclic dynamics that allow for a greater variety of species than could otherwise coexist. 
@@ -582,11 +600,29 @@ This is a broad research question.
 
 %could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
 The final next step I will outline is the coupling of the ecology of this thesis with evolution. 
+In chapter 2 I regarded how the scaling of the extinction time changes as niche overlap increases from independence ($a=0$) to complete niche overlap ($a=1$), at which point the MTE is that of the Moran model. 
+Despite the biological significance of this limit, in parameter space it is only one point, of measure zero, and seems unlikely to arise randomly. 
+Perhaps there is a biological reason for convergence toward this point, that could be shown with a simple model. %with a simple model
+If a mutant strain arises from a single population, it is likely to have a very similar niche to the wildtype, hence a large niche overlap. 
+And from there, what would the forces of evolution dictate? 
+%If species were to change their parameters in response to their environment and the other species, how would the dynamics change? 
+One could simulate the evolution of the niche overlap (for instance following the work of MacArthur \cite{MacArthur1957}) in an individual based model with a given resource distribution. 
+The question is whether having selection optimize the fitness of the individuals would cause the niches to converge to better match the resource distribution, supporting neutral models, or diverge to minimize niche overlap and competition, supporting niche theory. 
+Do fitness considerations act to make the already-unlikely Moran limit entirely untenable, or is this limit actually a natural consequence of evolution? 
+%Perhaps each species would evolve to minimize niche overlap while maximizing $r$ and $K$. 
+%If the niches were tied to underlying resources, the species might be constrained in how their niche overlap could evolve, such that they would reach some equilibrium. 
+%Or if the evolution itself were stochastic, it might be that whichever strain happens to find a beneficial mutation first would end up dominating the system. 
+Coupling ecology with evolution is a large field of research \cite{MacArthur1967,Shoener1974,Connell1980,Abrams1983,Lenski1991,Leibold1995,Peterson1997,May1999,Chesson2000,Traulsen2006,Desai2007,Xavier2007,Mayfield2010,Parsons2010,Lin2012,Jensen2014,Chotibut2015,Constable2015,Kessler2015,Castro2016,Posfai2017}, and there is more work to be done with stochasticity, especially demographic stochasticity. %Blythe2011,
+
+\iffalse
+%could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
+The final next step I will outline is the coupling of the ecology of this thesis with evolution. 
 If species were to change their parameters in response to their environment and the other species, how would the dynamics change? 
 Perhaps each species would evolve to minimize niche overlap while maximizing $r$ and $K$. 
 If the niches were tied to underlying resources, the species might be constrained in how their niche overlap could evolve, such that they would reach some equilibrium. 
 Or if the evolution itself were stochastic, it might be that whichever strain happens to find a beneficial mutation first would end up dominating the system. 
 Coupling ecology with evolution is a large field of research \cite{MacArthur1967,Schoener1974,Connell1980,Abrams1983,Lenski1991,Leibold1995,Peterson1997,May1999,Chesson2000,Traulsen2006,Desai2007,Xavier2007,Mayfield2010,Parsons2010,Blythe2011,Lin2012,Jensen2014,Chotibut2015,Constable2015,Kessler2015,Castro2016,Posfai2017}, and there is more work to be done with stochasticity, especially demographic stochasticity. 
+\fi
 
 %other possibilities?
 

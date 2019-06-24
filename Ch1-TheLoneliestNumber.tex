@@ -317,7 +317,7 @@ The system has repeated, independent events that occur with at a constant rate; 
 \end{figure}
 
 For one-species systems it is well known how to exactly solve the MTE for a birth-death process. 
-The mean time of extinction starting from a population of size $n$, is \cite{Nisbet1982,Palamara2012}
+The mean time of extinction starting from a population of size $n$, is \cite{Nisbet1982,Palamara2013}
 \begin{equation}
 \tau(n) = \sum_{i=1}^{N}q_i + \sum_{j=1}^{n-1} S_j\sum_{i=j+1}^{N}q_i,
 \label{analytic_mte}
@@ -345,7 +345,7 @@ and
 S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)}.  
 \end{equation}
 If $N$ does not exist or is negative the sum instead goes to infinity. 
-These equations come from noting $\tau(0)=0$, $\tau(1)<\infty$, and iterating the difference equation \cite{Nisbet1982,Palamara2012}
+These equations come from noting $\tau(0)=0$, $\tau(1)<\infty$, and iterating the difference equation \cite{Nisbet1982,Palamara2013}
 \begin{equation}
 \tau(n) = \frac{1}{b(n)+d(n)} 
 + \frac{b(n)}{b(n)+d(n)}\tau(n+1) 
@@ -383,7 +383,7 @@ Thus the mean time to extinction from neighbouring states are related, which lea
 	\label{mte}
 \end{figure}
 
-Combining equations \ref{birth} and \ref{death} with the solution for the mean time to extinction \ref{analytic_mte} obtains a complicated analytical expression in the form of a hypergeometric sum. %NTS:::put it in the appendix
+Combining equations \ref{birth} and \ref{death} with the solution for the mean time to extinction \ref{analytic_mte} obtains a complicated analytical expression in the form of a hypergeometric sum, given in the appendix. 
 Little intuition can be gained from the mathematical expression, but the numerical results of the MTE, as shown in figure \ref{mteCP}, are more interpretable. 
 A typical trajectory starting from $n$ goes first to the deterministic fixed point $K$ and fluctuates about that point before a large fluctuation leads to its extinction. 
 %The mean time to extinction depends on the initial population size $n$, however 
@@ -521,11 +521,12 @@ Generally, the WKB method involves approximating the solution to a differential 
 P_n \propto \exp \left\{ K \sum_i \frac{1}{K^i}S_i(n) \right\}.
  \label{WKBansatz}
 \end{equation}
-Starting from the master equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}.%careful, Assaf2016 is an arXiv paper
+Starting from the master equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}. %careful, Assaf2016 is an arXiv paper
 %To leading order, only $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$ is needed. 
 To leading order, only 
 \begin{equation}
-S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)
+%S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)
+S_0(n) = \int_{n=0}^{K} \ln\left(\frac{b_n}{d_n}\right)
  \label{WKBaction}
 \end{equation}
 is needed. 
@@ -564,17 +565,17 @@ It cannot easily be extended to higher dimensions.
 	\centering
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure4}
+		\includegraphics[width=1.0\linewidth]{{{Fig4_q0.703_d0.398}}}
 	\end{minipage}
 	\begin{minipage}{0.49\linewidth}
 		\centering
-		\includegraphics[width=1.0\linewidth]{Figure5}
+		\includegraphics[width=1.0\linewidth]{{{Fig5_q0.703_d0.398}}}
 	\end{minipage}
-	\caption{\emph{Approximation techniques for calculating the QSD and MTE.} Carrying capacity $K=100$, $\delta=???$ and $q=???$. %NTS:::I need to find these out!!!
-	\emph{Left:} The quasi-stationary probability distribution function is calculated using the exact QSD algorithm, and approximated with the Fokker-Planck equation, Fokker-Planck Guassian approximation, and WKB method. %NTS:::small n?!?!
-	The Fokker-Planck solution appears to be best. %NTS:::WHAAAAAAAAAAT!!!!!!!!!???????!?!?!?!?!?
+	\caption{\emph{Approximation techniques for calculating the QSD and MTE.} Carrying capacity $K=100$, $\delta=0.4$ and $q=0.7$. 
+	\emph{Left:} The quasi-stationary probability distribution function is calculated using the QSD algorithm, and approximated with the Fokker-Planck equation, Fokker-Planck Gaussian approximation, and WKB method. %NTS:::small n?!?!
+	The WKB method gives the best match with the correct QSD algorithm solution. %, though all techniques are good near the fixed point at $K$. 
 	All of the methods correctly capture the QSD near the deterministic fixed point, but start to diverge away from $K$. 
-	\emph{Right:} The mean time to extinction is calculated exactly using equation \ref{analytic_mte}. The same approximations as in the left panel are used, as is the QSD in conjunction with equation \ref{1overd1P1}. WKB stays closest to the true solution. %Small $n$ and 
+	\emph{Right:} The mean time to extinction is calculated exactly using equation \ref{analytic_mte}. Except for the regular Fokker-Planck solution, the same approximations as in the left panel are used, as is the QSD in conjunction with equation \ref{1overd1P1}. WKB stays closest to the true solution. %Small $n$ and 
 	}
 	\label{techn}
 \end{figure}
@@ -586,13 +587,18 @@ It cannot easily be extended to higher dimensions.
 The left panel of figure \ref{techn} gives an instance of the quasi-stationary distribution as a function of $n$ for a choice of the parameters $q$, $\delta$ and $K$ for each technique. 
 Note that with this scale of the figure the WKB approximation and the quasi-stationary algorithm are not distinguishable by eye, though there are indeed slight differences. 
 %NTS:::IT IS NOT YET CLEAR FROM THE FIGURE HOW I CAN CONCLUDE THIS; IT'S FROM CONSIDERING MANY SUCH FIGURES
-In general, the ability of the techniques to successfully approximate the quasi-stationary distribution depends heavily on the region of parameter space. 
+In general, the ability of the techniques to successfully approximate the quasi-stationary distribution and mean time to extinction depends heavily on the region of parameter space. 
+\iffalse
 What I observe is that for large $K$ the celebrated FP approximation is valid in all cases except for low $\delta$ and $q$. 
 For small $K$ it is a poor approximation except low $\delta$ and high $q$. %NTS:::why might these be true?
 The WKB method fares better, appearing to be reasonable everywhere in $q$, $\delta$, $K$ parameter space. 
 %for high K, WKB is always good, FP is good except for low low; for low K, WKB still good, FP bad except for low high; others are bad everywhere
 %NTS:::and small n?
 All other approximations match near the fixed point but fail elsewhere. 
+\fi
+Regarding figures similar to the right panel of figure \ref{techn} (shown in the appendix) reveals that WKB works well when $\delta$ is small, but is off by a significant factor for large $\delta$. 
+The Gaussian approximation to the Fokker-Planck equation always performs poorly. 
+The regular Fokker-Planck approximation involves numerical integration and shows convergence issues except at low $K$ and so is not plotted, but based on the low $K$ results it is a reasonable approximation at low $\delta$ and high $q$. 
 %
 %It is also possible to obtain the mean time to extinction from these distributions.
 %As described earlier, the quasi-stationary probability distribution leaks from $P_n$, a non-extinct population, to $P_0$.
@@ -604,6 +610,7 @@ All other approximations match near the fixed point but fail elsewhere.
 %\end{equation}
 %This same equation can be applied to different methods and algorithms that have produced quasi-stationary distributions. % for which we have an expression for $P_1$.
 %
+\iffalse
 %Results of the tau_e approximations presented above - Jeremy
 %Having calculated the MTE using each approximation, I can now compare the results to the exact solution and verify their accuracy in the parameter space of $q$, $\delta$, and $K$.
 %These results are summarized in Figure \ref{mte_techn}.
@@ -616,6 +623,7 @@ With increasing $K$ the divergence of each approximation becomes more evident:
 while no approximation works well for large $\delta$, many of them recover the correct scaling in $K$, albeit off by a factor. %yeah?
 For all other parameter regimes, the WKB method is reasonable. % approximations for the exact results. %!!!CHECK if this is true for small n as well %small $n$ and 
 %, and Fokker-Planck QSD? And small n? And full FP%
+\fi
 %I think we need to be a bit more specific with our assessment of the approximations
 %NTS:::say a bit more, here or in discussion%EDIT:::YEAH, AT LEAST A SENTENCE OR TWO
 
@@ -646,6 +654,7 @@ In this one-dimensional case I find an analytic expression for the mean time to 
 We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which, unlike the true solution to the Fokker-Planck equation, from equation \ref{FP-gaussian} always gives a closed form analytic result:
 \begin{equation}
 \tau_{\text{FP Gaussian}} = \frac{2}{1+2\delta} \sqrt{2 \pi K (1+\delta-q)} \exp\left\{\frac{K}{2(1+\delta-q)} \right\}.
+ \label{tau-fp-gauss}
 \end{equation}
 %\begin{equation}
 %\tau_{\text{FP WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K (1+\delta-1)}
@@ -663,6 +672,7 @@ The Gaussian Fokker-Planck solution has a coefficient $c=\frac{1}{2(1+\delta-q)}
 %The WKB approximation has prefactor $\frac{1+\delta}{q}\ln(1+\delta) + \frac{\delta}{1-q}\ln(\delta) - \frac{1+\delta-1}{q(1-q)}\ln(1+\delta-q)$ for large $K$, which diverges for extremes of $q$ but should otherwise be reasonable. 
 The lowest order of a Taylor expansion in $\delta$ and $q$ of the WKB solution gives a coefficient of $c=1-1/K$, which nicely matches the expected limit. 
 The prefactor of the WKB solution that is algebraic in $K$ does not match with the true limit \cite{Assaf2010,Badali2019a,Badali2019b}, but it is less dominant than the exponential term. %NTS:::see the appendix???
+See the appendix for the calculation with $\delta,q = 0$. 
 %The WKB approximation matches well for all $\delta$ and $q$ values, as seen in figure \ref{techn}. %EDIT:::THIS IS NOT CURRENTLY SEEN!!!
 %This agreement of the WKB method with the true solution is seen in figure \ref{techn}. 
 %The other technique that successfully approximates the true probability distribution and mean extinction time is the small $n$ approximation. %!!!CHECK THIS%

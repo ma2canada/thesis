@@ -149,40 +149,46 @@ Niche models like the Lotka-Volterra model typically show longer extinction time
 Recently, however, researchers have demonstrated that Moran-like dynamics are a limiting case of the Lotka-Volterra model with stochastic fluctuations. 
 \fi
 
-Remarkable biodiversity exists in biomes such as the human microbiome, the ocean surface, and every speck of soil. % soil, the immune system and other ecosystems. 
-%Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
-Despite their importance in human health and conservation biology, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood. %, industrial processes,
 The competitive exclusion principle postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state. %, and that species is said to have fixated. 
-However, maintenance of biodiversity of species that occupy similar niches is still not fully understood. 
-Biodiversity decreases as species go extinct, which is often caused by interactions with other species. 
+%However, maintenance of biodiversity of species that occupy similar niches is still not fully understood. 
+Seemingly in conflict with this principle, remarkable biodiversity exists in biomes such as the human microbiome, the ocean surface, and every speck of soil. % soil, the immune system and other ecosystems. 
+%Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
+Despite their importance in human health and conservation biology, the long term dynamics, diversity and stability of communities of multiple interacting species that occupy similar niches are still not fully understood. %, industrial processes,
 Stochastic fluctuations allow for an otherwise stable population to exhibit extinction. 
+Biodiversity decreases as species go extinct, which is often caused by interactions with other species. 
 Mathematical biologists employ stochastic models like the Moran or Lotka-Volterra models to emulate extinction or species competition. 
 
-The Moran model is the cleanest example of two competing species in an ecosystem in which eventually one goes extinct and the other fixates. 
-The extinction occurs on a short timescale with a characteristic dependence on system size. 
-Recently, some authors have observed that the Lotka-Volterra model, which typically has a long extinction timescale, exhibits dynamics similar to those of the Moran model in one parameter limit. 
-Given the widespread use of these models in mathematical biology, this correspondence of models is significant, but no one has investigated how the system transitions between its slow and fast extinction limits. 
+The Moran model is a minimal neutral model with that shows extinction of one while the other fixates, occurring on a short timescale with a characteristic dependence on system size. %algebraic 
+%the cleanest example of two competing species in an ecosystem in which eventually one goes extinct and the other fixates. 
+%The extinction occurs on a short timescale with a characteristic dependence on system size. 
+%Recently, some authors have observed that the Lotka-Volterra model, which typically has a long extinction timescale, exhibits dynamics similar to those of the Moran model in one parameter limit. 
+The connection between niche and neutral theories has recently gained attention, as some authors have recovered Moran-like dynamics in one limit of a stochastic Lotka-Volterra model, which typically has a long extinction timescale typical of niche theories. %n exponentially
+%Given the widespread use of these models in mathematical biology, this correspondence of models is significant, but no one has investigated how the system transitions between its slow and fast extinction limits. 
+The extinction times in the neutral and niche limits are qualitatively different, indicative respectively of fixation and coexistence of the two species, yet the transition has not been fully investigated. 
 %They employ various approximate techniques, usually the Fokker-Planck equation, and explore various metrics of this noisy Lotka-Volterra model, which in other limits has a long average extinction time. 
 %However, no one has looked at how the system transitions between its slow and fast extinction limits. 
 %Most have also restricted themselves to uncontrolled approximations. 
+I identify the nature of the transition by calculating the mean extinction time with an arbitrarily accurate technique. % largely overlooked in the literature. % to the Moran limit
 %This is where I situate my research. 
 %To contribute to the problem of biodiversity I look at Lotka-Volterra systems with one or two species, systems which include the randomness inherent in populations with their discrete state space, called demographic stochasticity. 
-To contribute to the problem of biodiversity I look at how the Lotka-Volterra model's transition depends on its parameters. %, including the overlap of the two species' ecological niches. 
+%To contribute to the problem of biodiversity I look at how the Lotka-Volterra model's transition depends on its parameters. %, including the overlap of the two species' ecological niches. 
 %In this thesis I show that competing species can coexist unless their ecological niches entirely overlap, and that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
-I show that competing species can coexist unless their ecological niches entirely overlap. 
+I discover that competing species can coexist unless their ecological niches entirely overlap, which implies that extinction and loss of biodiversity is less common than predicted by neutral models. 
 %I also discover that this niche overlap anticorrelates with a species' ability to invade an established ecosystem. 
 %
 %To accomplish my goals I first perform a thorough investigation of the various approximation techniques commonly used in stochastic biophysical modelling on a one dimensional toy model. 
 %Thence I investigate the two dimensional version, in particular to characterize the transition between its regular slow dynamics and the fast times limit corresponding to the foundational Moran model. 
 %Thence 
-I identify the nature of the transition by calculating the mean extinction time with an arbitrarily accurate technique. % largely overlooked in the literature. % to the Moran limit
-This technique also allows me to appraise the stability of the Lotka-Volterra and Moran models with regards to immigrant invasion attempts. 
-My research predicts at what parameter values two species will effectively coexist, or whether one will be susceptible to the invasion of the other. 
-This allows me to make some general comments on why ecosystems should display such biodiversity. %: in short, it is because no two species occupy exactly the same niche. 
+%This technique also allows me to appraise the stability of the Lotka-Volterra and Moran models with regards to immigrant invasion attempts. 
+Biodiversity is also maintained by new species entering the system, a process I represent with a single invader in the Lotka-Volterra model and repeated immigrants into the Moran model. 
+%My research predicts at what parameter values two species will effectively coexist, or whether one will be susceptible to the invasion of the other. 
+I demonstrate that greater niche overlap leads to longer invasion times, and less likelihood of success of an invasion attempt. 
+With the Moran model I find the critical immigration rate at which immigrants are likely to maintain their presence in the system. 
+%This allows me to make some general comments on why ecosystems should display such biodiversity. %: in short, it is because no two species occupy exactly the same niche. 
 %My results are also of significance in estimations of timescale for paleontology and phylogeny. 
 
 \iffalse
-Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2016}, the immune system \cite{Weinstein2009,Desponds2015,Stirk2010} and other ecosystems \cite{Tilman1996,Naeem2001}. 
+Remarkable biodiversity exists in biomes such as the human microbiome \cite{Korem2015,Coburn2015,Palmer2001}, the ocean surface \cite{Hutchinson1961,Cordero2016}, soil \cite{Friedman2017}, the immune system \cite{Weinstein2009,Desponds2015,Stirk2010} and other ecosystems \cite{Tilman1996,Naeem2001}. 
 Quantitative predictive understanding of long term population behavior of complex populations is important for many practical applications in human health and disease \cite{Coburn2015,Palmer2001,Kinross2011}, industrial processes \cite{Wolfe2014}, maintenance of drug resistance plasmids in bacteria \cite{Gooding-townsend2015}, cancer progression \cite{Ashcroft2015}, and evolutionary phylogeny inference algorithms \cite{Kingman1982,Rice2004,Blythe2007}. 
 Nevertheless, the long term dynamics, diversity and stability of communities of multiple interacting species are still incompletely understood.
 The competitive exclusion principle postulates that due to abiotic constraints, resource usage, inter-species interactions, and other factors, ecosystems can be divided into ecological niches, with each niche supporting only one species in steady state, and that species is said to have fixated \cite{Hardin1960,Mayfield2010,Kimura1968,Nadell2013}. 
