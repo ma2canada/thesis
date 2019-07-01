@@ -1,12 +1,14 @@
 \documentclass{beamer}
 %\documentclass[handout]{beamer}
 \usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+%\setbeameroption{show notes}% un-comment to see the notes
+\setbeamertemplate{note page}[plain] %to print it out with notes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{beamerthemesplit}
 \usepackage{graphicx}
 \usepackage{ragged2e} %for justifying
+\usepackage{amsmath} %for boxed - or not??? %for \text in math mode
 \graphicspath{{C:/Users/lenov/Documents/latex/thesis/figureItOut/}}
 %seahorse, beetle
 \usetheme{Berkeley}%side outline
@@ -31,56 +33,119 @@
 \frame{\titlepage}
 
 
-\section[Introduction]{intro}
+%\section[Introduction]{intro}
+\section[Background]{intro}
+%\iffalse
+%%EDIT:::still needs work - picture of gut biome, microfluidics; move applications to end
+%\begin{frame}
+%\frametitle{Motivation: Biodiversity}
+%\begin{columns}
+%	\begin{column}{6.5cm}
+%		\begin{itemize}
+%			\item biodiversity is the number of species in an ecosystem
+%			\item biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system
+%		\end{itemize}
+%\begin{itemize}
+%	\item microfluidics
+%	\pause
+%	\item plasmids
+%	\pause
+%	\item mitochondria
+%	\pause
+%	\item nematode gut
+%\end{itemize}
+%	\end{column}
+%	\pause
+%	\begin{column}{4.5cm}
+%		\begin{center}
+%			Paradox of the Plankton\\%\footnote{Hutchinson. \emph{American Naturalist}, 1961} \\
+%			a problem of biodiversity \\
+%			\includegraphics[width=0.99\textwidth]{diatom-seaice} \\
+%			\tiny{corp2365, NOAA Corps Collection}
+%		\end{center}
+%	\end{column}
+%\end{columns}
+%\end{frame}
+%\fi
 
-\begin{frame}
-\frametitle{Motivation and Background}
-\begin{columns}
-	\begin{column}{6.5cm}
-		\begin{itemize}
-			\item biodiversity is the number of species in an ecosystem
-			\item biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system
-			\pause
-			\item applications:
-			\begin{itemize}
-				\item human health (gut microbiome)%\footnote{Amor, Ratzke, and Gore. \emph{bioRxiv}, 2019}
-				\item planet health (conservation)%\footnote{Peterson, Allen, and Holling. \emph{Ecosystems}, 1997}
-				\item minimal working models
-				\item coalescent theory%\footnote{Kingman. \emph{Stoch. Proc. Appl.}, 1982}
-			\end{itemize}
-		\end{itemize}
-	\end{column}
-	\pause
-	\begin{column}{4.5cm}
+%EDIT:::still needs work - picture of gut biome, microfluidics; move applications to end
+\begin{frame}[t]
+\frametitle{Motivation: Biodiversity}
+\vspace{-1cm}
+\begin{columns}[t]
+	\begin{column}{4.2cm}
 		\begin{center}
+			\visible<1->{
 			Paradox of the Plankton\\%\footnote{Hutchinson. \emph{American Naturalist}, 1961} \\
 			a problem of biodiversity \\
 			\includegraphics[width=0.99\textwidth]{diatom-seaice} \\
-			\tiny{corp2365, NOAA Corps Collection}
+			\tiny{corp2365, NOAA Corps Collection} \\
+			}
+			\visible<4->{
+			\vfill
+			\normalsize{Conservation Efforts}\\
+			\includegraphics[width=0.99\textwidth]{conservationArea3}
+			}
 		\end{center}
 	\end{column}
+\begin{column}{3.5cm}
+	\begin{center}
+		\visible<2->{
+		Gut Microbiome\\%\footnote{Vega and Gore. \emph{PLoS Biology}, 2017} \\
+		important to health \\
+		\includegraphics[width=0.99\textwidth]{gutMicrobiome} \\
+		\tiny{E. coli, Rocky Mountain Laboratories, NIAID, NIH}
+		}
+	\end{center}
+\end{column}
+	\pause
+\begin{column}{4.2cm}
+	\begin{center}
+		\visible<3->{
+		%Microfluidics\\
+		Small Populations\\%\footnote{Ingalls?}
+		%\hspace{-0.6cm}
+		%a testable setup \\
+		microfluidics \\
+		\includegraphics[width=0.99\textwidth]{microfluidicExample} \\
+		\hspace{-0.5cm}\tiny{Microfluidic Device, Cooksey/NIST} \\
+		}
+		\visible<5->{
+		\vfill
+		\normalsize{Coalescent Trees}\\
+		%\includegraphics[width=0.99\textwidth]{Kingman_coalescent}
+		\vspace{0.2cm}
+		\includegraphics[height=0.3\textheight]{Coalescent_tree}
+		}
+	\end{center}
+\end{column}
 \end{columns}
 \end{frame}
 
 
+\newcommand{\lenitem}[2][.5\linewidth]{\parbox[t]{#1}{\strut #2\strut}}
 \begin{frame}
-\frametitle{Niche Theories}
-\large{Competitive Exclusion}
+\frametitle{Niche Apportionment Explains Abundance Curves}
+\vspace{-4\baselineskip}
+\Large{Competitive Exclusion Principle}\normalsize{}
 \begin{itemize}
-	\item niche apportionment explains abundance distribution
+	\item``two species cannot coexist if they share a single [ecological] niche''%\footnote{Gause. \emph{Science}, 1934}
+	\item niche/resource apportionment explains abundance distributions (biodiversity)
 	\item classic niche theory is Lotka-Volterra/logistic
 	\pause
-	\item``two species cannot coexist if they share a single [ecological] niche''\footnote{Gause. \emph{Science}, 1934}
+	\item \lenitem{species: group with the same birth and death rates}
 	%\pause
-	\item species: group with the same birth and death rates
-	%\pause
-	\item niche: survivable values of those factors which affect the birth and death rates
+	\item \lenitem{niche: survivable values of those factors which affect the birth and death rates}
 \end{itemize}
+\vspace*{-6\baselineskip}
+\mbox{}\hfill\raisebox{-\height}[0pt][0pt]{\includegraphics[width=.45\linewidth]{GaussianOverlap}}
+%\includegraphics[width=0.6\textwidth]{GaussianOverlap}
 \end{frame}
+%EDIT:::Anton suggested even here to put in the problem
 
 
 \begin{frame}
-\frametitle{Stochastic Analysis}
+\frametitle{Stochasticity Leads To Extinction}
 \centering
 logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$ \\
 \includegraphics[width=0.7\textwidth]{single-logistic-2.pdf}
@@ -89,12 +154,13 @@ logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$ \\
 	\pause
 	\item probability of population $n$: $P_n$
 	\item mean time to extinction: $\tau \sim e^K$ %for logistic it's $\tau \sim e^K/K$
+		\note[item]{$K$ is large so tau is long}%<1><1->
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Neutral Theories}
+\frametitle{Neutral Theory Explains Abundance Curves Better}
 \begin{itemize}
 	\item better prediction of abundance curves (Hubbell), also allele frequencies (Kimura), fixation (Moran)
 	\item inherently stochastic
@@ -108,88 +174,91 @@ logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$ \\
 %\end{equation*}
 \begin{itemize}
 	\item $\tau \sim K$
+	\pause
+	\item \small{biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system}
 \end{itemize}
 \end{frame}
 
 
+%EDIT:::goals, gaps, maybe in words say the answer
 \begin{frame}
-\frametitle{Structure of Thesis}
-Biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system.
+\frametitle{Main Goals Of My Research}
+There is a correspondence between niche and neutral theories: \\
+How do the times transition? \\
+\pause
+%\small{Biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system. }\\
+I find that:
 \begin{itemize}
 	%\pause
-	\item Extinction - Single Logistic System
+	\item Fixation is slow unless two species occupy the same niche
+	\pause
+	\item Invasion is fast unless two species occupy the same niche
 	%\pause
-	\item Fixation - Coupled Logistic System/LV
-	%\pause
-	\item Invasion - Coupled Logistic System/LV
-	%\pause
-	\item Maintenance - Moran with Immigration
-	%\pause
-	\item Discussion
+	%\item Maintenance within a niche - if immigration is common
 \end{itemize}
 \end{frame}
 
 
 
-
-\section[Extinction]{1D logistic}
-
-\begin{frame}
-\centering
-{{\Huge Extinction}}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Logistic Equation}
-deterministic logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$
-\pause
-\centering
-\includegraphics[width=0.9\textwidth]{lattice-fig1} \\
-\pause
-derived from a stochastic model with birth/death rates:
-%\pause%
-\begin{equation*}
-b_n = r\,(1 + \delta)\,n - \frac{r\,q}{K}n^2% = r\,n\left(1+\frac{\delta}{2}-q\,n/K\right)
-\label{birth}
-\end{equation*}
-\begin{equation*}
-d_n = r\,\delta\,n + \frac{r\,(1-q)}{K} n^2% = r\,n\left(\delta+(1-q)\,n/K\right)
-\label{death}
-\end{equation*}
-\vspace{-0.2cm}
-\pause
-\begin{itemize}
-\item 4 terms (2nd order in birth/death) so 4 total parameters
-\item $\delta$ gives magnitude of birth or death (rather than their average difference $r$)
-\item $q$ shifts intraspecies interactions between reducing birth and increasing death
+%\iffalse%
+%\section[Extinction]{1D logistic}
+%
+%\begin{frame}
+%\centering
+%{{\Huge Extinction}}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Logistic Equation}
+%deterministic logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$
 %\pause
-%\item note that $b_n>0$ implies a maximum population size, $N$
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Mean Time to Extinction}
-\begin{columns}
-	\begin{column}{5.5cm}
-		\begin{center}
-			\includegraphics[width=\textwidth]{Fig3A}
-		\end{center}
-	\end{column}
-	\begin{column}{5.5cm}
-		\begin{center}
-			\includegraphics[width=\textwidth]{Fig3B}
-		\end{center}
-	\end{column}
-\end{columns}
-\justifying
-\emph{Mean time to extinction for varying $\delta$ and $q$.} 
-Lightness of the line indicates an increase of $q$ or $\delta$ in left and right respectively. 
-Carrying capacity $K=100$. 
-The MTE decreases with increased $\delta$ or decreased $q$. 
-\end{frame}
-
+%\centering
+%\includegraphics[width=0.9\textwidth]{lattice-fig1} \\
+%\pause
+%derived from a stochastic model with birth/death rates:
+%%\pause%
+%\begin{equation*}
+%b_n = r\,(1 + \delta)\,n - \frac{r\,q}{K}n^2% = r\,n\left(1+\frac{\delta}{2}-q\,n/K\right)
+%\label{birth}
+%\end{equation*}
+%\begin{equation*}
+%d_n = r\,\delta\,n + \frac{r\,(1-q)}{K} n^2% = r\,n\left(\delta+(1-q)\,n/K\right)
+%\label{death}
+%\end{equation*}
+%\vspace{-0.2cm}
+%\pause
+%\begin{itemize}
+%\item 4 terms (2nd order in birth/death) so 4 total parameters
+%\item $\delta$ gives magnitude of birth or death (rather than their average difference $r$)
+%\item $q$ shifts intraspecies interactions between reducing birth and increasing death
+%%\pause
+%%\item note that $b_n>0$ implies a maximum population size, $N$
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Mean Time to Extinction}
+%\begin{columns}
+%	\begin{column}{5.5cm}
+%		\begin{center}
+%			\includegraphics[width=\textwidth]{Fig3A}
+%		\end{center}
+%	\end{column}
+%	\begin{column}{5.5cm}
+%		\begin{center}
+%			\includegraphics[width=\textwidth]{Fig3B}
+%		\end{center}
+%	\end{column}
+%\end{columns}
+%\justifying
+%\emph{Mean time to extinction for varying $\delta$ and $q$.} 
+%Lightness of the line indicates an increase of $q$ or $\delta$ in left and right respectively. 
+%Carrying capacity $K=100$. 
+%The MTE decreases with increased $\delta$ or decreased $q$. 
+%\end{frame}
+%\fi%
 
 
 \section[Fixation]{Generalized Lotka-Volterra model}
@@ -197,12 +266,42 @@ The MTE decreases with increased $\delta$ or decreased $q$.
 
 \begin{frame}
 \centering
-{{\Huge Fixation}}
+{{\Huge Fixation versus Coexistence of Two Species}}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Coupled Logistic Equations}
+\frametitle{How To Calculate The Mean Time To Extinction}
+%\large{
+Master equation $\dot{\vec{P}}(t) = \hat{M}\vec{P}(t)$ is solved by $\vec{P}(t)=e^{\hat{M}t}\vec{P}(0)$. \\ %\frac{\,d}{dt}
+\pause
+\large{
+Residence time = $\int_0^{\infty} dt P(s|s^0)=\hat{M}^{-1}_{s,s^0}$ so $\boxed{\hat{M}\vec{T}=-\vec{1}}$. \\%\langle t(s^0)\rangle_s = 
+}
+\pause
+\noindent\rule{10cm}{0.4pt}
+\large{Approximations}
+\begin{itemize}
+	\item $\tau \approx \frac{1}{d_1 P_1}$
+	\pause
+	\\ \noindent\rule{3cm}{0.4pt}
+	%\item Fokker-Planck: $\partial_t P(x,t) = - \partial_x\big( (b(x) - d(x)) P(x,t) \big) + \frac{1}{2 K} \partial_x^2 \Big( (b(x) + d(x)) P(x,t) \Big)$
+	\item Fokker-Planck: $\partial_t P_x = - \partial_x\big(\text{\footnotesize{$(b_x - d_x)$}} P_x \big) + \frac{1}{2 K} \partial_x^2 \big(\text{\footnotesize{$(b_x + d_x)$}} P_x \big)$
+	\begin{itemize}
+		%\item Gaussian approximation $p(n) \approx \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\Big\lbrace-\frac{(n-n^*)^2}{2\sigma^{2}}\Big\rbrace$ with $\sigma^2=\frac{-(b_n + d_n)|_{n=n^*}}{2\partial_n(b_n - d_n)|_{n=n^*}}$
+		\item $P_n \approx \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\Big\lbrace-\frac{(n-n^*)^2}{2\sigma^{2}}\Big\rbrace$ with $\sigma^2=\frac{-(b_n + d_n)|_{n^*}}{2\partial_n(b_n - d_n)|_{n^*}}$
+	\end{itemize}
+	\pause
+	\noindent\rule{9cm}{0.4pt}
+	\item WKB ansatz: $P_n \propto \exp \left\{ K \sum_i \frac{1}{K^i}S_i(n) \right\}$ with\\
+	$S_0(n) = \int_{0}^{n} dx \ln\big(b_x/d_x\big)$ along extinction trajectory
+	%$S_0(n) = \int_{0}^{n} dx \ln\big(\frac{b_x}{d_x}\big)$ along extinction trajectory
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Coupled Logistic Equations Include Competitive Exclusion}
 \centering
 $\dot{x}_1 = r_1 x_1 \left( 1 - \frac{x_1 + a_{12} x_2}{K_1} \right)$ and $\dot{x}_2 = r_2 x_2 \left( 1 - \frac{a_{21} x_1 + x_2}{K_2} \right)$
 \begin{columns}
@@ -229,10 +328,10 @@ $O = (0,0)$, $A = (0,K_2)$, $B = (K_1,0)$, $C = (\frac{K_1-a_{12} K_2}{1-a_{12}a
 
 
 \begin{frame}
-\frametitle{Transition to Neutrality}
+\frametitle{How The System Transitions To Neutrality}
 \begin{itemize}
 	\item Recall for niches $\tau \sim e^K$
-	\item $a_{12}=a_{21}=1$ limit recovers Moran results $\tau \sim K$: \textbf{neutral limit}%%\footnote{Lin, Kim, and Doering. \emph{J. Stat. Phys.}, 2012.}
+	\item $a=1$ recovers Moran result $\tau \sim K$: \textbf{neutral limit}	%\item $a_{12}=a_{21}=1$ recovers Moran results $\tau \sim K$: \textbf{neutral limit}%%\footnote{Lin, Kim, and Doering. \emph{J. Stat. Phys.}, 2012.}
 	%\emph{Features of Fast Living: On the Weak Selection for Longevity in Degenerate Birth-Death Processes}
 	\pause
 	\item ansatz: $\tau(a,K) = e^{h(a)}K^{g(a)}e^{f(a)K}$
@@ -251,7 +350,7 @@ $O = (0,0)$, $A = (0,K_2)$, $B = (K_1,0)$, $C = (\frac{K_1-a_{12} K_2}{1-a_{12}a
 		\end{center}
 	\end{column}
 \end{columns}
-\pause
+%\pause
 \textbf{Effective coexistence except with complete niche overlap!}
 \end{frame}
 
@@ -261,176 +360,127 @@ $O = (0,0)$, $A = (0,K_2)$, $B = (K_1,0)$, $C = (\frac{K_1-a_{12} K_2}{1-a_{12}a
 
 \begin{frame}
 \centering
-{{\Huge Invasion}}
+{{\Huge The Speed of Invasion of a Second Species}}
+%the other half of the biodiversity problem
+%also Gore results that a transient can affect the long term steady state
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Invasion}
-Invasion is going from one organism to half the population
+\frametitle{Invasion - Definition And Expectations}
+Invasion is going from one organism to half the population. %unlike in the literature
 \begin{itemize}
 	\item invasion is the other part of maintenance of biodiversity
 	\pause
 	\item invasion with a fixed point should be fast (logarithmic)
 	\pause
 	\item invasion on the line should be slower (linear)
-	\pause
-	\item effects of $a$ and $K$ are not trivial
-	\pause
-	\item invasion attempts characterized by invasion probability $E_s$, successful invasion time $\tau_s$, and failed invasion time $\tau_f$
+	%\pause
+	%\item effects of $a$ and $K$ are not trivial
+	%\pause
+	%\item invasion attempts characterized by invasion probability $E_s$, successful invasion time $\tau_s$, and failed invasion time $\tau_f$
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Invasion Probability}
-\justifying
-\begin{columns}
-\begin{column}{3.5cm}
-%	\begin{center}
-		%\emph{Right:} 
-		\visible<1->{
-		Invasion probability approaches $1-a$. 
-		}
-		\vfill
-		\vspace{0.8cm}
-		\visible<2->{
-		Successful invasion goes from logarithmic to linear in $K$. 
-		}
-%	\end{center}
-\end{column}
-\begin{column}{5cm}
-%	\begin{right}
-		\visible<1->{
-		\includegraphics[height=3cm]{fiftyfifty-probva.pdf}
-		}
-%	\end{right}
-\end{column}
-\begin{column}{2.8cm}
-%	\begin{center}
-		%\hspace{-0.2cm}
-		\vfill%supposed to bring it to the bottom
-		\vspace{1.5cm}
-		\visible<2->{
-		Failed invasion attempts go \\from constant to logarithmic in $K$. 
-		}
-%	\end{center}
-\end{column}
-\end{columns}
-\vspace{-0.3cm}
-\visible<2->{
+\frametitle{Invasion Is Less Probable As Niche Overlap Increases}
 \begin{columns}
 	\begin{column}{5.5cm}
-%		Successful invasion attempts are at longest linear with $K$ and become logarithmic in independent limit. \\
+		\begin{center}
+			\includegraphics[width=\textwidth]{fiftyfifty-probvK.pdf}
+		\end{center}
+	\end{column}
+	\begin{column}{5.5cm}
+		\begin{center}
+			\includegraphics[width=\textwidth]{fiftyfifty-probva.pdf}
+		\end{center}
+	\end{column}
+\end{columns}
+\justifying
+%\footnotesize{
+	\emph{Probability of a successful invasion.}
+	%\emph{Left:} Numerical results, from $a=0$ at the top to $a=1$ at the bottom. The purple solid line is the expected analytical solution in the independent limit. The green solid line is the prediction of the Moran model in the complete niche overlap case. 
+	%\emph{Right:} The red data show the results for carrying capacity $K=4$, and suggest the solid black line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ is an appropriate small carrying capacity limit. Successive lines are at larger system size, and approach the solid magenta line of $1-d_{mut}/b_{mut}\approx 1-a$.
+	Invasion probability lessens as niche overlap increases. The trend is more stark for large $K$. %which is the deterministic limit
+%}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Invasion Times Are Fast}
+\begin{columns}
+	\begin{column}{5.5cm}
 		\begin{center}
 			\includegraphics[width=\textwidth]{fiftyfifty-invtimevK.pdf}
 		\end{center}
 	\end{column}
 	\begin{column}{5.5cm}
-%		Failed invasion attempts are at longest logistic with $K$ and become constant in independent limit. \\
 		\begin{center}
 			\includegraphics[width=\textwidth]{fiftyfifty-exttimevK.pdf}
 		\end{center}
 	\end{column}
 \end{columns}
-}
-\iffalse
 \justifying
-\footnotesize{
-\emph{Probability of a successful invasion.}
-\emph{Left:} Numerical results, from $a=0$ at the top to $a=1$ at the bottom. The purple solid line is the expected analytical solution in the independent limit. The green solid line is the prediction of the Moran model in the complete niche overlap case. 
-\emph{Right:} The red data show the results for carrying capacity $K=4$, and suggest the solid black line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ is an appropriate small carrying capacity limit. Successive lines are at larger system size, and approach the solid magenta line of $1-d_{mut}/b_{mut}\approx 1-a$.
-}
-\fi
+%\tiny{
+	\emph{Mean time of a successful or failed invasion attempt.} \\
+	\emph{Left:} Mean time conditioned on eventual invasion success. \\
+	\emph{Right:} Mean time conditioned on failed attempt. 
+%}
 \end{frame}
 
 
-\iffalse
-\begin{frame}
-\frametitle{Invasion Times}
-\centering
-\begin{minipage}[b]{0.475\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{fiftyfifty-invtimevK.pdf}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{0.475\textwidth}  
-	\centering 
-	\includegraphics[width=\textwidth]{fiftyfifty-invtimeva.pdf}
-\end{minipage}
-%\vskip\baselineskip
-\begin{minipage}[b]{0.475\textwidth}   
-	\centering 
-	\includegraphics[width=\textwidth]{fiftyfifty-exttimevK.pdf}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.475\textwidth}   
-	\centering
-	\includegraphics[width=\textwidth]{fiftyfifty-exttimeva.pdf}
-\end{minipage}
-\justifying
-\tiny{
-\emph{Mean time of a successful or failed invasion attempt.}
-\emph{Left:} Mean time vs $K$. 
-\emph{Right:} Mean line vs $a$. 
-\emph{Upper:} Mean time conditioned on eventual invasion success. 
-\emph{Lower:} Mean time conditioned on failed attempt. 
-}
-\end{frame}
-\fi
-
-
-
-\section[Maintenance]{Moran with immigration}
-
-\begin{frame}
-\centering
-{{\Huge Maintenance}}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Moran Model with Immigration}
-Immigration comes from a constant reservoir of focal species fraction $g=n_{reservoir}/K_{reservoir}$ at a rate $\nu$. 
-Defining $f=n/K$, we have the following transition rates. 
-\footnotesize{
-\begin{center}
-	\begin{tabular}{l|c|l}
-		transition		& function	& value \\
-		\hline
-		$n$ $\rightarrow$ $n+1$	& $b(n)$	& $f(1-f)(1-\nu) + \nu g(1-f)$ \\
-		$n$ $\rightarrow$ $n-1$	& $d(n)$	& $f(1-f)(1-\nu) + \nu (1-g)f$ \\
-		$n$ $\rightarrow$ $n$	& $1-b-d$	& $\left(f^2+(1-f)^2\right)(1-\nu) + \nu\left(gf+(1-g)(1-f)\right)$
-	\end{tabular}
-\end{center}
-}
-%\pause
-The crucial comparison is between $1/\nu$ and the invasion times previously described. 
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Steady State Results}
-\begin{columns}
-	\begin{column}{6cm}
-		\begin{center}
-			\includegraphics[width=\textwidth]{Moran-withimmigration-fig1}
-		\end{center}
-	\end{column}
-	\begin{column}{5cm}
-		\begin{center}
-			\includegraphics[width=\textwidth]{ch3regimes}
-		\end{center}
-	\end{column}
-\end{columns}
-\justifying
-\footnotesize{
-\emph{PDF of stationary Moran process with immigration.} 
-Metapopulation focal fraction is $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour. 
-For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. 
-}
-\end{frame}
-
+%\iffalse
+%\section[Maintenance]{Moran with immigration}
+%
+%\begin{frame}
+%\centering
+%{{\Huge Maintenance of a Species with Repeated Immigration}}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Moran Model With Immigration}
+%Immigration comes from a constant reservoir of focal species fraction $g=n_{reservoir}/K_{reservoir}$ at a rate $\nu$. 
+%Defining $f=n/K$, we have the following transition rates. 
+%\footnotesize{
+%\begin{center}
+%	\begin{tabular}{l|c|l}
+%		transition		& function	& value \\
+%		\hline
+%		$n$ $\rightarrow$ $n+1$	& $b(n)$	& $f(1-f)(1-\nu) + \nu g(1-f)$ \\
+%		$n$ $\rightarrow$ $n-1$	& $d(n)$	& $f(1-f)(1-\nu) + \nu (1-g)f$ \\
+%		$n$ $\rightarrow$ $n$	& $1-b-d$	& $\left(f^2+(1-f)^2\right)(1-\nu) + \nu\left(gf+(1-g)(1-f)\right)$
+%	\end{tabular}
+%\end{center}
+%}
+%%\pause
+%The crucial comparison is between $1/\nu$ and the invasion times previously described. 
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Steady State Results}
+%\begin{columns}
+%	\begin{column}{6cm}
+%		\begin{center}
+%			\includegraphics[width=\textwidth]{Moran-withimmigration-fig1}
+%		\end{center}
+%	\end{column}
+%	\begin{column}{5cm}
+%		\begin{center}
+%			\includegraphics[width=\textwidth]{ch3regimes}
+%		\end{center}
+%	\end{column}
+%\end{columns}
+%\justifying
+%\footnotesize{
+%\emph{PDF of stationary Moran process with immigration.} 
+%Metapopulation focal fraction is $g=0.4$, local system size $N=100$, immigration rate $\nu$ is given by the colour. 
+%For high immigration rate the distribution should be centered near the metapopulation fraction $g\,N$ whereas for low immigration the system spends most of its time fixated. 
+%}
+%\end{frame}
+%\fi
 
 
 \section[Discussion]{Discussion}
@@ -442,51 +492,46 @@ For high immigration rate the distribution should be centered near the metapopul
 
 
 \begin{frame}
-\frametitle{Testable Systems}
-\begin{itemize}
-	\item microfluidics
-	\pause
-	\item plasmids
-	\pause
-	\item mitochondria
-	\pause
-	\item nematode gut
-\end{itemize}
-\pause
-\centering
-Vega and Gore, \emph{PLoS Biology}, 2017.
-\includegraphics[width=\textwidth]{Goregraphs}
-\end{frame}
-
-
-\begin{frame}
 \frametitle{Conclusions}
 \begin{itemize}
-	\item higher commensurate birth and death rates (\emph{i.e.} higher $\delta$, lower $q$) leads to faster extinction; 
-	\pause
+	%\item higher commensurate birth and death rates (\emph{i.e.} higher $\delta$, lower $q$) leads to faster extinction; 
+	%\pause
 	\item two species will effectively coexist unless they have exactly the same niche; 
 	\pause
 	\item similarly, greater niche overlap leads to longer invasion times, and less likelihood of success of an attempt; 
-	\pause
-	\item in Moran model with immigration, a focal species at moderate size if $K\nu > 1/g$; 
+	%\pause
+	%\item in Moran model with immigration, a focal species at moderate size if $K\nu > 1/g$; 
 	\pause
 	\item incomplete niche overlap is a niche theory with carrying capacities modified by niche overlaps;
-	\item complete niche overlap (neutrality) on an island with immigration has abundance curve like mainland for species with $g_i>1/K\nu$; other species are transients. 
+	%\item complete niche overlap (neutrality) on an island with immigration has abundance curve like mainland for species with $g_i>1/K\nu$; other species are transients. 
 \end{itemize}
 \end{frame}
 
+%\iffalse
+\begin{frame}
+\frametitle{Utility Of My Results}
+\begin{itemize}
+	\item human health (gut microbiome)%\footnote{Amor, Ratzke, and Gore. \emph{bioRxiv}, 2019}\footnote{Vega and Gore. \emph{PLoS Biology}, 2017}
+	\item planet health (conservation)%\footnote{Peterson, Allen, and Holling. \emph{Ecosystems}, 1997}
+	\item minimal working models
+	\item coalescent theory%\footnote{Kingman. \emph{Stoch. Proc. Appl.}, 1982}
+	\item plasmids
+	\item mitochondria
+\end{itemize}
+\end{frame}
+%\fi
 
 \begin{frame}
-\frametitle{Next Steps}
+\frametitle{Potential Future Research}
 \begin{itemize}
 	\item predator-prey model (centre fixed point)
-	\pause
+	%\pause
 	\item rock-paper-scissors model (limit cycle)
-	\pause
+	%\pause
 	\item other 3D models (chaos)
-	\pause
+	%\pause
 	\item SIR model (epidemics)
-	\pause
+	%\pause
 	\item evolving parameters (ecology and evolutionary biology)
 \end{itemize}
 \end{frame}
@@ -502,6 +547,7 @@ Vega and Gore, \emph{PLoS Biology}, 2017.
 {{\Huge Thank You}}
 \end{frame}
 
+\iffalse%
 
 %\section[Outline]{these are just headers on the side}
 \begin{frame}
@@ -594,6 +640,60 @@ With a stable fixed point $\tau \sim e^K$ (actually $e^K/K$)
 
 
 \begin{frame}
+\frametitle{Structure of Thesis}
+Biodiversity comes from a balance of species exiting (extinction, fixation) and species entering (invasion, immigration) the system. \\
+\Large{Tell them what you'll tell them}
+\begin{itemize}
+	%\pause
+	%\item Extinction - Single Logistic System
+	%\pause
+	\item Fixation - Coupled Logistic System/LV
+	%\pause
+	\item Invasion - Coupled Logistic System/LV
+	%\pause
+	\item Maintenance - Moran with Immigration
+	%\pause
+	\item Discussion
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\centering
+{{\Huge Extinction}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Logistic Equation}
+deterministic logistic equation $\dot{x} = r \, x \, \left(1-\frac{x}{K}\right)$
+\pause
+\centering
+\includegraphics[width=0.9\textwidth]{lattice-fig1} \\
+\pause
+derived from a stochastic model with birth/death rates:
+%\pause%
+\begin{equation*}
+b_n = r\,(1 + \delta)\,n - \frac{r\,q}{K}n^2% = r\,n\left(1+\frac{\delta}{2}-q\,n/K\right)
+\label{birth}
+\end{equation*}
+\begin{equation*}
+d_n = r\,\delta\,n + \frac{r\,(1-q)}{K} n^2% = r\,n\left(\delta+(1-q)\,n/K\right)
+\label{death}
+\end{equation*}
+\vspace{-0.2cm}
+\pause
+\begin{itemize}
+\item 4 terms (2nd order in birth/death) so 4 total parameters
+\item $\delta$ gives magnitude of birth or death (rather than their average difference $r$)
+\item $q$ shifts intraspecies interactions between reducing birth and increasing death
+%\pause
+%\item note that $b_n>0$ implies a maximum population size, $N$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Quasi-Steady State}
 \begin{columns}
 \begin{column}{5.5cm}
@@ -611,6 +711,28 @@ With a stable fixed point $\tau \sim e^K$ (actually $e^K/K$)
 \emph{Characterizing the quasi-stationary probability distribution function for varying $\delta$ and $q$.} 
 Lightness indicates an increased mean or variance in left and right respectively. Carrying capacity $K=100$. 
 The QSD has decreasing mean and increasing variance with increased $\delta$ or decreased $q$. 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Mean Time to Extinction}
+\begin{columns}
+	\begin{column}{5.5cm}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Fig3A}
+		\end{center}
+	\end{column}
+	\begin{column}{5.5cm}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Fig3B}
+		\end{center}
+	\end{column}
+\end{columns}
+\justifying
+\emph{Mean time to extinction for varying $\delta$ and $q$.} 
+Lightness of the line indicates an increase of $q$ or $\delta$ in left and right respectively. 
+Carrying capacity $K=100$. 
+The MTE decreases with increased $\delta$ or decreased $q$. 
 \end{frame}
 
 
@@ -742,6 +864,69 @@ $f(a)$ (exponential dependence of MTE) approaches zero monotonically as  niche o
 	\emph{Left:} Numerical results, from $a=0$ at the top to $a=1$ at the bottom. The purple solid line is the expected analytical solution in the independent limit. The green solid line is the prediction of the Moran model in the complete niche overlap case. 
 	\emph{Right:} The red data show the results for carrying capacity $K=4$, and suggest the solid black line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ is an appropriate small carrying capacity limit. Successive lines are at larger system size, and approach the solid magenta line of $1-d_{mut}/b_{mut}\approx 1-a$.
 }
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Invasion Probability}
+\justifying
+\begin{columns}
+	\begin{column}{3.5cm}
+		%	\begin{center}
+		%\emph{Right:} 
+		\visible<1->{
+			Invasion probability approaches $1-a$. 
+		}
+		\vfill
+		\vspace{0.8cm}
+		\visible<2->{
+			Successful invasion goes from logarithmic to linear in $K$. 
+		}
+		%	\end{center}
+	\end{column}
+	\begin{column}{5cm}
+		%	\begin{right}
+		\visible<1->{
+			\includegraphics[height=3cm]{fiftyfifty-probva.pdf}
+		}
+		%	\end{right}
+	\end{column}
+	\begin{column}{2.8cm}
+		%	\begin{center}
+		%\hspace{-0.2cm}
+		\vfill%supposed to bring it to the bottom
+		\vspace{1.5cm}
+		\visible<2->{
+			Failed invasion attempts go \\from constant to logarithmic in $K$. 
+		}
+		%	\end{center}
+	\end{column}
+\end{columns}
+\vspace{-0.3cm}
+\visible<2->{
+	\begin{columns}
+		\begin{column}{5.5cm}
+			%		Successful invasion attempts are at longest linear with $K$ and become logarithmic in independent limit. \\
+			\begin{center}
+				\includegraphics[width=\textwidth]{fiftyfifty-invtimevK.pdf}
+			\end{center}
+		\end{column}
+		\begin{column}{5.5cm}
+			%		Failed invasion attempts are at longest logistic with $K$ and become constant in independent limit. \\
+			\begin{center}
+				\includegraphics[width=\textwidth]{fiftyfifty-exttimevK.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
+}
+\iffalse
+\justifying
+\footnotesize{
+	\emph{Probability of a successful invasion.}
+	\emph{Left:} Numerical results, from $a=0$ at the top to $a=1$ at the bottom. The purple solid line is the expected analytical solution in the independent limit. The green solid line is the prediction of the Moran model in the complete niche overlap case. 
+	\emph{Right:} The red data show the results for carrying capacity $K=4$, and suggest the solid black line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ is an appropriate small carrying capacity limit. Successive lines are at larger system size, and approach the solid magenta line of $1-d_{mut}/b_{mut}\approx 1-a$.
+}
+\fi
 \end{frame}
 
 
@@ -901,7 +1086,7 @@ Rare events take even longer still.
 \end{itemize}
 \end{frame}
 
-
+\fi%
 
 
 
