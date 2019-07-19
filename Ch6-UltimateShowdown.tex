@@ -1,0 +1,621 @@
+%\chapter{Ch4-ClosingRemarks}
+\chapter{Discussion}
+
+%NTS:::Anton says:
+%3. In the final remarls: I would start with general experimental systems first, and then briefly describe how your specific results could be tested. Not need to mention our collaboration with Milstein too much.
+%4. In the "future" prospects - also watch out for redundancies, divergent thoughts, and logical order of topics. For instance, systems with a non fp steady state that coexist on few resources - thats one topic. Further details in essentially your model (selection, different forms for various terms) - thats another topic. transient distributions in Hubbell like models - thats a third topic, etc. Try to not jump between them. It would help if you would announce every new topic with a short italicized title.
+
+
+\section{Limitations and caveats}
+Although some of the assumptions underlying the theories outlined in this thesis might not hold in many real systems, they serve as a minimal working model. %, from which deviations can be noted and explained. . %, and this is especially true for systems with small population sizes. 
+%My results should be applied with caution. 
+%That said, they can at least serve as a minimal working model, from which deviations can be noted and explained. 
+%Comparing data against my results would be illuminating in that the way in which the theories fail is indicative of what is a relevant in affecting the system beyond my simple model. 
+Comparison of experimental data against my theoretical predictions illuminates the way in which that particular system differs from a simple model and the assumptions underlying it. 
+These deviations are informative as they indicate what properties of that system differentiate it from the simple model and characterize its behaviour. 
+%c.f. part in experimental section above where I explain that this is a null model to compare to other theories or from which to base other theories
+While there is a broad range of experiments to which my results would apply, there are also a number of ways they could fall short. %, and I discuss these complications here. 
+
+%neutral
+For the bulk of this thesis I have assumed the species interactions are symmetric (except section \ref{asymmetricsection}), with true neutrality as the limiting case of complete niche overlap. 
+%Neutrality, as in the models of Moran and Hubbell with complete niche overlap, or at least symmetric, in that no species has an explicit fitness advantage. 
+The symmetry implies no species has an explicit fitness advantage. %, and is relevant when there is no selective pressure in a system. 
+Selection due to differing fitnesses tends to lead to greater fixation probabilities and faster fixation times than the unselective case. 
+It is hard to believe that two species that occupy even partially overlapping niches would not have a fitness difference between them such that one of them is favoured (but see \cite{Hubbell2006,Rosindell2011}). %EDIT:::Anton asks, what is fitness? Do we get fitness with differing r's? YES, but I haven't really discussed it much %NTS:::discuss fitness in the Introduction(?)
+This dissonance is especially potent if two species evolved in different systems and are optimized for different conditions before one of them immigrates to the environment of the other. 
+%where mutant strains come from - clearest for SNPs in genes, but the theory is least applicable to them (unless Moran or selective) - to be symmetric requires two mutations [not true! could increase metabolism of one reactant while decreasing enzymatic activity of another] - SNP can be synonymous or not
+I have largely been silent on where new strains might arise from. 
+On the molecular level, mutation is most likely to come from single nucleotide polymorphisms, which has three common outcomes: most often, the mutation is deleterious and selected against; often the mutation is synonymous and therefore neutral; occasionally the mutation is beneficial \cite{Kimura1983,Rouzine2001,Kawecki2004,Orr2005,Desai2007,Desai2007a,Patwa2008}. 
+Synonymous mutations should obey the Moran limit of my results \cite{Kimura1955}, but to have symmetric partial niche overlap the mutant must use a resource less effectively than the wild type strain while simultaneously not decreasing the mutant's basal growth rate. 
+Intuitively this should require at least two mutations; one to decrease the usage efficacy and a second to improve a different resource usage to compensate. 
+The idea is not so far-fetched, however, since most enzymes have some activity on a variety of substrates (typically optimized for one compound) \cite{Gruning2010,Liscovitch1992}, it is not inconceivable that a mutation should decrease the catalytic activity of an enzyme on one substrate while simultaneously improving it for another. %NTS:::reference
+%NTS:::EDIT:::references for this whole paragraph, especially toward the end
+
+%phenomenology like $r$, $K$, and $a$
+One aspect of this thesis is that most of the parameters, like turnover rate $r$, carrying capacity $K$, and niche overlap $a$, are phenomenological. 
+Often these parameters can be connected to real physical quantities \cite{Caperon1967,MacArthur1967}, as I demonstrated in chapter 2 with the example of two bacterial strains producing antibacterial toxins. 
+Niche overlap, for example, was an amalgam of the basal birth and death rates, the toxin production and degradation rates, and the effect of toxin on the death rate. 
+%For the most part, d
+Deriving the phenomenological parameters from physical and biological quantities is case dependent and is outside the scope of this thesis. 
+Phenomenological parameters see wide use in the literature; nevertheless an astute reader should be wary whenever they are presented. 
+%I trust I have presented realistic parameters that are easily justified as based on reality. 
+
+%lumping all non-focal species together
+At times I have suggested that those organisms not from the focal species could be all from some second species or from a variety of non-focal species. 
+For incomplete niche overlap this means that those non-focal species all occupy the same niche as each other and have the same overlap with the focal species, a situation which is unlikely. 
+Lumping all non-focal species together is more justified under the assumptions of the Moran and Hubbell models, that in some way each species affects the others as strongly as itself. 
+Neutral theory apologists have made such arguments \cite{Hubbell2006,Rosindell2011}. %NTS:::this is being used redundantly - search Hubbell and Rosindell
+My results are more readily applied to those systems wherein only two species might coexist. 
+
+%well mixed, not spatial - %EDIT:::again redundant with elsewhere - search plants, muskrat or mink, lynx
+Another major assumptions is that species are well-mixed, such that each organism has a chance of interacting with every other organism in the system. 
+%I have also allowed for self-interactions, but this is of secondary import. 
+The well-mixed assumption is more valid for some systems than others. 
+It seems to work well with mobile organisms like animals or tree seeds as considered in \cite{Hubbell2001}, or mobile bacteria in a fluid like in \cite{Gore2009,Frey2010,Posfai2017,Abreu2019}. %NTS:::
+There are situations for which it is clearly not applicable, where spatial arrangement matters \cite{Durrett1994,Tilman1997,Haydon2001,Houchmandzadeh2002,Korolev2011}. 
+Then there are situations for which it is unclear \cite{MacArthur1970,Peterson1997,Chesson2000,Kessler2015}. 
+One of the motivating questions for this thesis is the paradox of the plankton, how come there are so many species of plankton that seem to coexist in a seemingly small niche with little variety of resources \cite{Hutchinson1961}. 
+One resolution of this paradox is that spatial effects act to stabilize the competing populations, and that otherwise they would collapse to only a few species coexisting \cite{Roy2007}. 
+Briefly, the idea is that in different patches a given species might go extinct, while elsewhere it is flourishing, and migration between the patches is what supports the global continued existence of each species. 
+
+%constant environment
+Another caveat of my research is that I have regarded demographic fluctuations while ignoring environmental noise. 
+In reality both sources of stochasticity should contribute, to varying degrees. 
+Typically, environmental fluctuations are of larger magnitude and therefore lead to larger variances and faster first passage times \cite{Ovaskainen2010}. 
+%Thus for even a moderately noisy environment the demographic fluctuations on which I base my results will be superseded and my predictions invalidated. 
+However, this depends on the particular experimental or biological setup. 
+It is also worth noting that an experimentalist can act to minimize environmental noise, but demographic stochasticity is inherent to any system of finite population and therefore cannot be removed. 
+
+%no life stage structure
+%asexual
+There are many other simplifications I have employed to make my research questions tractable. 
+For instance, I have assumed that reproduction is (or can at least be effectively treated as being) asexual. 
+As such I can make no comment on how demographic stochasticity and interspecies competition should affect heterozygosity. 
+I have also not considered any life stages or structured populations. 
+Genotypically an organism has died when it can no longer reproduce, yet this aged organism still can compete for resources. 
+%I treat birth events as being exponentially distributed, and yet even bacteria show a refractory time after reproducing before they can again produce offspring \cite{Altan-Bonnet???}. 
+There are many ways that my research could be made more realistic or otherwise extended. 
+%They come at the cost of also being more complicated. 
+I discuss some such examples in the Next Steps section. 
+The results of this thesis come from very simple models, which can nevertheless capture qualitative behaviours in extinction rates and coexistence phase diagrams. 
+
+
+\section{Experimental tests and applications of the theory}
+% (microfluidics, red green stuff with tunable overlaps, Gore gut stuff)
+
+The research presented in previous chapters were theoretical in nature. 
+%However, experimental tests are possible for some of the claims. 
+I will now present some experiments from the literature that have relevance to the theoretical work I have done. 
+I will also propose other sets of experiments that would test my results. 
+My research predicts how long a species is expected to survive before going extinct, which is an important consideration when performing experiments on a species. 
+
+%How can the MTE be probed in a lab setting?
+It is possible, for instance, to experimentally corroborate some of the claims made in chapter 2. %EDIT:::see Anton's last comment - this is weak
+%In experiments the difficulty of measuring a birth or death rate alone, as it changes with something like population density, varies with the system of interest.
+As previously discussed, measuring the average dynamics of a population increasing and decreasing is insufficient on its own to predict its eventual stochastic demise. 
+Instead, each of the birth and death rates must be measured. 
+For example, in a bacterial species the birth rate can be inferred by the uptake and usage of radioisotope-doped nucleotides in nucleic acid synthesis \cite{Kirchman1982}. 
+The death rate can also be measured using radioisotopes \cite{Servais1985}, and both birth and death can be tracked by following one or a few cells \cite{Wheeler2003,Groisman2005,Wang2010,Lee2012,Grunberger2014}. %may be more difficult. Maybe with some microfluidics and single cell tracking? %mother machine
+These two rates, and their dependence on neighbour density \cite{Nadell2008,Vulic2001,Greenhalgh1990,VanMelderen2009,Rankin2012}, constitute all that are required to make predictions in an experiment where the environment is tightly controlled. 
+The quasi-steady state population probability distribution could be measured by having multiple parallel replicates or by having just the one population but repeatedly measuring the population to collect statistics on the distribution. 
+The experimentalist would have to wait for the system to relax back to its quasi-steady state between measurements, but some preliminary work suggests that this is a fast process, on the order of a generation \cite{Badali2019b}. 
+At sufficiently low carrying capacity it would be possible to verify the dependence of the extinction time on $\delta$ and $q$. 
+%Unless the mean population size were very small, a measurement of the MTE would not be possible. 
+
+The extinction times I predict are long, and not just those that scale exponentially with the carrying capacity. %from the last few chapters 
+Even the relatively fast results of the Moran model, which scale linearly with $K$, will be longer than is experimentally viable for typical biological populations and timescales. 
+The fastest reproducing model organism is the \emph{E. coli} bacterium, which reproduces every twenty minutes in ideal conditions \cite{Lenski1991,Brock2006}. 
+A carrying capacity as low as $10^3$ would show fixation in the Moran limit in a week, but the complete extinction of the population (as described in chapter 2) would take longer than life has existed on the Earth. 
+For example, the famous long running experiments by Lenski \cite{Lenski1991} would take something like $10^{10^8}$ years for one of their vials to have all the bacteria die out due to demographic fluctuations. 
+A typical bacterial density is $10^6 - 10^8$ bacteria per millilitre. 
+Larger organisms tend to have lower densities (lower $K$) but also slower birth rates (lower $r$), such that it is not obvious whether these species will have longer or shorter lifespans. 
+Nevertheless some results have been corroborated experimentally, specifically those propounded by Kimura \cite{Kimura1980,Kimura1983}. 
+
+% (plasmids instead of species)
+%Chapters 2 and 3 briefly touch on the idea of small population sizes. 
+%For instance, the second chapter's
+Regarding small populations, figure \ref{ansatzplot} from chapter 3 suggests that the exponential term is less relevant than the algebraic term when it comes to the fixation time of two competing species as compared to a similarly sized Moran-like system. 
+%Indeed, exponential dependence is only dominant when system sizes are large. 
+%This large population size is relevant in many (if not most) biological contexts, from \emph{E. coli} and their typical $10^6 - 10^8$ bacteria/mL density \cite{Lenski1991} to lynx in Canada's arctic which are more spread out but easily number in the tens of thousands \cite{Lai1996}. %or use muskrat, mink \cite{Haydon2001}
+%But not all biology is overflowing with individuals. 
+One experimental system that lends itself to small populations, albeit not populations of organisms, is that of plasmids within a cell \cite{Gooding-townsend2015}. 
+%
+Plasmids are small loops of DNA that typically code for a few/handful genes, often one of which confers some antibiotic resistance\cite{DelSolar1998,Brock2006,VanMelderen2009}. 
+Their reproduction can be thought of as asexual, since only one plasmid copy is required as a template to make a new copy. 
+Plasmid copy numbers, the average number of copies of a plasmid per cell, tend to be low, ranging from $10^1$ to $10^3$. 
+The copy number can be thought of as the carrying capacity of that plasmid in the cell, and is maintained primarily by a negative regulatory circuit, whereby an antisense RNA expressed by the plasmid acts to inhibit the replication of new plasmids. 
+There is also a stochastic effect when the cell divides and the plasmids are distributed between the two daughters, as plasmids can be divided unevenly, resulting in sampling that can lead to cells without plasmids. 
+But given the differing time scales of plasmid (DNA) replication and cell division this uneven distribution is unlikely to be the sole mechanism of local extinction; demographic fluctuations like those described in this thesis may also be relevant \cite{Elowitz2002,McMillen2002}. 
+The bacterial chromosome is typically thousands or a million times longer than that of a plasmid, and one expects a similarly disparate timescale for their replication. 
+The bacterium divides when it has copied its whole chromosome, so a thousand or a million plasmid `generations' may have occurred before division. 
+A low copy number plasmid might have a carrying capacity of $K=20$, which would suggest a mean extinction time of $e^K/K\sim 20$ million replications, which is a long time for a bacterium, despite the differing time scales of DNA replication and cell division, though for a quickly replicating, low copy number plasmid in a slowly dividing bacterium this could be of relevance. 
+%https://biology.stackexchange.com/questions/31625/when-do-plasmids-replicate-relative-to-its-host-cell-cycle
+Furthermore, different types of plasmids can have the same or similar maintenance mechanisms, such that they compete, as mediated by their shared inhibitor proteins \cite{DelSolar1998}. 
+Then the relevant comparison would not be chapter 2's extinction of a single species but the competition of chapters 3 and 4. 
+%Each plasmid type would have its carrying capacity given by its copy number if it were alone in the bacteria. 
+The niche in this case is defined by the replication inhibitor, and niche overlap relates how much the inhibitor of each plasmid type stymies the replication of the other; if there is a shared inhibitor, the plasmids are in the Moran limit, and we expect fixation to be rapid, much faster than the cell division time scale. 
+
+Similar to plasmids, the number of mitochondria in a cell is small and tends to be controlled within a cell \cite{Michaels1982,Shuster1988,Taanman1999}. 
+%In brewer's yeast there are typically $34\pm 2$ mitochondria per cell. %EDIT:::Michaels is human, Shuster is bovine, Taanman is not yeast
+Of interest to researchers is how the integrity of mitochondrial DNA is maintained \cite{Taanman1999}. 
+Sometimes a mitochondrion will have large deletions in its DNA. 
+There are conflicting selection forces in this system: the mutant mitochondria reproduce faster than the wildtype but hinder the viability of the cell, hence its reproduction. 
+But when one mutant arises in a population, what is the chance it will fixate, and will fixation occur before the cell reproduces? 
+The analyses of chapter 3 are relevant to such a problem. 
+
+The most promising work on small populations of organisms has been with microfluidic devices \cite{Wheeler2003,Wang2010,Grunberger2014}. 
+Often these researchers ask different questions to those that I address in this thesis, and are not interested in species persistence and extinction in general. 
+%typically are more interested with the particular species or mechanisms at hand rather than species persistence and extinction in general. 
+Nevertheless, with their setups they are well positioned to study the dynamics of a small population. 
+Some labs can even observe a single individual cell over the span of generations; if they can maintain a population of one, surely they can maintain a few. 
+%NTS:::tunable stuff, maybe some old stuff by Gore: the amount of competition, which I correlate with niche overlap, is tuned by controlling the histidine concentration \cite{Gore2009}
+%
+With lab space provided by Josh Milstein at the University of Toronto, and inspired by similar designs \cite{Wheeler2003,Wang2010,Grunberger2014}, some undergraduate students and I attempted to build a microfluidic device that would constrain a bacterial population to a population on the order of tens or a few hundred. 
+%Figure \ref{microfluidic} shows an image of the design, filled with bacteria... 
+The challenge was to design a device that allowed for the population to receive a constant small influx of nutrients in a confined space (hence a small carrying capacity) without flushing them out of the system too quickly. 
+The flow rate could not be too slow, however, as it was the mechanism by which the bacteria would be well mixed. 
+Otherwise the bacteria would be spatially arranged and death (in this case, being flowed out of the system) would not be random but depend on proximity to the main channel. 
+It later turned out that this was indeed the case, which was problematic both in that it would not allow for competition of species (instead simply favouring the one farthest from the mouth of the chamber) and it would not allow for extinction of a single species (as the death rate dropped to negligible magnitude for bacteria in far back positions). 
+Nevertheless the bacteria grew and were maintained. 
+Further investigation of this system, both in experimental refinement and theoretical modelling, is warranted. 
+
+\iffalse
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{microfluidicDesign}
+\caption{words words and more words} \label{microfluidic} %NTS
+\end{figure}
+\fi
+
+One manifestation of the theories I have analyzed in this thesis was done by the Gore lab, growing bacteria in the guts of nematodes \cite{Vega2017}. 
+These \emph{C. elegans} worms are grown in an environment filled with red- and green-tagged \emph{E. coli} bacteria that are otherwise identical. 
+The bacteria invade the nematode guts by infrequently surviving the eating process and then slowly reproducing to colonize the system. %EDIT:::Anton talks about a Gore invasion paper, I don't know what he's talking about
+As the bacteria have the same reproductive rate and chance of entering the gut unscathed this is an experimental realization of the Moran model with immigration from chapter 3 with $g=0.5$. 
+The researchers use a version of the two-dimensional Lotka-Volterra model in the Moran limit to numerically simulate their data, compared to the more analytically tractable model of the Moran model with immigration that I propose. 
+%The data are too sparse to distinguish between their simple model and the Moran model with immigration. 
+The data are sparse but both theories appear to fit nicely. 
+%Both theories appear to fit nicely. 
+%NTS:::also zebrafish gut \cite{Roeselers2011} - but actually they don't do this experiment, they are just checking if the microbiome is conserved across zebrafish (and it is)
+The gut microbiome work of Gore and others \cite{Vega2017,Roeselers2011} suggests that the theories in this thesis could be applicable to microbiota more generally, be they in the gut or other areas \cite{Manichanh2010,Koenig2011,Theriot2014,Wolfe2014,Fisher2015,Coburn2015,Datta2016}. %\emph{C. elegans} 
+
+%NTS:::paragraph on the abundance distributions used by Hubbell and especially the niche to neutral transition people could be analyzed a little
+
+\iffalse
+\section{Applications of the theory outside the lab}%EDIT:::first! maybe? unless the conclusions and retrospective is? In any case, put this before the experimental tests
+%(coalescent theory, phylogenic construction, the obvious of applying it to real biological systems, gut microbiome, ...?)
+%\section{Extensions of the theory} - combine with applications
+%(eg. would eventually recover Hubbell)
+
+%EDIT:::can be applied to microbiome - keep
+The experimental realizations outlined above are confined to very controlled situations. 
+%exhibit very controlled situations where my research could be applicable. %NTS:::this intro has to be changed if applications goes before experiments section
+The obvious application of the theories investigated in this thesis is to biological systems of few competing species or strains within constant environments. %NTS:::these are two ideas: two separate paragraphs?!?
+This is somewhat artificial, but there are some systems for which it is relevant. 
+%see the previous paragraph for experimental tests
+%Any microfluidic work will start with one or two species in a constrained environment. 
+Microfluidic work, in addition to its testing capabilities, could model systems with flow, like industrial food processing or the digestive tract. 
+The \emph{C. elegans} gut microbiome work of Gore and others \cite{Vega2017,Roeselers2011} suggests that the theories in this thesis could be applicable to microbiota more generally, be they in the gut or other areas \cite{Manichanh2010,Koenig2011,Theriot2014,Wolfe2014,Fisher2015,Coburn2015,Datta2016}. 
+My results rely on a well-mixed assumption, so environments like the gut or the ocean surface are good candidates, but situations like plaque growth \cite{Xavier2007} or some plants \cite{Shmida1984} are not. %NTS:::this and next sentence
+Species need not rely on the environment to mix them well; animals that are mobile or trees with far-travelling seeds would also be candidates. 
+%NTS:::more citations above
+\fi
+
+%EDIT:::coalescent - keep
+Coalescent theory is a model that predicts the time in the past when two variants of a gene most recently shared a common ancestor \cite{Kingman1982,Rouzine2001,Blythe2007,Rogers2014}. 
+In its simplest form it treats all mutants as equally viable, interacting with other variants as strongly as they do with themselves \cite{Ricklefs2006,Rosindell2011} - it is a neutral model. %(at least, all that survived to the present day) 
+In this way it is like a Moran model, or a symmetric Lotka-Volterra model with complete niche overlap. 
+%The time it predicts since the last common ancestor is almost exponential in the genetic distance between mutants \cite{}. %incorrect
+The time it predicts since the last common ancestor is approximately exponentially distributed, with a mean proportional to the system size. %NTS:::cite?
+An inclusion of incomplete niche overlap, such as has been investigated in chapter 2, would only act to increase the estimated times. 
+Niche overlap less than one would be most appropriate for very dissimilar variants that now serve different but equally vital purposes in the organism. 
+The longer timescale of incomplete niche overlap of course would not change the historical record. 
+Rather, coalescent theory is used to make inferences about historical population genetic parameters, like mutation rate and population size. 
+For those genes to which incomplete niche overlap applies, the longer timescales that result from $a<1$ must be balanced by shortened timescales from a smaller population size or greater mutation rate in order for the observed records to match. 
+Conversely, if we know the historic population size and mutation rate, we could infer the niche overlap between disparate gene variants. 
+Phylogenetic reconstruction is related to coalescent theory, and would be similarly affected by incomplete niche overlap \cite{Ricklefs2006}. %EDIT:::Anton wants this in paper to appease referee 2
+%NTS:::coalescent theory also discusses the variance of time to most recent common ancestor
+
+%ANYTHING ELSE???
+
+%EDIT:::comments on Hubbell - move down
+%NTS:::FOR HERE AND IN PREVIOUS CHAPTER, READ DYNAMICS SECTION OF WIKIPEDIA UNTB (HUBBELL)
+\iffalse
+As discussed in the previous chapter, the Hubbell model also relies on assumptions similar to those of the Moran model, to the point that it is effectively a Moran model with immigration \cite{Hubbell2001}, albeit with each immigrant coming from a new species, and accounting for the abundance of species not just a focal one. 
+The Hubbell model is used to predict the number of species that on average can be found in a system, and the distribution of abundances of the species therein. 
+As with coalescent theory, the underlying assumption of Hubbell's neutral theory is that all species occupy the same niche. 
+This is effectively what he means by the term ``neutral'', a claim which has been controversial \cite{Ricklefs2006,Kalyuzhny2014,Carroll2015}. %"neutral" line is redundant
+Apologists defend the theory by explaining that, in an abstracted sense, species in the same trophic level are effectively competing with each other as much as they compete with themselves \cite{Hubbell2006,Rosindell2011}. 
+The alternative to neutral theory is traditionally taken to be niche theory, the idea that each species in a system occupies its own niche, and any newcomers must either die out as a transient species or invade a niche, suppressing and evicting its previous occupant. 
+I have shown, in chapter 3, that there are other alternatives. 
+My research investigated the situation where two species have overlapping, but not necessarily identical, niches, such that they do not exclude each other entirely. 
+Neither is selected for, and I have focused on symmetric interactions where each species affects the other to the same degree, has the same carrying capacity, and turnover rate. 
+Thus I situate myself among those theories which accommodate both niche and neutral theories \cite{Leibold2006,Ofiteru2010,Pigolotti2013,Fisher2014,Kessler2015}. 
+With partial niche overlap, the abundance distribution is still influenced by the niche apportionment distribution, as with niche theories. %, although compared to niche theories I expect fewer low ... also depends on how the niche overlaps are distributed
+My results predict that invasion is easier with incomplete niche overlap, so compared to neutral theory there will be more species with large abundance. 
+However, those small populations due to transients are lessened because times for both successful and failed invasion attempts are shorter, so I expect there will be fewer species at small abundance. 
+\fi
+
+\section{Conclusions}
+%NTS:::move this afer next steps? 
+%(techniques, how to think of niche, competitive exclusion)
+%Retrospect of previous contents, especially from the intro
+
+\iffalse
+Big Questions:
+How long will a single species exist with only intraspecies interactions?
+What mathematical techniques are effective to model such an extinction? 
+How long will a species exist with intra and interspecies interactions? That is, how long will two species coexist given some niche overlap? In particular, how does it transition from the effective coexistence of exponential scaling of MTE with carrying capacity to the relatively fast extinction of algebraic scaling as found in the Moran model/limit? 
+For an ecosystem with an already established species, what is the probability of success and the timescale of an invasion attempt? How do these probabilities and times depend on niche overlap? 
+With repeated immigration of a species, how will that species be distributed in a [neutral] system? In particular, how does the distribution depend on the immigration rate? 
+What is the timescale of species transient existence in a neutral model with repeated immigrants? 
+Is v=1/gN or gv=1/N the same as a model with v’=gv and g=1? - looks like it should be
+\fi
+%%\section{conclusion - Ch2}
+%With complete niche overlap, the model presented in this Letter matches the results of the WFM model in terms of reproducing a rapid neutral drift to fixation, with appropriate scaling in terms of the initial fraction and the system size.
+%But the coupled logistic model also goes beyond the WFM model to account for a variable population size and continuous time.
+%By solving the backward master equation to arbitrary accuracy we are able to investigate the behaviour of the fixation time as it depends on the carrying capacity of the system and the niche overlap of the two species therein.
+%The two limits of niche overlap give the expected results of the WFM and independent cases.
+%It is the transition between the two that is of particular interest.
+%We observe that even a slight mismatch between the niches of two species allows for coexistence of those species for long timescales.
+\iffalse
+%THIS IS FROM THE INTRO CHAPTER
+First, I use the exact techniques mentioned above and introduced more completely in chapters 2 and 3 to investigate a one dimensional logistic system, comparing the influence of the linear and quadratic terms to the quasi-steady state distribution and the MTE. 
+I find that those species with high birth and death rates, and those for whom competition acts to increase death rate rather than reduce their birth rate, tend to go extinct more rapidly. %CONCLUSION
+With the simplicity of this test system I explore the applicability of various common approximation techniques. 
+I conclude the Fokker-Planck approximation works well close to the deterministic fixed point, but incorrectly estimates the scaling of the extinction time with system size. The WKB approximation performs better, but misidentifies the prefactor to the exponential scaling. %CONCLUSION
+The exact techniques and the approximations together make up chapter 2, regarding a one dimensional system. 
+This chapter is being prepared as a paper for publication \cite{Badali2019b}. 
+The natural extension from a one dimensional logistic is to couple two such systems together; this arrives at the two dimensional generalized Lotka-Volterra system and is the subject of the next chapter, chapter 3. 
+%First a symmetric system is investigated, and t
+The mean time to fixation is used as a tool to diagnose the longevity of the two interacting species. 
+The overlap of their ecological niches is the parameter that controls the transition between effective coexistence and rapid fixation. 
+I determine that two species will effectively coexist unless they have complete niche overlap, even if they have only a slight niche mismatch. %CONCLUSION
+%Next the corresponding asymmetric model is explored. 
+Along with the MTE, my analysis uncovers a typical route to fixation, or rather a lack of a typical route, the discussion of which wraps up this chapter. %kinda CONCLUSION
+Chapter 4 extends the scope of this thesis to invasion of a new species into an already occupied niche. 
+I calculate the probability of a successful invasion as a function of system size and niche overlap. 
+Then the MTE conditioned on the success of the invasion is analyzed. 
+I discover that the closer the invader is to having complete niche overlap with the established species, the less likely it is to successfully invade, and the longer an invasion attempt will take before it is resolved. %CONCLUSION
+Once these timescales are developed, in chapter 5 I regard the Moran model modified to account for repeated invasions of the same species. 
+%This is compared with some steady state numerical results from Kimura. 
+%I demonstrate that, with system size $K$ and relevant immigrant probability $g$, an immigration rate of $1/K g$ is the critical value for determining the qualitative abundance distribution. %CONCLUSION
+I identify the critical value of the immigration rate above which a species will have a moderate population size and below which the population is either large or largely absent in its contribution to the abundance distribution. %CONCLUSION
+Chapters 3 and 4 together form another paper being reviewed for publication \cite{Badali2019a}. 
+The conclusions chapter covers a variety of topics: I explore applications and extensions of the results arrived at in this thesis; I address the central problems introduced in this preliminary chapter and draw some conclusions informed by my results; and I suggest next steps for this research, both continuations and implementations to novel situations. 
+\fi
+
+%EDIT:::‘I have shown…’, ‘I have worked out’, ‘I demonstrated’.
+%some good verbs: confirm find infer establish identify discover demonstrate show
+
+This thesis treats extinction of a one dimensional logistic system in chapter 2, fixation of a coupled logistic system in chapter 3, invasion into a coupled logistic system in chapter 4, and species maintenance in a Moran model with immigration in chapter 5. 
+The coupled logistic system of chapters 3 and 4, which typically has a deterministic fixed point, acts like a neutral model in the Moran limit, and I have characterized the transition to this limit. 
+Chapter 5 looks at dynamics and steady state distributions of a single species in the Moran model with immigration. 
+The results, in short, are: 
+\begin{itemize}
+	\item higher commensurate birth and death rates (\emph{i.e.} higher $\delta$, lower $q$) leads to faster extinction; 
+	\item the WKB approximation is usually fine to recover the dominant (exponential) scaling of the MTE but miscalculates the algebraic prefactor; the Fokker-Planck equation fails on both accounts, though it does model the probability distribution near the fixed point; 
+	\item two species will effectively coexist unless they have exactly the same niche; 
+	\item similarly, greater niche overlap leads to longer invasion times, and less likelihood of success of an invasion attempt; 
+	\item in a Moran model with repeated immigration a focal species will be most likely to have a moderate population size if $K\nu > \max\big(1/g,1/(1-g)\big)$, where $K$ is the system size, $\nu$ is the immigration rate, and $g$ is the fractional abundance of the focal species in the nearby reservoir population;
+	\item with incomplete niche overlap the abundance curve of a system should match the distribution of carrying capacities modified by niche overlaps;
+	\item with complete niche overlap (neutrality) the abundance curve of an island system will match the mainland abundance curve for those species with $g_i>1/K\nu$, with the remaining species contributing to low abundance transients. 
+\end{itemize}
+More detailed discussions and conclusions specifically related to these topics can be found in their respective chapters; below I shall summarize them and extend them beyond the topics of their chapters and to the broader questions discussed in this thesis. 
+
+How long will a single species with only intraspecies interactions persist before going extinct? 
+As was already known in the literature, the simplest model of a deterministically stable species, namely the logistic model, gives a mean extinction time whose scale is dominated by an exponential dependence on the system size. 
+%This was already known in the literature. 
+What was \emph{not} known was the particulars of how the extinction time depends on the other parameters of the model. %EDIT:::as Anton asks, what about Linda Allen?
+Along with carrying capacity $K$ and mean reproductive rate $r$ these parameters are the basal death rate $\delta$ (as opposed to the difference of basal birth and death rate, $r$) and a parameter $q$ which scales the intraspecies interactions from reducing the birth rate to increasing the death rate. 
+I have demonstrated that, after the carrying capacity, the most impactful parameter on the quasi-steady state distribution and extinction time is the death rate. 
+I find that increasing the death rate while maintaining the reproductive rate (and consequently also increasing the birth rate) tends to broaden the probability distribution and decreases the extinction time. 
+Acting to simultaneously increase the effect of interspecies interactions on both birth and death while holding their difference constant has a similar but lesser effect. 
+%More significantly, this chapter 1 research serves as a warning to those researchers who start their modelling with the deterministic equation and only add noise later. 
+%The details of the birth and death rates individually are just as important for stochastic quantities like extinction as are the deterministic parameters. 
+%More significantly, in chapter 1 I conclude that a researcher should start from the stochastic model relevant to the system being studied and thereafter find the deterministic limit, rather than the common practice of starting with a deterministic equation and adding noise later. 
+I conclude that the incorporation of noise to a deterministic model is ambiguous and the parameterization of birth and death rates that do not affect the deterministic limit nevertheless have a significant effect on stochastic quantities like the mean time to extinction. 
+Furthermore, I used this exemplar system to investigate which mathematical techniques are effective to model stochastic extinction. 
+If a researcher wants to model noise in their system but is only concerned with near equilibrium dynamics, the Fokker-Planck and WKB approximations appear acceptable. 
+It is only when investigating far-from-equilibrium quantities like the rare fluctuations that lead to extinction in a deterministically stable system do subtleties arise. 
+Specifically, while these two approximations do still capture the exponential dependence on system size, they incorrectly calculate the algebraic prefactor. 
+The failure of the Fokker-Planck equation was known \cite{Grasman1983,Doering2005}; not so for WKB. 
+These approximations remain appealing for getting an idea of the qualitative far-from-equilibrium behaviour but if the goal is to be precise there are better alternatives. 
+For instance, the approximation employed throughout most of this thesis, namely introducing a cutoff to the transition matrix and then inverting it to solve the master equation directly, is both accurate and fast. 
+%qualitative and analytic
+
+It has been long known in the literature that extinction from the stochastic logistic model is dominated by an exponential scaling with carrying capacity \cite{Norden1982,Kamenev2008,Assaf2010,Ovaskainen2010}, and so too is the fixation time of two independent logistic systems. 
+Coupling two logistic systems gives the Lotka-Volterra model, for which it has been recently noted that when intra- and interspecies interactions are equal it obeys fixation dynamics similar to the Moran model \cite{Lin2012,Constable2015,Chotibut2015,Young2018}. 
+%More recently, it was noted that when the Lotka-Volterra model has equal intra- and interspecies interactions it obeys fixation dynamics similar to the Moran model \cite{Lin2012,Constable2015,Chotibut2015,Young2018}. 
+Some of these papers even investigated partial niche overlap, and find the system still exhibits the long coexistence of a logistic model \cite{which of them?}, as is expected for a deterministically stable fixed point \cite{Hanggi1990}. %EDIT:::sort this out %NTS:::citations
+So then how long will a species exist with intraspecies interactions and some lesser but non-zero interspecies interactions? That is, how long will two species coexist given some partial niche overlap? 
+I conducted a systematic study of the MTE's scaling with carrying capacity to find out how the LV model transitions from the independent to the Moran limit. 
+I find that the MTE transitions from slow exponential scaling to the relatively fast extinction of algebraic scaling as found in the Moran limit via the continuous decrease of the exponential prefactor to zero as a function of increasing niche overlap. 
+Only with the neutrality of complete niche overlap does the exponential dependence disappear. 
+For large carrying capacity, I interpret this to mean that two species will effectively coexist if their niches have even a slight mismatch, a slight departure from neutrality. %is even a slight mismatch in their niches. 
+
+Hubbell's model, being neutral, has equal intra- and interspecies interactions. 
+There have been many pages written either decrying the unintuitive supposition that two disparate species might be equivalent \cite{Ricklefs2006,Kalyuzhny2014,Carroll2015}, and many others defending the theory, arguing there must be a way in which species are effectively neutral \cite{Hubbell2006,Rosindell2011}. %NTS:::redundancy
+My research shows that there is no room for compromise between neutral and niche theories of two species coexisting. 
+Even though neutral theory appears as a limit of niche theory, there is no such thing as being `close' to neutral, as even partial niche mismatch leads to qualitatively different dynamics. 
+I include the caveat that for low carrying capacity there are partial niche overlaps for which the system fixates faster than the corresponding Moran model, with this window of partial niches going to zero as carrying capacity increases. %region of phase space 
+Barring this caveat, unless the species are truly neutral they will coexist, and their respective carrying capacities should regulate their abundance \cite{MacArthur1957,Sugihara2003,Leibold1995}, rather than the random fluctuations of a neutral model. 
+It remains possible that collections of species are neutral with respect to each other but together exist in a different niche from other such collections, with the outcome that neutral theory is applicable within such a niche niche. 
+%I do not know how to distinguish these groups \emph{a priori}. 
+
+%In terms of coexistence and extinction, neutral models remain just as viable as they were before I did my research. 
+%I also investigate some consequences of a neutral model, and the more general Lotka-Volterra model, as regarding the entrance of a new species into a system. 
+%I have also investigated the stability of an ecosystem with respect to invasion, both in a neutral Moran model with immigration and the more general Lotka-Volterra model. 
+I have also investigated the stability of an ecosystem with respect to invasion into the stochastic Lotka-Volterra model. 
+%How about regarding the entrance of a new species? 
+For an ecosystem with a species already established, I have shown that the probability of failure of an invasion attempt of a new species in the large carrying capacity limit is directly proportional to the niche overlap between the established and invading species. 
+The timescale of a successful invasion attempt is never exponential in the system size, being linear at most, in the Moran limit of complete niche overlap, and following the deterministic trend of logarithmic scaling when the invader has independent resource needs from the established species. 
+I find that unsuccessful invasion attempts are even faster to resolve. 
+The implication is that one could test the Hubbell model by measuring invasion success probability or timescale. 
+If invasion (as defined in chapter 4) is more common than Hubbell predicts then it suggests that the neutral model is not a good model of the system. 
+Similarly, if invasion attempts, whether successful or not, resolve themselves more rapidly than the neutral model then the system is better characterized by a theory of niches. 
+
+The Hubbell model assumes that each invader is from a new species \cite{Hubbell2001}, but was inspired by the island model of MacArthur and Wilson \cite{MacArthur1967a}, which supposes that a small island gets repeated invasions from a larger repository of species on the mainland. 
+This was the motivation for considering the Moran model with immigration in chapter 5, which allows for the calculation of the probability distribution of a species in a neutral system, and how this distribution depends on the immigration rate. %EDIT:::Anton asks if this has been done before - not exactly, but see \cite{McKane2004,Pigolotti2013,Kessler2015}
+The research is similar to that of McKane \cite{McKane2004}, but I offer a more biological analysis of the results; I also worked out the probability and times for a species to first reach extinction before fixation. %I have SO much trouble motivating this last bit
+I find that the probability distribution has three characteristic qualitative shapes, with the probability either concentrated at the extremes of extinction and fixation, somewhere near the middle, or mostly near the middle but with sizable density at one of the extremes. 
+The three shapes occur in different regimes of parameter space, bounded by how $K\nu$ compares with $1/g$ and $1/(1-g)$. 
+%Assuming that no single species dominates the mainland (that is, assuming $g<0.5$), 
+Each mainland species will have its own abundance $g$, and the distribution of $g$'s, specifically the number of species with $g$'s greater than $1/(N\nu)$, suggests the number of species we expect to see with population around $K g$ in the island system. 
+Those with lesser $g$'s will likely have low or zero population in the system. 
+
+%%What is the timescale of species transient existence in a neutral model with repeated immigrants? 
+%Increasing immigration rate (obviously) acts to increase the mean first passage time, to either extinction or fixation. 
+%I think this was a problem with Hubbell, so maybe here's a resolution... but the problem is Hubbell OVERestimates the times \cite{Ricklefs2006}
+
+%%move to later (and make the sentences flow)%NTS:::
+%Here I would like to address the general questions brought forward in the introduction. 
+%In short, these are: how long will a species exist on its own, how long will it exist among other species, and what might these timescales imply for biodiversity. 
+%Furthering the discussion of biodiversity, I want to consider immigration probabilities and repeated invasions (into the Moran model). 
+%In reality the questions addressed in this thesis are more numerous, and I will address them in the next few paragraphs. 
+
+%general concluding comment, maybe on maintenance of biodiversity
+Competitive exclusion within a niche and the observation that the ocean surface has very few resources compared to its abundance of species were the initial motivators for my research: the paradox of the plankton. 
+In the end, I cannot conclude whether neutral or niche theories are more appropriate for explaining the maintenance of biodiversity in general. 
+One or the other will be more appropriate on a case by case basis. 
+I situate myself among those theories which accommodate both niche and neutral theories \cite{Leibold2006,Ofiteru2010,Pigolotti2013,Fisher2014,Kessler2015}. 
+%With partial niche overlap, the abundance distribution is still influenced by the niche apportionment distribution, as with niche theories. %, although compared to niche theories I expect fewer low ... also depends on how the niche overlaps are distributed
+Neutral theory is more parsimonious \cite{Leibold2006}; above I have suggested some bounds or checks to what it should predict. 
+Namely, my results predict that invasion is easier with incomplete niche overlap, so compared to neutral theory there will be more species with large abundance. 
+However, those small populations due to transients are lessened because times for both successful and failed invasion attempts are shorter, so I expect there will be fewer species at small abundance. 
+Invasions into a neutral model should be rare and slow, and an island abundance distribution should follow the mainland abundance distribution. %obvious
+Others have suggested different tests that call neutral theory into question \cite{McGill2003,Ricklefs2006,Kelly2008,Adler2010,Rosindell2011,Carroll2015}. 
+Conversely, niche theories are hard to disprove, as they suffer from an overabundance of parameters. 
+What I can say is that coexisting species need not be in entirely disparate niches; they can effectively coexist even with large, albeit incomplete, niche overlaps. 
+
+%other more general conclusions:
+%exponential implies surviving is fine, but even a 1d stable system might not observe that exactly
+%what approximations work (and when)
+%comment on niche vs neutral - neutral?, for parsimony - I can't really conclude
+%maintenance of biodiversity
+
+
+\section{Next steps for the research}
+%EDIT::: I’d just say maybe it would be good to mention what sort of questions to answer from this research onwards: big picture stuff?
+%EDIT:::this whole section needs more refs/citations/\cite{???}
+I will now indulge in some speculation. 
+In this section I present some straightforward extensions of my research. 
+Also included are some more extensive next steps. 
+As with all my research, there is the next step of applying my results to specific real biological systems, finding a way to estimate the phenomenological parameters based on measurable evidence, and then making predictions. 
+See the experimental tests section of this chapter for more details, but two promising systems are microfluidic devices \cite{Groisman2005} and small microbiomes like the gut of nematodes \cite{Vega2017}. 
+
+\iffalse
+%From the first chapter: approximations
+In terms of the approximations covered in this thesis, not much more could be done, unless a new approximation technique is developed and needs testing. 
+Biophysics as a field is dynamic and as such I would not be surprised if a new technique gains popularity in the next few years. 
+Likely the technique already exists and has not made its way to our discipline. 
+It could be in far from equilibrium condensed matter or high energy physics, it might be evolutionary game theory, or already commonly employed in linguistics, economics, graph theory, or the more mathematical side of stochastic processes. 
+Martingales are soluble, so perhaps the next approach will be to map everything to a martingale or a convolution of martingales. 
+Artificial intelligence is also trendy at the time of writing, and the many layered neural nets that are becoming available could easily be turned to stochastic processes, with each neuron representing one population state of the system. 
+Current routinely used nets have millions of neurons, which corresponds to a carrying capacity of thousands. 
+\fi
+
+%From the first chapter: biology
+%In addition, t
+%The content of the first chapter has some obvious extensions. 
+The stochastic parameters of chapter 2 were those that did not show up in the deterministic analogue of the system which nevertheless affect the stochastic dynamics. 
+They have a natural extension to powers greater than quadratic:
+%Suppose we write the system as
+\begin{align*}
+	b(n) &= r\,n + f(n) \\
+	d(n) &= r\,n^2/K + f(n)
+\end{align*}
+with an arbitrary $f(n)$. 
+It is unclear how $f$ affects the stochastic measurable quantities like the MTE. 
+Writing $f$ as a polynomial, I predict the higher orders will have a lesser and lesser effect, since the linear parameter $\delta$ is already has greater effect than the quadratic parameter $q$. 
+%and that there will be some conditions placed on $f^{(k)}(0)/k!$, the $k$th coefficient. 
+Furthermore, I investigated the deterministic equation $\dot{x} = r\,x(1-x/K)$. I speculate that any concave down system will behave similarly, as is the case with logistic difference equations \cite{Strogatz1994}. 
+%It is unclear what the effects of other forms would be. 
+%For instance, 
+Assaf and Meerson \cite{Assaf2016} included the Allee effect and found that the MTE still scales exponentially with carrying capacity; I predict there is an effective carrying capacity given by the distance between the stable and unstable fixed points, which could be generalizable to systems with multiple minima. 
+
+\iffalse
+%chapter 2 stuff - see if the Moran condition is ruined by adding anything (already measure zero); include evolution, possibly which would stabilize, possibly leading to greater likelihood of Moran
+In chapter 2 I regarded how the scaling of the extinction time changes as niche overlap increases from independence ($a=0$) to complete niche overlap ($a=1$), at which point the MTE is that of the Moran model. 
+%It is only in this one limit that coexistence is not long-lived (with the large population caveat examined in section 2.7); with the size of phasespace, this one point seems unlikely, being of measure zero. %%EDIT:::"redundant" says Anton
+Despite the biological significance of this limit, in parameter space it is only one point, of measure zero, and seems unlikely to arise randomly. 
+%Perhaps there is a way to show convergence toward this point. %with a simple model
+Perhaps there is a biological reason for convergence toward this point, that could be shown with a simple model. %with a simple model
+%A next step would be to account for mutation and evolution in this model. 
+If a mutant strain arises from a single population, it is likely to have a very similar niche to the wildtype, hence a large niche overlap. 
+And from there, what would the forces of evolution dictate? 
+%I would continue to constrain the system to the case wherein neither species has an intrinsic fitness advantage. 
+%The niche overlap could be allowed to evolve, but it would be more sensible to instead define a niche space (perhaps 1D, perhaps multidimensional) in which the niche of each species is defined (likely with a Gaussian distribution \cite{MacArthur1957}). 
+One could simulate the evolution of the niche overlap (for instance following the work of MacArthur \cite{MacArthur1957}) in an individual based model with a given resource distribution. 
+%The desire to increase fitness might have a stabilizing effect on the system, encouraging differing niches. 
+%Or it might keep the niche overlap close to unity, which would go far to explaining why the Hubbell model has had such success. 
+The question is whether having selection optimize the fitness of the individuals would cause the niches to converge to better match the resource distribution, supporting neutral models, or diverge to minimize niche overlap and competition, supporting niche theory. 
+%In any case, it would be insightful to see whether fitness considerations act to make the already-unlikely Moran limit entirely untenable, or whether this limit is actually a natural consequence of evolution. 
+Do fitness considerations act to make the already-unlikely Moran limit entirely untenable, or is this limit actually a natural consequence of evolution? 
+\fi
+
+%chapter 2 stuff - selection (weak and strong)
+%NTS:::citations in this chapter
+%NTS:::in my breaking the symmetries section I didn't consider breaking the "r"s. I should (or else do it now (or else talk about it now))
+A natural extension of my work would be to include selection, explicit fitness advantages, to the system, for instance by increasing one $r$ to increase the birth rate while simultaneously increasing $K$ to keep the same death rate. 
+%NTS:::fitness is a tricky subject that I should address at some point
+%EDIT:::as Anton points out, changing r's doesn't change the fixed point, and even changing K's just moves it around but still has coexistence
+I have not done so already because selection has been treated many times in many ways \cite{Chesson2000,Kawecki2004,Orr2005,Lambert2006,Leibold2006,Desai2007,Parsons2007,Patwa2008,Mayfield2010,Lin2012,Constable2016}. 
+Selection actually tends to simplify the system as the higher fitness species rapidly fixates, quickly reducing the dimensionality of the problem. 
+Nevertheless there are some advantages to how I treat stochastic systems that would aid the analysis of systems with selection. 
+In the independent limit any fitness advantage should be irrelevant, so there will at least be a transition between coexistence in the independent limit and rapid fixation otherwise. 
+What is more, many models with selection, like that of Kimura, must make the assumption that the effect of selection is weak, typically much less than $1/K$ \cite{Kimura1964,Kimura1969,Kimura1983}. %\cite{Taylor2004,Etheridge2010,Lin2012,Chalub2016} %and Moran 
+Inverting the transition matrix, as I do in chapter 2, is arbitrarily precise, and so does not suffer from any requirement of such an assumption. 
+It can treat the range of selection, from weak to strong. 
+Not only does this give access to regimes not normally considered, it provides a way to verify the small selection results that rely on approximation. 
+%one more sentence?!?
+The way in which selection acts is to cause selective sweeps. 
+In the literature there is a debate about selective sweeps \cite{Jensen2014}, specifically whether it is more common for a new fit mutant to quickly fixate in a population, or whether it is more often the case that a mutant trait in a population is neutral until the environment changes, after which it is more fit and fixates. 
+The distinction between these hard and soft selective sweeps requires more careful treatment, with fewer assumptions; the method employed in chapter 2 of this thesis would be an ideal tool to use, given its arbitrary accuracy. 
+Selection can also be incorporated into the invasion dynamics of chapter 3. 
+
+%chapter 2-3 stuff - environmental noise
+%One extension applicable to all my work, that I did not account for, is the inclusion of environmental noise. 
+Another extension to my work is the inclusion of environmental noise, which has a fundamentally different action on the system. 
+Whereas demographic stochasticity comes from the discrete nature of population sizes and therefore can be mapped onto a transition matrix or graph (as in figure \ref{phasespace}), environmental noise is continuous, especially for the phenomenological parameters I use, which cannot be fixed to any one cause, let alone a discrete one. 
+Such an advancement in my research would involve the abandonment of the transition matrix, and likely would require the use of the Fokker-Planck equation, which has its limits, as I demonstrated in chapter 1. %EDIT:::"already said this above" - okay but that was a caveat not a next step, I think there's a slight distinction %which sometimes fails, 
+
+\iffalse
+%chapter 3 stuff - check what happens to Hubbell/abundance with incomplete niche overlap
+%In chapter 3 I focused on a single species immigrating into a small system. 
+%EDIT:::this is the effects of my research on Hubbell - I included this in applications
+In chapter 3 I considered the probability and timescales of a single individual attempting to invade a system with an established species, and observed the effect of niche overlap. 
+I then looked at the steady state population distribution and conditional exit times of the focal species in the case of complete niche overlap, via the Moran model. 
+This Moran model was equivalent to the system employed by Hubbell \cite{Hubbell2001}, albeit with different questions being asked. 
+However, I could have also asked the questions of Hubbell in the case of incomplete niche overlap. 
+Namely, if species do not occupy the same niche, what should we expect the species abundance curves to look like? 
+With lessened pressure of competing for exactly the same niche I showed that an invader can more easily invade a system, and in lesser time, regardless of its ultimate success or failure. 
+This suggests that a Hubbell model with only partial niche overlap would certainly have more species than the classic Hubbell model with $a=1$. 
+It is unclear how the abundance curves would change. 
+The Hubbell model has its total population size $K$, but if species occupy different niches they could in principle have different carrying capacities. 
+Therefore the abundance curve would be influenced by the distribution $K$ is drawn from. 
+In effect this change of niche overlap being partial and carrying capacities drawn from a distribution would move the model of Hubbell closer to those models of niche apportionment \cite{??niche apportionment??}. 
+Insofar as no species would have an explicit fitness advantage this new model would be neutral, but with its differing $K$s it would also be a niche model, hence a hybrid of the two. 
+There is a body of work for hybrid models \cite{??hybrid niche neutral??} against which one could compare my proposed incomplete niche overlap Hubbell model. 
+\fi
+
+\iffalse
+%chapter 3 stuff - coalescent with incomplete niche overlap
+%EDIT:::this is the effects of my research on Hubbell/coalescent - I included this in applications
+Just as the Hubbell model is employed to explain the abundance distribution of current extant species, coalescent theory uses a Moran or Kimura model to understand paleontological data and other data of the past \cite{Kingman1982,Blythe2007,Rogers2014}.  
+It seeks to find the time to coalescence, which means the time (in the past) when a common ancestor existed for two variants of a species (in the present). 
+The classic model assumes the variants behave the same - in my language, they occupy the same niche, and have niche overlap of one. 
+The theory has been modified to include explicit fitness advantage \cite{???} but the unbiased case of incomplete niche overlap has not been tried. %as far as I know/to the best of my knowledge. 
+Seeing as decreasing the niche overlap from unity acts to increase the timescales of the system, as I have shown in this thesis, using my results to extend coalescent theory when appropriate would similarly suggest that variants diverged longer ago than the classic theory predicts. 
+\fi
+
+In chapters 3 and 4 I considered the two species stochastic generalized Lotka-Volterra model in the regime in which it had a stable fixed point or a line of marginal stability along which the stochastic trajectories diffused. 
+%A judicious choice of parameters (\emph{e.g.} $a_{12}<0$, $a_{21}>0$) will recreate the predator-prey dynamics from which the generalized Lotka-Volterra system gets its name. 
+With a different choice of parameters it gives the predator-prey system, which has a fixed point of marginal stability, about which deterministic orbits cycle. 
+Gottesman and Meerson \cite{Gottesman2012} analyzed the predator-prey system using a clever rotating reference frame and the WKB approximation. 
+%The deterministic system is marginally stable, with trajectories orbiting a zero-eigenvalue fixed point. 
+%As such, I expect an algebraic time to extinction, as well as a stronger dependence on initial conditions. 
+%However, the period depends on the value of the Lyapunov function associated with the orbit. %Lyapunov energy
+%Thus as it ``diffuses'' tangentially to the orbit its characteristic time scale will change, which may complicate the analysis. 
+%It would be nice to get the arbitrarily correct data to compare to the approximate results of their research. 
+Arbitrarily correct data obtained via the matrix inverse (rather than the approximate results of WKB) allows for a complete analysis of the scaling of the MTE with system size. 
+One could look also at the effect of initial conditions on the MTE, whether the MTE is cyclic starting at different points along an orbit. 
+%Nevertheless, the data that can be generated by inverting a truncated transition matrix to solve the extinction time to arbitrary accuracy would be correct, regardless of the analysis. 
+%EDIT:::Anton: "does noise not completely destroy the orbits?" no
+
+The techniques applied in this thesis, specifically the use of a truncated transition matrix being inverted to solve for the first passage times exactly, can easily be applied to other low species number systems. 
+The calculation for each point in parameter space is not lengthy; the main constraint is RAM, rather than time, and so a larger memory computer could deal with problems with larger carrying capacities or more species. %NTS::: can expand these past two sentences into a whole paragraph
+For example, in chapter 3 I considered a two dimensional generalized Lotka-Volterra system to explore competition between two species. 
+The Lotka-Volterra system has been generalized to any dimension, any number of species, with a number of three species systems being of interest. 
+\iffalse
+%EDIT:::"no coulda woulda"
+From the two dimensional Lotka-Volterra system one arrives at the predator-prey system by choosing the parameters correctly. 
+One can also move to the third dimension, in order to account for a third species in the system. 
+This allows for the investigation of many systems of interest, with much more diversity. 
+The simplest extension in this regard would be to have three species all with overlapping niches \cite{MacArthur1970}. 
+I could observe how a species whose niche is situated between those of two others (such that they each overlap with the first species but not with each other) would go extinct more readily as the overlap of the encroaching species is increased. 
+\fi
+%RPS/limit cycles
+With three species the Lotka-Volterra model can show limit cycles, which is another way of allowing for deterministic coexistence of species (along with fixed points) \cite{Smale1976,Armstrong1976}. 
+This contradicts the intuition that the number of resources constrains the number of species that can exist in a system. 
+Future investigations will probe whether the MTE from a stable limit cycle also scales exponentially with the system size, and how the system size should be characterized given that there is no asymptotic population size. 
+This could serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
+%One model of three interacting species has species that each are excluded by one other and exclude the other, \emph{e.g.} $a_{12},a_{23},a_{31}>0$ and $a_{21},a_{32},a_{13}<0$.  
+%For this reason it is called a rock-paper-scissors system, after the children's game \cite{Kerr2002,Kirkup2004,Berr2009}. 
+%In any pairwise competition there is a winner, but when all three are combined none has a clear advantage. 
+%The model is not just fun, it is also relevant to real-world systems, for instance of lizards or bacteria \cite{Kerr2002,Kirkup2004,Berr2009}. 
+One example of a three species limit cycle system is called the rock-paper-scissors system, and occurs in biology in lizards and bacteria \cite{Kerr2002,Kirkup2004,Berr2009}. 
+%Such systems have stable limit cycles, which is another way of allowing for deterministic coexistence of species (along with fixed points) \cite{Smale1976,Armstrong1976}. %and chaos, and ???
+%This contradicts the intuition that the number of resources constrains the number of species that can exist in a system. 
+%Fluctuations cause the system to ultimately end in extinction. 
+%Future investigations will probe whether the MTE from a stable limit cycle also scales exponentially with the system size, and how the system size should be characterized given that there is no asymptotic population size. 
+%
+%3 species fewer resources highlighted by McGehee
+%Armstrong and McGehee showed that, despite there not being a fixed point at which all three species coexisted, there are conditions that allow for three species to indefinitely avoid extinction in a deterministic system with only one resource \cite{Armstrong1976,Smale1976}. 
+%I propose an investigation as to whether there is a qualitative difference in the extinction time of such a system as compared to one with the same number of species but a sufficient number of resources to allow for a coexistence fixed point. 
+%With stochastic analysis both such systems should eventually exhibit extinction, but the way the mean time scales with the population size scale of the systems could differ. 
+%This could serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
+%chaos
+Extension to three dimensions also allows for the possibility of observing a chaotic system \cite{Strogatz1994}. 
+It is an open question how best to distinguish between chaotic systems and non-chaotic systems with stochastic fluctuations \cite{May1999}, but the scaling of the MTE may serve such a purpose. 
+
+%Again I highlight work from the Gore lab, where they identified the different bacteria found in a soil sample and performed the combinatorial pairwise competitions \cite{Friedman2017}. 
+%One possible resolution of the unexpectedly large biodiversity one typically observes is that a rock-paper-scissors-like dynamic interaction cyclic dynamics that allow for a greater variety of species than could otherwise coexist. 
+
+%SIR
+Another three species model that has enjoyed widespread usage is the SIR model of disease outbreak \cite{Gadhamsetty2015,Doering2005,Luksza2014}. 
+It counts the number of susceptible (S), infected (I), and recovered (R) individuals with regards to the disease. 
+There are many variations of this model, but the simplest has a stable spiral node deterministic fixed point. 
+Application of the WKB approximation showed a route to extinction that spiraled in the opposite direction \cite{Kamenev2008}. 
+In chapter 1 I showed that WKB does not recover the correct prefactor for the extinction time, and in chapter 2 I showed that the idea of a route to extinction is questionable. 
+Thus the SIR model is ripe for further analysis. 
+Specifically, the next step is to calculate the residence times for the model, and from these times construct a probable route to extinction, to compare to the WKB route. 
+
+%%3 species fewer resources highlighted by McGehee
+%Armstrong and McGehee showed that, despite there not being a fixed point at which all three species coexisted, there are conditions that allow for three species to indefinitely avoid extinction in a deterministic system with only one resource \cite{Armstrong1976,Smale1976}. 
+%This contradicts the intuition that the number of resources constrains the number of species that can exist in a system. 
+%I propose an investigation as to whether there is a qualitative difference in the extinction time of such a system as compared to one with the same number of species but a sufficient number of resources to allow for a coexistence fixed point. 
+%With stochastic analysis both such systems should eventually exhibit extinction, but the way the mean time scales with the population size scale of the systems could differ. 
+%If so, this would serve as a way to distinguish between systems with a fixed point and those with an extended attractor. 
+
+\iffalse
+%niches, $K$ drawn from distribution
+For the two dimensional Lotka-Volterra stochastic system I created figure \ref{phasespace} identifying qualitatively different regions in parameter space. 
+Especially for a greater number of species, it might be instructive to look at parameters drawn from distributions. 
+Complete niche overlap is of measure zero if niche overlap is a continuous parameter, so it is unlikely to be observed. 
+Distributed parameters may also have an effect on the higher moments of the extinction time beyond the mean, something I have not considered but which is a conceptually-straightforward extension of my research. 
+The extinction time distribution in figure \ref{etimedistr} looks roughly exponential, in which case the moments can be estimated. 
+%chaos
+Extending to three or more dimensions also allows for the possibility of observing a chaotic system. 
+I would first have to determine what parameter values lead to deterministic chaos, and based on how the parameters are distributed I could estimate how likely this chaos would be observed.
+But it is unclear whether chaotic and not chaotic systems can be distinguished with the inclusion of stochastic fluctuations. 
+This is a broad research question. 
+\fi
+
+%could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
+The final next step I will outline is the coupling of the ecology of this thesis with evolution. 
+In chapter 2 I regarded how the scaling of the extinction time changes as niche overlap increases from independence ($a=0$) to complete niche overlap ($a=1$), at which point the MTE is that of the Moran model. 
+Despite the biological significance of this limit, in parameter space it is only one point, of measure zero, and seems unlikely to arise randomly. 
+Perhaps there is a biological reason for convergence toward this point, that could be shown with a simple model. %with a simple model
+If a mutant strain arises from a single population, it is likely to have a very similar niche to the wildtype, hence a large niche overlap. 
+And from there, what would the forces of evolution dictate? 
+%If species were to change their parameters in response to their environment and the other species, how would the dynamics change? 
+One could simulate the evolution of the niche overlap (for instance following the work of MacArthur \cite{MacArthur1957}) in an individual based model with a given resource distribution. 
+The question is whether having selection optimize the fitness of the individuals would cause the niches to converge to better match the resource distribution, supporting neutral models, or diverge to minimize niche overlap and competition, supporting niche theory. 
+Do fitness considerations act to make the already-unlikely Moran limit entirely untenable, or is this limit actually a natural consequence of evolution? 
+%Perhaps each species would evolve to minimize niche overlap while maximizing $r$ and $K$. 
+%If the niches were tied to underlying resources, the species might be constrained in how their niche overlap could evolve, such that they would reach some equilibrium. 
+%Or if the evolution itself were stochastic, it might be that whichever strain happens to find a beneficial mutation first would end up dominating the system. 
+Coupling ecology with evolution is a large field of research \cite{MacArthur1967,Shoener1974,Connell1980,Abrams1983,Lenski1991,Leibold1995,Peterson1997,May1999,Chesson2000,Traulsen2006,Desai2007,Xavier2007,Mayfield2010,Parsons2010,Lin2012,Jensen2014,Chotibut2015,Constable2015,Kessler2015,Castro2016,Posfai2017}, and there is more work to be done with stochasticity, especially demographic stochasticity. %Blythe2011,
+
+\iffalse
+%could couple eco and evo, to move the niches (or their overlap) based on competition with the other species in the system or with some ``hidden'' resource parameters
+The final next step I will outline is the coupling of the ecology of this thesis with evolution. 
+If species were to change their parameters in response to their environment and the other species, how would the dynamics change? 
+Perhaps each species would evolve to minimize niche overlap while maximizing $r$ and $K$. 
+If the niches were tied to underlying resources, the species might be constrained in how their niche overlap could evolve, such that they would reach some equilibrium. 
+Or if the evolution itself were stochastic, it might be that whichever strain happens to find a beneficial mutation first would end up dominating the system. 
+Coupling ecology with evolution is a large field of research \cite{MacArthur1967,Schoener1974,Connell1980,Abrams1983,Lenski1991,Leibold1995,Peterson1997,May1999,Chesson2000,Traulsen2006,Desai2007,Xavier2007,Mayfield2010,Parsons2010,Blythe2011,Lin2012,Jensen2014,Chotibut2015,Constable2015,Kessler2015,Castro2016,Posfai2017}, and there is more work to be done with stochasticity, especially demographic stochasticity. 
+\fi
+
+%other possibilities?
+

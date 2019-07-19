@@ -58,7 +58,7 @@
 %\addbibresource{library-thesis.bib}
 %\numberwithin{equation}{section} %%%%%%%%%%%%%%%
 \graphicspath{{C:/Users/lenov/Documents/latex/thesis/figureItOut/}}
-\setcounter{chapter}{-1}
+%\setcounter{chapter}{-1}%to start numbering from zero rather than from one - problems: figures start 1 instead of 0.1 (or 0.0)
 %% The standard packages `geometry' and `setspace' are already loaded by
 %% `ut-thesis' -- see their documentation for details of the features
 %% they provide.  In particular, you may use the \geometry command here
@@ -326,15 +326,24 @@ Conservation biology is a driving motivation for me in both my academic and pers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % *** Include chapter files here. ***
+\include{Ch1-KiIsCon}
+\include{Ch2-TheLoneliestNumber}
+\include{Ch3-TheIncredibleBulk}
+\include{Ch4-Immigrant}
+\include{Ch5-Song}
+\include{Ch6-UltimateShowdown}
+
+\iffalse
 %\include{Ch0-ConIsKi}
 \include{Ch0-KiIsCon}
 \include{Ch1-TheLoneliestNumber}
 \include{Ch2-TheIncredibleBulk}
 %\include{Ch3-ImmigrantSong}
 \include{Ch3-Immigrant}
-\include{Ch3-Song}
+\include{Ch3-SOKG}
 %\include{Ch4-should be part of the previous chapter probably}
 \include{Ch4-UltimateShowdown}
+\fi
 
 
 %% This adds a line for the Bibliography in the Table of Contents.
