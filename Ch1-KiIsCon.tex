@@ -260,9 +260,8 @@ In its modern incarnation the generalized Lotka-Volterra model is typically writ
 \begin{align}
 %\frac{\dot{x}_1}{r_1 x_1} &= 1 - \frac{(x_1 + a_{12}x_2)}{K_1} \\
 %\frac{\dot{x}_2}{r_2 x_2} &= 1 - \frac{(a_{21}x_1 + x_2)}{K_2}. 
-\dot{x}_1 &= r_1 x_1 \left(1 - x_1/K_1 - a_{12}x_2/K_1\right) \\
-\dot{x}_2 &= r_2 x_2 \left(1 - a_{21}x_1/K_2 - x_2/K_2\right). \notag 
- \label{LVeqns}
+\dot{x}_1 &= r_1 x_1 \left(1 - x_1/K_1 - a_{12}x_2/K_1\right) \label{LVeqns} \\
+\dot{x}_2 &= r_2 x_2 \left(1 - a_{21}x_1/K_2 - x_2/K_2\right). \notag
 \end{align}
 The generalized Lotka-Volterra model is the accepted terminology for a dynamical system that depends linearly and quadratically on the populations modelled, with no explicit time dependence. 
 The Verhulst or logistic model is one of these equations with its $a_{ij}=0$. 

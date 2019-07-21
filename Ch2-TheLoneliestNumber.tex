@@ -21,7 +21,7 @@
 %NTS:::basal birth rate, basal death rate
 
 %\section*{pre-intro note}
-This chapter is based on a paper written by myself, Jeremy Rothschild, and our supervisor Anton Zilman, which is currently be prepared for submission \cite{Badali2019b}. 
+This chapter is based on a paper written by myself, Jeremy Rothschild, and our supervisor Anton Zilman, which is currently being prepared for submission \cite{Badali2019b}. 
 
 \section{Introduction} \label{Introduction}% - MattheW
 
@@ -32,15 +32,15 @@ This chapter is based on a paper written by myself, Jeremy Rothschild, and our s
 
 %NTS:::NEED A BETTER INTRO - INTO THE PHYSICS (BIOLOGY) not just the technical stuff
 Interactions are what make physics interesting. 
-So too in biology, interactions between organisms lead to the more interesting, and biologically realistic, situations. 
+So too in biology, interactions between organisms lead to more interesting, and biologically realistic, situations. 
 Later chapters of this thesis will look at interactions between different species. 
 First it will be useful to consider self interactions, that is to say interactions between members of the same species. 
-The inclusion of intraspecies interactions into a model of one species already leads to successful biological models, of use in that they curb unlimited grown and lead to stable populations \cite{Verhulst1838,Ovaskainen2010,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}. 
+The inclusion of intraspecies interactions into a model of one species already leads to successful biological models \cite{Verhulst1838,Ovaskainen2010,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}, of use in that they curb unlimited grown and lead to stable populations \cite{Verhulst1838,Ovaskainen2010}. 
 Biologically, interactions mean that the birth or death rate of an organism is influenced by the number of other organisms present in the system. 
 Specifically, the per capita birth rate can be reduced by the presence of competitors, for instance if the competitors reduce the resource abundance and growth is slowed \cite{Nadell2008,Vulic2001}. 
 Alternatively, the per capita death rate can be increased by neighbours, perhaps due to secreted factors like toxins or waste products introduced by those neighbours \cite{Greenhalgh1990,VanMelderen2009,Rankin2012}. 
 The biological reality determines how this shows up in a mathematical model that captures the growth and decay of the population. 
-In either case the interactions are modelled mathematically as a nonlinear term in the equations \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Nasell2001}. %Fujita1953
+In either case the interactions are modelled mathematically as a nonlinear term in the equations \cite{Greenhalgh1990,Ovaskainen2010,Assaf2010,Allen2003a,Norden1982,Newman2004,Allen2005,Nasell2001}. %Fujita1953 %EDIT:::I'm not sure how this differs from the big list of references above... or the one that follows...
 %
 The oldest model of intraspecies interactions is named for Verhulst \cite{Verhulst1838}, and is also called the logistic equation. 
 The logistic equation has seen wide use in a number of biological contexts \cite{Ovaskainen2010,Newman2004,Allen2005,Assaf2009,Greenhalgh1990,Hubbell2001,Adler2010,Kessler2007,Brock2006,Norden1982,Dushoff2000}. %Wallace2002
@@ -54,13 +54,17 @@ To the best of my knowledge no one has done an exhaustive study of the effect of
 %
 One subtlety with the stochastic problem is that the mapping from deterministic to stochastic dynamics is not unique; many stochastic models give the same deterministic limit as noise becomes negligible, since the deterministic dynamics are given by the difference between birth and death rates \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004a}. 
 Some of the parameters that define the stochastic model do not show up in the deterministic limit; in a sense they are ``hidden'' parameters. 
-This highlights the limitation of only using deterministic theories such as the logistic equation; not only do they not allow extinction, they lose some details of a more accurate representation of the physical system. 
+This highlights the limitation of only using deterministic theories such as the logistic differential equation; not only do they not allow extinction, they lose some details of a more accurate representation of the physical system. 
 %For this reason I argue that the stochastic description should be explicitly chosen and motivated, for any analysis which involves stochasticity even in part. 
 %In this chapter I will justify my argument in two ways, both of which use the ubiquitous example of the Verhulst, or logistic, model. 
 For it is sensible to model each of the birth and death rate with a per capita value, and model the decrease or increase of these basal rates due to intraspecies competition each with another parameter. 
 Of these four parameters, only two show up in the deterministic logistic equation. 
 Whereas the effects of carrying capacity and basic reproductive ratio on the mean time to extinction are known (scaling exponentially and proportionally, respectively) \cite{Leigh1981,Lande1993,Foley1994}, the effect of the other two parameters are not well characterized. 
 Using the metrics of the quasi-stationary probability distribution function (QSD) and the mean time to extinction (MTE) I will show that the allocation of linear and nonlinear contributions between the birth and death rate, as given by these two parameters, has a drastic effect. %NTS:::use QPDF, use MTE?
+%Biologically speaking, those species with larger birth and death rates tend to have greater stochastic fluctuations in their populations and are therefore less stable, being more probable to go extinct sooner. 
+%This is true both for basal birth and death rates and when intraspecies interactions tend to cause death (rather than simply slowing birth). 
+Specifically, those species with larger birth and death rates are likely to go extinct quicker than those with smaller birth and death rates, even if their basic reproductive ratios are the same. 
+Regarding intraspecies interactions, I will show that extinction is more rapid when interactions increase the death rate rather than slow the birth rate despite having the same effect on average. 
 
 %I will evaluate the validity of various commonly employed approximation techniques. 
 I will also use the simple system of a logistic model with demographic noise to evaluate some of the more common approximation techniques used in the literature. 
@@ -189,14 +193,15 @@ and the death rate
 d_n = r\,\delta\,n + \frac{r(1-q)}{K} n^2 = r\,n\left(\delta+(1-q)\frac{n}{K}\right).
 \label{death}
 \end{equation}
+I have not seen an equivalent parameterization used in the literature. 
+Denoting $P_n(t)$ as the probability that the population is composed of $n$ organisms at time $t$, these rates are used in the master equation
 %Note that I introduce two new parameters in the equations \ref{birth} and \ref{death}: 
-These rates are used in the master equation
 \begin{equation}
 \frac{dP_n}{dt} =  b_{n-1}P_{n-1}(t) + d_{n+1}P_{n+1}(t) - (b_n+d_n)P_n(t).
-\label{master-eqn}
+ \label{master-eqn}
 \end{equation}
 In addition to $r$ and $K$, the stochastic rates of equations \ref{birth} and \ref{death} have two additional parameters: $q\in[0,1]$ shifts the nonlinearity between the death term and the birth term, whereas the parameter $\delta\in[0,\infty)$ establishes a scale for the contribution of linear terms in both the birth and death rates. 
-I include the parameter $\delta$ to account for the stochastic relevance of the absolute values of the per capita birth and death rates; in the deterministic limit only their difference $r$ affects the dynamics of the system. 
+I include the parameter $\delta$ to account for the stochastic relevance of the absolute values of the per capita birth and death rates; in the deterministic limit only their difference $r$ affects the dynamics of the system; in reality $\delta$ is typically smaller than one \cite{Servais1985}. 
 Parameter $q$ describes where the intraspecies inhibition acts: a $q$ near unity implies competition for resources and a decreased effective birth rate, whereas a low $q$ near zero reflects more direct conflict, with intraspecies interactions resulting in greater death rates of organisms. 
 In reality most systems will lie somewhere between $q=0$ and $q=1$, as the effects of crowding and competition will both reduce birth and increase death rates. 
 Note that so long as $q\leq 1$ the death rate is positive semi-definite for the domain of interest. 
@@ -227,7 +232,6 @@ At $n=0$ both the birth and death rates go to zero, as they should, for it to be
 %A probability distribution function is a useful mathematical tool to describe the state of a dynamical system.
 %A probability distribution function is a necessary mathematical tool to describe the state of a stochastic dynamical system.
 The evolution of the distribution in the single birth and death process is captured in the master equation \ref{master-eqn} \cite{Nisbet1982,Gardiner2004a}. 
-I denote $P_n(t)$ as the probability that the population is composed of $n$ organisms at time $t$.
 Note that ultimately at large times the probability of being at population size $n\neq 0$ decays to zero, as more and more of the probability gets drawn to the absorbing state. 
 %This is due to the stochasticity of the births and deaths and the nature of the absorbing state $n=0$ with no possibility of recovery. % [reference probability distribution leaking to zero definitely].
 %NTS:::prove this? show this with reference to Nisbet and Gurney?
@@ -294,12 +298,14 @@ To calculate the QSD I employ the following textbook algorithm \cite{Nisbet1982}
 	- \widetilde{P}^c_{i-1}\widetilde{P}^c_{1}d_{1}}{d_{i}}.
 \end{equation}
 Given that $b_0=0$ there is a lower cutoff and so the whole distribution can be written in terms of $\tilde{P}_1$, which is then solved by normalization of the total probability to unity. 
-The outcome of this algorithm is seen in figure \ref{qsd} for different values of $q$ and $\delta$. 
+The outcome of this algorithm constitutes the novelty of this section, and is seen in figure \ref{qsd} for different values of $q$ and $\delta$. 
 %The former technique is shown in figure \ref{qsd}, for different values of $q$ and $\delta$. %NTS:::get your own figure
 %Results of this algorithm, for different values of $q$ and $\delta$, are presented in Figure \ref{qsd}. 
 Increasing the value of $\delta$ shifts the mode slightly toward $0$ and spreads the distribution out, increasing its variance. 
+In biological terms, having large birth and death rates leads to frequent deviations from the carrying capacity compared to small birth and death rates with an equivalent reproductive rate $r$. 
 Decreasing $q$ has a similar but lesser effect to increasing $\delta$. %decreasing q gives broader and anterior
-%NTS:::comment on biology of q and delta here? or below in discussion
+Intraspecies interactions that reduce birth rate tend to cause the population to stagnate near the carrying capacity, with only small stochastic fluctuations. 
+When these interactions are a cause of death it makes the system less stable, with larger fluctuations, hence a greater variance. 
 
 
 \section{Exact mean time to extinction}% - Jeremy
@@ -318,7 +324,7 @@ Decreasing $q$ has a similar but lesser effect to increasing $\delta$. %decreasi
 As described earlier, the system ultimately goes to the absorbing extinct state $n=0$, with some distribution of (first passage) extinction times. %, at a rate which on average occurs as the inverse of the mean time to extinction $\tau$. 
 %The time in which this happens is a random variable, the mean of which is the mean time to extinction $\tau_e$. 
 In many cases, including the single logistic model, the MTE characterizes the entire distribution of exit times \cite{Hanggi1990,Bel2010}, which are observed to look roughly exponential, as shown in figure \ref{etimedistr}.  
-Because the absorbing point is deterministically repelling and, as the QSD shows, the system spends most of its time near the deterministic fixed point at $n=K$, extinction events are rare, as are trajectories that get close to extinction. 
+Because the absorbing point is deterministically repelling and, as the QSD shows, the system spends most of its time near the deterministic fixed point at $n=K$, extinction events are rare, far from equilibrium. %, as are trajectories that get close to extinction. 
 These extinction attempts can be considered as almost independent, since the autocorrelation time is so much shorter than the time between attempts \cite{Hanggi1990,Lande1993}. %NTS:::references???
 The system has repeated, independent events that occur with at a constant rate; it is Poissonian, hence the distribution of extinction times is exponential and described by its mean, the MTE \cite{Hanggi1990,Leigh1981,Lande1993,Foley1994}. 
 
@@ -394,7 +400,7 @@ Thus the mean time to extinction from neighbouring states are related, which lea
 	\label{mte}
 \end{figure}
 
-Combining equations \ref{birth} and \ref{death} with the solution for the mean time to extinction \ref{analytic_mte} obtains a complicated analytical expression in the form of a hypergeometric sum, given in the appendix. 
+Combining equations \ref{birth} and \ref{death} with the solution for the mean time to extinction \ref{analytic_mte} I obtain a complicated analytical expression in the form of a hypergeometric sum, given in the appendix. 
 Little intuition can be gained from the mathematical expression, but the numerical results of the MTE, as shown in figure \ref{mteCP}, are more interpretable. 
 A typical trajectory starting from $n$ goes first to the deterministic fixed point $K$ and fluctuates about that point before a large fluctuation leads to its extinction. 
 %The mean time to extinction depends on the initial population size $n$, however 
@@ -402,7 +408,7 @@ Since the time for the population to reach carrying capacity is insignificant co
 This approximation only fails for small $n$ \cite{Chotibut2015}. %NTS:::show this? in a graph? %EDIT:::cite others?
 It is well known that $\tau_e$ scales as $e^K$ \cite{Lande1993,Ovaskainen2010} and this is indeed what I observe (for an example see the appendix or the right panel of figure \ref{techn} below). 
 Similarly the times I report have all been rescaled by $r$ and so are measured in generations, such that the real times are $\tau_e/r$. 
-What is less well known is the dependence on the additional parameters $\delta$ and $q$. %NTS:::have I introduced the term "hidden parameters"?
+What is less well known, the novelty of this research, is the dependence on the additional parameters $\delta$ and $q$. %NTS:::have I introduced the term "hidden parameters"?
 Figure \ref{mte} shows that the MTE depends on the values of $\delta$ and $q$, parameters that appear in the births and deaths but do not appear in the deterministic equation. %hence are called "hidden"
 
 %EDIT:::!!!CONSIDER INCLUDING THE DERIVATION WITH q,\delta=0 IN HERE
@@ -436,6 +442,7 @@ These approximations make analytic calculations possible or reduce numeric compu
 Unfortunately the most popular approximation is known to fail in some situations \cite{Grasman1983,Doering2005}, and an exhaustive test with the approximations I highlight below has not been performed (but see \cite{Allen2003a,Yu2017}). 
 %the regime of parameter space in which each approximation is valid is not very well understood. 
 Using the same model system of a single logistic species I shall evaluate the Fokker-Planck equation, the Gaussian approximation to the Fokker-Planck equation, the WKB method, and some numerical methods. %the small $n$ approximation, 
+I have not invented these methods, but I apply them in the context of this stochastic logistic model with the full four parameters needed to characterize its quadratic nature. 
 Comparing these approximations to the above exact results will grant insight into their utility. %will better inform choices researchers make in the future
 %NTS:::COULD ALSO EASILY ADD MOMENT CLOSURE - SEE ONE-SPECIES.PDF
 
@@ -448,7 +455,8 @@ Unfortunately, as I referenced above, the MTE tends to scale exponentially with 
 The transition matrix inverse method alluded to in the introduction chapter and used in subsequent chapters of this thesis calculates the MTE to arbitrary accuracy. 
 Essentially, equation \ref{mte-recurrence} can be written in matrix form as \cite{Nisbet1982,Iyer-Biswas2015}
 \begin{equation}
-\hat{M}\vec{T} = -\vec{1} \label{matrix-method}
+\hat{M}\vec{T} = -\vec{1}
+ \label{matrix-method}
 \end{equation}
 with $\left(\vec{T}\right)_n = \tau(n)$ and elements of $\hat{M}$ being the birth and death rates into and out of each state. 
 If $N$ exists the matrix is finite and can be inverted; if not, a cutoff is introduces to make $\hat{M}$ finite \cite{Munsky2006,Parsons2007,Parsons2010}. 
@@ -477,7 +485,7 @@ The Pawula theorem says that when employing the Kramers-Moyal expansion the only
 The expansion requires the definition of a density $x=n/K$ and that the rates $W_n$ can be written in a form $W_n/K = w(x)$, eventually arriving at:
 %The more pedagogical Fokker-Planck equation is then
 \begin{equation}
-\partial_t P(x,t) = - \partial_x\big( (b(x) - d(x)) P(x,t) \big) + \frac{1}{2 K} \partial_x^2 \Big( (b(x) + d(x)) P(x,t) \Big). 
+\partial_t P(x,t) = - \partial_x\Big( (b(x) - d(x)) P(x,t) \Big) + \frac{1}{2 K} \partial_x^2 \Big( \big(b(x) + d(x)\big) P(x,t) \Big). 
  \label{FPch1}
 \end{equation}
 %which is equivalent to equation \ref{FPch1} above for $b(x) = b_n/K$ and similarly for $d$. 
@@ -549,7 +557,7 @@ The momentum-space WKB has been shown to err from real-space WKB \cite{Ovaskaine
 The quantity $S_0(n)$ can be interpreted as the action in a Hamilton-Jacobi equation \cite{Assaf2016}. 
 %Its solution is $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$. %NTS:::check this
 As before, the MTE can be calculated from the QSD equation \ref{WKBansatz} using equation \ref{1overd1P1}. 
-%NTS:::show the equation for the WKB MTE
+%NTS:::%EDIT:::show the equation for the WKB MTE
 
 \iffalse
 %C - MattheW; small n - SHOULD SMALL n BE CUT, SINCE IT ONLY WORKS IN 1D WHICH HAS A FULL SOLUTION ANYWAYS??
@@ -712,7 +720,7 @@ This scaling differentiates systems with low birth and death rates from those wi
 Whereas the deterministic dynamics includes only the difference of birth and death and will not distinguish between populations with high or low turnover, the magnitude of the birth and death rates affect stochastic processes like extinction. 
 For example, the probability of extinction of a system with linear birth and death rates ($b_n=\beta n$ and $d_n=\mu n$) starting from population $n_0$ goes as $(\beta/\mu)^{n_0}$ \cite{Nisbet1982}.
 In this context, the model with high turnover will differ from one with low turnover as the ratio $b_n/d_n$ will depend on the scale, that is to say, on $\delta$. 
-In bacterial systems it seems that $delta$ is typically small compared to $r$ \cite{Servais1985}. 
+In bacterial systems it seems that $delta$ is typically small compared to one \cite{Servais1985}. 
 
 Additionally, $q$ determines whether intraspecies interactions have a greater effect on birth or death. 
 It moves the quadratic dependence between the two rates. 
