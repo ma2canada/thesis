@@ -52,7 +52,7 @@ Specifically, applying demographic stochasticity to a logistic model involves fo
 %In my search of the literature on the subject I have not seen an exhaustive study of the effect of all four parameters on quantities of stochastic importance, like the mean time to extinction, despite the solution being entirely tractable. 
 To the best of my knowledge no one has done an exhaustive study of the effect of all four parameters on stochastic quantities like the mean time to extinction, despite the solution being entirely tractable. 
 %
-One subtlety with the stochastic problem is that the mapping from deterministic to stochastic dynamics is not unique; many stochastic models give the same deterministic limit as noise becomes negligible, since the deterministic dynamics are given by the difference between birth and death rates \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004a}. 
+One subtlety with the stochastic problem is that the mapping from deterministic to stochastic dynamics is not unique; many stochastic models give the same deterministic limit as noise becomes negligible, since the deterministic dynamics are given by the difference between birth and death rates \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004}. 
 Some of the parameters that define the stochastic model do not show up in the deterministic limit; in a sense they are ``hidden'' parameters. 
 This highlights the limitation of only using deterministic theories such as the logistic differential equation; not only do they not allow extinction, they lose some details of a more accurate representation of the physical system. 
 %For this reason I argue that the stochastic description should be explicitly chosen and motivated, for any analysis which involves stochasticity even in part. 
@@ -69,15 +69,15 @@ Regarding intraspecies interactions, I will show that extinction is more rapid w
 %I will evaluate the validity of various commonly employed approximation techniques. 
 I will also use the simple system of a logistic model with demographic noise to evaluate some of the more common approximation techniques used in the literature. 
 The Fokker-Planck equation, for example, has a long history of use, and despite it being known to fail \cite{Grasman1983,Doering2005}, is still a popular choice today \cite{Kimura1955,Mangel1977,Roozen1987,Leigh1981,Lande1993,Foley1994,Traulsen2006,Parsons2007,Parsons2010,Chotibut2015,Constable2015,Lin2015,Iyer-Biswas2015,Yu2017,Young2018}. 
-Also known as the backward Kolmogorov equation, it approximates the master equation with a partial differential equation for the probability distribution for continuous (time and) population density, rather than the discretized population state space on which the master equation acts \cite{Nisbet1982,Gardiner2004a}. 
+Also known as the backward Kolmogorov equation, it approximates the master equation with a partial differential equation for the probability distribution for continuous (time and) population density, rather than the discretized population state space on which the master equation acts \cite{Nisbet1982,Gardiner2004}. 
 A more recently developed approximation technique is the WKB method \cite{Doering2005,Assaf2006,Kessler2007,Ovaskainen2010,Assaf2016}, which also considers a continuous state space, and defines a conjugate variable to the population size, such that the system evolves in this expanded space. 
-The WKB method generally compares to simulations more favourably than the Fokker-Planck equation \cite{Yu2017}, but is also known to be occasionally incorrect \cite{Assaf2010}. %, and can be supplemented by a small $n$ approximation \cite{Gardiner2004a,Assaf2010}. 
+The WKB method generally compares to simulations more favourably than the Fokker-Planck equation \cite{Yu2017}, but is also known to be occasionally incorrect \cite{Assaf2010}. %, and can be supplemented by a small $n$ approximation \cite{Gardiner2004,Assaf2010}. 
 
 \iffalse
 %As deterministic dynamics have a longer history of being applied in a biological context than their stochastic analogues, and as deterministic mathematics are easier to solve, many researchers start with a deterministic approach to their problem of choice. 
 %This is not a bad thing; it allows them to get a sense of the problem if noise is minimal or negligible, which is often the case. 
 A naive implementation of including noise into a model would be to start with a deterministic model represented by a system of differential equations and add a noise term to each equation. 
-This does indeed simulate a noisy system, and these stochastic differential equations can be called Langevin equations \cite{Nisbet1982,Gardiner2004a}. 
+This does indeed simulate a noisy system, and these stochastic differential equations can be called Langevin equations \cite{Nisbet1982,Gardiner2004}. 
 Such an approach is suitable for continuous systems of quantities like density or concentration. 
 But for systems with demographic noise where the organisms are quantized one must be more careful...
 
@@ -180,8 +180,8 @@ See figure \ref{latticefig}.
 The system being constrained to integer populations gives a clear example of why the deterministic analysis is insufficient. 
 Instead of the continuous, fractional populations of equation \ref{logistic}, one must define birth and death rates. 
 %Instead of a birth rate $b_n$ we 
-As is standard, I assume that each birth event is independent and distributed exponentially with a probability $b_n\,dt$ of occurring in each infinitesimal time interval $dt$, and similarly for death events \cite{Nisbet1982,Gardiner2004a,VanKampen1992}. 
-The Markov property underlying most stochastic processes studied, including those in this thesis, is that future events only depend on the present state \cite{Nisbet1982,Gardiner2004a,VanKampen1992}, hence a birth event happening with the same probability in each time interval, given that the state is the same at the start of each of those intervals. 
+As is standard, I assume that each birth event is independent and distributed exponentially with a probability $b_n\,dt$ of occurring in each infinitesimal time interval $dt$, and similarly for death events \cite{Nisbet1982,Gardiner2004,VanKampen1992}. 
+The Markov property underlying most stochastic processes studied, including those in this thesis, is that future events only depend on the present state \cite{Nisbet1982,Gardiner2004,VanKampen1992}, hence a birth event happening with the same probability in each time interval, given that the state is the same at the start of each of those intervals. 
 %and this is similarly assumed for death events. %too technical? Or esoteric?
 In this chapter I use the birth rate
 \begin{equation}
@@ -193,7 +193,7 @@ and the death rate
 d_n = r\,\delta\,n + \frac{r(1-q)}{K} n^2 = r\,n\left(\delta+(1-q)\frac{n}{K}\right).
 \label{death}
 \end{equation}
-I have not seen an equivalent parameterization used in the literature. 
+Such a parameterization, with the four parameters, is novel. 
 Denoting $P_n(t)$ as the probability that the population is composed of $n$ organisms at time $t$, these rates are used in the master equation
 %Note that I introduce two new parameters in the equations \ref{birth} and \ref{death}: 
 \begin{equation}
@@ -231,7 +231,7 @@ At $n=0$ both the birth and death rates go to zero, as they should, for it to be
 
 %A probability distribution function is a useful mathematical tool to describe the state of a dynamical system.
 %A probability distribution function is a necessary mathematical tool to describe the state of a stochastic dynamical system.
-The evolution of the distribution in the single birth and death process is captured in the master equation \ref{master-eqn} \cite{Nisbet1982,Gardiner2004a}. 
+The evolution of the distribution in the single birth and death process is captured in the master equation \ref{master-eqn} \cite{Nisbet1982,Gardiner2004}. 
 Note that ultimately at large times the probability of being at population size $n\neq 0$ decays to zero, as more and more of the probability gets drawn to the absorbing state. 
 %This is due to the stochasticity of the births and deaths and the nature of the absorbing state $n=0$ with no possibility of recovery. % [reference probability distribution leaking to zero definitely].
 %NTS:::prove this? show this with reference to Nisbet and Gurney?
@@ -242,9 +242,9 @@ That is, after some decorrelation time, the system reaches a state that changes 
 
 I want to solve this conditional probability distribution function $P_n^c$: the probability distribution of the population conditioned on not being in the steady extinct state. 
 It is found by renormalizing the probability of being at each state $n$ by the total probability that the system has not yet gone extinct \cite{Nisbet1982}:
-\begin{equation*}
- P_n^c = \frac{P_n}{1-P_0}.
-\end{equation*}
+\begin{equation}
+ P_n^c \equiv \frac{P_n}{1-P_0}.
+\end{equation}
 The dynamics of this conditional distribution are described by a slightly different master equation than equation \ref{master-eqn} \cite{Nisbet1982}:
 \begin{equation}
 \frac{dP_n^c}{dt} =  b_{n-1}P_{n-1}^c + d_{n+1}P_{n+1}^c - \big(b_n + d_n - P_1^c d_1 \big) P_n^c. 
@@ -475,8 +475,8 @@ The first approximation I will regard is the Fokker-Planck (FP) equation, which 
 %\begin{equation}
 %\partial_t P_n(t) = - \partial_n\big( (b_n - d_n) P_n(t) \big) + \frac{1}{2} \partial_n^2 \Big( (b_n + d_n) P_n(t) \Big). \label{FPch1}
 %\end{equation}
-%In going from the master equation to FP I have used the Kramers-Moyal expansion \cite{Gardiner2004a}. 
-Starting from the master equation \ref{master-eqn} one employs the Kramers-Moyal expansion \cite{Gardiner2004a}. 
+%In going from the master equation to FP I have used the Kramers-Moyal expansion \cite{Gardiner2004}. 
+Starting from the master equation \ref{master-eqn} one employs the Kramers-Moyal expansion \cite{Gardiner2004}. 
 The Pawula theorem says that when employing the Kramers-Moyal expansion the only valid orders to stop the expansion are at two terms or infinite \cite{VanKampen1992}. 
 %I have been cavalier; more precisely, we need a large parameter, which I denote $K$, to do the expansion. 
 %Typically in bio the large parameter is volume. 
@@ -490,10 +490,10 @@ The expansion requires the definition of a density $x=n/K$ and that the rates $W
 \end{equation}
 %which is equivalent to equation \ref{FPch1} above for $b(x) = b_n/K$ and similarly for $d$. 
 Instead of the master equation's difference differential equation for the probability, equation \ref{FPch1} is a partial differential equation for the probability density. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
-The first term on the right-hand side is often called the drift term and reduces to the deterministic dynamics when fluctuations are neglected \cite{Gardiner2004a}. 
-%corresponds to the dynamical equation at the deterministic limit, when fluctuations are neglected \cite{Gardiner2004a}. 
+The first term on the right-hand side is often called the drift term and reduces to the deterministic dynamics when fluctuations are neglected \cite{Gardiner2004}. 
+%corresponds to the dynamical equation at the deterministic limit, when fluctuations are neglected \cite{Gardiner2004}. 
 The second term is the diffusion term and describes the effect of stochasticity on the system. 
-There is a one-to-one correspondence between Fokker-Planck and Langevin equations, which are stochastic differential equations \cite{Gardiner2004a}. 
+There is a one-to-one correspondence between Fokker-Planck and Langevin equations, which are stochastic differential equations \cite{Gardiner2004}. 
 Equation \ref{FPch1} can be solved directly to get the MTE \cite{Gardiner2004,Iyer-Biswas2015}: 
 %For ease of reference, I leave the equation here:
 \begin{equation}
@@ -502,7 +502,7 @@ Equation \ref{FPch1} can be solved directly to get the MTE \cite{Gardiner2004,Iy
 %In the above, 
 where $\phi(x) = \exp\left[\int_0^x dn 2 A(n)/B(n)\right]$, $A(n) = b_n - d_n$, and $B(n) = b_n + d_n$. 
 %A quasi-steady state can be calculated when the time derivative $\partial_t P_n(t)$ is small. 
-To find the QSD the left-hand side of equation \ref{FPch1} is set to zero, resulting in \cite{Gardiner2004a}
+To find the QSD the left-hand side of equation \ref{FPch1} is set to zero, resulting in \cite{Gardiner2004}
 %That is,
 \begin{equation}
 \ln P_n^{ss} \propto \frac{2(b_n - d_n) - \partial_n(b_n + d_n)}{(b_n + d_n)}. 
@@ -564,10 +564,10 @@ As before, the MTE can be calculated from the QSD equation \ref{WKBansatz} using
 Rather than approximating the probability distribution function near the fixed point, a different approximation can be done to estimate the probability distribution function near the absorbing state $n=0$. %NTS:::this still could be formulated simply as a steady state approximation - see Gardiner p.237
 If the bulk of the probability mass is centered on $K$ then the probability of being close to the absorbing state is small (note that this condition is similar to the quasi-stationary approximation, since the flux out of the system is proportional to the probability of being at a state close to $0$). 
 %Furthermore, it is assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order \cite{smalln}. 
-For this small $n$ approximation it is further necessary to assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order, \emph{e.g.} $b_{n+1}\sim b_n$ \cite{Gardiner2004a,Assaf2010}. 
+For this small $n$ approximation it is further necessary to assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order, \emph{e.g.} $b_{n+1}\sim b_n$ \cite{Gardiner2004,Assaf2010}. 
 Rewriting the master equation \ref{master-eqn} as $\partial_t P_n = \left(b_{n-1} P_{n-1} - b_n P_n \right) + \left(d_{n+1}P_{n+1} - d_n P_n\right)$ in each set of brackets only the higher state term is kept: $\left(b_{n-1} P_{n-1} - b_n P_n \right) \approx - b_n P_n$ and $\left(d_{n+1}P_{n+1} - d_n P_n\right) \approx d_{n+1}P_{n+1}$. 
 %one approximates the left hand side as zero and the right hand side as $\left(-b_n P_n \right) + \left( d_{n+1} P_{n+1}\right)$. 
-Rearranging this gives \cite{Gardiner2004a}
+Rearranging this gives \cite{Gardiner2004}
 % $P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}$. %make sure it looks nice, like Gardiner
 \begin{equation}
 P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}. 

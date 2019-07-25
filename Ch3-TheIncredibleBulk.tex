@@ -854,14 +854,14 @@ However, for consistency it also requires $\partial_j \left( - \partial_i U \rig
 It is easy to show that this is not upheld for the two directions unless $a_{12}=a_{21}=0$ and the system can be decomposed into two one-dimensional logistic systems.
 
 %%%%%%%%%%%%%%%%%%[better?]
-Instead, I define the pseudo-potential as:
+Instead, I use the definition of the pseudo-potential \cite{Zhou2012}
 \begin{equation}
-U(x_1,x_2) \equiv -\ln\left[P_{ss}(x_1,x_2)\right].
+U(x_1,x_2) \equiv -\ln\left[P_{ss}(x_1,x_2)\right],
 \label{quasipotential}
 \end{equation}
-where $P_{ss}(x_1,x_2)$ is a quasi-stationary probability distribution function \cite{Zhou2012}. 
+where $P_{ss}(x_1,x_2)$ is a quasi-stationary probability distribution function. 
 I calculate $P_{ss}(x_1,x_2)$ in the approximation to the Fokker-Planck equation (\ref{FP}) linearized about the deterministic coexistence fixed point. 
-The linearized equation is
+The linearized equation is \cite{Gardiner2004}
 \begin{equation}
 \partial_t P = -\sum_{i,j} A_{ij}\partial_i (x_j-x_j^*) P + \frac{1}{2} \sum_{i,j} B_{ij} \partial_i\partial_j (x_i-x_i^*) (x_j-x_j^*) P
 \label{linFP}
@@ -1054,9 +1054,9 @@ However, it gets an incorrect prefactor, being $\propto \sqrt{K}$ rather than $\
 %NTS:::I really should put numbers rather than low to high on bars
 
 To gain deeper insight into the fixation dynamics, in this section I calculate the residency times in each state during the fixation process \cite{Grinstead2003}, given by equation (\ref{residence-time}), reproduced here:
-\begin{equation*}
+\begin{equation}
 \langle t(s^0)\rangle_s = \int_0^{\infty} dt P(s,t|s^0,0)=\hat{M}^{-1}_{s,s^0}.
-\end{equation*}
+\end{equation}
 This gives the mean total time the system resides in state $s$, given that it starts in state $s^0$. 
 As with the fixation times, the dependence on the initial state is weak, so long as that initial state is not near an axis. 
 Whereas I previously analyzed the fixation time scaling, the residency times themselves proffer some insight into the system. 

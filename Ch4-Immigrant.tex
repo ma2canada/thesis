@@ -208,10 +208,10 @@ For all values $0\leq a<1$ the invasion time scales sub-linearly with the carryi
 In the $a=0$ limit of non-interacting species, the invading mutant follows the dynamics of a single logistic system with the carrying capacity $K$, resulting in the invasion time that grows approximately logarithmically with the system size, as shown in the upper left panel of figure \ref{TsuccTfail} as a purple line. 
 This result is well-known in the literature, often stated without reference \cite{Lande1993,Parsons2018}. 
 It is easy to see: by writing $\tau_s = \int dt = \int_{x_o}^{x_f} dx \frac{1}{\dot{x}}$ for initial state $x_0=1$ and final state $x_f=(1-\epsilon)K$ with small $\epsilon$ and large $K$ we get
-\begin{align*}
-\tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} = \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) = \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} = \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \\
+\begin{align}
+\tau_s &= \frac{1}{r}\int_{x_o}^{x_f} dx \frac{K}{x(K-x)} = \frac{1}{r}\int_{x_o}^{x_f} dx \left(\frac{1}{x}-\frac{1}{K-x} \right) = \frac{1}{r}\ln\left[\frac{x}{K-x} \right]\mid_{x_o}^{x_f} = \frac{1}{r}\ln\left[\frac{x_f(K-x_o)}{x_o(K-x_f)} \right] \notag \\
 	   &\approx \frac{1}{r}\ln\left[\frac{(1-\epsilon)K}{\epsilon} \right] \approx \frac{1}{r}\left(\ln\left[K\right]-\ln\left[\epsilon\right]\right)
-\end{align*}
+\end{align}
 and so expect the invasion time to grow logarithmically with carrying capacity. 
 
 %\iffalse

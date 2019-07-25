@@ -133,9 +133,11 @@ Whether two species will coexist, and for how long, is of essential importance t
 %The development of Hubbell's neutral theory was motivated to explain observed abundance distributions \cite{Hubbell2001}.		
 %It contrasts with niche theories of resource apportionment; whereas the former assumes that all species compete with each other, the latter assumes that each species grows based on the apportionment it is allocated and does not touch the resources of other species.		
 
+%EDIT:::could emphasize that along with biodivsersity as a problem in its own right, I have other motivations, such as... conservation biology, health, and some applications both theoretical (coalescent theory) and experimental (one or two strains living in a controlled little world)
+Along with the problem of the maintenance biodiversity in its own right, I have other motivations related to biodiversity is it manifests in various systems. 
 %applications, it seems
 %The theories dealt with
-The results arrived at in this thesis have many applications. 
+%The results arrived at in this thesis have many applications. 
 Most obvious, and arguably most pressing to society, is the realm of conservation biology. 
 Biodiversity is often used as an indicator of the health of an ecosystem \cite{McKane2000,Pimm1988,Kalyuzhny2014,Peterson1997,Shaffer1981,Saavedra2013}. 
 A clearer understanding of the forces that maintain biodiversity could provide new and easier metrics for evaluating the health of an ecosystem, and hence the efficacy of various conservation efforts.
@@ -149,14 +151,15 @@ We are only recently learning, for example, about the composition of the microbi
 Imbalance of the microbiome composition, or invasion of a new species, can greatly impact a person's wellbeing, and a theory of whether an invasion will be successful and how long it might persist would go a long way toward diagnostics and prognostication.
 %The other end of the process, namely the extinction of a species, also has a number of applications. 
 So too does the prediction of extinction probability and times have a number of applications. 
-Other than the obvious modern ecological ones, extinction times are useful in paleontology. 
+Experimentally, scientists often grow a population of one or two strains in a controlled, constrained environment to which my results are especially suited. 
+And other than the obvious modern ecological ones, extinction times are useful in paleontology. 
 The fossil record shows a number of species in different epochs, and these data make more sense in the light of a consistent theory of species survival and eventual decline. %NTS:::don't have any citations
 Similarly, extinction and fixation times are already used in the construction of phylogenetic trees \cite{Rogers2014,Rice2004,Blythe2007}. 
 The more accurate a theory of extinction timescales developed, the more precisely we can perform phylogenetic analyses. 
 Mapping existent species to their common ancestors falls under the purview of coalescent theory \cite{Kingman1982}. %NTS:::other citations?
 %NTS:::probably should explain in more detail what coalescent and phylogenetic theory actually do
 This is part of the impact of the results presented in this thesis, in that I calculate extinction times to arbitrary accuracy, using a controlled approximation largely neglected in the literature. %ignored, overlooked, unused
-
+Finally, with this thesis I hope to contribute to the debate of niche versus neutral theories, by showing how a model transitions from one to the other. 
 
 %if the applications paragraph above is kept then it makes more sense to flow to neutrality; however, if the previous paragraph is on limiting factors it makes more sense to go to niches
 
@@ -477,7 +480,7 @@ Figure \ref{singlelogfig} shows an example of the logistic equation with noise, 
 %We need to include stochasticity in our models because of nature's inherent randomness. 
 % and because of the course-graining and phenomenological modelling necessarily done in biology (and indeed, in every scientific endeavor whose purview is not nanoscopic). %we observe inherent randomness in nature
 %Especially with the course-graining and phenomenological modelling done in biology for which we cannot account all elements it is necessary to include randomness in our models. 
-Depending on the system of interest, stochasticity may or may not be relevant: it is usually most important for systems with highly variable environments or small typical population sizes \cite{Nisbet1982,Kimura1983,VanKampen1992,Gardiner2004a,Blythe2007,Ovaskainen2010,Black2012}. 
+Depending on the system of interest, stochasticity may or may not be relevant: it is usually most important for systems with highly variable environments or small typical population sizes \cite{Nisbet1982,Kimura1983,VanKampen1992,Gardiner2004,Blythe2007,Ovaskainen2010,Black2012}. 
 %Beyond biology, there are applications of stochasticity in many disciplines, including linguistics, economics, neuroscience, chemistry, game theory, and cryptography, to name a few \cite{Schuster1983,BrianArthur1987,Borgers1997,Hofbauer2003,Pemantle2007,Blythe2007,Hilbe2011,Yan2013}. %\cite{wikipedia Stochasticity page}
 In the biological context Wright and Fisher were pioneers in applying randomness and statistical reasoning. %, in the biological context and in general. 
 There have since been renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell, and with new mathematical and computational developments it is popular today. %NTS:::Anton says everyone is blabbering about stochasticity - I am unsure if this is a good thing or a bad thing
@@ -520,7 +523,7 @@ These static states are extinction and fixation: the species has no chance of re
 Both of these cases are absorbing states, so called since once the system reaches either it will stay in that state indefinitely. 
 
 The natural mathematical tool to describe stochastic systems like this is a probability distribution over the states. 
-The evolution of the probability distribution is given by a continuity equation called the master equation \cite{Nisbet1982,Gardiner2004a,Iyer-Biswas2015}. 
+The evolution of the probability distribution is given by a continuity equation called the master equation \cite{Nisbet1982,Gardiner2004,Iyer-Biswas2015}. 
 As there is a probability of being in each state at a given time, there is a distribution of times when the system reaches fixation or extinction. 
 The mean of this distribution is one of the main objects of study of this thesis. 
 More generally in the field of stochastic analysis it is known as a mean first passage time, the mean time before a system first reaches some predefined state or collection of states. 
@@ -599,7 +602,7 @@ Demographic stochasticity is the focus of my thesis.
 %Going the other way, from deterministic to stochastic, is obvious for incorporating environmental noise only; the inclusion of demographic fluctuations is less trivial, and is one of the focuses of chapter 2 of this thesis. %need to cite? 
 Chapter 2 deals with the inclusion of demographic fluctuations in a deterministic equation. 
 %MOAR??
-Each stochastic model has a deterministic analogue when fluctuations are negligible, but many stochastic models lead to the same deterministic equation \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004a}; prior to my research presented in chapter 1 a comprehensive investigation of the single species logistic model with demographic noise had not been conducted. %surjective/onto; many mappping onto one
+Each stochastic model has a deterministic analogue when fluctuations are negligible, but many stochastic models lead to the same deterministic equation \cite{Nisbet1982,Norden1982,Nasell2001,Rouzine2001,Gardiner2004}; prior to my research presented in chapter 1 a comprehensive investigation of the single species logistic model with demographic noise had not been conducted. %surjective/onto; many mappping onto one
 %; extinction is not typically seen in the deterministic analogue and is a uniquely stochastic processes. 
 
 It is accepted in the literature that demographic noise in a system whose deterministic analogue has a stable fixed point leads to extinction times scaling exponentially in the system size if the initial condition is near that fixed point \cite{Leigh1981,Lande1993,Kamenev2008,Cremer2009a,Dobrinevski2012,Yu2017}. 
@@ -646,7 +649,7 @@ There is a gap in the literature in that the transition between these two limits
 %Demographic fluctuations can be modelled using the master equation, that describes the evolution of a probability distribution function \cite{Nisbet1982,Gardiner2004a}. 
 %It is a differential equation in time and a difference equation in the population size, which accounts for the integer number of organisms. %EDIT:::Anton disagrees
 %The master 
-Stochastic equations are generally hard to solve, with a solution only reliably being found for one dimensional systems of birth-death processes \cite{Nisbet1982,Gardiner2004a,Hanggi1990}. %, those which only increase or decrease by one individual at a time. 
+Stochastic equations are generally hard to solve, with a solution only reliably being found for one dimensional systems of birth-death processes \cite{Nisbet1982,Gardiner2004,Hanggi1990}. %, those which only increase or decrease by one individual at a time. 
 The dimensionality, in an ecological context, is given by the number of distinct species or strains being modelled. 
 Particular realizations of solutions to the master equation are found via the Gillespie algorithm, also knows as the stochastic simulation algorithm \cite{Gillespie1977,Cao2006}. 
 For most of my research I calculate the mean time to extinction exactly, or at least to arbitrary accuracy, following a textbook formulation that involves inverting the transition matrix \cite{Nisbet1982,Norden1982,Parsons2007,Parsons2010}. 

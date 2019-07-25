@@ -149,9 +149,9 @@ Since the extremes of $n=0$ and $n=K$ are absorbing, the ultimate fate of the sy
 The variance starts at zero for this delta function initial condition. 
 %EDIT:::Maddy suggests having a few steps in the appendix (maybe) or here (yes, briefly - as with the mean - and maybe explain below why I include more steps)
 After $k$ time steps the variance is
-\begin{equation*}
+\begin{equation}
 V_k = n_0(K-n_0) \big(1-(1-2/K^2)^k\big).
-\end{equation*}
+\end{equation}
 For finite $K$ the variance goes to $K^2 \, f_0(1-f_0)=n_0(K-n_0)$ at long times. 
 %NTS:::[maybe cf. hardy-weinberg variances]
 This is easy to intuit: there is probability $f_0$ that the system ended in $n=K$, and probability $(1-f_0)$ of ending at $n=0$, since at long times the system has fixated at one end or the other. 
@@ -304,9 +304,9 @@ The unnormalized steady-state probability $q_n$ can be written compactly as%Spec
 %\begin{equation*}%this is definitely awkward and possibly wrong
 %q_n = \frac{ N^2 \Gamma(N+n-2) \Gamma\left(n+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+\nu-1-g N\nu}{1-\nu}\right) }{ (n(N-n)(1-\nu)+(1-g)n N\nu) \Gamma(n) \Gamma(N-1) \Gamma\left(1+\frac{g N\nu}{1-\nu}\right) \Gamma\left(\frac{N+(n-2)(1-\nu)-g N\nu}{1-\nu}\right)}
 %\end{equation*}
-\begin{equation*}%right from b/d
+\begin{equation}%right from b/d
 q_n = \frac{ K^2\Gamma(K) \Gamma\left(n+\frac{g K\nu}{1-\nu}\right) \Gamma\left(K-n+1+\frac{(1-g) K\nu}{1-\nu}\right) }{ \big(n(K-n)(1-\nu)+(1-g)n K\nu\big) \Gamma(n) \Gamma(K-n+1) \Gamma\left(1+\frac{g K\nu}{1-\nu}\right) \Gamma\left(K+\frac{(1-g) K\nu}{1-\nu}\right)}
-\end{equation*}
+\end{equation}
 %\begin{equation*}%right from b/d
 %q_n = \frac{ N^2(N-1)! \left(n-1+\frac{g N\nu}{1-\nu}\right)! \left(N-n+\frac{(1-g) N\nu}{1-\nu}\right)! }{ \bigg(n(N-n)(1-\nu)+(1-g)n N\nu\bigg) (n-1)! (N-n)! \left(\frac{g N\nu}{1-\nu}\right)! \left(N-1+\frac{(1-g) N\nu}{1-\nu}\right)!}
 %\end{equation*}
@@ -324,10 +324,10 @@ and the sum of these is the normalization
 %\end{equation*}
 %hypergeometric is defined as 2F1(a,b,c,z)=sum_n=0^\infty \frac{\Gamma(a+n)\Gamma(b+n)\Gamma(c)}{\Gamma(a)\Gamma(b)\Gamma(c+n)}\frac{z^n}{n!}
 % $\sum q_i = _2F_1(-N,g N \nu/(1-\nu); 1-N(1-g\nu)/(1-\nu); 1)/g\nu$ which follows from the hypergeometric definition and $q_i$  %seems close to legit with definition of q_i, 2F1, but it requires writing (d-n)!/(d-1)! = (-1)^{n-1}(-d)!/(n-d-1)! ish
-\begin{equation*}
+\begin{equation}
 \sum q_i = \frac{1}{g\nu} \frac{\Gamma[1-\frac{K(1-g\nu)}{1-\nu}]\Gamma[K+1-\frac{K}{1-\nu}]}{\Gamma[K+1-\frac{K(1-g\nu)}{1-\nu}]\Gamma[1-\frac{K}{1-\nu}]},
 %         = \frac{1}{g\nu} \frac{(-\frac{N(1-g\nu)}{1-\nu})!(-\frac{N\nu}{1-\nu})!}{(-\frac{N(1-g)\nu}{1-\nu})!(-\frac{N}{1-\nu})!}
-\end{equation*}
+\end{equation}
 which follows formally from the definition of the hypergeometric function $_2F_1$. 
 See also \cite{McKane2003}. 
 %Together these give $\widetilde{P}_n$. 
@@ -380,19 +380,19 @@ At long times the mean fraction $f$ approaches $g$, the fraction of the focal sp
 Finding the variance involves solving a difficult difference equation; to get the an approximation of the variance, I consider the continuous time analogue to the model by taking $\Delta t$ to be infinitesimal, as described previously. 
 First, the above difference equation of the mean is written as a differential equation $\partial_t\mu(t) = \langle b(n)-d(n)\rangle = \nu\left(g-\mu(t)/K\right)$, which has solution $\mu(t) = g K + (\mu_0-g K)e^{-\nu t/K}$, and the timescale is set by $K/\nu$. %EDIT:::MEAN DE SEEMS TO BE OFF BY A FACTOR OF K???
 The dynamical equation for the second moment is
-\begin{align*}
+\begin{align}
  \partial_t\langle n^2\rangle &= 2\langle n b(n) - n d(n)\rangle + \langle b(n) + d(n)\rangle \\
-                              &= 2\nu \left( g \mu - \langle n^2\rangle/K\right) + 2(1-\nu)\left(K\mu-\langle n^2\rangle\right)/K^2 + \nu(\mu + g K - 2 \mu g)/K
-\end{align*}
+                              &= 2\nu \left( g \mu - \langle n^2\rangle/K\right) + 2(1-\nu)\left(K\mu-\langle n^2\rangle\right)/K^2 + \nu(\mu + g K - 2 \mu g)/K \notag
+\end{align}
 which is an inhomogeneous linear differential equation. 
 %The solution is easy to arrive at, but I omit it here as it is not intuitable. 
 Recalling that $\sigma^2(t) = \langle n^2\rangle(t) - \mu^2(t)$ I solve the above equation and write the variance as
 %\begin{equation*}
 % \text{Var} = \frac{N e^{-\frac{2 t ((N-1) \nu+1)}{N^2}} \left(\mu_0 ((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(e^{\frac{t ((N-2) \nu+2)}{N^2}}-1\right)+g N \left(((N-1) \nu+1) (\nu (2 g (N-1)-1)+2) \left(-e^{\frac{t ((N-2) \nu+2)}{N^2}}\right)+((N-2) \nu+2) (g (N-1) \nu+1) e^{\frac{2 t ((N-1) \nu+1)}{N^2}}+(N-1) \nu (\nu (g N-1)+1)\right)\right)}{((N-2) \nu+2) ((N-1) \nu+1)}-e^{-\frac{2 \nu t}{N}} \left(g N \left(e^{\frac{\nu t}{N}}-1\right)+\mu_0\right)^2. 
 %\end{equation*}
-\begin{equation*}
+\begin{equation}
  \sigma^2(t) = \sigma^2(\infty) + A\exp\Bigg\{-\frac{\nu}{K}t\Bigg\} - B\exp\Bigg\{-2\frac{\nu}{K}t\Bigg\} + C\exp\Bigg\{-\frac{2}{K}\left(\nu+\frac{(1-\nu)}{K}\right)t\Bigg\}
-\end{equation*}
+\end{equation}
 where $A=\big(1+g\nu-g(1-\nu)/K\big)K^2\frac{\mu_0-gK}{K\nu+2(1-\nu)}$, $B=(gK-\mu_0)^2$, and $C$ is an integration constant; $C = \sigma^2(0) - \sigma^2(\infty) + (gK-\mu_0)^2 + (gK-\mu_0)(2-\nu)(1-2g)/\big(K\nu+2(1-\nu)\big)$ if the initial variance is $\sigma^2(0)$. 
 \begin{equation}
 \sigma^2(\infty) = g(1-g) K^2\frac{1}{1+\nu(K-1)}
