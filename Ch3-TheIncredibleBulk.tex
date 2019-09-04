@@ -366,7 +366,7 @@ Any simulations that do not finish will be from the tail end of the distribution
 %Despite being rare, these long time trajectories have a significant contribution to the mean time, by virtue of their magnitude. 
 
 Inverting the truncated transition matrix, as has been done in this chapter and the next, is a much faster computational problem, and is hindered by insufficient RAM rather than interminable runtimes. 
-Essentially it involves solving equation \ref{matrix-method}, $\hat{M}\vec{T} = -\vec{1}$. 
+Essentially it involves solving equation \ref{matrix-method}, $\hat{M}^T\vec{T} = -\vec{1}$. %FINAL:::ensure this is correct, sufficiently clear, and references stuff
 Changing the cutoff means that the solution can be arbitrarily precise. 
 In the left panel of figure \ref{lntauvK}, the direct solution from inverting the truncated transition matrix compares favourably with the Gillespie simulations. 
 

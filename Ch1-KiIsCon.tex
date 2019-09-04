@@ -54,7 +54,7 @@ We employ the reasoning of physics, and its workhorse mathematics, to problems o
 %NTS:::Anton says "Define big questions. explain what were the existing gaps in the literature and what your thesis contributed in terms of closing those gaps"
 %EDIT:::outline field, big challenges, what has been done, what are the gaps, how my work closes those gaps
 
-Mathematical ecology is one of the oldest discipline of mathematical biology, with its relevance dating back at least since Malthus used a model of exponential growth to argue that overpopulation would lead to widespread famine and disease, and that was more than two hundred years ago \cite{Malthus1798}. 
+Mathematical ecology is one of the oldest discipline of mathematical biology, with its relevance dating back at least since Malthus used a model of exponential growth to argue that overpopulation would lead to widespread famine and disease, more than two hundred years ago \cite{Malthus1798}. % and that was
 %It is certainly older than modern biology, with the structure of DNA only being reconstructed sixty years ago \cite{Watson1953,Klug1968}. 
 About a century ago, Lotka \cite{Lotka1920} and Volterra \cite{Volterra1926} extended the logistic equation of Verhulst \cite{Verhulst1838} and applied it to biological systems, arriving at the famous predator-prey equations. 
 Midway through the last century, Wright \cite{Wright1931}, Fisher \cite{Fisher1930}, and Moran \cite{Moran1962} proposed urn models that demonstrate fixation and extinction in a way that is easily intuited and also treatable mathematically. 
@@ -87,7 +87,7 @@ Biodiversity, simply put, refers to the number of species or genetic strains in 
 %NTS:::in chapter 3 should explain in more detail that if the species are idential/neutral then the abundance disribution is simply an unnormalized stationary distribution (one which possibly has to be normalized based on the size of each bin)
 %
 I would like to highlight the issue of biodiversity, one of the stubbornly unsolved problems in modern ecology \cite{May1999,Chesson2000,Pennisi2005,Kelly2008}. % is that of biodiversity. 
-In 1961 Hutchinson published ``The paradox of the plankton'' \cite{Hutchinson1961}, in which he speculated about an apparent contradiction: for plankton living in the upper layer of the ocean far from shore there are few different resources on which to live, yet there is an immense diversity of different species of plankton that appear to coexist. 
+In 1961 Hutchinson published ``The paradox of the plankton'' \cite{Hutchinson1961}, in which he speculated about an apparent contradiction: for plankton living in the upper layer of the ocean far from shore there are few different resources on which to live, yet there is an immense diversity of different species of plankton that appear to coexist. %phyto-
 Surely those species that reproduce the quickest or use the resources most efficiently would outcompete all others such that only the fittest would survive. 
 %For my purposes, a species is a collection of organisms with the same mean birth and death rates, that are distinguishable from members of other species. 
 This principle of competitive exclusion, sometimes called Gause's Law \cite{Gause1934} states that ``two species cannot coexist if they share a single [ecological] niche.''
@@ -102,7 +102,7 @@ In systems with few resources and therefore few niches, one expects that only fe
 The expectation is that in this homogeneous ecosystem with extreme nutrient deficiency the competition should be severe, and only a few species should persist, many fewer than the number observed. 
 
 A variety of solutions have been proposed to resolve the paradox of the plankton but there is as yet no consensus \cite{Roy2007}.
-These include: the system is approaching a steady state of fewer species but very slowly; the ecosystem contains as yet undiscovered metabolic resources or factors that help differentiate their niches; environmental fluctuations or oscillations stabilize the system; spatial heterogeneity allows for local extinction but supports the great biodiversity on larger length scales; the system is stabilized by life-history traits of the plankton; the system is stabilized by the presence of predators to the plankton; there is symbiosis or commensalism between the various plankton species \cite{Hutchinson1961,May1999,Chesson2000,Roy2007}. 
+These include \cite{Hutchinson1961,May1999,Chesson2000,Roy2007}: the system is approaching a steady state of fewer species but very slowly; the ecosystem contains as yet undiscovered metabolic resources or factors that help differentiate their niches; environmental fluctuations or oscillations stabilize the system; spatial heterogeneity allows for local extinction but supports the great biodiversity on larger length scales; the system is stabilized by life-history traits of the plankton; the system is stabilized by the presence of predators to the plankton; there is symbiosis or commensalism between the various plankton species. 
 This lack of consensus is a gap in the literature. 
 While in reality each proposed solution likely contributes to some degree, a deeper understanding of each mechanism is required to evaluate their respective contributions to this problem and to others in ecology. 
 In this thesis I address a part of the general problem by systematically investigating the extinction and coexistence of competing species in a system with parameterized overlap between their niches. %competition between them. %two species
@@ -134,14 +134,14 @@ Whether two species will coexist, and for how long, is of essential importance t
 %It contrasts with niche theories of resource apportionment; whereas the former assumes that all species compete with each other, the latter assumes that each species grows based on the apportionment it is allocated and does not touch the resources of other species.		
 
 %EDIT:::could emphasize that along with biodivsersity as a problem in its own right, I have other motivations, such as... conservation biology, health, and some applications both theoretical (coalescent theory) and experimental (one or two strains living in a controlled little world)
-Along with the problem of the maintenance biodiversity in its own right, I have other motivations related to biodiversity is it manifests in various systems. 
+Along with the problem of the maintenance biodiversity in its own right, I have other motivations related to biodiversity as it manifests in various systems. 
 %applications, it seems
 %The theories dealt with
 %The results arrived at in this thesis have many applications. 
 Most obvious, and arguably most pressing to society, is the realm of conservation biology. 
 Biodiversity is often used as an indicator of the health of an ecosystem \cite{McKane2000,Pimm1988,Kalyuzhny2014,Peterson1997,Shaffer1981,Saavedra2013}. 
 A clearer understanding of the forces that maintain biodiversity could provide new and easier metrics for evaluating the health of an ecosystem, and hence the efficacy of various conservation efforts.
-The mechanisms of species maintenance are related to those of speciation, and an ecosystem losing stability can refer to both its collapse or invasion of a foreign species. 
+The mechanisms of species maintenance are related to those of speciation, and an ecosystem losing stability can refer to both its collapse or the invasion of a foreign species. 
 Invasion of a new mutant or immigrant strain or species into the system is a problem deeply intertwined with that of biodiversity maintenance \cite{Hubbell2001}. 
 %This problem too is of obvious interest in the study of ecosystems. 
 
@@ -159,7 +159,7 @@ The more accurate a theory of extinction timescales developed, the more precisel
 Mapping existent species to their common ancestors falls under the purview of coalescent theory \cite{Kingman1982}. %NTS:::other citations?
 %NTS:::probably should explain in more detail what coalescent and phylogenetic theory actually do
 This is part of the impact of the results presented in this thesis, in that I calculate extinction times to arbitrary accuracy, using a controlled approximation largely neglected in the literature. %ignored, overlooked, unused
-Finally, with this thesis I hope to contribute to the debate of niche versus neutral theories, by showing how a model transitions from one to the other. 
+Finally, with this thesis I hope to contribute to the debate of niche versus neutral theories, by showing how a Lotka-Volterra model transitions from one to the other. 
 
 %if the applications paragraph above is kept then it makes more sense to flow to neutrality; however, if the previous paragraph is on limiting factors it makes more sense to go to niches
 
@@ -214,9 +214,10 @@ But in the space of all these factors, Hutchinson calls the fundamental niche th
 He defines the realized niche as the point or subspace in this high dimensional space that the species effectively experiences, given that it is existing and potentially coexisting in an ecosystem. 
 This also lends a natural definition of niche overlap, as the (normalized) overlap of the fundamental niches of two species \cite{MacArthur1967}. 
 %EDIT:::Anton asks if this agrees with our mathematical definition of niche overlap - the toxin stuff? yeah kinda
-The requirement niche tells us whether the coexistence point of two species is physical, according to simple model of two species \cite{Holt1994}. 
+The requirement niche tells us whether the coexistence point of two species is physical, according to a simple model of two species \cite{Holt1994}. 
 %McGehee and Armstrong do not stake a claim in the debates on the definition of a niche, but likely they would side with Hutchinson
-It is inherently linked to the argument of limiting factors as the delimiters of niches as outlined earlier \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
+%It is inherently linked to the argument of limiting factors as the delimiters of niches as outlined earlier \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
+It is inherently linked to the argument that the number of limiting factors delimits the number of niches in an ecosystem \cite{Armstrong1976,McGehee1977a,Armstrong1980}. 
 
 \emph{The impact niche:}
 The other usage of the term niche, that of a functional or impact niche, was popularized by Elton \cite{Elton1927} and MacArthur \& Levins \cite{MacArthur1967}. 
@@ -239,7 +240,7 @@ The literature shows attempts to resolve the discrepancies that arise when the t
 %This thesis tends to favour the requirement niche definition, based on an argument of limiting factors and explained more fully in chapter 2, but ultimately remains agnostic to the debate. %NTS:::Anton thinks I have a precise definition of a niche
 In chapter 2 I show an example derivation of the Lotka-Volterra system based on an argument of limiting factors that aligns with the requirement niche definition. 
 %However, so long as niches exist in some sense and a niche overlap parameter can be defined, the results I arrive at in this thesis are sound.
-However, my results hold regardless of ones definition of a niche, so long as a niche overlap parameter can be defined. 
+However, my results hold regardless of one's definition of a niche, so long as a niche overlap parameter can be defined. 
 %I felt it would be remiss were I not to include a brief summary of the debates associated with the definition of an ecological niche, hence the preceding section.
 
 %***MAYBE REORDER: NICHE CONCEPT, McGEHEE AND ARMSTRONG, LOTKA-VOLTERRA, /THEN/ TOXINS
@@ -273,7 +274,7 @@ This predator prey model has oscillating dynamics about a center fixed point.
 %It has been used to model bacteria and bacteriophage \cite{Iranzo2013}, and other contexts \cite{Smith2016,Peckarsky2008,Cox2010,Parker2009,Bomze1983,Zhu2009,wikipedia}
 %To restrict our investigation to viable species in the same trophic level (treating predators and prey of the species of interest as being some of the limiting factors) we assume $K$ is finite and $r$ is positive. 
 I am interested in the competitive variant, where the $K_i$'s are finite and $r_i$'s are positive. 
-This corresponds to species that are in the same trophic level (or position in the food chain), such that two competing species can share the same predators or use the same prey as resources. 
+Such a model corresponds to species that are in the same trophic level (or position in the food chain), such that two competing species can share the same predators or use the same prey as resources. 
 %More details of the Lotka-Volterra model will be provided as they become relevant, particularly in chapter 3. 
 More details of the Lotka-Volterra model are provided in chapter 3. 
 %A stochastic 2D model will be the main model used in this thesis.
@@ -369,7 +370,7 @@ Similarly, the models of Wright, Fisher, Moran, and Kimura are minimal models th
 %%Other example systems have a limited number of resources hence a finite number of species, and due to a lack of mobility or distance from biodiversity reservoirs do not often see the introduction of new species, as in the soil or the ocean surface \cite{Friedman2017,Cordero2016}. 
 %The Moran model \cite{Moran1962} is sufficiently simple that it can be described in words. 
 %Its most prominent use is in coalescent theory, describing how the relative proportion of genes in a gene pool might change over time.
-Neutral models also underlie the simplest version of coalescent theory and phylogenetic tree reconstruction \cite{Kingman1982,Rice2004}, showing their use not only as minimal models but in whole fields of ecology. 
+Neutral models also underlie the simplest version of coalescent theory and phylogenetic tree reconstruction \cite{Kingman1982,Rice2004}, showing their use not only as minimal models but in whole sub-fields of ecology. 
 %EDIT:::what garbage I have written
 
 %there is also a chance here to talk about neutral vs symmetric
@@ -381,11 +382,11 @@ No species is distinguished or exceptional in a neutral theory.
 Thus, unless the whole system's net population is increasing or decreasing, a given organism (and hence its species) is equally likely to reproduce or die, and on average its species abundance is constant. 
 Whether and why different species should regard each other the same as themselves is a matter of debate \cite{Hubbell2001,Leibold2006,Leigh2007,Rosindell2011}. %EDIT:::remove? because Anton deems it "philosphy"
 %EDIT:::THIS PARAGRAPH NEEDS SOME WORK - SEE ANTON'S COMMENTS
-It is important to clarify the difference between neutral theories and those that are simply symmetric. 
+It is important to clarify the difference between neutral theories and those that are simply symmetric. %FINAL:::"It is important for my purposes"?
 %One could formulate a model where intraspecies interactions are different than interspecies interactions, but the intraspecies interactions are the same for each species, as are the interspecies interactions. 
 %In a symmetric model a given species behaves as another would in its situation, but not necessarily as another does, given that they are in different situations (namely, those species are typically at different abundances). 
 In a symmetric theory an exchange of labels between two species has the same effect as an exchange of population sizes. 
-Calling the red species of figure \ref{Moranfig} blue and the blue species red does not change how the system will evolve. 
+Calling the red species of figure \ref{Moranfig} blue and the blue species red does not change how the system will evolve. %FINAL:::figure comes much later
 %For the bulk of this thesis I deal with symmetric theories, with a neutral theory being one limit thereof. 
 Neutral theories are a subset of symmetric theories, since a neutral theory in which each species does not distinguish between self and others automatically allows for an exchange of species labels with no noticeable effect beyond exchanging abundances. 
 %NTS:::this paragraph needs work
@@ -428,11 +429,11 @@ Hubbell predicts the distribution of species abundances, a binned plot of the nu
 %The abundance distribution is the curve that results from binning each species based on its population in the system, such that the first bin indicates the number of species that have a local population of only one organism (or a number falling in the first bin's range), the second bin is the number of species with abundance two (or a population in the second bin's range), and so on, with the bin size doubling each time. 
 %By an abundance curve I mean a Preston plot, a plot of the number of species that belong in bins of exponentially increasing population size \cite{Hubbell2001}. 
 Following the arguments of Hubbell, one can get an estimate of the expected biodiversity of a community, the number of species that should exist in one trophic level. 
-The abundance distribution he predicts matches well with Fisher's log series distribution \cite{Fisher1943,McKane2003} and with experimental observations in a variety of biological contexts, from trees to birds to microbiomes \cite{Hubbell2001}. 
+The abundance distribution he predicts matches well with Fisher's phenomenological log series distribution \cite{Fisher1943,McKane2003} and with experimental observations in a variety of biological contexts, from trees to birds to microbiomes \cite{Hubbell2001}. 
 Other authors have calculated, for a single species in a Hubbell model, how it is expected to grow and decline, and how long it will last in the system before going extinct \cite{Azaele2006,Leigh2007,Pigolotti2013,Kalyuzhny2014}. 
 
-A similar model to that of Hubbell has those species which enter arise not from speciation but from immigration\cite{McKane2003,Kessler2015}. 
-Rather than being entirely new species, these immigrants are thought to come from a larger, static reservoir, so the system of interest tends to have similar species to the reservoir, like an island that receives immigrants from a mainland population \cite{MacArthur1967a}. 
+A similar model to that of Hubbell has those species which enter arise not from speciation but from immigration \cite{McKane2003,Kessler2015}. 
+Rather than being entirely new species, these immigrants are thought to come from a larger, static reservoir, so the system of interest tends to have similar species to the reservoir, as with an island that receives immigrants from a mainland population \cite{MacArthur1967a}. 
 This Moran with immigration model can be thought of as a variant of Hubbell's theory; its applicability is less broad, but more apt for islands and similar small ecosystems that have their biodiversity maintained by immigration rather than the formation of new species. 
 For the Moran model with immigration the abundance curve has been simulated \cite{Kessler2015} and the steady state probability distribution has been calculated \cite{McKane2003}, however it has not been analyzed to find its qualitatively different regimes of biological interest, nor have the extinction probabilities and times been calculated. 
 This constitutes a gap in the literature, one which this thesis addresses. 
@@ -482,7 +483,7 @@ Figure \ref{singlelogfig} shows an example of the logistic equation with noise, 
 %Especially with the course-graining and phenomenological modelling done in biology for which we cannot account all elements it is necessary to include randomness in our models. 
 Depending on the system of interest, stochasticity may or may not be relevant: it is usually most important for systems with highly variable environments or small typical population sizes \cite{Nisbet1982,Kimura1983,VanKampen1992,Gardiner2004,Blythe2007,Ovaskainen2010,Black2012}. 
 %Beyond biology, there are applications of stochasticity in many disciplines, including linguistics, economics, neuroscience, chemistry, game theory, and cryptography, to name a few \cite{Schuster1983,BrianArthur1987,Borgers1997,Hofbauer2003,Pemantle2007,Blythe2007,Hilbe2011,Yan2013}. %\cite{wikipedia Stochasticity page}
-In the biological context Wright and Fisher were pioneers in applying randomness and statistical reasoning. %, in the biological context and in general. 
+In the biological context, Wright and Fisher were pioneers in applying randomness and statistical reasoning. %, in the biological context and in general. 
 There have since been renaissances in the stochastic treatment of genetics due to Kimura and ecology due to Hubbell, and with new mathematical and computational developments it is popular today. %NTS:::Anton says everyone is blabbering about stochasticity - I am unsure if this is a good thing or a bad thing
 
 %%%%%%%%%%%%%%%%%%%%%NTS::::::::::::::::::::::!!!!!!!!!
@@ -516,7 +517,7 @@ For each birth or death event the participating species is chosen with a chance 
 Since a species is equally likely to increase or decrease each time step, the model is akin to an unbiased random walk. %, which is a solved problem. %and therefore the probability of extinction occurring before fixation is known.
 And since each event has an equal probability of happening for a given species, the frequency of that species tends to stay constant on average \cite{Kimura1955,Moran1962}. 
 %There is an equal net rate of change, in both increasing and decreasing the frequency.
-However, due to the randomness inherent in the model the species' frequency in fact fluctuates - this is stochasticity. 
+However, due to the randomness inherent in the model, the species' frequency in fact fluctuates - this is stochasticity. 
 This fluctuation is not indefinite; there are two states from which the system cannot exit and thus only accumulate in probability of occurrence. 
 These static states are extinction and fixation: the species has no chance of reproducing when at zero population (extinction) and does not change abundance when it is the only species in the system (fixation) as it constantly is both reproducing and dying with unit probability each time step. 
 %The system fluctuates until either the species dies (extinction) or all others die (fixation).
@@ -595,7 +596,7 @@ It can arise from the extrinsic fluctuations of the environment \cite{Kamenev200
 %Whereas a deterministic system like the logistic one shown in figure \ref{singlelogfig} has a continuous solution with the population growing smoothly to the carrying capacity, this is not possible in a real biological system, as the number of organisms is quantized. 
 %There can be two bacteria or three, but not two and a half. 
 It is also intrinsic to any system with a finite size or integer state space. 
-A deterministic system like the logistic one shown in the black line of figure \ref{singlelogfig} has a continuous solution, but a real population cannot vary continuously between 7 and 8; rather, it is discretized. % (see figure \ref{latticefig}). 
+A deterministic system like the logistic one shown in the black line of figure \ref{singlelogfig} has a continuous solution, but a real population cannot vary continuously between integers; rather, it is discretized. % (see figure \ref{latticefig}). 
 Constraining the system to integer values, and the inherent randomness in the birth and death times of the individuals, leads to demographic noise \cite{Assaf2006,Gottesman2012,Dobrinevski2012,Gabel2013,Fisher2014,Constable2015,Lin2012,Chotibut2015,Young2018}. 
 Demographic stochasticity is the focus of my thesis. 
 %For both environmental and demographic stochasticity it is usually obvious how to recover the deterministic analogue, by taking the noise to zero. %need to cite?

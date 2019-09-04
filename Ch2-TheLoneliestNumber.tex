@@ -135,7 +135,7 @@ This model is a classic but gives the outcome of population explosion if $r>0$ \
 Even in the stochastic case there is a finite probability of population explosion, and the mean diverges \cite{Nisbet1982}. 
 %, as probably is the case with constant birth/death (immigration/emigration) or any combination of these two. [find examples]
 To mathematically curb this infinite growth, and to biologically allow for intraspecies interactions, a non-linear term is required. 
-A quadratic is the simplest non-linearity so it serves as a popular choice for modelling intraspecies interactions, giving equation
+A quadratic is the simplest non-linearity, so it serves as a popular choice for modelling intraspecies interactions, giving the equation
 \begin{equation}
 \frac{dn}{dt} = r\,n\left(1-\frac{n}{K}\right),
 \label{logistic}
@@ -294,14 +294,14 @@ The steady state of this distribution is referred to as the quasi-stationary dis
 To calculate the QSD I employ the following textbook algorithm \cite{Nisbet1982}: at steady state equation \ref{masters2} can be rearranged to relate $\tilde{P}_{n+1}$ to $\tilde{P}_n$ and $\tilde{P}_{n-1}$
 \begin{equation}
 \widetilde{P}^c_{i} = \frac{- \widetilde{P}^c_{i-2}b_{i-2} 
-	+ (b_{i-1}+d_{i-1}\widetilde{P}^c_{i-1} 
+	+ (b_{i-1}+d_{i-1})\widetilde{P}^c_{i-1} 
 	- \widetilde{P}^c_{i-1}\widetilde{P}^c_{1}d_{1}}{d_{i}}.
 \end{equation}
 Given that $b_0=0$ there is a lower cutoff and so the whole distribution can be written in terms of $\tilde{P}_1$, which is then solved by normalization of the total probability to unity. 
 The outcome of this algorithm constitutes the novelty of this section, and is seen in figure \ref{qsd} for different values of $q$ and $\delta$. 
 %The former technique is shown in figure \ref{qsd}, for different values of $q$ and $\delta$. %NTS:::get your own figure
 %Results of this algorithm, for different values of $q$ and $\delta$, are presented in Figure \ref{qsd}. 
-Increasing the value of $\delta$ shifts the mode slightly toward $0$ and spreads the distribution out, increasing its variance. 
+Increasing the value of $\delta$ shifts the mean slightly toward $0$ and spreads the distribution out, increasing its variance. 
 In biological terms, having large birth and death rates leads to frequent deviations from the carrying capacity compared to small birth and death rates with an equivalent reproductive rate $r$. 
 Decreasing $q$ has a similar but lesser effect to increasing $\delta$. %decreasing q gives broader and anterior
 Intraspecies interactions that reduce birth rate tend to cause the population to stagnate near the carrying capacity, with only small stochastic fluctuations. 
@@ -335,7 +335,7 @@ The system has repeated, independent events that occur with at a constant rate; 
 \end{figure}
 
 For one-species systems it is well known how to exactly solve the MTE for a birth-death process. 
-The mean time of extinction starting from a population of size $n$, is \cite{Nisbet1982,Palamara2013}
+The mean time of extinction starting from a population of size $n$ is \cite{Nisbet1982,Palamara2013}
 \begin{equation}
 \tau(n) = \sum_{i=1}^{N}q_i + \sum_{j=1}^{n-1} S_j\sum_{i=j+1}^{N}q_i,
 \label{analytic_mte}
@@ -459,7 +459,8 @@ Essentially, equation \ref{mte-recurrence} can be written in matrix form as \cit
  \label{matrix-method}
 \end{equation}
 with $\left(\vec{T}\right)_n = \tau(n)$ and elements of $\hat{M}$ being the birth and death rates into and out of each state. 
-If $N$ exists the matrix is finite and can be inverted; if not, a cutoff is introduces to make $\hat{M}$ finite \cite{Munsky2006,Parsons2007,Parsons2010}. 
+If $N$ exists the matrix is finite and can be inverted; if not, a cutoff is introduced to make $\hat{M}$ finite \cite{Munsky2006,Parsons2007,Parsons2010}. 
+This is the arbitrarily precise technique I use in chapters 3 and 4 of this thesis. 
 Since it involves inverting a matrix of size proportional to the system size to the power of the number of species it can be taxing on a computer's RAM. 
 A cruder yet faster and less RAM-intense numerical approximation is to take the negative reciprocal of the smallest magnitude eigenvalue \cite{Hanggi1990}:
 \begin{equation}
@@ -539,7 +540,7 @@ Then the Gaussian approximation to the Fokker-Planck equation has an MTE of
 Another method frequently utilized is the WKB approximation \cite{Doering2005,Assaf2006,Kessler2007,Kamenev2008,Assaf2010,Ovaskainen2010,Gottesman2012,Assaf2016,Yu2017}. 
 Generally, the WKB method involves approximating the solution to a differential equation with a large parameter (such as $K$) by assuming an exponential solution (an ansatz) of the form \cite{Assaf2016}
 \begin{equation}
-P_n \propto \exp \left\{ K \sum_i \frac{1}{K^i}S_i(n) \right\}.
+P_n \propto \exp \left\{ K \sum_{i=0}^\infty \frac{1}{K^i}S_i(n) \right\}.
  \label{WKBansatz}
 \end{equation}
 Starting from the master equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}. %careful, Assaf2016 is an arXiv paper
@@ -720,7 +721,7 @@ This scaling differentiates systems with low birth and death rates from those wi
 Whereas the deterministic dynamics includes only the difference of birth and death and will not distinguish between populations with high or low turnover, the magnitude of the birth and death rates affect stochastic processes like extinction. 
 For example, the probability of extinction of a system with linear birth and death rates ($b_n=\beta n$ and $d_n=\mu n$) starting from population $n_0$ goes as $(\beta/\mu)^{n_0}$ \cite{Nisbet1982}.
 In this context, the model with high turnover will differ from one with low turnover as the ratio $b_n/d_n$ will depend on the scale, that is to say, on $\delta$. 
-In bacterial systems it seems that $delta$ is typically small compared to one \cite{Servais1985}. 
+In bacterial systems it seems that $\delta$ is typically small compared to one \cite{Servais1985}. 
 
 Additionally, $q$ determines whether intraspecies interactions have a greater effect on birth or death. 
 It moves the quadratic dependence between the two rates. 
@@ -741,7 +742,7 @@ Though it is not trivially apparent from the form of the exact analytical soluti
 %maybe because MTE depends most crucially on P_1, ie inherently on low populations, where the linear term dominates the quadratic term?
 %Around the mean of the pdf, the linear and quadratic terms are of similar order ($\delta K$ and $q K$, respectively). 
 %However, one can get an intuition for why this might be the case. 
-At small populations, the linear term is of order $\delta$ (for $\delta \geq 1$) and the quadratic terms is of order $q/K$, hence the linear term dominates the small population end of the distribution, as $K$ is typically large. 
+At small populations, the linear term is of order $\delta$ (for $\delta \geq 1$ - otherwise it's order one) and the quadratic terms is of order $q/K$, hence the linear term dominates the small population end of the distribution, as $K$ is typically large. 
 %It is exactly this portion of the distribution that affects the MTE, as seen in equation \ref{1overd1P1}. 
 The MTE comes from the small population dynamics (see equation \ref{1overd1P1}) and so the greater order term will have a stronger effect. 
 These relative orders also explain why the effect of $q$ on the MTE is strongest when $\delta$ is small and almost negligible for large $\delta$. 

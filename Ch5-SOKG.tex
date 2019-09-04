@@ -45,7 +45,7 @@ In the previous chapter I argued that the biodiversity of a system depends on a 
 The number of invader progeny fluctuates and ultimately it either dies out or occupies half of the total population, as per my definition of a successful invasion. 
 If new species enter the system faster than they go extinct, the number of extant coexisting species should increase to some steady state. %, and hence the biodiversity,
 Conversely, if extinction is much more rapid than speciation, a monoculture of one single species is expected in the system. 
-Whether the monocultural system consists of the same species over multiple invasion attempts or whether it experiences sweeps, changing from monocultures of one species to the next, depends on the probability of a successful invasion \cite{Chesson1997,Chesson2000,Desai2007,Desai2007}. 
+Whether the monocultural system consists of the same species over multiple invasion attempts or whether it experiences sweeps, changing from monocultures of one species to the next, depends on the probability of a successful invasion \cite{Chesson1997,Chesson2000,Desai2007}. 
 %Numerics are easy, and have been done, though mostly for Hubbell stuff - indeed, most of this is for Hubbell stuff
 %Results can easily be simulated, but to get better insight into the role of the parameters on the results I look for analytic solutions, and as such I treat a simplified model, that of the Moran model with immigration. 
 In order to extend the results of the previous chapter to the circumstance of repeated concurrent invaders in the Moran limit I analyze the Moran model with an immigration term. 
@@ -224,7 +224,7 @@ The immigrant is not necessarily a member of the focal species; in most biologic
 The metapopulation contains $m = g\,M$ members of the focal species out of $M$ total organisms. 
 In principle $g$ should be a random number drawn from the probability distribution associated with an evolving metapopulation, but for $M\gg K$ one can treat the metapopulation as stationary. 
 In practice, I am assuming that the metapopulation changes much slower than the Moran population \cite{McKane2003}. % of interest. 
-In the context of the Gore experiment \cite{Vega2017}, the system of interest is the nematode gut, and the metapopulation is the environment in which the nematode lives (and uptakes bacteria to its gut). 
+In the context of the Gore experiment \cite{Vega2017}, the system of interest is the nematode gut, and the metapopulation is the environment in which the nematode lives (and in which it uptakes bacteria to its gut). 
 The consumption of one bacterium will influence the gut microbiome while having a negligible effect on the external environment. 
 In a more general setting, the system of interest is a small island receiving immigrants from a larger mainland; the arrival of one immigrant on the island is impactful even when the loss of that same emigrant is negligible to the mainland. 
 
@@ -361,7 +361,7 @@ These qualitatively different outcomes suggest some critical parameter combinati
 	\includegraphics[width=0.6\textwidth]{Moran-withimmigration-fig1-linedot}
 	\caption{\emph{PDF of stationary Moran process with immigration.} Metapopulation focal fraction is $g=0.4$, local system size $K=100$, immigration rate $\nu$ is given by the colour. Notice that the curvature of the distribution inverts around $\nu=2/K$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,K$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
-\end{figure}
+\end{figure}%FINAL:::plot says $N$ instead of $K$
 %\begin{picture}(100,100)
 %\put(0,0){\includegraphics[width=0.4\textwidth]{Moran-withimmigration-fig1}}
 %\put(10,10){$x$ axis}
@@ -416,8 +416,9 @@ Notice that for $g=0$ or $g=1$ the long term variance $\sigma^2(\infty)$ asympto
 This contrasts with the results of the Moran model without immigration, which has a nonzero variance. 
 Without immigration there is a nonzero chance of ending up with the focal species fixated or extinct, with fixation ultimate probability equal to initial fractional abundance. 
 %, where a fraction of instances fixate with the focal species and in the remaining fraction that species goes extinct, in proportion to its initial abundance. 
-Having a supply of immigrants destabilizes one of these absorbing states; for instance for $g=0$ the ultimate fate is none of the focal species. % for $g=0$ or only the focal species for $g=1$. 
-This is true even if the initial population fraction was almost entirely of the focal species. If immigration is rare the system may temporarily fixate with the focal species, but with the repeated invasion attempts eventually a non-focal species will fixate, after which the system cannot recover the focal species. 
+Having a supply of immigrants destabilizes one of these absorbing states; for instance for $g=0$ the ultimate fate is to have none of the focal species remaining. % for $g=0$ or only the focal species for $g=1$. 
+This is true even if the initial population fraction was entirely of the focal species. % almost
+If immigration is rare the system may temporarily fixate with the focal species, but with the repeated invasion attempts eventually a non-focal species will fixate, after which the system cannot recover the focal species. 
 Ultimately there is only one fate, hence no variance. 
 %The memory of the initial abundance does not affect these results at long times. 
 
@@ -463,9 +464,9 @@ These regimes will be investigated further in the following paragraphs.
 		\emph{Left:} The heat map shows the steady state variance $\sigma^2(\infty)$ of a focal species' population probability distribution in the Moran model with immigration, normalized by $K^2$. System size is $K=100$. As immigration probability $\nu$ is increased the variance decreases monotonically. Variance is optimal in metapopulation focal species fractional abundance $g$ for $g=0.5$ as at this fraction there is the greatest likelihood of an immigrant not matching the most populous species in the system. 
 		\emph{Right:} Parameter space is divided into the qualitatively different regimes of the system based on the comparison of $K\nu$ with $1/g$ and $1/(1-g)$, with system size $K$, immigration rate $\nu$, and focal species metapopulation abundance $g$. When immigration is frequent (green region) the focal species is likely to be maintained at a moderate population by new immigrants. When immigration is rare (yellow region) the steady state of the system is either an absence or monoculture of the focal species. There is an intermediate regime (blue region) for which the focal species is present but not fixated. 
 	} \label{biodiversity-regimes}
-\end{figure}
+\end{figure}%FINAL:::plot says $N$ instead of $K$
 
-Like the mean and variance, another way to characterize the distribution is the extremum, which for large immigration rate corresponds to the mode of the system. 
+Like the mean and variance, another way to characterize the distribution is the extremum (minimum or maximum), which for large immigration rate corresponds to the mode of the system. 
 %A quantity similar to the mean is the extremum of the distribution, which for large immigration corresponds to the mode of the system. 
 The extremum is the highest or lowest point of a function and occurs at the $n$ for which $\partial_n \widetilde{P}_n = 0$. 
 For ease of analysis note that, using equation \ref{steadystateprobdistr}, $\partial_n \widetilde{P}_n = \partial_n \left( q_n/\sum_i q_i \right) = \partial_n q_n = q_n \partial_n \ln(q_n)$ and therefore I can instead calculate the $n$ that gives $\partial_n \ln(q_n)=0$. 
@@ -860,7 +861,7 @@ For incomplete niche overlap, once a species successfully invades it will persis
 The previous chapter modelled a single invading immigrant into a Lotka-Volterra system, an event which was assumed to happen infrequently enough that it would resolve before other invaders arrived. 
 Within the Moran model with immigration, analogous to the $a=1$ limit of the Lotka-Volterra model, I have explicitly considered the cases of high and low immigration rate. 
 When immigration is sufficiently high, such that $K\nu > \max\big(1/g,1/(1-g)\big)$, the focal species is maintained at steady state most often at a fractional abundance equal to that in the metapopulation from which the immigrants arrive. 
-For low immigration rate, specifically $K\nu < \min\big(1/g,1/(1-g)\big)$, the focal species spends the bulk of its time either temporarily extinct or else fixated in the local system (rather than in the metapopulation). 
+For low immigration rate, specifically $K\nu < \min\big(1/g,1/(1-g)\big)$, the focal species spends the bulk of its time either temporarily extinct or else fixated in the local system (not the metapopulation). 
 One way to characterize biodiversity is by the number of different species that reside in a system \cite{May1999,Hubbell2001,Chesson2000}. 
 An estimate of the expected number of species in a system, at least when immigration is frequent, is given by the number of $g_i$'s greater than $1/(K\nu)$, where $g_i$ is the fractional abundance of species $i$ in the static large metapopulation that provides immigrants to the system. %EDIT:::Anton doesn't understand
 %NTS:::if I convolve an unknown distribution of g_i's with the distribution of a species with a given g_i and set this equal to that same unknown distribution of g_i's (perhaps accounting for the M vs N difference) can I solve for the unknown distribution? Neat research idea
