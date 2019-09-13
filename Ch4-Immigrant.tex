@@ -108,6 +108,7 @@ The species' dynamics are described by the birth and death rates defined by equa
 	b_i/x_i &= r_i \\
 	d_i/x_i &= r_i\frac{x_i+a_{ij}x_j}{K_i}. 
 \end{align*}
+As before, the times I write are expressed in units of $1/r$, such that the rate constant $r$ does not explicitly show up in the results. 
 
 An invasion is unsuccessful if the invading species dies out before establishing itself in the system. 
 There are many ways to define what it means for a species to be established, and I will outline one such definition below. 
@@ -158,7 +159,7 @@ As in the previous chapter, I truncate the transition matrix and invert it in or
 		\includegraphics[width=1.0\linewidth]{fiftyfifty-probva.pdf}
 	\end{minipage}
 	%  \includegraphics[width=0.9\linewidth]{invasion-prob-succ}
-	\caption{\emph{Probability of a successful invasion.}
+	\caption{\emph{Probability of a successful invasion attempt into a two-dimensional Lotka-Volterra system.}
 		\emph{Left:} Numerical results, from $a=0$ at the top to $a=1$ at the bottom. The purple solid line is the expected analytical solution in the independent limit. The green solid line is the prediction of the Moran model in the complete niche overlap case. Data come from equation \ref{conditionalP} and are connected with dotted lines to guide the eye. 
 		\emph{Right:} The red data show the results for carrying capacity $K=4$, and suggest the solid black line $\frac{b_{mut}}{b_{mut}+d_{mut}}$ is an appropriate small carrying capacity limit. Successive lines are at larger system size, and approach the solid magenta line of $1-d_{mut}/b_{mut}\approx 1-a$.
 	} \label{Esucc}

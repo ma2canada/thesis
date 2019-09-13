@@ -359,7 +359,7 @@ These qualitatively different outcomes suggest some critical parameter combinati
 	%\put(10,0){$F_N$}
 %	\includegraphics[width=0.8\textwidth]{Moran-withimmigration-stationaryprobability}
 	\includegraphics[width=0.6\textwidth]{Moran-withimmigration-fig1-linedot}
-	\caption{\emph{PDF of stationary Moran process with immigration.} Metapopulation focal fraction is $g=0.4$, local system size $K=100$, immigration rate $\nu$ is given by the colour. Notice that the curvature of the distribution inverts around $\nu=2/K$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,K$ whereas for low immigration the system spends most of its time fixated. } \label{stationary-fig2}
+	\caption{\emph{PDF of stationary Moran process with immigration.} Metapopulation focal fraction is $g=0.4$, local system size $K=100$, immigration rate $\nu$ is given by the colour. Notice that the curvature of the distribution inverts around $\nu=2/K$. For high immigration rate the distribution should be centered near the metapopulation fraction $g\,K$ whereas for low immigration the system spends most of its time fixated at either $0$ or $K$. } \label{stationary-fig2}
 	%N.B. note that it's plotting from n=1 to n=100, so it won't look quite symmetric
 \end{figure}%FINAL:::plot says $N$ instead of $K$
 %\begin{picture}(100,100)
@@ -461,7 +461,7 @@ These regimes will be investigated further in the following paragraphs.
 		\includegraphics[width=1.0\linewidth]{ch5regimes}
 	\end{minipage}
 	\caption{\emph{Mapping the parameter space of the Moran model with immigration.}
-		\emph{Left:} The heat map shows the steady state variance $\sigma^2(\infty)$ of a focal species' population probability distribution in the Moran model with immigration, normalized by $K^2$. System size is $K=100$. As immigration probability $\nu$ is increased the variance decreases monotonically. Variance is optimal in metapopulation focal species fractional abundance $g$ for $g=0.5$ as at this fraction there is the greatest likelihood of an immigrant not matching the most populous species in the system. 
+		\emph{Left:} The heat map shows the steady state variance $\sigma^2(\infty)$ of a focal species' population probability distribution in the Moran model with immigration, normalized by $K^2$. System size is $K=100$. As immigration probability $\nu$ is increased the variance decreases monotonically. Variance is optimal in metapopulation focal species fractional abundance $g$ for $g=0.5$, as at this fraction there is the greatest likelihood of an immigrant not matching the most populous species in the system. 
 		\emph{Right:} Parameter space is divided into the qualitatively different regimes of the system based on the comparison of $K\nu$ with $1/g$ and $1/(1-g)$, with system size $K$, immigration rate $\nu$, and focal species metapopulation abundance $g$. When immigration is frequent (green region) the focal species is likely to be maintained at a moderate population by new immigrants. When immigration is rare (yellow region) the steady state of the system is either an absence or monoculture of the focal species. There is an intermediate regime (blue region) for which the focal species is present but not fixated. 
 	} \label{biodiversity-regimes}
 \end{figure}%FINAL:::plot says $N$ instead of $K$
@@ -747,8 +747,8 @@ Most of the immigrants act in opposition to fixation of the focal species, great
 		\includegraphics[width=1.0\linewidth]{Moran-withimmigration-fig4}
 	\end{minipage}
 	\caption{\emph{Mean first passage times depending on initial population.}
-		\emph{Left:} Unconditioned mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.4$, system size is $K=100$, and immigration rate $\nu$ is coloured as before. The black line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gK$. 
-		\emph{Right:} Same as the left panel but for conditioned first passage times. Times conditioned on reaching fixation first decrease from left to right, and those conditioned on extinction first increase. Note that the curves follow their corresponding unconditioned times from the left panel when the occurrence is probable but are much longer when improbable. 
+		\emph{Left:} Unconditioned mean time to first reaching either fixation or extinction, from a given starting population of the focal species. Focal immigration fraction is $g=0.4$, system size is $K=100$, and immigration rate $\nu$ is coloured as in figure \ref{extnprobfig-ihope}. The black line shows regular Moran results without immigration. Immigration acts to increase the first passage time, and the effects are greatest away from $gK$. 
+		\emph{Right:} Same as the left panel but for conditioned first passage times. Times conditioned on first reaching fixation decrease from left to right, and those conditioned on extinction first increase from left to right. Note that the curves follow their corresponding unconditioned times from the left panel when the occurrence is probable but are much longer when improbable. 
 	} \label{extntimefig}
 \end{figure}
 

@@ -132,7 +132,7 @@ I return to this point in the following sections within the discussion of the Lo
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{two-resources}
-	\caption{\emph{A simple two species two resource model that derives the Lotka-Voltera model} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). } \label{toxinsfig}
+	\caption{\emph{A simple two species two resource model that derives the Lotka-Voltera model.} Each of the two species (here, red and blue circles) reproduces (arrows to self) and produces a toxin (arrows to limiting factors, respectively red and blue squares) which inhibits its own growth (square-ending lines to self) and the growth of the other (square-ending lines to other colour). } \label{toxinsfig}
 \end{figure}%NTS:::this isn't referenced in the text; furthermore the model in the text is slightly different, with each species producing both waste product
 
 As a minimal example, in this section I introduce a model of two interacting species whose dynamics is constrained by two secreted factors. 
@@ -270,14 +270,14 @@ In the next two sections, I study how the niche overlap affects the stability of
 		\centering
 		\includegraphics[width=1.0\textwidth]{phasespace-graphic-73.jpg}
 	\end{minipage}
-	\caption{\emph{Left: stability phase diagram of the coexistence fixed point for $K_1=K_2=K$.} The coexistence fixed point $C=\left(\frac{K_1-a_{12} K_2}{1-a_{12}a_{21}},\frac{K_2-a_{21} K_1}{1-a_{12}a_{21}}\right)$ is stable in the green region and unstable in the blue region; in the white regions it is non-biological. Colored dots indicate the parameter range studied in the paper. The numbered regions correspond to different biological different regimes; see text.
+	\caption{\emph{Left: stability phase diagram of the coexistence fixed point for $K_1=K_2=K$.} The coexistence fixed point $C=\left(\frac{K_1-a_{12} K_2}{1-a_{12}a_{21}},\frac{K_2-a_{21} K_1}{1-a_{12}a_{21}}\right)$ is stable in the green region and unstable in the blue region; in the white regions it is non-biological (negative). Colored dots indicate the parameter range studied in the paper. The numbered regions correspond to different biological regimes; see text.
 	%Regions 4-6 correspond to competitive exclusion, with only single species fixed point $A$ or $B$ being stable (or both, in the bistable regime 5). In region 7 the populations experience unbounded growth.
-	For the degenerate case $a_{12}=a_{21}=1$, indicated by the red dot, the coexistence fixed point is replaced by a line of marginal stability, shown in the Right Panel.
-	\emph{Right: phase space of the coupled logistic model.} Colored dots show $C$ at the indicated values of the niche overlap $a$. The fixed point is stable for $a<1$. At $a=0$ the two species evolve independently. As $a$ increases, the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of marginally stable fixed points, corresponding to the Moran model. The dashed lines illustrate the deterministic flow of the system: black is for $a=0.5$, and orange for $a=1.2$. The zoom inset illustrates the stochastic transitions between the discrete states of the system. Fixation occurs when the system reaches either of the axes. See text for details.
+	For the degenerate case $a_{12}=a_{21}=1$, indicated by the red dot, the coexistence fixed point is replaced by a line of marginal stability, shown in the right panel.
+	\emph{Right: phase space of the coupled logistic model.} Colored dots show $C$ at the indicated values of the symmetric niche overlap $a$. The fixed point is stable for $a<1$. At $a=0$ the two species evolve independently. As $a$ increases, the deterministically stable fixed point moves toward the origin. At $a=1$ the fixed point degenerates into a line of marginally stable fixed points, corresponding to the Moran model. The dashed lines illustrate the deterministic flow of the system: blue is for $a=0.5$, and orange for $a=1.2$. Having an asymmetry $r_1\neq r_2$ deforms the dynamical flows but not position of $C$. The zoom inset illustrates the stochastic transitions between the discrete lattice states of the system. Fixation occurs when the system reaches either of the axes. See text for details.
 	} \label{phasespace}
 \end{figure}
 
-In this section, which is a summary of the deterministic 2D Lotka-Volterra literature \cite{Neuhauser1999,Cox2010,Chotibut2015}, I examine the behaviour of the deterministic equations (\ref{mean-field-eqns}), which have four fixed points:
+In this section, which is a summary of the deterministic 2D Lotka-Volterra literature \cite{Neuhauser1999,Cox2010,Chotibut2015}, I examine the behaviour of the deterministic equations \ref{mean-field-eqns}, herein referred to as the coupled logistic or Lotka-Volterra equations, which have four fixed points:
 \begin{equation}
 O = (0,0) \quad A = (0,K_2) \quad B = (K_1,0) \quad C = \left( \frac{K_1-a_{12} K_2}{1-a_{12}a_{21}},\frac{K_2-a_{21} K_1}{1-a_{12}a_{21}} \right). %or use hspace
 \end{equation}
@@ -335,6 +335,7 @@ d_i/x_i &= r_i\frac{x_i+a_{ij}x_j}{K_i}.
 In terms of the previous chapter, this corresponds to choosing $\delta = 0$ and $q=0$. 
 Certainly different choices of $\delta$ and $q$ would give different quantitative results, but the purpose of this chapter is not to investigate the effect of these parameters in the two-dimensional system but to find the transition between the qualitatively different results of the niche and neutral regimes of the Lotka-Volterra model. 
 In the deterministic limit of negligible fluctuations the model recovers the mean field competitive Lotka-Volterra equations (\ref{mean-field-eqns}) \cite{Lin2012}. 
+As before, I renormalize the time by $r$, such that all times are implicitly expressed in units of $1/r$. 
 
 The system is characterized by the vector of probabilities $P(s,t|s^0)$ to be in a state $s=\{x_1,x_2\}$ at time $t$, given the initial conditions $s^0=(x_1^{0},x_2^{0})$: $\vec{P}(t)\equiv\big(\dots,P(s,t|s^0),\dots \big)$ \cite{Munsky2006}. 
 The forward master equation describing the time evolution of this probability distribution is \cite{VanKampen1992}
@@ -366,7 +367,7 @@ Any simulations that do not finish will be from the tail end of the distribution
 %Despite being rare, these long time trajectories have a significant contribution to the mean time, by virtue of their magnitude. 
 
 Inverting the truncated transition matrix, as has been done in this chapter and the next, is a much faster computational problem, and is hindered by insufficient RAM rather than interminable runtimes. 
-Essentially it involves solving equation \ref{matrix-method}, $\hat{M}^T\vec{T} = -\vec{1}$. %FINAL:::ensure this is correct, sufficiently clear, and references stuff
+Essentially it involves solving equation \ref{matrix-method}, $\hat{M}^T\vec{T} = -\vec{1}$ \cite{Nisbet1982,Iyer-Biswas2015}. %FINAL:::ensure this is correct, sufficiently clear, and references stuff
 Changing the cutoff means that the solution can be arbitrarily precise. 
 In the left panel of figure \ref{lntauvK}, the direct solution from inverting the truncated transition matrix compares favourably with the Gillespie simulations. 
 
@@ -404,7 +405,7 @@ With 8GB of RAM this allows for a maximum carrying capacity around two hundred.
 	\end{minipage}
 	\caption{\emph{Dependence of the fixation time on carrying capacity and niche overlap.}
 		\emph{Left:} Dotted lines come from directly solving the backwards master equation by inverting the transition matrix as per equation \ref{explicit-tau}, after a cutoff has been applied to the matrix to make it finite. Dashed lines connecting crosses are each an average of a hundred realizations of the stochastic process, as simulated using the Gillespie algorithm with tau-leaping. The simulations and direct solution are in good agreement, as one would expect. 
-		\emph{Right:} The same direct solution data as in the left panel are extended to larger carrying capacities. The lowest line, $a=1$, recovers the Moran model results in solid green with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$. At $a=0$ the systems acts as two independent stochastic logistic systems, and matches that limit as shown with the solid purple line. 
+		\emph{Right:} The same direct solution data as in the left panel are extended to larger carrying capacities. The lowest line, $a=1$, recovers the Moran model results in solid green with the fixation time algebraically dependent on $K$ for $K\gg 1$. For all other values of $a$, the fixation time is exponential in $K$ for $K\gg 1$. At $a=0$ the system acts as two independent stochastic logistic systems, and matches that limit as shown with the solid purple line. 
 	} \label{lntauvK}
 \end{figure}
 % \cite{Gillespie1977,Cao2006}
@@ -584,7 +585,7 @@ to leading order \cite{Lande1993}.
 	\centering
 	\includegraphics[width=0.6\linewidth]{morantimespicturename.png}
 	\caption{\emph{Moran-like dynamics in the Moran limit of niche overlap in the coupled logistic model.}
-	The coupled logistic model agrees with the Moran model in the limit of complete niche overlap, $a=1$. Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
+	The coupled logistic, or Lotka-Volterra, model agrees with the Moran model in the limit of complete niche overlap, $a=1$. Fixation time varies with initial fraction of the species in the population. The fixation time for the Moran model is in red and the coupled logistic model for $a=1$ is in black. The population size of the Moran model is set equal to the carrying capacity $K=64$ of the corresponding coupled logistic model. 
 	} \label{ICfig}
 \end{figure}
 
@@ -685,7 +686,7 @@ To quantitatively investigate the transition from the exponentially stable fixat
 \end{equation}
 In the  Moran limit, $a=1$, I expect $f(1)=0$, $g(1)=1$, and $h(1)=\ln\big(\ln(2)\big)$ as follows from equation (\ref{morantime}). In the independent species limit with zero niche overlap, $a=0$, equation (\ref{indietime}) suggests $f(0)=1$, $g(0)=-1$, and $h(0)=-\ln(2)$. 
 %In the  Moran limit, $a=1$, I expect $f(1)=0$, $g(1)=1$. In the independent species limit with zero niche overlap, $a=0$, I expect $f(0)=1$ and $g(0)=-1$. 
-The left panel of figure \ref{ansatzplot} shows the ansatz functions $f(a)$, $g(a)$, and $h(a)$, obtained by numerical fit to the fixation times as a function of $K$ shown in figure \ref{lntauvK}. 
+The left panel of figure \ref{ansatzplot} shows the ansatz functions $f(a)$, $g(a)$, and $h(a)$, obtained by numerical fit (using the SciPy python package) to the fixation times as a function of $K$ shown in figure \ref{lntauvK}. 
 The numerical results agree well with the expected approximate analytical results for $a=0$ and $a=1$ with small discrepancies attributable to the approximate nature of the limiting values. 
 Notably, $f(a)$, which quantifies the exponential dependence of the fixation time on the niche overlap $a$, smoothly decays to zero at $a=1$: only when two species have complete niche overlap ($a=1$) does one expect rapid fixation dominated by the algebraic dependence on $K$. 
 In all other cases the mean time until fixation is exponentially long in the system size \cite{Hanggi1990,Ovaskainen2010}. 
@@ -722,9 +723,9 @@ Even two species that occupy \emph{almost} the same niche ($a\lesssim1$) effecti
 		\includegraphics[width=1.0\linewidth]{coexist-vs-fixate.pdf}
 	\end{minipage}
 	\caption{\emph{Niche overlap controls the transition from coexistence to fixation.}
-		\emph{Left:} Blue line: $f(a)$ from the ansatz of equation (\ref{ansatz}) characterizes the exponential dependence of the fixation time on $K$; it  smoothly approaches zero as the niche overlap reaches its Moran line value $a=1$. Green line: $g(a)$ quantifies the scaling of the pre-exponential prefactor $K^{g(a)}$ with $K$. Yellow line: $h(a)$ is the multiplicative constant. Dashed bars represent a 95\% confidence interval. The dots at the extremes $a=0$ and $a=1$ are the expected asymptotic values from equations (\ref{morantime}) and (\ref{indietime}), which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the Moran limit. The red line comes from the Gaussian Fokker-Planck approximation described in section \ref{FPsection}. 
+		\emph{Left:} Blue line: $f(a)$ from the ansatz of equation (\ref{ansatz}) characterizes the exponential dependence of the fixation time on $K$; it  smoothly approaches zero as the niche overlap reaches its Moran line value $a=1$. Green line: $g(a)$ quantifies the scaling of the pre-exponential prefactor $K^{g(a)}$ with $K$. Yellow line: $h(a)$ is the multiplicative constant. Dashed bars represent a 95\% confidence interval. For each $a$ value, the ansatz was fit to data like those shown in figure \ref{lntauvK}. The dots at the extremes $a=0$ and $a=1$ are the expected asymptotic values from equations (\ref{morantime}) and (\ref{indietime}), which varies from $g(a)=-1$ for the independent processes to $g(a)=1$ in the Moran limit. The red line comes from the Gaussian Fokker-Planck approximation described in section \ref{FPsection} below. 
 		%NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE RECODED AND CORRECTED
-		\emph{Right:} In part of the parameter space, fixation is always fast. The white area shows where two species are expected to effectively coexist, while the black shading identifies the regime where fixation is faster than a similarly-sized Moran model. Fixation is estimated by extrapolating the ansatz parameter fits to the $a,K$ parameter space. %NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE rerun AND CORRECTED
+		\emph{Right:} In part of the parameter space, fixation is always fast. The white area shows where two species are expected to effectively coexist, while the black shading identifies the regime where fixation is faster than a similarly-sized Moran model. Fixation is estimated by extrapolating the ansatz parameter fits to the $a,K$ parameter space. See text for details. %NTS:::THIS DOES NOT ACCOUNT FOR THE NEW DELTA T = 3/K BUSINESS - NEEDS TO BE rerun AND CORRECTED
 	} \label{ansatzplot}
 \end{figure}
 
@@ -1047,7 +1048,7 @@ However, it gets an incorrect prefactor, being $\propto \sqrt{K}$ rather than $\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{{RouteToFixation}}
-	\caption{\emph{The system samples multiple trajectories on its way to fixation.}  Contour plot shows the average residency times at different population states of the system, with pink indicating longer residence time, deep green indicating rarely visited states. The colored line is a sample trajectory the system undergoes before fixation; color coding corresponds to the elapsed time with orange at early times, purple at the intermediate times and red at late stages of the trajectory. The red dot shows the deterministic coexistence point. See text for more details. \emph{Left}: Complete niche overlap limit, $a=1$, for $K=64$. \emph{Right}: Independent limit with $a=0$ and $K=32$. % Note that only one per million trajectory points are included, since most of the trajectory is very close tp the deterministic fixed point.
+	\caption{\emph{The system samples multiple trajectories on its way to fixation.}  Contour plot shows the average residency times at different population states of the system, with pink indicating longer residence time, deep green indicating rarely visited states. The colored line is a sample trajectory the system undergoes before fixation, as generated by the Gillespie algorithm; color coding corresponds to the elapsed time with orange at early times, purple at the intermediate times and red at late stages of the trajectory. The red dot shows the deterministic coexistence point, and the black lines are the most probable exit trajectories. See text for more details. \emph{Left}: Complete niche overlap limit, $a=1$, for $K=64$. \emph{Right}: Independent limit with $a=0$ and $K=32$. % Note that only one per million trajectory points are included, since most of the trajectory is very close tp the deterministic fixed point.
 	} \label{extinctionroutes}
 \end{figure}
 %guassian potentials in insets!!!

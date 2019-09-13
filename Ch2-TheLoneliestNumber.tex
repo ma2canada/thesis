@@ -152,7 +152,7 @@ The parameter $K$ is the carrying capacity, a phenomenological measure of the sy
 Many dynamical systems can be approximated by a Taylor series expansion at a population small relative to the characteristic system size, such that they recover the logistic equation. %truncated
 %For any per capita dynamics $r\,f(n/\tilde{K})$ with some large system parameter $\tilde{K}$ that gives exponential growth at small population we can write an expansion $f(n/\tilde{K})\approx f(0) + f'(0)n/\tilde{K}$. 
 %Defining $K\equiv-\tilde{K}/f'(0)$ we recover the logistic equation for small populations. 
-For example, if exponential growth is inhibited by Michaelis-Menten kinetics such that $\frac{1}{n}\frac{dn}{dt} = r\left(1-\frac{n}{n+\tilde{K}}\right)$, at small population the dynamics are the same as the logistic equation with $K=\tilde{K}$. 
+For example, if exponential growth is inhibited by Michaelis-Menten kinetics such that $\frac{1}{n}\frac{dn}{dt} = r\left(1-\frac{\gamma n}{n+\tilde{K}}\right)$, at small population the dynamics are the same as the logistic equation with $K=\tilde{K}/\gamma$. 
 %Since I concern myself with extinction, it is exactly the dynamics of small populations that interests me; the population can have different behaviour at large $n$, but my MTE results should at least remain a good estimate. %should still hold validity. %NTS:::this isn't true! the n~K details matter - or do they?
 %Note that the QSD will in general be different, and that most approximation techniques considered in this chapter work best near the mean of the QSD rather than near the small population sizes relevant to extinction. 
 Extinction occurs when the system reaches $n=0$, an absorbing state. %, with flux from small populations. 
@@ -185,9 +185,14 @@ The Markov property underlying most stochastic processes studied, including thos
 %and this is similarly assumed for death events. %too technical? Or esoteric?
 In this chapter I use the birth rate
 \begin{equation}
-b_n = r\,(1 + \delta)\,n - \frac{r\,q}{K}n^2 = r\,n\left(1+\delta-q\frac{n}{K}\right)
-\label{birth}
+b_n = 
+\begin{cases}
+ r\,(1 + \delta)\,n - \frac{r\,q}{K}n^2 = r\,n\left(1+\delta-q\frac{n}{K}\right) &\text{for } 0\leq n < N \\
+ 0																				 &\text{for } n \geq N
+\end{cases}
+ \label{birth}
 \end{equation}
+(see equation \ref{maxN} below for the definition of $N$)
 and the death rate
 \begin{equation}
 d_n = r\,\delta\,n + \frac{r(1-q)}{K} n^2 = r\,n\left(\delta+(1-q)\frac{n}{K}\right).
@@ -217,9 +222,10 @@ This is the maximum size the population can achieve, and I define this cutoff as
 %This limits the population to a maximal size $N = \lceil n_{max}\rceil$, where $n_{max}$ is defined as the population size such that $b_{n_{max}}=0$.
 %From equation \ref{birth} we find that
 \begin{equation}
-N = \frac{1+\delta}{q}K. 
+N = \bigg\lfloor \frac{1+\delta}{q}K \bigg\rfloor,
 \label{maxN}
 \end{equation}
+where $\lfloor \cdot \rfloor$ is the floor function, rounding down to the nearest integer. 
 Therefore I limit the calculations to the biologically relevant range $n\in[0,N]$. % and, for completeness to our study, we can readily check that for our range of parameters $N\geq K$. 
 Already it is evident that the parameters $\delta$ and $q$ have an effect on the system, as different values of the parameters will naturally define a range of states accessible in the model. 
 %Note that so long as $q\leq 1$ the death rate is positive semi-definite for the domain of interest. % as defined previously does not imply any necessary subtle manipulation of the population range since the death rate is always positive (except at $n=0$) in the range of $q$ and $\delta$ described earlier. 
@@ -248,9 +254,9 @@ It is found by renormalizing the probability of being at each state $n$ by the t
 The dynamics of this conditional distribution are described by a slightly different master equation than equation \ref{master-eqn} \cite{Nisbet1982}:
 \begin{equation}
 \frac{dP_n^c}{dt} =  b_{n-1}P_{n-1}^c + d_{n+1}P_{n+1}^c - \big(b_n + d_n - P_1^c d_1 \big) P_n^c. 
-\label{masters2}
+ \label{masters2}
 \end{equation}
-After an initial transient period, this conditional probability will stabilize to a steady $\tilde{P}^c_n$ for which $d/dt\,\tilde{P}_n^c=0$. 
+After an initial transient period, this conditional probability will stabilize to a steady $\tilde{P}^c_n$ for which $d\tilde{P}_n^c/dt=0$. 
 The steady state of this distribution is referred to as the quasi-stationary distribution (QSD), not to be confused with the true stationary distribution of the population which is $\tilde{P}_n(t\rightarrow\infty)=\delta_{n,0}$, extinction. 
 
 %NTS:::talk about autocorrelation time, actually do it. 
@@ -276,7 +282,7 @@ The steady state of this distribution is referred to as the quasi-stationary dis
 		\centering
 		\includegraphics[width=1.0\linewidth]{Var}
 	\end{minipage}
-	\caption{\emph{Characterizing the quasi-stationary probability distribution function for varying $\delta$ and $q$.} Lightness indicates an increased mean or variance in the left and right panels respectively. Carrying capacity $K=100$. 
+	\caption{\emph{Characterizing the quasi-stationary probability distribution function for varying basal death rate $\delta$ and competition mechanism parameter $q$.} Lightness indicates an increased mean or variance in the left and right panels respectively. Carrying capacity $K=100$. 
 	\emph{Left:} The QSD has decreasing mean with increased $\delta$ or decreased $q$. 
 	\emph{Right:} The QSD has increasing variance with increased $\delta$ or decreased $q$. 
 	}
@@ -299,6 +305,7 @@ To calculate the QSD I employ the following textbook algorithm \cite{Nisbet1982}
 \end{equation}
 Given that $b_0=0$ there is a lower cutoff and so the whole distribution can be written in terms of $\tilde{P}_1$, which is then solved by normalization of the total probability to unity. 
 The outcome of this algorithm constitutes the novelty of this section, and is seen in figure \ref{qsd} for different values of $q$ and $\delta$. 
+For an example of the probability distribution function itself, see the left panel of figure \ref{techn}; the distribution appears to be well characterized by its mean and variance. 
 %The former technique is shown in figure \ref{qsd}, for different values of $q$ and $\delta$. %NTS:::get your own figure
 %Results of this algorithm, for different values of $q$ and $\delta$, are presented in Figure \ref{qsd}. 
 Increasing the value of $\delta$ shifts the mean slightly toward $0$ and spreads the distribution out, increasing its variance. 
@@ -316,7 +323,7 @@ When these interactions are a cause of death it makes the system less stable, wi
 	\includegraphics[width=0.6\linewidth]{cdf1D8K-10000runs.pdf}
 	\caption{\emph{The extinction time cumulative distribution of a single species logistic model is dominated by a single exponential tail.} 
 	Except at early times, the bulk of the cumulative distribution function is modelled by an exponential distribution with the same mean, shown in the red dotted line. 
-	The $10,000$ data are generated using using the Gillespie algorithm for $K=8$, $\delta=q=0$, starting from the carrying capacity. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. 
+	The $10,000$ data are generated using using the Gillespie algorithm for $K=8$, $\delta=q=0$, starting from the carrying capacity. Similar results are seen for various values of $\delta$ and $q$. For higher carrying capacities the assumption of exponentially distributed times becomes even more accurate. 
 	%NTS:::cdf K=4, n=10000; K=8, n=10000; K=16, n=1000;
 	} \label{etimedistr}
 \end{figure}
@@ -327,11 +334,14 @@ In many cases, including the single logistic model, the MTE characterizes the en
 Because the absorbing point is deterministically repelling and, as the QSD shows, the system spends most of its time near the deterministic fixed point at $n=K$, extinction events are rare, far from equilibrium. %, as are trajectories that get close to extinction. 
 These extinction attempts can be considered as almost independent, since the autocorrelation time is so much shorter than the time between attempts \cite{Hanggi1990,Lande1993}. %NTS:::references???
 The system has repeated, independent events that occur with at a constant rate; it is Poissonian, hence the distribution of extinction times is exponential and described by its mean, the MTE \cite{Hanggi1990,Leigh1981,Lande1993,Foley1994}. 
+Another way to get intuition into the exit times being roughly exponentially distributed is to rewrite the master equation \ref{master-eqn} in vector form as $\partial_t \vec{P} = \hat{M}\vec{P}$, which is solved by $\vec{P}(t)=e^{\hat{M}t}\vec{P}(0)$. 
+The probability of being in each state, and relevantly the absorbing state, is a sum of exponentials (in a basis which diagonalizes the transition matrix $\hat{M}$), and at long times this is dominated by the single longest lasting exponential term. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\textwidth]{Figure2}
-	\caption{\emph{Exploring the mean time to extinction in the parameter space.} The parameter $q$ shifts the nonlinearity between the birth and death rates: for $q=0$ the nonlinearity is purely in the death rate, for $q=1$ nonlinearity appears only in birth. The birth and death rates are increased simultaneously with $\delta$. Extinction occurs more rapidly as $\delta$ increases or $q$ decreases. } \label{mteCP}
+	\caption{\emph{Exploring the mean time to extinction (from equation \ref{analytic_mte}) in the parameter space.} The parameter $q$ shifts the nonlinearity between the birth and death rates: for $q=0$ the nonlinearity is purely in the death rate, for $q=1$ nonlinearity appears only in birth. The birth and death rates are increased simultaneously with $\delta$. Extinction occurs more rapidly as $\delta$ increases or $q$ decreases, as the system effectively becomes more noisy. }
+	 \label{mteCP}
 \end{figure}
 
 For one-species systems it is well known how to exactly solve the MTE for a birth-death process. 
@@ -353,24 +363,31 @@ where
 %\end{equation*}
 \begin{align}
 %q_0 &= \frac{1}{b(0)} \\
-q_1 &= \frac{1}{d(1)} \\
+q_1 &= \frac{1}{d_1} \\
+%q_1 &= \frac{1}{d(1)} \\
 % q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)}, \text{  }\hspace{1cm} \text{for }i > 1 \\
 %     &= \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}
-q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1 \notag
+%q_i &= \frac{b(i-1)\cdots b(1)}{d(i)d(i-1)\cdots d(1)} = \frac{1}{d(i)}\prod_{j=1}^{i-1}\frac{b(j)}{d(j)}, \hspace{1cm} \text{for }i > 1 \notag
+q_i &= \frac{b_{i-1}\cdots b_1}{d_i d_{i-1}\cdots d_1} = \frac{1}{d_i}\prod_{j=1}^{i-1}\frac{b_j}{d_j}, \hspace{1cm} \text{for }i > 1 \notag
 \end{align}
 and
 \begin{equation}
-S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)} = \prod_{j=1}^{i}\frac{d(j)}{b(j)}.  
+%S_i = \frac{d(i)\cdots d(1)}{b(i)\cdots b(1)} = \prod_{j=1}^{i}\frac{d(j)}{b(j)}.  
+S_i = \frac{d_i\cdots d_1}{b_i\cdots b_1} = \prod_{j=1}^{i}\frac{d_j}{b_j}. 
 \end{equation}
 If $N$ does not exist or is negative the sum instead goes to infinity. 
 These equations come from noting $\tau(0)=0$, $\tau(1)<\infty$, and iterating the difference equation \cite{Nisbet1982,Palamara2013}
 \begin{equation}
-\tau(n) = \frac{1}{b(n)+d(n)} 
-+ \frac{b(n)}{b(n)+d(n)}\tau(n+1) 
-+ \frac{d(n)}{b(n)+d(n)}\tau(n-1),
+\tau(n) = \frac{1}{b_n+d_n} 
++ \frac{b_n}{b_n+d_n}\tau(n+1) 
++ \frac{d_n}{b_n+d_n}\tau(n-1),
  \label{mte-recurrence}
+%\tau(n) = \frac{1}{b(n)+d(n)} 
+%+ \frac{b(n)}{b(n)+d(n)}\tau(n+1) 
+%+ \frac{d(n)}{b(n)+d(n)}\tau(n-1),
 \end{equation}
-which itself comes from noticing that from state $n$ the system will either go to state $n+1$ (with probability $\frac{b(n)}{b(n)+d(n)}$) or state $n-1$ (with probability $\frac{d(n)}{b(n)+d(n)}$), and the mean time for either of these jumps is $\frac{1}{b(n)+d(n)}$. 
+%which itself comes from noticing that from state $n$ the system will either go to state $n+1$ (with probability $\frac{b(n)}{b(n)+d(n)}$) or state $n-1$ (with probability $\frac{d(n)}{b(n)+d(n)}$), and the mean time for either of these jumps is $\frac{1}{b(n)+d(n)}$. 
+which itself comes from noticing that from state $n$ the system will either go to state $n+1$ (with probability $\frac{b_n}{b_n+d_n}$) or state $n-1$ (with probability $\frac{d_n}{b_n+d_n}$), and the mean time for either of these jumps is $\frac{1}{b_n+d_n}$. 
 Thus the mean time to extinction from neighbouring states are related, which leads to this recurrence relation. 
 
 \iffalse
@@ -393,7 +410,7 @@ Thus the mean time to extinction from neighbouring states are related, which lea
 		\centering
 		\includegraphics[width=1.0\linewidth]{Fig3B}
 	\end{minipage}
-	\caption{\emph{Mean time to extinction for varying $\delta$ and $q$.} Each line represents a slice in figure \ref{mteCP}. Lightness of the line indicates an increase of $q$ or $\delta$ in the left and right panels respectively. Carrying capacity $K=100$. 
+	\caption{\emph{Mean time to extinction for varying basal death rate $\delta$ and competition mechanism parameter $q$.} Each line represents a slice in figure \ref{mteCP}. Lightness of the line indicates an increase of $q$ or $\delta$ in the left and right panels respectively. Carrying capacity $K=100$. 
 	\emph{Left:} Vertical slices of the heat map show that increasing $\delta$ decreases $\tau$ for different values of $q$. 
 	\emph{Right:} Horizontal slices of the heat map show that increasing $q$ increases $\tau$ for different values of $\delta$. 
 	}
@@ -407,7 +424,7 @@ A typical trajectory starting from $n$ goes first to the deterministic fixed poi
 Since the time for the population to reach carrying capacity is insignificant compared to the extinction time, the MTE is largely independent of the initial population \cite{Chotibut2015}, and I write $\tau(n) \approx \tau(K) \equiv \tau_e$ for all $n$ here and for most of this thesis. %maybe \cite{Chotibut2015} or Munsky?
 This approximation only fails for small $n$ \cite{Chotibut2015}. %NTS:::show this? in a graph? %EDIT:::cite others?
 It is well known that $\tau_e$ scales as $e^K$ \cite{Lande1993,Ovaskainen2010} and this is indeed what I observe (for an example see the appendix or the right panel of figure \ref{techn} below). 
-Similarly the times I report have all been rescaled by $r$ and so are measured in generations, such that the real times are $\tau_e/r$. 
+Similarly the times I report have all been rescaled by $r$ and so are measured in generations, such that the real times are $r\tau_e$. 
 What is less well known, the novelty of this research, is the dependence on the additional parameters $\delta$ and $q$. %NTS:::have I introduced the term "hidden parameters"?
 Figure \ref{mte} shows that the MTE depends on the values of $\delta$ and $q$, parameters that appear in the births and deaths but do not appear in the deterministic equation. %hence are called "hidden"
 
@@ -455,7 +472,7 @@ Unfortunately, as I referenced above, the MTE tends to scale exponentially with 
 The transition matrix inverse method alluded to in the introduction chapter and used in subsequent chapters of this thesis calculates the MTE to arbitrary accuracy. 
 Essentially, equation \ref{mte-recurrence} can be written in matrix form as \cite{Nisbet1982,Iyer-Biswas2015}
 \begin{equation}
-\hat{M}\vec{T} = -\vec{1}
+\hat{M}^T\vec{T} = -\vec{1}
  \label{matrix-method}
 \end{equation}
 with $\left(\vec{T}\right)_n = \tau(n)$ and elements of $\hat{M}$ being the birth and death rates into and out of each state. 
@@ -466,7 +483,9 @@ A cruder yet faster and less RAM-intense numerical approximation is to take the 
 \begin{equation}
  \tau_e \approx -1/\lambda_1. 
 \end{equation}
+This corresponds to keeping only the longest-lived term in the sum of exponentials $\vec{P}(t)=e^{\hat{M}t}\vec{P}(0)$ (see the discussion regarding figure \ref{etimedistr}). 
 For this chapter, all of these numerical methods (Gillespie algorithm, matrix inverse method, and smallest eigenvalue) give results indistinguishable from the exact summation of equation \ref{analytic_mte} and so they are not included in any figures. 
+{etimedistr}
 
 %D - MattheW; FP
 The first approximation I will regard is the Fokker-Planck (FP) equation, which approximates the discrete populations as continuous. 
@@ -483,14 +502,14 @@ The Pawula theorem says that when employing the Kramers-Moyal expansion the only
 %Typically in bio the large parameter is volume. 
 %Then $x=n/K$ is something like density, and is the parameter about which we expand, requiring that $|1/K| \ll 1$. 
 %Furthermore, the expansion requires that the rates $W_n$ can be written in a form $W_n/K = w(x)$. %NTS:::
-The expansion requires the definition of a density $x=n/K$ and that the rates $W_n$ can be written in a form $W_n/K = w(x)$, eventually arriving at:
+The expansion requires the definition of a density $x=n/K$ and that the rates $w_n$ can be written in a form $w_n/K = w(x)$, eventually arriving at:
 %The more pedagogical Fokker-Planck equation is then
 \begin{equation}
-\partial_t P(x,t) = - \partial_x\Big( (b(x) - d(x)) P(x,t) \Big) + \frac{1}{2 K} \partial_x^2 \Big( \big(b(x) + d(x)\big) P(x,t) \Big). 
+\partial_t p(x,t) = - \partial_x\Big( (b(x) - d(x)) p(x,t) \Big) + \frac{1}{2 K} \partial_x^2 \Big( \big(b(x) + d(x)\big) p(x,t) \Big). 
  \label{FPch1}
 \end{equation}
 %which is equivalent to equation \ref{FPch1} above for $b(x) = b_n/K$ and similarly for $d$. 
-Instead of the master equation's difference differential equation for the probability, equation \ref{FPch1} is a partial differential equation for the probability density. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
+Instead of the master equation's difference differential equation for the probability $P_n$, equation \ref{FPch1} is a partial differential equation for the probability density $p(x)$. %NTS:::previously I referred to the quasi-PDF, when really it was a PMF; I should be more careful; explain more fully above that I will switch between the two
 The first term on the right-hand side is often called the drift term and reduces to the deterministic dynamics when fluctuations are neglected \cite{Gardiner2004}. 
 %corresponds to the dynamical equation at the deterministic limit, when fluctuations are neglected \cite{Gardiner2004}. 
 The second term is the diffusion term and describes the effect of stochasticity on the system. 
@@ -498,85 +517,69 @@ There is a one-to-one correspondence between Fokker-Planck and Langevin equation
 Equation \ref{FPch1} can be solved directly to get the MTE \cite{Gardiner2004,Iyer-Biswas2015}: 
 %For ease of reference, I leave the equation here:
 \begin{equation}
-\tau(n) = 2\int_0^n dy \frac{1}{\phi(y)} \int_y^\infty dz \frac{\phi(z)}{B(z)},
+\tau(n) = 2K\int_0^n dy \frac{1}{\phi(y)} \int_y^\infty dz \frac{\phi(z)}{B(z)},
+ \label{FPfull}
 \end{equation}
 %In the above, 
-where $\phi(x) = \exp\left[\int_0^x dn 2 A(n)/B(n)\right]$, $A(n) = b_n - d_n$, and $B(n) = b_n + d_n$. 
+where $\phi(x) = \exp\left[\int_0^x dy\, 2 A(y)/B(y)\right]$, $A(y) = b(y) - d(y)$, and $B(y) = b(y) + d(y)$. 
+I have calculated these integrals numerically where possible, but it is prone to computational problems of convergence at large $K$. 
 %A quasi-steady state can be calculated when the time derivative $\partial_t P_n(t)$ is small. 
-To find the QSD the left-hand side of equation \ref{FPch1} is set to zero, resulting in \cite{Gardiner2004}
+To find the QSD the left-hand side of equation \ref{FPch1} is set to zero, resulting in the steady state probability density \cite{Gardiner2004}
 %That is,
 \begin{equation}
-\ln P_n^{ss} \propto \frac{2(b_n - d_n) - \partial_n(b_n + d_n)}{(b_n + d_n)}. 
+\ln p(x)^{ss} \propto \frac{2K(b(x) - d(x)) - \partial_x(b(x) + d(x))}{(b(x) + d(x))}. 
 \end{equation}
-By analogy with Boltzmann statistics, the negative of the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Roozen1987,Grasman1996,Zhou2012,Yan2013}, although in higher dimensions it cannot be defined \cite{Zhou2012,Badali2019a}. %EDIT:::refer to next chapter/appendix?
+By analogy with Boltzmann statistics, the negative of the right-hand side of the above equation is sometimes referred to as a pseudo-potential \cite{Roozen1987,Grasman1996,Zhou2012,Yan2013}, although in higher dimensions it cannot be defined \cite{Zhou2012,Badali2019a}, as will be further discussed in the next chapter. %EDIT:::refer to next chapter/appendix?
 
 %D.2 MattheW; FP Gaussian
 %NTS:::expand the below?
 %To simplify the situation further, the birth and death rates can be linearized about a stable fixed point, which implies a Gaussian solution to the FP equation. 
-The Fokker-Planck equation can be further simplified by linearizing the birth and death rates about a stable (deterministic) fixed point $n^*$. 
+The Fokker-Planck equation can be further simplified by linearizing the birth and death rates about a stable (deterministic) fixed point $x^*$. 
 %More specifically, t
-The drift term is replaced with $(n-n^*)\partial_n(b_n - d_n)|_{n=n^*}$ (since by definition $(b_n - d_n)|_{n=n^*}=0$) and the diffusion with $(b_n + d_n)|_{n=n^*}$. 
+The drift term is replaced with $(x-x^*)\partial_x(b(x) - d(x))|_{x=x^*}$ (since by definition $(b(x) - d(x))|_{x=x^*}=0$) and the diffusion with $(b(x) + d(x))|_{x=x^*}$. 
 We only expect this approximation to hold near the fixed point. 
 %If we extend the domain to all space the solution is Gaussian, peaked near the fixed point. 
 The solution is 
 \begin{equation}
-p (n) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\Big\lbrace-\frac{(n-n^*)^2}{2\sigma^{2}}\Big\rbrace,
+p (x) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\Big\lbrace-\frac{(x-x^*)^2}{2\sigma^{2}}\Big\rbrace,
  \label{FP-gaussian}
 \end{equation}
-a Gaussian centred at the fixed point with variance $\sigma^2=\frac{-(b_n + d_n)|_{n=n^*}}{2\partial_n(b_n - d_n)|_{n=n^*}}$. 
+a Gaussian centred at the fixed point with variance $\sigma^2=K\frac{-(b(x) + d(x))|_{x=x^*}}{2\partial_x(b(x) - d(x))|_{x=x^*}}$. 
 As described earlier, the quasi-stationary probability distribution leaks from $P_n$, a non-extinct population, to $P_0$.
 And since this is a single step process (with the population only changing by one individual per event), the only transition from which it can reach the absorbing state is through a death at $P_1$: all population extinctions must go through this sole state. 
-The flux of the probability to the absorbing state is thus given by the expression $d(1)P_1$, hence the MTE can be approximated from the QSD \cite{Assaf2016}:
+The flux of the probability to the absorbing state is thus given by the expression $d_1P_1$, hence the MTE can be approximated from the QSD \cite{Assaf2016}:
 \begin{equation}
-\tau_e \approx \frac{1}{d(1)P_1}.
+\tau_e \approx \frac{1}{d_1P_1}% = \frac{1}{d(1)p(1)}.
  \label{1overd1P1}
 \end{equation}
-Then the Gaussian approximation to the Fokker-Planck equation has an MTE of
+Based on the flux into the zero state, the Gaussian approximation to the Fokker-Planck equation has an MTE of \cite{VanKampen1992}
 \begin{equation}
-\tau_e \approx 2\sqrt{2\pi\sigma^{2}} \left( \partial_n(b_n + d_n)|_{n=0} \right)^{-1} \exp\Big\{\frac{(n^*)^2}{2\sigma^{2}}\Big\}. 
+\tau_e \approx 2\sqrt{2\pi\sigma^{2}} \left( \partial_x(b(x) + d(x))|_{x=0} \right)^{-1} \exp\Big\{\frac{(x^*)^2}{2\sigma^{2}}\Big\}. 
 \end{equation}
 
 %E - Jeremy; WKB
 Another method frequently utilized is the WKB approximation \cite{Doering2005,Assaf2006,Kessler2007,Kamenev2008,Assaf2010,Ovaskainen2010,Gottesman2012,Assaf2016,Yu2017}. 
 Generally, the WKB method involves approximating the solution to a differential equation with a large parameter (such as $K$) by assuming an exponential solution (an ansatz) of the form \cite{Assaf2016}
 \begin{equation}
-P_n \propto \exp \left\{ K \sum_{i=0}^\infty \frac{1}{K^i}S_i(n) \right\}.
+p(x) \propto \exp \left\{ K \sum_{i=0}^\infty \frac{1}{K^i}S_i(x) \right\}.
  \label{WKBansatz}
 \end{equation}
-Starting from the master equation \ref{master-eqn}, one can immediately apply the ansatz in the probability distribution and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}. %careful, Assaf2016 is an arXiv paper
+Starting from the Fokker-Planck equation \ref{FPch1}, one can immediately apply the ansatz in the probability density and solve the subsequent differential equations to different orders in $1/K$\cite{Assaf2016}. %careful, Assaf2016 is an arXiv paper
 %To leading order, only $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$ is needed. 
 To leading order, only 
 \begin{equation}
 %S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)
-S_0(n) = \int_{n=0}^{K} dn \ln\left(\frac{b_n}{d_n}\right)
+S_0(x) = \int_{x=0}^{1} dx \ln\left(\frac{b(x)}{d(x)}\right)
  \label{WKBaction}
 \end{equation}
 is needed. 
 This method is sometimes referred to as the real-space WKB approximation, wherein we obtain a solution for the quasi-stationary probability distribution.
-Another method, known as the momentum-space WKB, is to write the evolution equation of the generating function of $P_n$, the conjugate of the master equation, and then apply the exponential ansatz \cite{Assaf2006,Assaf2016}. 
+Another method, known as the momentum-space WKB, is to write the evolution equation of the generating function of $p(x)$, the conjugate of the master or FP equation, and then apply the exponential ansatz \cite{Assaf2006,Assaf2016}. 
 The momentum-space WKB has been shown to err from real-space WKB \cite{Ovaskainen2010,Assaf2016}, and it seems the real-space WKB method is now more popular \cite{Kessler2007,Kamenev2008,Assaf2010,Ovaskainen2010,Gottesman2012,Assaf2016,Yu2017}. 
-The quantity $S_0(n)$ can be interpreted as the action in a Hamilton-Jacobi equation \cite{Assaf2016}. 
+The quantity $S_0(x)$ can be interpreted as the action in a Hamilton-Jacobi equation \cite{Assaf2016}. 
 %Its solution is $S_0(n) = \int_{n=0}^{n^*} \ln\left(\frac{b_n}{d_n}\right)$. %NTS:::check this
 As before, the MTE can be calculated from the QSD equation \ref{WKBansatz} using equation \ref{1overd1P1}. 
 %NTS:::%EDIT:::show the equation for the WKB MTE
-
-\iffalse
-%C - MattheW; small n - SHOULD SMALL n BE CUT, SINCE IT ONLY WORKS IN 1D WHICH HAS A FULL SOLUTION ANYWAYS??
-Rather than approximating the probability distribution function near the fixed point, a different approximation can be done to estimate the probability distribution function near the absorbing state $n=0$. %NTS:::this still could be formulated simply as a steady state approximation - see Gardiner p.237
-If the bulk of the probability mass is centered on $K$ then the probability of being close to the absorbing state is small (note that this condition is similar to the quasi-stationary approximation, since the flux out of the system is proportional to the probability of being at a state close to $0$). 
-%Furthermore, it is assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order \cite{smalln}. 
-For this small $n$ approximation it is further necessary to assume that the probability distribution function grows rapidly, away from the absorbing state, such that $P_{n+1}\gg P_n$, whereas neighbouring birth and death rates are of the same order, \emph{e.g.} $b_{n+1}\sim b_n$ \cite{Gardiner2004,Assaf2010}. 
-Rewriting the master equation \ref{master-eqn} as $\partial_t P_n = \left(b_{n-1} P_{n-1} - b_n P_n \right) + \left(d_{n+1}P_{n+1} - d_n P_n\right)$ in each set of brackets only the higher state term is kept: $\left(b_{n-1} P_{n-1} - b_n P_n \right) \approx - b_n P_n$ and $\left(d_{n+1}P_{n+1} - d_n P_n\right) \approx d_{n+1}P_{n+1}$. 
-%one approximates the left hand side as zero and the right hand side as $\left(-b_n P_n \right) + \left( d_{n+1} P_{n+1}\right)$. 
-Rearranging this gives \cite{Gardiner2004}
-% $P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}$. %make sure it looks nice, like Gardiner
-\begin{equation}
-P_n = \frac{b_{n-1}}{d_n}P_{n-1} = \prod_{i=2}^n \frac{b_{i-1}}{d_i} P_{1}. 
-\end{equation}
-$P_{1}$ can be found by ensuring the probability is normalized; despite the sum extending beyond the region for which $P_{n+1}\gg P_n$ is valid, the probability distribution generated from this small $n$ approximation is qualitatively reasonable. 
-It has been used in the literature, in conjunction with approximations that work near the fixed point, to verify numerical solutions of a one dimensional problem \cite{Assaf2010}. 
-It cannot easily be extended to higher dimensions. 
-\fi
 
 %\begin{figure}[h]
 %	\centering
@@ -596,7 +599,7 @@ It cannot easily be extended to higher dimensions.
 	\caption{\emph{Approximation techniques for calculating the QSD and MTE.} Carrying capacity $K=100$, $\delta=0.4$ and $q=0.7$. 
 	\emph{Left:} The quasi-stationary probability distribution function is calculated using the QSD algorithm, and approximated with the Fokker-Planck equation, Fokker-Planck Gaussian approximation, and WKB method. %small n??
 	The WKB method gives the best match with the correct QSD algorithm solution. %, though all techniques are good near the fixed point at $K$. 
-	All of the methods correctly capture the QSD near the deterministic fixed point, but start to diverge away from $K$. 
+	All of the methods correctly capture the QSD near the deterministic fixed point, but start to diverge away from the deterministic fixed point $n^*=K$. 
 	\emph{Right:} The mean time to extinction is calculated exactly using equation \ref{analytic_mte}. Except for the regular Fokker-Planck solution, the same approximations as in the left panel are used, as is the QSD in conjunction with equation \ref{1overd1P1}. WKB stays closest to the true solution. %Small $n$ and 
 	}
 	\label{techn}
@@ -610,50 +613,26 @@ The left panel of figure \ref{techn} gives an instance of the quasi-stationary d
 Note that with this scale of the figure the WKB approximation and the quasi-stationary algorithm are not distinguishable by eye, though there are indeed slight differences. 
 %NTS:::IT IS NOT YET CLEAR FROM THE FIGURE HOW I CAN CONCLUDE THIS; IT'S FROM CONSIDERING MANY SUCH FIGURES
 In general, the ability of the techniques to successfully approximate the quasi-stationary distribution and mean time to extinction depends heavily on the region of parameter space. 
-\iffalse
-What I observe is that for large $K$ the celebrated FP approximation is valid in all cases except for low $\delta$ and $q$. 
-For small $K$ it is a poor approximation except low $\delta$ and high $q$. %NTS:::why might these be true?
-The WKB method fares better, appearing to be reasonable everywhere in $q$, $\delta$, $K$ parameter space. 
-%for high K, WKB is always good, FP is good except for low low; for low K, WKB still good, FP bad except for low high; others are bad everywhere
-%and small n?
-All other approximations match near the fixed point but fail elsewhere. 
-\fi
 Regarding figures similar to the right panel of figure \ref{techn} (shown in the appendix) reveals that WKB works well when $\delta$ is small, but is off by a significant factor for large $\delta$. 
+The regular Fokker-Planck approximation involves numerical integration and shows convergence issues except at low $K$ and so is not plotted, but based on the low $K$ results it shows an opposite trend to WKB, working well at high $\delta$ but not at low. 
 The Gaussian approximation to the Fokker-Planck equation always performs poorly. 
-The regular Fokker-Planck approximation involves numerical integration and shows convergence issues except at low $K$ and so is not plotted, but based on the low $K$ results it is a reasonable approximation at low $\delta$ and high $q$. 
-%
-%It is also possible to obtain the mean time to extinction from these distributions.
-%As described earlier, the quasi-stationary probability distribution leaks from $P_n$, a non-extinct population, to $P_0$.
-%As since this is a single step process (with the population only changing by one individual per event), the only transition from which it can reach the absorbing state is through a death at $P_1$: all population extinctions must go through this sole state. 
-%The flux of the probability to the absorbing state is thus given by the expression $d(1)P_1$, hence the approximation \cite{textbooks,WKB paper(Assaf2016?)}
-%\begin{equation}
-%\tau_e \approx \frac{1}{d(1)P_1}.
-%\label{1overd1P1}
-%\end{equation}
-%This same equation can be applied to different methods and algorithms that have produced quasi-stationary distributions. % for which we have an expression for $P_1$.
-%
-\iffalse
-%Results of the tau_e approximations presented above - Jeremy
-%Having calculated the MTE using each approximation, I can now compare the results to the exact solution and verify their accuracy in the parameter space of $q$, $\delta$, and $K$.
-%These results are summarized in Figure \ref{mte_techn}.
-Similarly, I calculate the MTE using the various approximations, as shown in the right panel of figure \ref{techn}. 
-As with the probability distribution function, the difference between the solution of the approximations and equation \ref{analytic_mte} is dependent on $q$, $\delta$ and $K$. 
-%Most of the solutions tend to converge at very low $K$, though this is unsurprising as the techniques should all approach zero as $K$ decreases and the initial condition of $K$ approaches the final absorbing state at $0$. 
-With increasing $K$ the divergence of each approximation becomes more evident: 
-%From this difference we can evaluate in which regime certain approximations work best.
-%I find that 
-while no approximation works well for large $\delta$, many of them recover the correct scaling in $K$, albeit off by a factor. %yeah?
-For all other parameter regimes, the WKB method is reasonable. % approximations for the exact results. %!!!CHECK if this is true for small n as well %small $n$ and 
-%, and Fokker-Planck QSD? And small n? And full FP%
-\fi
-%I think we need to be a bit more specific with our assessment of the approximations
-%NTS:::say a bit more, here or in discussion%EDIT:::YEAH, AT LEAST A SENTENCE OR TWO
+Figure \ref{techn-delta} shows the success of these techniques as $\delta$ is varied, for a low carrying capacity. 
+%FINAL:::why does WKB fail for large delta? Does FP appear to work for large delta simply because the absorbing state is effectively "near" the fixed point K, since the variance is so large with large delta??
 
-%\begin{figure}[ht!]
-%	\centering
-%	\includegraphics[width=0.6\textwidth]{Figure5}
-%	\caption{\emph{Techniques for calculating the mean time to extinction} Plotted as a function of the carrying capacity, a comparison of the ratio of the MTE of different techniques to that of the 1D sum reveals the ranges for which they are more accurate for approximating $\tau_{e}$.} \label{mte_techn}
-%\end{figure}
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{{{Fig5_q0.208_d0.398-delta-K16}}}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{{{Fig5_q0.703_d0.398-delta-K16}}}
+	\end{minipage}
+	\caption{\emph{Approximation techniques as they depend on basal death rate.} Carrying capacity $K=16$, $\delta$ varying, and $q=0.2$ (left) or $0.7$ (right). 
+	At low $\delta$, the WKB approximation performs well, but its performance worsens as $\delta$ is increased. Numerical solution of the Fokker-Planck equation shows the opposite result, being off from the true solution at low $\delta$ and only matching it as $\delta$ increases. }
+	\label{techn-delta}
+\end{figure}
 
 %EDIT:::SHOULD THIS PARAGRAPH MOVE UP TO THE APPROXIMATIONS SECTION?? - I THINK SO, YEA
 %[Approximations] - MattheW
@@ -668,20 +647,21 @@ For all other parameter regimes, the WKB method is reasonable. % approximations 
 The best candidate in most regimes appears to be the WKB approximation. 
 It generalizes to multiple dimensions without conceptual difficulty.
 Mathematically, at higher dimensions WKB necessitates solving a Hamiltonian system, in order to find the most probable route to extinction along which to integrate equation \ref{WKBaction}; an analytic solution cannot be derived in general, and a symplectic integrator is necessary to find the numeric trajectory \cite{Channell1990}. 
-In this one-dimensional case I find an analytic expression for the mean time to extinction using the WKB approximation to be
+In this one-dimensional case I find an analytic expression for the mean time to extinction using the WKB approximation of equations \ref{WKBansatz} and \ref{WKBaction}, evaluated using the birth and death rates \ref{birth} and \ref{death}, and the flux equation \ref{1overd1P1}:
 \begin{align}
 \tau_{\text{WKB}} = &\frac{\sqrt{2 \pi K}}{\delta+(1-q)/K} \left(\frac{K(1+\delta)-q}{K\delta + (1-q)}\right) \sqrt{\frac{(1+\delta-q)^2}{\delta q + (1-q)(1+\delta)/K}} \\
-&\times \exp \left\{ K\left( \frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + \frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) \right\}. \notag
+					&\times \exp \left\{ K\left( \frac{1+\delta}{q}\ln\left[\frac{K(1+\delta)-1}{K(1+\delta-q)}\right] + \frac{\delta}{1-q}\ln\left[\frac{K\delta+(1-q)}{K(1+\delta-q)}\right] \right) \right\}. \notag
 \end{align}
-We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which, unlike the true solution to the Fokker-Planck equation, from equation \ref{FP-gaussian} always gives a closed form analytic result:
-\begin{equation}
-\tau_{\text{FP Gaussian}} = \frac{2}{1+2\delta} \sqrt{2 \pi K (1+\delta-q)} \exp\left\{\frac{K}{2(1+\delta-q)} \right\}.
- \label{tau-fp-gauss}
-\end{equation}
+%We can contrast this with the Gaussian approximation to the Fokker-Planck equation, which, unlike the true solution to the Fokker-Planck equation, from equation \ref{FP-gaussian} always gives a closed form analytic result: CITATIONS?!?!?! %FINAL::: citations?!?!?!
 %\begin{equation}
-%\tau_{\text{FP WKB}} = \frac{1}{\delta+(1-q)/K} \sqrt{2 \pi K (1+\delta-1)}
-% \exp\left{ K\frac{2(1+\delta-q)}{(1-2q)^2} \ln\left[ \frac{K 2(1+\delta-q)}{K(1+2\delta)+(1-2q)} %\right] - \frac{K-1}{(1-2q)} \right}
+%\tau_{\text{FP Gaussian}} = \frac{2}{1+2\delta} \sqrt{2 \pi K (1+\delta-q)} \exp\left\{\frac{K}{2(1+\delta-q)} \right\}.
+% \label{tau-fp-gauss}
 %\end{equation}
+%A better approximation to the Fokker-Planck solution is to use a steepest descent/Laplace/saddlepoint approximation, expanding $\phi$ and $1/\phi$ about $0$ and $K$, which gives
+We can contrast this with a further approximation to the Fokker-Planck solution of equation \ref{FPfull}, with a Laplace method/saddlepoint approximation expanding $\phi$ and $1/\phi$ about $0$ and $K$ \cite{Nisbet1982,Grasman1996,Doering2005}:
+\begin{equation}
+ \tau_{FP} \approx \sqrt{\frac{4\pi(1+2\delta)^2}{K(1+\delta-q)}} e^{ K\big( 4(1+\delta-q)\ln 2(1+\delta-q) - 2(1-2q) \big)/(1-2q)^2 }. %this is fine so long as $q\neq1/2$ (which is simpler anyway)
+\end{equation}
 Both formulae are dominated by their exponential dependence on $K$. 
 %NTS:::somewhere don't just put the asymptotic, put the full gamma function etc solution
 %This is to be expected, as the true solution with $\delta,q = 0$ increases as $\frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}. 
@@ -690,9 +670,10 @@ This is to be expected, as it matches with the research community's intuition th
 %It is the prefactor multiplying with the carrying capacity in the exponential that is of critical importance in determining the qualitative behaviour of the MTE. 
 The qualitative behaviour of the MTE is most affected by the coefficient $c$. % when written as $\tau \propto e^{cK}$. 
 While I have not found a simple closed analytical form for the exact solution of the MTE in general, the asymptotic scaling for $\delta,q = 0$ is known to increase as $\tau_e \propto \frac{1}{K}e^K$ \cite{Lande1993,Lambert2005}, with $c=1$. 
-The Gaussian Fokker-Planck solution has a coefficient $c=\frac{1}{2(1+\delta-q)}$, so we expect it to underestimate $\tau_e$ near $\delta,q = 0$ in parameter space. %hopefully this is shown in the figure
+%The Gaussian Fokker-Planck solution has a coefficient $c=\frac{1}{2(1+\delta-q)}$, so we expect it to underestimate $\tau_e$ near $\delta,q = 0$ in parameter space. %hopefully this is shown in the figure %FINAL:::NOPE
+The approximated Fokker-Planck solution has $c=\big( 4(1+\delta-q)\ln 2(1+\delta-q) - 2(1-2q) \big)/(1-2q)^2$, giving $c=4\ln2-2\approx 0.7$ for $\delta,q = 0$, slightly underestimating the scaling. 
 %The WKB approximation has prefactor $\frac{1+\delta}{q}\ln(1+\delta) + \frac{\delta}{1-q}\ln(\delta) - \frac{1+\delta-1}{q(1-q)}\ln(1+\delta-q)$ for large $K$, which diverges for extremes of $q$ but should otherwise be reasonable. 
-The lowest order of a Taylor expansion in $\delta$ and $q$ of the WKB solution gives a coefficient of $c=1-1/K$, which nicely matches the expected limit. 
+The lowest order of a Taylor expansion in $\delta$ and $q$ of the WKB solution, as calculated using Mathematica, gives a coefficient of $c=1-1/K$, which nicely matches the expected limit. 
 The prefactor of the WKB solution that is algebraic in $K$ does not match with the true limit \cite{Assaf2010,Badali2019a,Badali2019b}, but it is less dominant than the exponential term. %NTS:::see the appendix???
 See the appendix for the calculation with $\delta,q = 0$. 
 %The WKB approximation matches well for all $\delta$ and $q$ values, as seen in figure \ref{techn}. %EDIT:::THIS IS NOT CURRENTLY SEEN!!!
@@ -788,6 +769,7 @@ The use of approximations is widespread and necessary when using mathematics to 
 I find that all approximations considered in this chapter accurately capture the QSD near the deterministic fixed point. %including, surprisingly, the small $n$ approximation, which is expected to work best for small $n$
 %I find that FP, WKB, and small $n$ are largely suitable in the models considered here, in that they recover the correct exponential scaling of the MTE with carrying capacity. 
 Regarding the MTE, the WKB approximation fares best, though it does incorrectly calculate the algebraic prefactor \cite{Assaf2010,Badali2019a,Badali2019b}. % and the small $n$ approximation cannot be extended to higher dimensions. %THEN WHY EVEN CONSIDER SMALL n??? %and small $n$ 
+The Fokker-Planck equation appears to fare well for large $\delta$ and low $K$, presumably because the absorbing state is effectively ``near'' the stable fixed point $n^*=K$ when the variance is so large, as is the case for large $\delta$. 
 %The biggest caveat is that FP fails for low values of $\delta$ and $q$, and at low $K$.  
 %I will nevertheless use the Fokker-Planck equation to motivate some results in the next chapter, despite selecting a model with $\delta,q = 0$. 
 %Other techniques do not fare so well. 

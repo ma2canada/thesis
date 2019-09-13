@@ -260,6 +260,7 @@ The Lotka-Volterra model can be thought of as a minimal model of niche theory \c
 The original Lotva-Volterra model was introduced around a century ago to describe the dynamics of a population of a predator and its prey.
 It can be seen as an extension of the Verhulst, or logistic, equation, from one to two dimensions. %EDIT:::NOTE this is repetitive with history at the beginning
 %SHOW at least a 1D log, if not the deterministic LV?
+Throughout the thesis I shall refer to it both as a coupled logistic or Lotka-Volterra model. 
 In its modern incarnation the generalized Lotka-Volterra model is typically written as 
 \begin{align}
 %\frac{\dot{x}_1}{r_1 x_1} &= 1 - \frac{(x_1 + a_{12}x_2)}{K_1} \\
@@ -491,7 +492,7 @@ There have since been renaissances in the stochastic treatment of genetics due t
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{MoranExample}
-	\caption{\emph{Example Time Steps of the Moran Model} Here is a sample Moran model with $K=12$ individuals, initially $n=3$ of which are red. In the first time step, a red individual is chosen to reproduce (which would happen with probability $3/12$) and a blue one dies (probability $9/12$). This increases the number of red individuals in the system. Other possibilities each time step are that the number of reds remains the same or decreases. There is a non-zero chance that in as few as three steps a colour will have fixated in the system. Over time the probability of fixation increases such that it is almost certain the system will fixate eventually. Once only one colour remains in the system the chance that a different colour reproduces (and is thus introduced into the system) is zero, since there are none of that different colour around to reproduce. } \label{Moranfig} %NTS:::Anton asks I show fixation
+	\caption{\emph{Example Time Steps of the Moran Model.} Here is a sample Moran model with $K=12$ individuals, initially $n=3$ of which are red. In the first time step, a red individual is chosen to reproduce (which would happen with probability $n/K=3/12$) and a blue one dies (probability $9/12$). This increases the number of red individuals in the system. Other possibilities each time step are that the number of reds remains the same or decreases. There is a non-zero chance that in as few as three steps a colour will have fixated in the system. Over time the probability of fixation increases such that it is almost certain the system will fixate eventually. Once only one colour remains in the system the chance that a different colour reproduces (and is thus introduced into the system) is zero, since there are none of that different colour around to reproduce. } \label{Moranfig} %NTS:::Anton asks I show fixation
 \end{figure}
 
 The Wright-Fisher model is a minimal model to show fixation and extinction, and is similar to the Moran model \cite{Moran1962}, which I will outline here for pedagogical reasons. 
